@@ -1,0 +1,573 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Activate" xml:space="preserve">
+    <value>启用</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="AdditionalAnonymousProjects" xml:space="preserve">
+    <value>其他匿名项目</value>
+  </data>
+  <data name="AdditionalInternalProjects" xml:space="preserve">
+    <value>其他经过验证的用户项目</value>
+  </data>
+  <data name="AdditionalUserLicense" xml:space="preserve">
+    <value>其他用户许可证密钥</value>
+  </data>
+  <data name="AdditionalUsers" xml:space="preserve">
+    <value>其他用户</value>
+  </data>
+  <data name="AdminList" xml:space="preserve">
+    <value>管理员电子邮件地址（以分号分隔）</value>
+  </data>
+  <data name="AdminUserDetails" xml:space="preserve">
+    <value>管理员用户</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>（所有）</value>
+  </data>
+  <data name="Analytics" xml:space="preserve">
+    <value>数据分析</value>
+  </data>
+  <data name="AnonymousProjectCount" xml:space="preserve">
+    <value>匿名项目数量</value>
+  </data>
+  <data name="AnonymousProjectLicenses" xml:space="preserve">
+    <value>匿名项目许可证</value>
+  </data>
+  <data name="AnonymousUsers" xml:space="preserve">
+    <value>匿名用户</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>背面</value>
+  </data>
+  <data name="Basic" xml:space="preserve">
+    <value>基本</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>更改</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>确认新密码</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>确认密码</value>
+  </data>
+  <data name="Contacts" xml:space="preserve">
+    <value>联系人</value>
+  </data>
+  <data name="ContentLibrary" xml:space="preserve">
+    <value>内容库</value>
+  </data>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>复制到剪贴板</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>国家</value>
+  </data>
+  <data name="Deactivate" xml:space="preserve">
+    <value>停用</value>
+  </data>
+  <data name="Demo" xml:space="preserve">
+    <value>演示</value>
+  </data>
+  <data name="DemoTenantType" xml:space="preserve">
+    <value>演示网站</value>
+  </data>
+  <data name="DisableUser" xml:space="preserve">
+    <value>禁用用户</value>
+  </data>
+  <data name="EditTenant" xml:space="preserve">
+    <value>编辑租户</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>电子邮件</value>
+  </data>
+  <data name="EmailTenants" xml:space="preserve">
+    <value>电子邮件租户</value>
+  </data>
+  <data name="Enterprise" xml:space="preserve">
+    <value>企业</value>
+  </data>
+  <data name="ExistingProjectsInfo" xml:space="preserve">
+    <value>从默认租户导入的模板列表</value>
+  </data>
+  <data name="Expired" xml:space="preserve">
+    <value>过期</value>
+  </data>
+  <data name="ExpiresOn" xml:space="preserve">
+    <value>至{0}到期</value>
+  </data>
+  <data name="ExpiryDate" xml:space="preserve">
+    <value>到期日</value>
+  </data>
+  <data name="Express" xml:space="preserve">
+    <value>表达</value>
+  </data>
+  <data name="ExtendTrial" xml:space="preserve">
+    <value>延长试用期</value>
+  </data>
+  <data name="FailedLogin" xml:space="preserve">
+    <value>门户无法让您登录。请与您的管理员确认您的用户名已在门户中注册，然后重试。</value>
+  </data>
+  <data name="FailedLoginDuplicate" xml:space="preserve">
+    <value>重复登录已被检测到。登录只能由一人使用。</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>名字</value>
+  </data>
+  <data name="FormSummaryQuestion" xml:space="preserve">
+    <value>表格摘要问题</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>常规</value>
+  </data>
+  <data name="GenerateNewKey" xml:space="preserve">
+    <value>生成新密钥</value>
+  </data>
+  <data name="GetEmails" xml:space="preserve">
+    <value>获取电子邮件</value>
+  </data>
+  <data name="HeaderText" xml:space="preserve">
+    <value>多租户管理门户</value>
+  </data>
+  <data name="HideDeactivated" xml:space="preserve">
+    <value>隐藏已禁用</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>导入</value>
+  </data>
+  <data name="ImportProjectToTenant" xml:space="preserve">
+    <value>将项目导入租户</value>
+  </data>
+  <data name="ImportTemplates" xml:space="preserve">
+    <value>导入模板</value>
+  </data>
+  <data name="InternalProjectCount" xml:space="preserve">
+    <value>已认证的用户项目数</value>
+  </data>
+  <data name="InternalProjectLicenses" xml:space="preserve">
+    <value>经过身份验证的用户项目许可证</value>
+  </data>
+  <data name="InvalidProductKey" xml:space="preserve">
+    <value>许可证持有人和/或产品许可证密钥无效</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>密钥</value>
+  </data>
+  <data name="KeyCopied" xml:space="preserve">
+    <value>Tenancy密钥被复制到剪贴板</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>姓</value>
+  </data>
+  <data name="LicenseExpiredOn" xml:space="preserve">
+    <value>{0}的授权已过期</value>
+  </data>
+  <data name="LicenseExpiry" xml:space="preserve">
+    <value>有效期：{0}</value>
+  </data>
+  <data name="LicenseHolder" xml:space="preserve">
+    <value>许可证持有人</value>
+  </data>
+  <data name="LicenseHolderAlreadyUsed" xml:space="preserve">
+    <value>本许可证持有人已被使用。</value>
+  </data>
+  <data name="LicenseHolderAlreadyUsedForCreateTenant" xml:space="preserve">
+    <value>此租户名称已被用作许可证持有人。</value>
+  </data>
+  <data name="LicenseHolderEmpty" xml:space="preserve">
+    <value>许可证持有人为空</value>
+  </data>
+  <data name="LicenseInvalid" xml:space="preserve">
+    <value>许可证无效</value>
+  </data>
+  <data name="LicenseKeyAlreadyUsed" xml:space="preserve">
+    <value>此产品许可证密钥已被使用。</value>
+  </data>
+  <data name="LicenseNewSiteOnly" xml:space="preserve">
+    <value>此许可证只能在新的网站上使用</value>
+  </data>
+  <data name="LicenseType" xml:space="preserve">
+    <value>许可证类型</value>
+  </data>
+  <data name="Licensing" xml:space="preserve">
+    <value>许可</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>登出</value>
+  </data>
+  <data name="Management" xml:space="preserve">
+    <value>管理</value>
+  </data>
+  <data name="MobileAppUserLicense" xml:space="preserve">
+    <value>移动应用用户许可</value>
+  </data>
+  <data name="MobileAppUserLicenses" xml:space="preserve">
+    <value>移动应用用户许可</value>
+  </data>
+  <data name="Modules" xml:space="preserve">
+    <value>模块</value>
+  </data>
+  <data name="MonthlyTenantType" xml:space="preserve">
+    <value>月结帐户</value>
+  </data>
+  <data name="MsgAnonymousProjectLicensesExceedsLimit" xml:space="preserve">
+    <value>项目不能发布到示例文件夹。匿名项目许可证计数超过了可用许可证的最大数量。</value>
+  </data>
+  <data name="MsgCannotExtendTrial" xml:space="preserve">
+    <value>您无法进一步延长试用许可证。请联系您的系统管理员。</value>
+  </data>
+  <data name="MsgErrorInExtendTrial" xml:space="preserve">
+    <value>延长试用许可证时出现错误。</value>
+  </data>
+  <data name="MsgExtendTrialSuccess" xml:space="preserve">
+    <value>试用许可已经成功地延长了30天。您有{0}更多尝试机会。</value>
+  </data>
+  <data name="MsgImported" xml:space="preserve">
+    <value>选定的项目已成功导入。</value>
+  </data>
+  <data name="MsgInternalProjectLicensesExceedsLimit" xml:space="preserve">
+    <value>项目不能发布到示例文件夹。经过身份验证的用户项目许可证计数超过了可用许可证的最大数量。</value>
+  </data>
+  <data name="MsgInvalidImage" xml:space="preserve">
+    <value>上传的文件不是有效或受支持的图像类型</value>
+  </data>
+  <data name="MsgLicenseFileInvalid" xml:space="preserve">
+    <value>许可证文件无效</value>
+  </data>
+  <data name="MsgMinimumTemplateSelection" xml:space="preserve">
+    <value>请选择一个或多个模板以导入新租户</value>
+  </data>
+  <data name="MsgPublishFailedLicenseExpired" xml:space="preserve">
+    <value>项目不能发布到示例文件夹。产品许可证密钥已过期或不再有效。</value>
+  </data>
+  <data name="MsgSaved" xml:space="preserve">
+    <value>您的修改已被保存</value>
+  </data>
+  <data name="MsgSettingsError" xml:space="preserve">
+    <value>无效的设置。更改尚未保存。</value>
+  </data>
+  <data name="MsgTenantInUse" xml:space="preserve">
+    <value>租户名称“{0}”已在使用中。</value>
+  </data>
+  <data name="MsgUsernameInUse" xml:space="preserve">
+    <value>用户名“{0}”已被使用。</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>新密码</value>
+  </data>
+  <data name="NewTenant" xml:space="preserve">
+    <value>新租客</value>
+  </data>
+  <data name="NewTenantAdmin" xml:space="preserve">
+    <value>新管理员用户</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>（没有）</value>
+  </data>
+  <data name="NoTenants" xml:space="preserve">
+    <value>没有房客</value>
+  </data>
+  <data name="NoValidLicense" xml:space="preserve">
+    <value>没有有效的许可证</value>
+  </data>
+  <data name="NumberInUse" xml:space="preserve">
+    <value>{0}({1}在使用中）</value>
+  </data>
+  <data name="PartnerTenantType" xml:space="preserve">
+    <value>伙伴网站</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="PasswordNoMatch" xml:space="preserve">
+    <value>密码不匹配</value>
+  </data>
+  <data name="PasswordValidation_ComplexPassword" xml:space="preserve">
+    <value>密码不符合复杂性要求。必须包含大写，小写，数字和特殊字符。不得包含用户名。</value>
+  </data>
+  <data name="PasswordValidation_DisallowCommonPwd" xml:space="preserve">
+    <value>通用密码被拒绝。</value>
+  </data>
+  <data name="PasswordValidation_Generic" xml:space="preserve">
+    <value>密码验证错误</value>
+  </data>
+  <data name="PasswordValidation_History" xml:space="preserve">
+    <value>密码与上次的{0}密码不匹配</value>
+  </data>
+  <data name="PasswordValidation_MinimumLength" xml:space="preserve">
+    <value>密码长度至少为{0}个字符</value>
+  </data>
+  <data name="PerformedBy" xml:space="preserve">
+    <value>执行者</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>电话号码</value>
+  </data>
+  <data name="ProductLicenseKey" xml:space="preserve">
+    <value>产品许可证密钥</value>
+  </data>
+  <data name="Provision" xml:space="preserve">
+    <value>条款</value>
+  </data>
+  <data name="ProvisionTenant" xml:space="preserve">
+    <value>租户条款</value>
+  </data>
+  <data name="PushNotification" xml:space="preserve">
+    <value>推送通知</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>原因</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="RemoveLogo" xml:space="preserve">
+    <value>删除图示</value>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>{0}是必填字段</value>
+  </data>
+  <data name="RequiredPasswordChange" xml:space="preserve">
+    <value>您需要更改密码</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="ResetPwd" xml:space="preserve">
+    <value>重置密码</value>
+  </data>
+  <data name="SaaS" xml:space="preserve">
+    <value>SaaS</value>
+  </data>
+  <data name="SampleProjectsInfo" xml:space="preserve">
+    <value>选择要导入新租户的模板</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="SharePoint" xml:space="preserve">
+    <value>SharePoint</value>
+  </data>
+  <data name="ShowDeactivated" xml:space="preserve">
+    <value>显示禁用</value>
+  </data>
+  <data name="Standard" xml:space="preserve">
+    <value>标准</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>提交</value>
+  </data>
+  <data name="SupportContract" xml:space="preserve">
+    <value>Infiniti支持和维护</value>
+  </data>
+  <data name="TemporaryUserSave" xml:space="preserve">
+    <value>临时用户保存</value>
+  </data>
+  <data name="TenancyKey" xml:space="preserve">
+    <value>租用密钥</value>
+  </data>
+  <data name="TenancyKeyInvalid" xml:space="preserve">
+    <value>租用密钥无效</value>
+  </data>
+  <data name="Tenant" xml:space="preserve">
+    <value>租户</value>
+  </data>
+  <data name="TenantLogo" xml:space="preserve">
+    <value>租户图示</value>
+  </data>
+  <data name="TenantName" xml:space="preserve">
+    <value>租户姓名</value>
+  </data>
+  <data name="TenantProvision" xml:space="preserve">
+    <value>租户条款</value>
+  </data>
+  <data name="TenantsManagement" xml:space="preserve">
+    <value>管理租户</value>
+  </data>
+  <data name="TenantType" xml:space="preserve">
+    <value>租户类型</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>测试</value>
+  </data>
+  <data name="TIBCO" xml:space="preserve">
+    <value>TIBCO</value>
+  </data>
+  <data name="Transactional" xml:space="preserve">
+    <value>交易</value>
+  </data>
+  <data name="TRIM" xml:space="preserve">
+    <value>调整</value>
+  </data>
+  <data name="Unlimited" xml:space="preserve">
+    <value>无限</value>
+  </data>
+  <data name="UnlimitedAnonymousProjects" xml:space="preserve">
+    <value>无限匿名项目</value>
+  </data>
+  <data name="UnlimitedInternalProjects" xml:space="preserve">
+    <value>无限认证用户项目</value>
+  </data>
+  <data name="UnlimitedUsers" xml:space="preserve">
+    <value>无限指定用户</value>
+  </data>
+  <data name="UploadNewLicenseFile" xml:space="preserve">
+    <value>上传新许可证文件</value>
+  </data>
+  <data name="UserContactDetails" xml:space="preserve">
+    <value>用户联系方式</value>
+  </data>
+  <data name="UserCount" xml:space="preserve">
+    <value>用户数</value>
+  </data>
+  <data name="UserLicenseKeyInvalid" xml:space="preserve">
+    <value>未添加许可证密钥。可能无效，或已经在使用中。</value>
+  </data>
+  <data name="UserLicenses" xml:space="preserve">
+    <value>用户许可</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="ValidEmailAddress" xml:space="preserve">
+    <value>需要有效的电子邮箱地址</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="WinApp" xml:space="preserve">
+    <value>Windows 应用</value>
+  </data>
+  <data name="Workflow" xml:space="preserve">
+    <value>工作流程</value>
+  </data>
+  <data name="YearlyTenantType" xml:space="preserve">
+    <value>年度帐户</value>
+  </data>
+</root>

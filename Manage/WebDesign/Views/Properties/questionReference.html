@@ -1,0 +1,16 @@
+﻿<div class="form-group">
+    <label for="questionReference" class="col-sm-4 control-label">{{ ::'Question' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="questionReference" class="form-control input-sm"
+                ng-options="option.QuestionGuid as option.Text for option in model.propertiesPanelModel.questionReferenceModel.availableQuestions"
+                ng-model="model.propertiesPanelModel.questionReferenceModel.questionReference"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.questionReferenceModel.isAnswerVisible">
+    <label for="answerReference" class="col-sm-4 control-label">{{ ::'Answer' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="answerReference" class="form-control input-sm"
+                ng-options="option.AnswerGuid as option.Name for option in model.propertiesPanelModel.questionReferenceModel.availableAnswers"
+                ng-model="model.propertiesPanelModel.questionReferenceModel.answerReference"></select>
+    </div>
+</div>

@@ -1,0 +1,245 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.UserPromptDateQuestionViewModel>
+@{
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+    var qid = @IdHelper.IdFor(Model.Question);
+}
+@if (Model.Question.IsEditable)
+{
+    var fieldOrder = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern.Split(new[] { System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.DateSeparator }, StringSplitOptions.None);
+    var fieldArrayString = "[" + string.Join(",", fieldOrder.Select(f => "'" + f + "'")) + "]";
+
+    if (Model.Question.QuestionModel.DisplayType != Intelledox.Model.QuestionDisplayType.DateFields)
+    {
+        var onBlurAction = string.Empty;
+        if (Model.Question.IsRealtimeParentQuestion)
+        {
+            onBlurAction = "if ($('#" + qid + "_change').val() == '1') {wiz.delayPostback();}";
+        }
+
+        if (!Model.UseNativePicker)
+        {
+            var typeCheck = "validate.dateStringValidate('" + qid + "', " + fieldArrayString + ", " + (Model.Question.IsMandatory ? "true" : "false") + ");";
+            if (string.IsNullOrEmpty(onBlurAction))
+            {
+                onBlurAction = typeCheck;
+            }
+            else
+            {
+                onBlurAction = "if (" + typeCheck.TrimEnd(';') + "){" + onBlurAction + "}";
+            }
+        }
+
+        if (Model.Question.HasValidationErrors())
+        {
+            Model.Question.Validate();
+        }
+
+        <div class="input-group" style="width:200px" id="@(qid)_grp">
+            <input type="@(Model.UseNativePicker ? "date" : "text")" id="@qid" name="@qid" class="form-control"
+                   placeholder="@Model.Question.WatermarkFormatted"
+                   onchange="@(Model.UseNativePicker && Model.Question.IsRealtimeParentQuestion ? "wiz.delayPostback()" : "")"
+                   value="@(Model.UseNativePicker ? Model.ValueUniversalString : Model.ValueString)"
+                   @Html.Raw(!Model.UseNativePicker && string.IsNullOrEmpty(onBlurAction) ? string.Empty : "onblur=\"" + onBlurAction + "\" autocomplete=\"off\"")
+                   @Html.Raw(Model.Question.HasValidationErrors() ? "aria-invalid=\"true\" aria-describedby=\"error_" + qid + "\"" : "")
+                   @Html.Raw(Model.Question.IsMandatory ? "required" : "")
+                   @if (Model.LogInteractions)
+                   { <text> data-analyticsid="@Model.AnalyticsID" </text> }
+                   @if (Model.UseNativePicker && Model.MinDate.HasValue)
+                   { <text> min="@(Model.MinDate.Value.ToString("yyyy-MM-dd"))" </text> }
+                   @if (Model.UseNativePicker && Model.MaxDate.HasValue)
+                   { <text> max="@(Model.MaxDate.Value.ToString("yyyy-MM-dd"))" </text> }
+                   @if (Model.UseNativePicker && Model.Question.UserPromptQuestionModel.WeekdaysOnly)
+                   { <text> data-valmsg="@Intelledox.Produce.Resources.Strings.DateWeekendsOnly" </text> } />
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-calendar" type="button" onclick="@(Model.UseNativePicker ? "$('#" + qid + "').focus().click();" : "$('#" + qid + "').datepicker('show');")" id="@(qid)_btn">
+                    <img height="16" alt="@Intelledox.Produce.Resources.Strings.SelectDate" src="~/Images/IX_Calendar.svg" />
+                </button>
+            </span>
+        </div>
+        @Html.DisplayValidation(Model.Question.LastValidationMessage, qid)
+
+        if (Model.UseNativePicker)
+        {
+            if (Model.Question.UserPromptQuestionModel.WeekdaysOnly)
+            {
+                <script>
+                document.getElementById('@qid').addEventListener('input', wiz.disableUniversalWeekends);
+                </script>
+            }
+        }
+        else
+        {
+                <script type="text/javascript">
+                $('#@qid').datepicker({
+                showOn: 'none', changeMonth:true,changeYear:true,nextText:'>',prevText:'<',dayNames: [@Html.JQueryDate().DayNames],dayNamesMin: [@Html.JQueryDate().DayNamesMin],
+                    monthNamesShort: [@Html.JQueryDate().MonthNames],dateFormat: '@Html.JQueryDate().DatePattern',
+                    isRTL: @(System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft ? "true" : "false"),
+                    yearRange:'@Model.YearRange', constrainInput: false, onSelect: function(tsDate, troPicker) {
+                    @if (Model.Question.IsParentQuestion)
+                    {
+                        @:$('#@(qid)_change').val('1');
+                    }
+                    $('#@(qid)_btn').focus();
+                    @Html.Raw(onBlurAction);
+                },
+                @if (Model.MinDate.HasValue)
+                {
+                @:minDate: new Date(@Model.MinDate.Value.Year, @Model.MinDate.Value.Month - 1, @Model.MinDate.Value.Day),
+                }
+
+                @if (Model.MaxDate.HasValue)
+                {
+                @:maxDate: new Date(@Model.MaxDate.Value.Year, @Model.MaxDate.Value.Month - 1, @Model.MaxDate.Value.Day),
+                }
+
+                @if (Model.Question.UserPromptQuestionModel.WeekdaysOnly)
+                {
+                    @:beforeShowDay: wiz.disableWeekends,
+                }
+                @* Work around JQuery UI bug http://bugs.jqueryui.com/ticket/8434 *@
+                onChangeMonthYear:function(year, month, inst)
+                    {
+                        if (year == 1899 || year == 1900 || year == 0)
+                        {
+                            $(this).datepicker('setDate', $(this).val());
+                            var now = $(this).datepicker("getDate");
+
+                            if (now == null)
+                            {
+                                now = new Date();
+                            }
+
+                            if (year == 1899) // Clicked backward
+                            {
+                                now.setMonth(now.getMonth() - 1);
+                            }
+                            else if (year == 1900) // Clicked forward
+                            {
+                                now.setMonth(now.getMonth() + 1);
+                            }
+                            else if (year == 0) // Clicked a month
+                            {
+                                now.setMonth(month - 1);
+                            }
+                            $(this).datepicker('setDate', now);
+                        }
+                    }
+                });
+                </script>
+        }
+    }
+    else
+    { 
+        var year = string.Empty;
+        var month = string.Empty;
+        var day = string.Empty;
+
+        if (!Model.Value.HasValue && Model.ValueString.Contains("-"))
+        {
+            var components = Model.ValueString.Split('-');
+            if (components.Length == 3)
+            {
+                year = components[0];
+                month = components[1];
+                day = components[2];
+            }
+        }
+        <div id="@(qid)_grp">
+            @{ 
+                var firstField = "dd";
+                for (var i = 0; i < fieldOrder.Length; i++)
+                {
+                    if (fieldOrder[i].StartsWith("y"))
+                    {
+                        if (i == 0) { firstField = "yyyy"; }
+                        <input type="number"
+                                max="9999"
+                                min="0"
+                                value="@(Model.Value.HasValue ? Model.Value.Value.ToString(fieldOrder[i].PadLeft(4, '%')) : year)"
+                                placeholder="@fieldOrder[i]"
+                                class="form-control yyyy"
+                                id="@Html.Raw(qid + "_yyyy")"
+                                @Html.Raw(Model.Question.HasValidationErrors() ? "aria-invalid=\"true\" aria-describedby=\"error_" + qid + "\"" : "")
+                                @Html.Raw(Model.Question.IsMandatory ? "required" : "")
+                                @if (Model.LogInteractions) { <text> data-analyticsid="@(Model.AnalyticsID)_yyyy" </text>                            }
+                                onkeyup="validate.intervalKeyUp(event, '@qid', @fieldArrayString, 'yyyy')"
+                                onblur="wiz.dateIntervalBlur('@qid', @fieldArrayString, @Html.Raw(Model.Question.IsRealtimeParentQuestion ? "true" : "false"), @Html.Raw(Model.Question.IsMandatory ? "true" : "false"), 'yyyy')"
+                                @Html.Raw(Model.Question.IsRealtimeParentQuestion ? "autocomplete=\"off\"" : "") />
+                    }
+                    else if (fieldOrder[i].StartsWith("M"))
+                    {
+                        if (i == 0) { firstField = "MM"; }
+                        <input type="number"
+                                placeholder="@fieldOrder[i].ToLowerInvariant()"
+                                value="@(Model.Value.HasValue ? Model.Value.Value.ToString(fieldOrder[i].PadLeft(2, '%')) : month)"
+                                max="12"
+                                min="1"
+                                class="form-control mm"
+                                id="@Html.Raw(qid + "_MM")"
+                                @Html.Raw(Model.Question.HasValidationErrors() ? "aria-invalid=\"true\" aria-describedby=\"error_" + qid + "\"" : "")
+                                @Html.Raw(Model.Question.IsMandatory ? "required" : "")
+                                @if (Model.LogInteractions) { <text> data-analyticsid="@(Model.AnalyticsID)_MM" </text>                            }
+                                onkeyup="validate.intervalKeyUp(event, '@qid', @fieldArrayString, 'MM')"
+                                onblur="wiz.dateIntervalBlur('@qid', @fieldArrayString, @Html.Raw(Model.Question.IsRealtimeParentQuestion ? "true" : "false"), @Html.Raw(Model.Question.IsMandatory ? "true" : "false"), 'MM')"
+                                @Html.Raw(Model.Question.IsRealtimeParentQuestion ? "autocomplete=\"off\"" : "") />
+                    }
+                    else if (fieldOrder[i].StartsWith("d"))
+                    {
+                        <input type="number"
+                                placeholder="@fieldOrder[i]"
+                                value="@(Model.Value.HasValue ? Model.Value.Value.ToString(fieldOrder[i].PadLeft(2, '%')) : day)"
+                                min="1"
+                                max="31"
+                                class="form-control dd"
+                                id="@Html.Raw(qid + "_dd")"
+                                @Html.Raw(Model.Question.HasValidationErrors() ? "aria-invalid=\"true\" aria-describedby=\"error_" + qid + "\"" : "")
+                                @Html.Raw(Model.Question.IsMandatory ? "required" : "")
+                                @if (Model.LogInteractions) { <text> data-analyticsid="@(Model.AnalyticsID)_dd" </text>                            }
+                                onkeyup="validate.intervalKeyUp(event, '@qid', @fieldArrayString, 'dd')"
+                                onblur="wiz.dateIntervalBlur('@qid', @fieldArrayString, @Html.Raw(Model.Question.IsRealtimeParentQuestion ? "true" : "false"), @Html.Raw(Model.Question.IsMandatory ? "true" : "false"), 'dd')"
+                                @Html.Raw(Model.Question.IsRealtimeParentQuestion ? "autocomplete=\"off\"" : "") />
+                    }
+                }
+            }
+        </div>
+        @Html.DisplayValidation(Model.Question.LastValidationMessage, qid + "_" + firstField)
+
+        var strVal = string.Empty;
+        if (Model.Value.HasValue)
+        {
+            strVal = Model.Value.Value.ToString("yyyy-MM-dd");
+        }
+        else if (!string.IsNullOrEmpty(year) || !string.IsNullOrEmpty(month) || !string.IsNullOrEmpty(day))
+        {
+            strVal = year + "-" + month + "-" + day;
+        }
+
+        <input type="hidden" id="@qid" name="@qid" value="@strVal" />
+        <script type="text/javascript">
+            $("label[for='@qid']").attr("for", '@Html.Raw(qid + "_" + firstField)');
+        </script>
+    }
+}
+else
+{
+    if (Model.Value == null || String.IsNullOrEmpty(Model.Value.ToString()))
+    {
+        <div id="@qid" class="question-label notAnswered">@Intelledox.Produce.Resources.Strings.NotAnswered</div>
+    }
+    else
+    {
+        <div id="@qid" class="question-label">@Model.ValueString</div>
+    }
+}
+@if (Model.Question.IsParentQuestion)
+{
+    <input type="hidden" id="@(qid)_change" name="@(qid)_change" value="0" />
+    if (Model.Question.QuestionModel.DisplayType != Intelledox.Model.QuestionDisplayType.DateFields)
+    {
+        <script type="text/javascript">
+            wiz.wireTextChanged('#@(qid)', '#@(qid)_change', '');
+        </script>
+    }
+}

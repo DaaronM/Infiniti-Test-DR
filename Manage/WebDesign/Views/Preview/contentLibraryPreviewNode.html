@@ -1,0 +1,28 @@
+﻿<div>
+    <input type="button" class="btn btn-default" value="{{ ::'UploadNew' | translate }}" ng-if="node.DisplayType === 6" />
+
+    <div class="row" ng-if="node.DisplayType === 4 || node.DisplayType === 7">
+        <div class="col-xs-3">
+            <div class="input-group">
+                <input type="text" class="form-control" onkeypress="event.preventDefault();" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default">{{ ::'Search' | translate }}</button>
+                </span>
+            </div>
+        </div>
+        <div class="col-xs-9" ng-if="node.DisplayType === 7">
+            <button type="button" class="btn btn-default">{{ ::'UploadNew' | translate }}</button>
+        </div>
+    </div>
+
+    <div ng-if="node.DisplayType === 8">
+        <textarea class="form-control" rows="4" ng-if="node.ContentTypeRestriction === 2" onkeypress="event.preventDefault();"></textarea>
+
+        <img src="Images/NoImage.svg" ng-if="node.ContentTypeRestriction === 1" />
+
+        <div ng-if="node.ContentTypeRestriction === 4">
+            <span>{{'ContentItem'|translate}}</span>
+            <span class="preview">[{{'Open'|translate}}]</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+﻿<div class="form-group">
+    <label for="cssStyle" class="col-sm-4 control-label">{{ ::'Style' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="cssStyle" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.styleModel.availableCssStyles"
+                ng-model="model.propertiesPanelModel.styleModel.CssStyle"></select>
+    </div>
+</div>

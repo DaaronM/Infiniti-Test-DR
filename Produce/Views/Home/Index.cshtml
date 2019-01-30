@@ -1,0 +1,150 @@
+﻿@using Infiniti.MvcControllers
+@using Intelledox.Produce
+@model Intelledox.Produce.HomeViewModel
+@{
+    bool isGuest = Infiniti.MvcControllers.UserSettings.IsGuest;
+    var cookieName = Infiniti.MvcControllers.UserSettings.UserGuid + "_locationAccuracy";
+    ViewBag.CurrentTab = MenuTab.Home;
+    ViewBag.ShowContacts = Model.ShowContacts;
+    ViewBag.ShowAnswerFiles = Model.ShowAnswerFiles;
+    ViewBag.ShowDocuments = Model.ShowDocuments;
+    ViewBag.ShowActiveForms = Model.ShowActive;
+    ViewBag.ShowProfilePage = Model.ShowProfilePage;
+}
+@section AddToHead
+{
+    <meta name="msapplication-starturl" content="./" />
+    <meta name="msapplication-tooltip" content="Intelligent document creation" />
+    <script src="~/scripts/location.js?v=10.0.31" type="text/javascript"></script>
+    <!--[if lte IE 9]>
+    <script src="@Url.Content("~/scripts/jquery.placeholder.min.js?v=2")"></script>
+    <![endif]-->
+@if (!String.IsNullOrEmpty(ViewBag.HomeMessage) || !String.IsNullOrEmpty(ViewBag.HomeError))
+{
+    if (!Infiniti.MvcControllers.ApplicationSettings.Bundle)
+    {
+    <link href="~/Content/toastr.css?v=9.7.3" rel="stylesheet" />
+    }
+    <script src="~/scripts/toastr.js?v=9.7.3" type="text/javascript"></script>
+}
+    @if (!string.IsNullOrEmpty(Model.GoogleAnalyticsCode))
+    {
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', '@Model.GoogleAnalyticsCode', 'auto');
+            ga('send', 'pageview');
+        </script>
+    }
+}
+@Html.Partial("_SiteHeader")
+
+<div class="container ix-header-body">
+    <div id="SearchThinScreen">
+        <input id="SearchTermThin" name="SearchTerm" value="@Model.SearchTerm" class="form-control" placeholder="@Intelledox.Produce.Resources.Strings.Search" maxlength="50" aria-label="@Intelledox.Produce.Resources.Strings.Search" />
+    </div>
+    <div id="SearchUpdate">
+        <form id="actionForm" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="Latitude" id="Latitude" />
+            <input type="hidden" name="Longitude" id="Longitude" />
+            <input type="hidden" name="Warn" id="Warn" />
+        </form>
+        <div id="SearchUpdateResults">
+            @Html.Partial("_SearchResultsPartial")
+        </div>
+    </div>
+
+    @Html.Raw(Infiniti.MvcControllers.ApplicationSettings.ThemeHomePageBottomLeft)
+</div>
+
+<script type="text/javascript">
+    function updateGridThin() {
+        $('#SearchTerm').val($('#SearchTermThin').val());
+        $('#SearchUpdateResults').load('@Url.Action("Index", "Home")?searchTerm=' + encodeURIComponent($('#SearchTermThin').val()));
+    }
+
+    var autoTimerThin;
+    $("#SearchTermThin").on('keyup', function(e) {
+        e.preventDefault();
+        clearTimeout(autoTimerThin);
+        autoTimerThin = setTimeout(updateGridThin, 300);
+    });
+
+    @if (Model.ShowContinueAlert)
+    {
+    <text>
+    if (confirm('@Html.Raw(HttpUtility.JavaScriptStringEncode(Intelledox.Produce.Resources.Strings.UnfinishedDocument))')) {
+        document.location = '@Url.Action("ContinueUnfinished", "Home")';
+    } else {
+        $.post('@Url.Action("ClearUnfinished", "Home")', { clear: 1 });
+    }
+    </text>
+    }
+</script>
+<!--[if lte IE 9]>
+<script type="text/javascript">
+    $('input[placeholder]').placeholder();
+</script>
+<![endif]-->
+
+@if (!String.IsNullOrEmpty(ViewBag.HomeMessage))
+{
+    <script>
+        $(document).ready(function()
+            {
+                toastr.options =
+                {
+                    "timeOut":
+                    "3000",
+                    "extendedTimeOut":
+                    "1000"
+                };
+                toastr.success("@Html.Raw(HttpUtility.JavaScriptStringEncode(ViewBag.HomeMessage))");
+            }
+        );
+    </script>
+}
+else if (!String.IsNullOrEmpty(ViewBag.HomeError))
+{
+    <script>
+        $(document).ready(function()
+            {
+                toastr.options =
+                {
+                    "timeOut":
+                    "10000",
+                    "extendedTimeOut":
+                    "2000"
+                };
+                toastr.error("@Html.Raw(HttpUtility.JavaScriptStringEncode(ViewBag.HomeError))");
+            }
+        );
+    </script>
+}
+@if (HttpContext.Current.Request.Cookies[cookieName] == null && Intelledox.Controller.LicenseController.HasModule(UserSettings.BusinessUnit, Intelledox.Model.IntelledoxModule.Analytics) && Intelledox.Controller.GlobalOptionsController.GetStoreLocation(UserSettings.BusinessUnit, true))
+{
+    <script>
+        $(document).ready(function () {
+          getGeolocation('@UserSettings.UserGuid.ToString()','Latitude',
+                'Longitude',
+                'Warn',
+                true,
+                function() {
+                    updateLog(
+                        '@HttpUtility.JavaScriptStringEncode(ApplicationSettings.ProduceUrl + (ApplicationSettings.ProduceUrl.EndsWith("/") ? "" : "/"))',
+                        '@UserSettings.UserGuid.ToString()',
+                        '@ViewBag.LoginTimeUtc',
+                        '@UserSettings.BusinessUnit.ToString()',
+                        $("#Latitude").val(),
+                        $("#Longitude").val());
+                }
+            );
+        });
+    </script>
+}

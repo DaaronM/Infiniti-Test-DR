@@ -1,0 +1,118 @@
+﻿<div class="prop-title">
+    {{ 'FinishPropertiesTitle' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="finishTitle" class="col-sm-4 control-label">{{ ::'FinishTitle' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="finishTitle" class="form-control input-sm" ng-model="model.propertiesPanelModel.FinishTitle" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.Visible" />{{ ::'Visible' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <label for="submitButtonText" class="col-sm-4 control-label">{{ ::'SubmitButtonText' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="submitButtonText" class="form-control input-sm" ng-model="model.propertiesPanelModel.SubmitButtonText" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="generateButtonLocation" class="col-sm-4 control-label">{{ ::'GenerateButtonLocation' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="generateButtonLocation" class="form-control input-sm"
+                    ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.GenerateButtonLocations"
+                    ng-model="model.propertiesPanelModel.GenerateButtonLocation"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="invalidProjectText" class="col-sm-4 control-label">{{ ::'InvalidProjectText' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="invalidProjectText" class="form-control input-sm" ng-model="model.propertiesPanelModel.InvalidProjectText" />
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <label for="submittingText" class="col-sm-4 control-label">{{ ::'SubmittingText' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="submittingText" class="form-control input-sm" ng-model="model.propertiesPanelModel.SubmittingText" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.AllowDocumentDownload" />{{ ::'AllowDocumentDownload' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="downloadPageTitle" class="col-sm-4 control-label">{{ ::'DownloadPageTitle' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="downloadPageTitle" class="form-control input-sm" ng-model="model.propertiesPanelModel.FinishPageTitle" />
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.RedirectToHome" />{{ ::'RedirectToHome' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-show="model.propertiesPanelModel.ShowRedirectOptions">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.WaitForProject" />{{ ::'WaitForProject' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-show="model.propertiesPanelModel.ShowRedirectOptions">
+        <label for="onlineRedirectMessage" class="col-sm-4 control-label">{{ ::'OnlineRedirectMessage' | translate }}</label>
+        <div class="col-sm-8">
+            <textarea id="onlineRedirectMessage" class="form-control input-sm" rows="3" xng-focus="model.propertiesPanelModel.RedirectToHome" ng-model="model.propertiesPanelModel.OnlineRedirectMessage" ng-blur="model.propertiesPanelModel.validateOnlineRedirectMessage('onlineRedirectMessage')" spellcheck="true"></textarea>
+        </div>
+    </div>
+    <div class="form-group" ng-show="model.propertiesPanelModel.ShowRedirectOptions">
+        <label for="offlineRedirectMessage" class="col-sm-4 control-label">{{::'OfflineRedirectMessage' | translate }}</label>
+        <div class="col-sm-8">
+            <textarea id="offlineRedirectMessage" class="form-control input-sm" rows="3" ng-model="model.propertiesPanelModel.OfflineRedirectMessage" ng-blur="model.propertiesPanelModel.validateOfflineRedirectMessage('offlineRedirectMessage')" spellcheck="true"></textarea>
+        </div>
+    </div>
+    <hr />
+    <fieldset>
+        <legend>{{ ::'Downloads' | translate }}</legend>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="model.propertiesPanelModel.RestrictDownloadableDocs" />{{ ::'RestrictDocs' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.RestrictDownloadableDocs">
+            <label for="finishPgDocuments" class="col-sm-4 control-label">{{ ::'SelectedDocuments' | translate }}</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <input id="finishPgDocuments" class="form-control input-sm" ng-model="model.propertiesPanelModel.documentsText" readonly />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default input-sm" type="button" ng-click="model.propertiesPanelModel.selectFinishPgDocuments()">...</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

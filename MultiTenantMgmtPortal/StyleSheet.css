@@ -1,0 +1,536 @@
+﻿body, html, form
+{
+    font-family:Calibri, Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    cursor: default;
+    height: 100%;
+}
+th.sortasc a  
+{
+   display:block; padding:0 4px 0 15px; 
+   background:url("images/moveup.gif") no-repeat;
+}
+th.sortdesc a 
+{
+   display:block; padding:0 4px 0 15px; 
+   background:url("images/movedown.gif") no-repeat;
+}
+div, table, textarea, select, .fld
+{
+    font-family:Calibri, Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+th 
+{
+    text-align:left;
+    font-weight:600;
+    background-color:#FFFFFB;
+    color:#7F7F7F;
+}
+#layout
+{
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    background-image: url(Images/PanelBack.png);
+    background-repeat:repeat-y;
+    min-height:670px;
+}
+#header
+{
+    background-color: #999999;
+    color: #ffffff;
+    font-size:14px;
+    font-weight: 600;
+    height:64px;
+    padding: 0px;
+    background-image: url('images/MastheadBG.png');
+    background-repeat: repeat-x;
+    background-position: top;
+    padding: 0px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    /* hack for IE6 */
+    width:expression(document.body.clientWidth < 860? "861px": "auto" );
+}
+#headerWrap
+{
+    width:700px;
+    height:64px;
+}
+#logoHead
+{
+    display:inline-block;
+    width:280px;
+    height:63px;
+    background-image: url('Images/BrandContainerBG.png');
+    text-align: center;
+}
+#logoHead img
+{
+    margin-top: 10px;
+}
+#NavButtons
+{
+    width:385px;
+    display:inline-block;
+}
+.mnuRight
+{
+    position:absolute;
+    top:0;
+    right:0;
+    text-align:right;
+}
+#ProduceMenu:hover, #DesignMenu:hover, #LogoutMenu:hover {
+    box-shadow:inset 0 0 20px rgba(0, 0, 0, 0.25);
+}
+#ProduceMenu:hover {
+    background-color:#0F7DCE;
+}
+#DesignMenu:hover {
+    background-color:#0F7DCE;
+}
+#LogoutMenu:hover {
+    background-color: #ED4037;
+}
+.mnu
+{
+    float:left;
+    width:64px;
+    height:54px;
+    background-image:url('Images/NavButtonNormalBG.png');
+    text-align:center;
+    vertical-align:middle;
+    padding:10px 0 0 0;
+    font-size: x-small;
+    text-transform:uppercase;
+    font-weight:bold;
+    text-align:center;
+    cursor:pointer;
+}
+.mnu img
+{
+    border:0px;
+    margin:0px;
+}
+.mnu a:link, .mnu a:visited
+{
+    color:#EEE;
+    text-decoration: none;
+}
+.mnu:hover a
+{
+    color:#FFF;
+    text-decoration: none;
+}
+#headertitle
+{
+    margin-top:10px;
+    position:absolute;
+}
+#versionnumber
+{
+    text-align:center;
+    text-transform:uppercase;
+    text-shadow: #4A4A4A 0 2px 0;
+}
+#menu
+{
+    width:140px;
+    z-index:100;
+    position:absolute;
+    top:64px;
+}
+.menusection
+{
+    padding-top:2px;
+    padding-left:10px;
+    font-size:12px;
+    height:15px;
+    color:#EEEEEE;
+    background-image: url(images/MenuHeadingBack.png);
+    text-transform:uppercase;
+    text-shadow: #707070 -1px -1px 0;
+}
+.menuitem 
+{
+    background-image: url(images/MenuItemBack.png);
+    background-repeat:repeat-y;
+    text-shadow: #EEEEEE 1px 1px 0;
+}
+.menuitem:hover, .selectedmenuitem:hover
+{
+    background-position: -140px 0;
+}
+.menuitem img
+{
+    padding-left:8px;
+    vertical-align: middle;
+    margin: 4px 1px 4px 0;
+}
+.menuitem a
+{
+    color:#666666;
+    text-decoration: none;
+}
+.menuitem a:hover
+{
+    text-decoration: underline;
+}
+.menuitemdiv
+{
+    background-image: url(images/MenuItemDiv.png);
+    height:2px;
+}
+.selectedmenuitem 
+{
+    background-image: url(images/MenuItemBack.png);
+    background-repeat:repeat-y;
+    background-position: -280px 0;
+}
+.selectedmenuitem img
+{
+    padding-left:8px;
+    vertical-align: middle;
+    margin:4px 1px 4px 0;
+}
+.selectedmenuitem a
+{
+    color:Maroon;
+    text-decoration: none;
+}
+.selectedmenuitem a:hover
+{
+    text-decoration: underline;
+}
+.breadcrumbdiv 
+{
+    padding: 5px;
+    background-color:#C1C1C1;
+}
+#content
+{
+    float:right;
+    width:100%;
+    margin-left:-140px;
+    background-image: url(Images/PanelBack.png);
+    background-repeat:repeat-y;
+}
+#wrapper
+{
+    margin-left:140px;
+}
+#footer
+{
+    color: #FFFFFF;
+    padding: 5px 0px 5px 5px;
+    height:17px;
+}
+.basecolor
+{
+    background-color: #6696AD;
+}
+.toolbar 
+{
+    background-color:#C1C1C1;	
+    border-bottom:1px solid black;
+    background-image: url(images/optionsBar_r1_c2.jpg);
+    padding:5px;
+}
+.body 
+{
+    width:98%;
+    margin: 16px 13px 0 8px;
+    padding-bottom: 8px;
+}
+.msg
+{
+    padding: 5px;
+    margin: 6px;
+    border:1px solid blue;
+    text-align:center;
+    background-color:#D1E5FF;
+    font-weight:bold;
+}
+.warningmsg
+{
+    padding: 5px;
+    margin: 6px;
+    border:1px solid red;
+    background-color:#FFBFBF;
+    text-align:center;
+    font-weight:bold;
+}
+.TableHeading
+{
+    font-weight:bold;	
+}
+.imgPanel
+{
+    border:1px solid #B4D5E4;
+    width:120px;
+    height:140px;	
+    margin:4px;
+    text-align:center;
+}
+.imgPanel a
+{
+    height:100%;
+    width:100%;	
+}
+.imgPanel a:hover
+{
+    background-color:#D7EEFC;
+}
+.imgPanel img
+{
+    border:0px;
+}
+.imgPanelSpecial 
+{
+    border:1px solid #FFE32D;
+}
+.imgPanelSpecial a:hover
+{
+    background-color:#FFF2AA;
+}
+.SelectLink
+{
+    width:219px;
+    padding:5px;
+    text-decoration:none;
+    color:Black;
+    margin:0;
+    border-right:1px solid black;
+    display:block;
+}
+.SelectLink:hover
+{
+    border:1px solid black;
+    border-right:0px;
+    padding:4px;
+    width:221px;
+}
+.SelectLink img
+{
+    border:0;
+    vertical-align:middle;
+    margin-right:4px;
+}
+.SelectLinkSelected
+{
+    border:1px solid black;
+    padding:4px;
+    background-color:#C6DAFF;
+    border-right:0px;
+    width:221px;
+}
+.LookupField
+{
+    width:270px;
+    border:1px solid black;
+    padding:3px;
+    background-color: #D8D8D8;
+    display:inline-block;
+    overflow:hidden;
+    vertical-align:middle;
+    margin-bottom:4px;
+}
+.tooldiv
+{
+    width:1px;
+    height:20px;
+    border-left:1px solid black;
+    margin-left:4px;
+    margin-right:8px;
+}
+.toolbtn
+{
+    border: 1px solid #959490;
+    background-image: url(images/btn.jpg);
+    font-family:Calibri, Verdana, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    padding-top:2px;
+    padding-bottom:2px;
+}
+a.toolbtn, a.toolbtn:hover {
+    text-decoration: none;
+    color: black;
+    padding-left:5px; 
+    padding-right:5px;
+}
+
+
+#logoutTitle
+{
+    position:absolute;
+    right:8px;
+    top:46px;
+    text-align:right;
+    font-size:12px;
+    font-weight: normal;
+}
+#logoutTitle a
+{
+    color:white;
+    text-decoration:none;
+}
+.fld 
+{
+    width:200px;
+}
+.subfield
+{
+    border:solid 1px #D0D0BF;
+}
+.titlerow
+{
+    font-weight:bold;
+}
+.inforow td
+{
+    background-color:white; padding:4px 20px 4px 20px; color:Gray;
+}
+#lblCardWarning 
+{
+    color:Fuchsia;font-size:8pt;font-weight:bold;
+}
+#tblLogin 
+{
+    background-image: url(images/loginLoginBG.gif);
+    width:508px;
+    height:201px;
+    padding:80px;
+    margin-top:50px;
+}
+#tblLogin span {margin-left:30px;}
+#divLogin h1 {color:White; text-align:left; font-size:18px; margin-left:30px;}
+#LoginBottom
+{
+    background-image: url(images/loginFooterBG.gif);
+    width:676px;
+    height:168px;
+    margin-top:50px;
+}
+.LoginBody
+{
+    background-image: url(images/pageBG.jpg);
+    background-repeat:repeat-x;
+    background-color: #FFFFFF;
+    text-align:center;
+}
+.footer 
+{
+    font-weight:600;
+    background-color:#FFFFFB;
+    color:#7F7F7F;
+}
+.preview
+{
+    font-size:smaller;
+    color:Gray;
+    margin-left:4px;
+    cursor:pointer;
+}
+.pager a
+{
+    padding: 2px 4px 2px 4px;
+    background-color: #e6e6f1;
+    font-weight:bold;
+}
+.pager span 
+{
+    padding: 2px 4px 2px 4px;
+    background-color: #e6eef2;
+    font-weight:bold;
+}
+.pager div
+{
+    padding: 2px 4px 2px 4px; /*background-color: #e6eef2;*/
+    background-color: #a2a2b4;
+    color: #ffffff;
+    font-weight: bold;
+}
+.pager td table tr td
+{
+    border: #a2a2b4 1px solid;
+    padding: 0px;
+}
+.wrn
+{
+    color:Red;
+}
+img
+{
+    border:0;
+}
+.ui-autocomplete
+{
+    overflow:scroll;
+    height:300px;
+    width:540px;
+}
+.grd td, .grd th
+{
+    border: 1px solid #A0A0A0;
+}
+.floatRight
+{
+    float:right;
+}
+.tabButton
+{
+    display:inline-block;
+    width:140px;
+    text-align:center;
+    background-color: #DDD;
+    font-size: 12px;
+    font-weight: bold;
+    border: solid 1px #CCC;
+    zoom:1; /* IE7 */
+    *display: inline; /* IE7 */
+}
+.tabButton a
+{
+    margin:4px 6px 4px 6px;
+    display:block;
+}
+.tabButtonActive {
+    border:solid 1px #DDD;
+    background-color: #EEE;
+    font-size: 12px;
+    color: #666;
+}
+input[type=text],
+input[type=password] {
+    width:180px;
+}
+@media screen and (max-width:767px) {
+
+    button, input, select, textarea {
+        font-size: 16px !important;
+    }
+    input[type=checkbox] {
+        width: 20px; /*Desired width*/
+        height: 20px; /*Desired height*/
+        vertical-align: middle;
+    }
+
+    .checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+        margin-left: -20px;
+        margin-top: -1px;
+        width: 20px; /*Desired width*/
+        height: 20px; /*Desired height*/
+        vertical-align: middle;
+    }
+
+    .checkbox label, .radio label {
+        min-height: 25px;
+        padding-left: 20px;
+        margin-left: 2px;
+    }
+}

@@ -1,0 +1,133 @@
+﻿<div class="prop-title">
+    {{ 'DisplayFields' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="displayAll" class="col-sm-4 control-label">{{ ::'All' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="displayAll"
+                   type="radio"
+                   ng-value="true"
+                   ng-model="model.displayFieldsPanelModel.hasAllFields" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="displayCustom" class="col-sm-4 control-label">{{ ::'Custom' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="displayCustom" 
+                   type="radio"
+                   ng-value="false"
+                   ng-model="model.displayFieldsPanelModel.hasAllFields" />
+        </div>
+    </div>
+
+    <div ng-if="!model.displayFieldsPanelModel.hasAllFields">
+        <div class="form-group">
+            <label for="sortField" class="col-sm-4 control-label">{{ ::'DisplayField' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="sortField" class="form-control input-sm"
+                        ng-options="option.value as option.name for option in model.displayFieldsPanelModel.availableFields"
+                        ng-model="model.displayFieldsPanelModel.selectedFieldFromDropDown"></select>
+            </div>
+        </div>
+
+        <div class="form-group" ng-if="model.displayFieldsPanelModel.isFormulaVisible">
+            <label for="formula" class="col-sm-4 control-label">{{ ::'Formula' | translate }}</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <div id="formula"
+                         ng-model="model.displayFieldsPanelModel.formula"
+                         ui-ace="{
+                                 useWrapMode:true,
+                                 showGutter:false,
+                                 theme:'infiniti',
+                                 mode:'infiniti',
+                                 onLoad: model.displayFieldsPanelModel.onEditorLoad(),
+                                 advanced: {
+                                    enableSnippets: false,
+                                    enableBasicAutocompletion: true,
+                                    enableLiveAutocompletion: true,
+                                    tabSize: 0
+                                  }
+                 }"></div>
+
+                    <span class="input-group-btn" style="vertical-align:top">
+                        <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                                ng-click="model.displayFieldsPanelModel.pickAceRef('formula')"
+                                ng-class="{'active': model.treeView.isInPickMode }">
+                            <img src="Images/refPick.svg" alt="" height="15" />
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-if="model.displayFieldsPanelModel.isDataGrid">
+            <label for="columnTitle" class="col-sm-4 control-label">{{ ::'ColumnTitle' | translate }}</label>
+            <div class="col-sm-8">
+                <input id="columnTitle" class="form-control input-sm" ng-model="model.displayFieldsPanelModel.selectedFieldColumnTitle"/>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.displayFieldsPanelModel.isDashboardProject && model.displayFieldsPanelModel.availableLinks.length > 1">
+            <label for="link" class="col-sm-4 control-label">{{ ::'Link' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="link" class="form-control input-sm"
+                        ng-options="option.label for option in model.displayFieldsPanelModel.availableLinks track by option.value"
+                        ng-model="model.displayFieldsPanelModel.selectedFieldLink"></select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.displayFieldsPanelModel.isDashboardProject && model.displayFieldsPanelModel.availableLinks.length > 1">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="model.displayFieldsPanelModel.operationsDropdown" />{{ ::'OperationsDropdown' |translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-if="model.displayFieldsPanelModel.isDataGrid">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="model.displayFieldsPanelModel.sortable" />{{ ::'Sortable' |translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <button ng-disabled="!model.displayFieldsPanelModel.isAddEnabled" class="btn btn-default" ng-click="model.displayFieldsPanelModel.add()">{{ 'Add' | translate }}</button>
+            <button ng-disabled="!model.displayFieldsPanelModel.isUpdateEnabled" class="btn btn-default" ng-click="model.displayFieldsPanelModel.update()">{{ 'Update' | translate }}</button>
+            <button ng-disabled="!model.displayFieldsPanelModel.isRemoveEnabled" class="btn btn-default" ng-click="model.displayFieldsPanelModel.remove()">{{ 'Remove' | translate }}</button>
+        </div>
+
+        <div>
+            <div class="tool-bar">
+                <button title="{{ 'MoveUpGroup' | translate }}" ng-click="model.displayFieldsPanelModel.moveUp()" ng-disabled="!model.displayFieldsPanelModel.isMoveUpEnabled" class="tool-btn">
+                    <img src="Images/moveUp.png" />
+                </button>
+                <button title="{{ 'MoveDownGroup' | translate }}" ng-click="model.displayFieldsPanelModel.moveDown()" ng-disabled="!model.displayFieldsPanelModel.isMoveDownEnabled" class="tool-btn">
+                    <img src="Images/moveDown.png" />
+                </button>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-condensed selection-grid">
+            <thead>
+                <tr>
+                    <th>{{ 'DisplayField' | translate }}</th>
+                    <th ng-if="model.displayFieldsPanelModel.isDataGrid">{{ 'ColumnTitle' | translate }}</th>
+                    <th ng-if="model.displayFieldsPanelModel.isDashboardProject && model.displayFieldsPanelModel.availableLinks.length > 1">{{ 'Link' | translate }}</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="field in model.displayFieldsPanelModel.existingDisplayFields"
+                ng-click="model.displayFieldsPanelModel.selectedExistingDisplayInTable(field.tag)"
+                ng-class="{'active': field.selected}">
+                <td>{{ field.field }}</td>
+                <td ng-if="model.displayFieldsPanelModel.isDataGrid">{{ field.tag.columnTitle }}</td>
+                <td ng-if="model.displayFieldsPanelModel.isDashboardProject && model.displayFieldsPanelModel.availableLinks.length > 1">{{ model.displayFieldsPanelModel.showLinkDisplayName(field.tag) }}</td>
+            </tr>
+        </table>
+    </div>
+</form>

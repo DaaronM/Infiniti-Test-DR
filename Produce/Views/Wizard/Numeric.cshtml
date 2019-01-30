@@ -1,0 +1,68 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.NumericQuestionViewModel>
+@{ 
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+    var qid = @IdHelper.IdFor(Model.Question);
+    var questionModel = Model.Question.NumericQuestionModel;
+}
+@if (!Model.Question.IsEditable)
+{ 
+    if (Model.Value == null || String.IsNullOrEmpty(Model.Value.ToString()))
+    {
+        <div id="@qid" class="question-label notAnswered">@Intelledox.Produce.Resources.Strings.NotAnswered</div>
+    }
+    else
+    {
+        <div id="@qid" class="question-label" @Html.Raw(questionModel.Width > 0 ? "style=\"width:" + questionModel.Width.ToString() + "px\"" : "")>@Model.Value</div>
+    }
+}
+else
+{
+    var step = "1";
+    if (questionModel.Increment > 0)
+    {
+        step = @questionModel.Increment.ToString(System.Globalization.CultureInfo.InvariantCulture);
+    }
+    <div class="slider" id="@qid" name="@qid" @Html.Raw(questionModel.Width > 0 ? "style=\"width:" + questionModel.Width.ToString() + "px\"" : "") @Html.Raw(Model.Question.HasValidationErrors() ? "aria-invalid=\"true\" aria-describedby=\"error_" + qid + "\"" : "")/>
+    <span id="@(qid)_display">@Model.Value</span>
+    <input type="hidden" id="@(qid)_value" name="@(qid)_value" value="@Model.Value" />
+    <script type="text/javascript">
+        $('#@(qid)').slider({
+            min: @questionModel.MinimumValue.ToString(System.Globalization.CultureInfo.InvariantCulture),
+            max: @questionModel.MaximumValue.ToString(System.Globalization.CultureInfo.InvariantCulture),
+            step: @(step),
+            value: '@Model.Value',
+            slide: function(event, ui) {
+                $("#@(qid)_display").text(ui.value);
+            },
+            @if (Model.LogInteractions)
+            {
+                <text>
+            start: function (event, ui) {
+                wiz.dataAnalyticsFocus("@(Model.AnalyticsID)", "slide");
+            },
+            stop: function (event, ui) {
+                wiz.dataAnalyticsBlur();
+            },
+                </text>
+            }
+            change: function(event, ui) {
+                $("#@(qid)_value").val(ui.value);
+                @if (Model.Question.IsParentQuestion)
+                {
+                    @:$("#@(qid)_change").val('1');
+                }
+                @if (Model.Question.IsRealtimeParentQuestion)
+                {
+                    @:wiz.delayPostback();
+                }
+            }
+        });
+    </script>
+    if (Model.Question.IsParentQuestion)
+    {
+        <input type="hidden" id="@(qid)_change" name="@(qid)_change" value="0" />
+    }
+}
+@Html.DisplayValidation(Model.Question.LastValidationMessage, qid)

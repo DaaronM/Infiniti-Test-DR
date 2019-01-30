@@ -1,0 +1,76 @@
+﻿<div class="prop-title">
+    {{ model.propertiesPanelModel.propertiesTitle }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="actionName" class="col-sm-4 control-label">{{ ::'ActionName' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="actionName" class="form-control input-sm f2-rename" ng-model="model.propertiesPanelModel.name" ng-blur="model.propertiesPanelModel.validateName()" />
+        </div>
+    </div>
+    <div class="property-divider" />
+    <div class="form-group" ng-show="model.propertiesPanelModel.isRunActionVisible">
+        <label for="runAction" class="col-sm-4 control-label">{{ ::'RunAction' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="runAction" class="form-control input-sm"
+                    ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.availableActionWhens"
+                    ng-model="model.propertiesPanelModel.selectedRunActionWhen"></select>
+        </div>
+    </div>
+    <div class="form-group" ng-show="model.propertiesPanelModel.isShowActionVisible">
+        <label for="showAction" class="col-sm-4 control-label">{{ ::'ShowAction' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="showAction" class="form-control input-sm"
+                    ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.availableActionWhens"
+                    ng-model="model.propertiesPanelModel.selectedShowActionWhen"></select>
+        </div>
+    </div>
+    <div class="form-group" ng-show="model.propertiesPanelModel.isSubmissionStageVisible">
+        <label for="submissionStage" class="col-sm-4 control-label">{{ ::'RunAfter' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="submissionStage" class="form-control input-sm"
+                    ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.availableSubmissionStages"
+                    ng-model="model.propertiesPanelModel.selectedSubmissionStage"></select>
+        </div>
+    </div>
+    <div class="form-group" ng-show="model.propertiesPanelModel.isRunActionVisible">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.isRetryVisible" />{{ ::'RetryOnFailure' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-show="model.propertiesPanelModel.isRetryVisible">
+        <label for="retries" class="col-sm-4 control-label">{{ ::'Retries' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="retries" class="form-control input-sm f2-rename" ng-model="model.propertiesPanelModel.retries" maxlength="2" pattern="\d*" />
+        </div>
+    </div>
+    <div class="form-group" ng-show="model.propertiesPanelModel.isRetryVisible">
+        <label for="retries" class="col-sm-4 control-label">{{ ::'RetryWait' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="retries" class="form-control input-sm f2-rename" ng-model="model.propertiesPanelModel.retryWait" maxlength="3" pattern="\d*" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.isRepeated" />{{ ::'Repeating' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+        <div class="form-group" ng-show="model.propertiesPanelModel.isRepeatSourceVisible">
+            <label for="repeatSource" class="col-sm-4 control-label">{{ ::'RepeatSource' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="repeatSource" class="form-control input-sm"
+                        ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.availableRepeatSources"
+                        ng-model="model.propertiesPanelModel.repeatSource"></select>
+            </div>
+        </div>
+        <div class="property-divider" />
+        <ng-include src="'Views/Properties/inputs.html?v=106882799234227327'"></ng-include>
+</form>

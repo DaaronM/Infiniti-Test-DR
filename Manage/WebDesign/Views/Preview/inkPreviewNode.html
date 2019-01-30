@@ -1,0 +1,17 @@
+﻿<div class="inkScrollWrapper" style="height:314px">
+    <div class="inkWrapper" style="height:300px">
+        <canvas width="500" height="300" class="inkQuestion canvasTouchAction"></canvas>
+    </div>
+</div>
+<div>
+    <input type="button" value="{{ ::'Upload' | translate }}" class="btn btn-default" ng-if="node.AllowBackgroundUpload" />
+    <input type="button" value="{{ ::'Zoom' | translate }}" class="btn btn-default" ng-if="node.AllowZoom" />
+    <input type="button" value="{{ ::'Clear' | translate }}" class="btn btn-default" />
+
+    <span ng-if="node.AllowInkColourChoice">
+        <span class="question-label">{{ ::'InkColour' | translate }}</span>
+        <select class="form-control" style="width:auto;display:inline">
+            <option>&nbsp;&nbsp;&nbsp;&nbsp;</option>
+        </select>
+    </span>
+</div>

@@ -1,0 +1,49 @@
+﻿<div class="prop-title">
+    {{ 'ProjectProperties' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="projectProperty" class="col-sm-4 control-label">{{ ::'ProjectProperty' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="projectProperty" class="form-control input-sm"
+                    ng-options="option.Id as option.Name for option in model.projectPropertiesModel.availableProjectProperties"
+                    ng-model="model.projectPropertiesModel.selectedProjectProperty"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="projectPropertyValue" class="col-sm-4 control-label">{{ ::'Value' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input id="projectPropertyValue" class="form-control input-sm" ng-model="model.projectPropertiesModel.selectedValue" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                            ng-click="model.projectPropertiesModel.pickValueRef('watermark')"
+                            ng-class="{'active': model.propertiesPanelModel.treeView.isInPickMode }">
+                        <img src="Images/refPick.svg" alt="" height="15" />
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group text-center">
+        <button ng-disabled="!model.projectPropertiesModel.isAddEnabled" class="btn btn-default" ng-click="model.projectPropertiesModel.add()">{{ 'Add' | translate }}</button>
+        <button ng-disabled="!model.projectPropertiesModel.isUpdateEnabled" class="btn btn-default" ng-click="model.projectPropertiesModel.update()">{{ 'Update' | translate }}</button>
+        <button ng-disabled="!model.projectPropertiesModel.isRemoveEnabled" class="btn btn-default" ng-click="model.projectPropertiesModel.remove()">{{ 'Remove' | translate }}</button>
+    </div>
+
+    <table class="table table-bordered table-condensed selection-grid">
+        <thead>
+            <tr>
+                <th>{{ 'Name' | translate }}</th>
+                <th>{{ 'Value' | translate }}</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="prop in model.projectPropertiesModel.existingProjectProperties"
+            ng-click="model.projectPropertiesModel.selectExistingProjectProperty(prop.tag)"
+            ng-class="{'active': prop.selected}">
+            <td>{{ prop.name }}</td>
+            <td>{{ prop.value }}</td>
+        </tr>
+    </table>
+</form>

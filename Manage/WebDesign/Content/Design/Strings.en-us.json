@@ -1,0 +1,14 @@
+﻿{
+    "AllowInkColourChoice": "Allow ink color choice",
+    "BackColour": "Background color",
+    "BackToggleColour": "Background color on toggle",
+    "Behaviour": "Behavior",
+    "Colour": "Color",
+    "CurrencyToChequeText": "Currency to check text",
+    "FocusRingColour": "Border color on focus",
+    "FontColour": "Font Color",
+    "LineColour": "Line Color",
+    "PlaceholderColour": "Placeholder Color",
+    "PlaceholderColourTooltip": "The Color that represents placeholders from this document",
+    "SanitiseContent": "Sanitize Content"
+}

@@ -1,0 +1,115 @@
+﻿@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.QAViewModel>
+<input type="hidden" id="reloadPageUrl" value="~/wizard/reloadPage/@Model.ProjectGroupGuid.ToString()/?@Model.QueryString" />
+<input type="hidden" id="saveActionUrl" value="~/wizard/saveAnswerFile/@Model.ProjectGroupGuid.ToString()/?@Model.QueryString" />
+<input type="hidden" id="tempUserReassignUrl" value="~/wizard/TempUserReassign/@Model.ProjectGroupGuid.ToString()/?@Model.QueryString" />
+<input type="hidden" id="changeSortUrl" value="~/wizard/ChangeSort/@Model.ProjectGroupGuid.ToString()/?@Model.QueryString" />
+<input type="hidden" id="selectTabUrl" value="~/wizard/selectTab/@Model.ProjectGroupGuid.ToString()/?@Model.QueryString" />
+<input type="hidden" id="runActionsUrl" value="~/wizard/runActionsAsync/@Model.ProjectGroupGuid.ToString()/?@Model.QueryString" />
+<input type="hidden" id="logUrl" value="~/wizard/@Model.ProjectGroupGuid.ToString()/?@(Model.QueryString.ToString().Contains("logguid") ? Model.QueryString.ToString() : "logguid=" + Model.Wizard.ProjectLog + "&" + Model.QueryString)" />
+<form action="~/wizard/generateProject/@Model.ProjectGroupGuid.ToString()/?@Model.QueryString" id="aspnetForm" method="post"
+      novalidate="novalidate">
+    <div id="up">
+        @{ Html.RenderAction("RenderPage", new Intelledox.ViewModel.Core.RenderPageRouteData() { LogGuid = Model.Wizard.ProjectLog, ScrollToTop = false, LogRenderPage = true }); }
+    </div>
+
+    <div id="popupModal" class="modal fade" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" style="text-align:center">
+            <div class="modal-content modal-insert"></div>
+        </div>
+    </div>
+    <div id="popupLargeModal" class="modal fade" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="text-align: center">
+            <div class="modal-content modal-lg-insert"></div>
+        </div>
+    </div>
+
+    <div id="popupLargeDraggableModal" class="modal fade" role="dialog" aria-hidden="true">
+        <div id="draggableDialog" class="modal-dialog modal-lg" style="text-align: center">
+            <div class="modal-content modal-lgd-insert"></div>
+        </div>
+    </div>
+    <div id="popupFullscreenModal" class="modal fade" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen" style="text-align: center">
+            <div class="modal-content modal-lgf-insert"></div>
+        </div>
+    </div>
+</form>
+@if (Model.AnswerFiles.Count > 0)
+{
+    <div style="display:none">
+        <div id="ProjectAnswerFilesLoad">
+            <h5 class="sidebarTop titleAnswerFiles">
+                @Intelledox.Produce.Resources.Strings.LoadAnswerFile
+            </h5>
+            <div class="sidebarContent">
+                @foreach (var af in Model.AnswerFiles)
+                {
+                    <div class="sidebarItem" style="overflow:hidden;">
+                        <div class="bullet ImageSize">
+                            @if (!af.InProgress)
+                            {
+                                <span>
+                                    <a href="~/wizard/@Model.ProjectGroupGuid.ToString()/?Gen=true&wizardmode=@Model.IsWizardMode.ToString()&portal=@Model.IsPortal.ToString()&portalsave=@Model.IsPortalSave.ToString()&AnswerFileID=@af.Id">
+                                        <img src="~/Images/IX_SavedAnswer.svg" alt="@Intelledox.Produce.Resources.Strings.GenDocFromFile" />
+                                    </a>
+                                </span>
+                            }
+                            else
+                            {
+                                <img src="~/Images/IX_Recent.svg" alt="@Intelledox.Produce.Resources.Strings.Recent" />
+                            }
+                        </div>
+                        <div class="indent">
+                            <a title="@af.RunDate" href="~/wizard/@Model.ProjectGroupGuid.ToString()/?wizardmode=@Model.IsWizardMode.ToString()&portal=@Model.IsPortal.ToString()&portalsave=@Model.IsPortalSave.ToString()&AnswerFileID=@af.Id&InProgress=@(af.InProgress ? "1" : "0")">
+                                @af.Description
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $(".modal-fullscreen").on('show.bs.modal', function () {
+        setTimeout(function () {
+            $(".modal-backdrop").addClass("modal-backdrop-fullscreen");
+        }, 0);
+    });
+    $(".modal-fullscreen").on('hidden.bs.modal', function () {
+        $(".modal-backdrop").addClass("modal-backdrop-fullscreen");
+    });
+    $('#up').on('click', 'input[type="submit"]', function (e) {
+        e.preventDefault();
+        if ($(this).data('pushstate') == true) {
+            wiz.formIsDirty = true;
+            wiz.pushingState = true;
+        }
+        if ($(this).data('repeatpath') != null) {
+            wiz.setPath($(this).data('fragmentguid'), $(this).data('objectid'), $(this).data('repeatpath'));
+        }
+        if ($(this).data('command') != null) {
+            wiz.doAjaxPost($(this).data('command'));
+        } else {
+            wiz.doAjaxPost($('#aspnetForm').prop('action'), $(this).prop('name'), $(this).val());
+        }
+        this.disabled = true;
+    });
+
+    @if (Model.Wizard.AllowTimeout)
+    {
+        @:wiz.logOut(@(Model.Wizard.TimeoutPeriod));
+    }
+    else
+    {
+        @:wiz.keepAlive('@(Model.Wizard.ProjectLog)', @(Model.Wizard.TimeoutPeriod));
+    }
+    @if (Model.Wizard.WizardModel.LiveRefresh)
+    {
+        @:wiz.liveRefresh(@((Model.Wizard.WizardModel.RefreshPeriod * 1000).ToString()));
+    }
+    @if (Model.AnswerFiles.Count > 0)
+    {
+        @:$("#ProjectAnswerFiles").append($("#ProjectAnswerFilesLoad"));
+    }
+</script>

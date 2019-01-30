@@ -1,0 +1,71 @@
+﻿<div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.upToCurrentPageOnly" />{{ ::'VisitedPagesOnly' | translate }}
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.collapsiblePages" />{{ ::'CollapsiblePages' | translate }}
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.includePageLinks" />{{ ::'IncludePageLinks' | translate }}
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.includeComments" />{{ ::'IncludeComments' | translate }}
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.includeAllChoices" />{{ ::'IncludeAllChoices' | translate }}
+            </label>
+        </div>
+    </div>
+</div>
+<div class="property-divider" />
+<div class="form-group">
+    <label for="excludePage" class="col-sm-4 control-label">{{ ::'ExcludePage' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="excludePage" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availablePages"
+                ng-model="model.propertiesPanelModel.selectedPage"></select>
+    </div>
+</div>
+<div class="form-group text-center">
+    <button ng-disabled="!model.propertiesPanelModel.isAddEnabled" class="btn btn-default" ng-click="model.propertiesPanelModel.add()">{{ 'Add' | translate }}</button>
+    <button ng-disabled="!model.propertiesPanelModel.isRemoveEnabled" class="btn btn-default" ng-click="model.propertiesPanelModel.remove()">{{ 'Remove' | translate }}</button>
+</div>
+
+<table class="table table-bordered table-condensed selection-grid">
+    <thead>
+        <tr>
+            <th>{{ 'ExcludedPages' | translate }}</th>
+        </tr>
+    </thead>
+    <tr ng-repeat="p in model.propertiesPanelModel.existingExcludedPages"
+        ng-click="model.propertiesPanelModel.selectExistingExcludedPage(p.tag)"
+        ng-class="{'active': p.selected}">
+        <td>{{ p.name }}</td>
+    </tr>
+</table>

@@ -1,0 +1,161 @@
+﻿<div class="prop-title">
+    {{ 'Conditions' | translate }}<span ng-if="model.conditionsPanelModel.hasAnyConditions"> &#x2713;</span>
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="conditionsFor" class="col-sm-4 control-label">{{ ::'ConditionsFor' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="conditionsFor" class="form-control input-sm"
+                    ng-model="model.conditionsPanelModel.selectedConditionTypeText">
+                <option ng-repeat="option in model.conditionsPanelModel.availableConditionTypes" ng-class="{ bold: option.hasType }" value="{{option.value}}">{{option.name}}</option>
+            </select>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <label for="conditionType" class="col-sm-4 control-label">{{ ::'Type' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="conditionType" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.conditionsPanelModel.availableParentTypes"
+                    ng-model="model.conditionsPanelModel.selectedParentType"></select>
+        </div>
+    </div>
+
+    <!-- Question -->
+    <div class="form-group" ng-if="model.conditionsPanelModel.isQuestionVisible">
+        <label for="conditionQuestion" class="col-sm-4 control-label">{{ ::'Question' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="conditionQuestion" class="form-control input-sm"
+                    ng-options="option.QuestionGuid as option.Text for option in model.conditionsPanelModel.availableQuestions"
+                    ng-model="model.conditionsPanelModel.selectedQuestionGuid"></select>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.conditionsPanelModel.isAnswerVisible">
+        <label for="conditionAnswer" class="col-sm-4 control-label">{{ ::'Answer' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <select id="conditionAnswer" class="form-control input-sm"
+                        ng-disabled="!model.conditionsPanelModel.isAnswerEnabled"
+                        ng-options="option.AnswerGuid as option.Name for option in model.conditionsPanelModel.availableAnswers"
+                        ng-model="model.conditionsPanelModel.selectedAnswerGuid"></select>
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                            ng-click="model.conditionsPanelModel.pickRef()"
+                            ng-class="{'active': model.treeView.isInPickMode }">
+                        <img src="Images/refPick.svg" alt="" height="15" />
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fragment input -->
+    <div class="form-group" ng-if="model.conditionsPanelModel.isInputVisible">
+        <label for="conditionInput" class="col-sm-4 control-label">{{ ::'Input' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <select id="conditionInput" class="form-control input-sm"
+                        ng-options="option.routingElementTypeId as option.description for option in model.conditionsPanelModel.availableInputs"
+                        ng-model="model.conditionsPanelModel.selectedInput"></select>
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                            ng-click="model.conditionsPanelModel.pickRef()"
+                            ng-class="{'active': model.treeView.isInPickMode }">
+                        <img src="Images/refPick.svg" alt="" height="15" />
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fragment output -->
+    <div class="form-group" ng-if="model.conditionsPanelModel.isFragmentVisible">
+        <label for="conditionFragment" class="col-sm-4 control-label">{{ ::'Fragment' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="conditionFragment" class="form-control input-sm"
+                    ng-options="option.ObjectId as option.Name for option in model.conditionsPanelModel.availableFragments"
+                    ng-model="model.conditionsPanelModel.selectedFragment"></select>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.conditionsPanelModel.isFragmentVisible">
+        <label for="conditionFragmentOutput" class="col-sm-4 control-label">{{ ::'Output' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <select id="conditionFragmentOutput" class="form-control input-sm"
+                        ng-options="option.RoutingOptionGuid as option.Name for option in model.conditionsPanelModel.availableFragmentOutputs"
+                        ng-model="model.conditionsPanelModel.selectedFragmentOutput"></select>
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                            ng-click="model.conditionsPanelModel.pickRef()"
+                            ng-class="{'active': model.treeView.isInPickMode }">
+                        <img src="Images/refPick.svg" alt="" height="15" />
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action output -->
+    <div class="form-group" ng-if="model.conditionsPanelModel.isActionVisible">
+        <label for="conditionAction" class="col-sm-4 control-label">{{ ::'Action' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="conditionAction" class="form-control input-sm"
+                    ng-options="option.ActionGuid as option.Name for option in model.conditionsPanelModel.availableActions"
+                    ng-model="model.conditionsPanelModel.selectedAction"></select>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.conditionsPanelModel.isActionVisible">
+        <label for="conditionActionOutput" class="col-sm-4 control-label">{{ ::'Output' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="conditionActionOutput" class="form-control input-sm"
+                    ng-disabled="!model.conditionsPanelModel.isActionOutputEnabled"
+                    ng-options="option.id as option.name for option in model.conditionsPanelModel.availableActionOutputs"
+                    ng-model="model.conditionsPanelModel.selectedActionOutput"></select>
+        </div>
+    </div>
+
+    <!-- Project Property -->
+    <div class="form-group" ng-if="model.conditionsPanelModel.isProjectPropertyVisible">
+        <label for="conditionProperty" class="col-sm-4 control-label">{{ ::'ProjectProperty' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="conditionProperty" class="form-control input-sm"
+                    ng-options="option.Id as option.Name for option in model.conditionsPanelModel.availableProjectProperties"
+                    ng-model="model.conditionsPanelModel.selectedProjectProperty"></select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="conditionComparison" class="col-sm-4 control-label">{{ ::'Comparison' | translate }}</label>
+        <div class="col-sm-4">
+            <select id="conditionComparison" class="form-control input-sm"
+                    ng-disabled="!model.conditionsPanelModel.isComparisonTypeEnabled"
+                    ng-options="option.value as option.name for option in model.conditionsPanelModel.availableComparisonTypes"
+                    ng-model="model.conditionsPanelModel.selectedComparisonType"></select>
+        </div>
+        <div class="col-sm-4"
+             ng-if="model.conditionsPanelModel.isCompareToTextVisible">
+            <input id="conditionComparisonText" class="form-control input-sm"
+                   ng-disabled="!model.conditionsPanelModel.isCompareToTextEnabled"
+                   ng-model="model.conditionsPanelModel.compareTo" />
+        </div>
+        <div class="col-sm-4"
+             ng-if="model.conditionsPanelModel.isStateVisible">
+            <select id="conditionState" class="form-control input-sm"
+                    ng-options="option.Id as option.Name for option in model.conditionsPanelModel.availableStates"
+                    ng-model="model.conditionsPanelModel.selectedStateGuid"></select>
+        </div>
+        <div class="col-sm-4"
+             ng-if="model.conditionsPanelModel.isCompareToListVisible">
+            <select id="conditionComparisonList" class="form-control input-sm"
+                    ng-disabled="!model.conditionsPanelModel.isCompareToListEnabled"
+                    ng-options="option.value as option.name for option in model.conditionsPanelModel.availableCompareTos"
+                    ng-model="model.conditionsPanelModel.selectedCompareTo"></select>
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <button ng-disabled="!model.conditionsPanelModel.isAddEnabled" class="btn btn-default" ng-click="model.conditionsPanelModel.add()">{{ 'Add' | translate }}</button>
+        <button ng-disabled="!model.conditionsPanelModel.isUpdateEnabled" class="btn btn-default" ng-click="model.conditionsPanelModel.update()">{{ 'Update' | translate }}</button>
+        <button ng-disabled="!model.conditionsPanelModel.isRemoveEnabled" class="btn btn-default" ng-click="model.conditionsPanelModel.remove()">{{ 'Remove' | translate }}</button>
+    </div>
+    <clause-designer model="model.conditionsPanelModel.clauseDesignerModel"></clause-designer>
+</form>

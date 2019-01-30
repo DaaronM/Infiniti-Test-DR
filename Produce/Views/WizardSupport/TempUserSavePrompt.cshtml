@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "~/Views/Shared/_WizardSubpage.cshtml";
+}
+
+<script type="text/javascript">
+    function doOk() {
+        parent.wiz.closeModal();
+    }
+</script>
+<form method="post" id="aspnetForm" onsubmit="return doOk();">
+    <div class="container">
+        <div id="SaveMessage" class="form-group">
+            <label>@ViewBag.AccessCodeDescription</label>
+        </div>
+        <div class="form-group">
+            <label>@ViewBag.AccessCode</label>
+        </div>
+        <div class="form-group">
+            <label>@ViewBag.Err</label>
+        </div>
+        <div class="pull-right">
+            <input type="button" id="OK" onclick="doOk()" value="@Intelledox.Produce.Resources.Strings.OK" class="btn btn-primary btn-submit" />
+        </div>
+    </div>
+</form>

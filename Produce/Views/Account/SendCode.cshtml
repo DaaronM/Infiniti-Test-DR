@@ -1,0 +1,35 @@
+﻿@model Infiniti.MvcControllers.LoginViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutSubpage.cshtml";
+}
+<form id="Form1" method="post" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <span id="lblBefore">@Html.Raw(Infiniti.MvcControllers.ApplicationSettings.ThemeLoginBefore)</span>
+    <div id="divLogin" class="form-horizontal">
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div id="divLoginMessage">@ViewBag.Message</div>
+        }
+        <br /><br />
+        <div>
+            <h3 class="login-title">@Intelledox.Produce.Resources.Strings.TwoFactorCode</h3>
+            <div class="form-group">
+                <label for="code" class="col-sm-3 control-label">@Intelledox.Produce.Resources.Strings.Code</label>
+                <div class="col-sm-9">
+                    <input name="code" maxlength="50" id="code" class="form-control" autofocus="autofocus" autocomplete="off" />
+                </div>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="RememberBrowser" value="true" /> @Intelledox.Produce.Resources.Strings.RememberThisBrowser
+                    </label>
+                </div>
+            </div>
+            <div class="pull-right">
+                <input type="submit" value="@Intelledox.Produce.Resources.Strings.Submit" class="btn btn-primary btn-submit" />
+            </div>
+        </div>
+    </div>
+    <span id="lblAfter">@Html.Raw(Infiniti.MvcControllers.ApplicationSettings.ThemeLoginAfter)</span>
+</form>

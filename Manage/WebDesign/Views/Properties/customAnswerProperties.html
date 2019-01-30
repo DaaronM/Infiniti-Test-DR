@@ -1,0 +1,9 @@
+﻿<div class="form-group">
+    <label for="dataField" class="col-sm-4 control-label">{{ ::'Output' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="dataField" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableOutputs"
+                ng-model="model.propertiesPanelModel.customField"></select>
+    </div>
+</div>
+<ng-include ng-if="model.propertiesPanelModel.isImagePropertiesVisible" src="'Views/Properties/imageProperties.html?v=106882799234227327'"></ng-include>

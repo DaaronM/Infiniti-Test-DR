@@ -1,0 +1,103 @@
+﻿<div class="prop-title">
+    {{ 'DataFilterTab' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="filterKeyField" class="col-sm-4 control-label">{{ ::'FilterField' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="filterKeyField" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.dataFiltersPanelModel.availableFields"
+                    ng-model="model.dataFiltersPanelModel.selectedField"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="filterComparison" class="col-sm-4 control-label">{{ ::'Comparison' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="filterComparison" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.dataFiltersPanelModel.availableComparisonTypes"
+                    ng-model="model.dataFiltersPanelModel.selectedComparisonType"></select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="filterType" class="col-sm-4 control-label">{{ ::'Type' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="filterType" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.dataFiltersPanelModel.availableParentTypes"
+                    ng-model="model.dataFiltersPanelModel.selectedParentType"></select>
+        </div>
+    </div>
+
+    <!-- Question -->
+    <div class="form-group" ng-if="model.dataFiltersPanelModel.isQuestionVisible">
+        <label for="filterQuestion" class="col-sm-4 control-label">{{ ::'Question' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="filterQuestion" class="form-control input-sm"
+                    ng-options="option.QuestionGuid as option.Text for option in model.dataFiltersPanelModel.availableQuestions"
+                    ng-model="model.dataFiltersPanelModel.selectedQuestionGuid"></select>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.dataFiltersPanelModel.isQuestionVisible && !model.dataFiltersPanelModel.isParentFieldVisible">
+        <label for="filterAnswer" class="col-sm-4 control-label">{{ ::'Answer' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <select id="filterAnswer" class="form-control input-sm"
+                        ng-disabled="!model.dataFiltersPanelModel.isAnswerEnabled"
+                        ng-options="option.AnswerGuid as option.Name for option in model.dataFiltersPanelModel.availableAnswers"
+                        ng-model="model.dataFiltersPanelModel.selectedAnswerGuid"></select>
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                            ng-click="model.dataFiltersPanelModel.pickRef()"
+                            ng-class="{'active': model.treeView.isInPickMode }">
+                        <img src="Images/refPick.svg" alt="" height="15"/>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.dataFiltersPanelModel.isQuestionVisible && model.dataFiltersPanelModel.isParentFieldVisible">
+        <label for="filterParentField" class="col-sm-4 control-label">{{ ::'DataField' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="filterParentField" class="form-control input-sm"
+                    ng-disabled="!model.dataFiltersPanelModel.isAnswerEnabled"
+                    ng-options="option.value as option.name for option in model.dataFiltersPanelModel.availableParentFields"
+                    ng-model="model.dataFiltersPanelModel.selectedParentField"></select>
+        </div>
+    </div>
+
+    <!-- Fragment input -->
+    <div class="form-group" ng-if="model.dataFiltersPanelModel.isInputVisible">
+        <label for="filterInput" class="col-sm-4 control-label">{{ ::'Input' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="filterInput" class="form-control input-sm"
+                    ng-options="option.routingElementTypeId as option.description for option in model.dataFiltersPanelModel.availableInputs"
+                    ng-model="model.dataFiltersPanelModel.selectedInput"></select>
+        </div>
+    </div>
+
+    <!-- Constant -->
+    <div class="form-group" ng-if="model.dataFiltersPanelModel.isConstantVisible">
+        <label for="filterConstant" class="col-sm-4 control-label">{{ ::'Value' | translate }}</label>
+        <div class="col-sm-8">
+            <textarea id="filterConstant" class="form-control input-sm" rows="5"
+                      ng-model="model.dataFiltersPanelModel.constant"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group" ng-if="model.dataFiltersPanelModel.isAggregateVisible">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.dataFiltersPanelModel.isAggregate" />{{ ::'Aggregate' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group text-center">
+        <button ng-disabled="!model.dataFiltersPanelModel.isAddEnabled" class="btn btn-default" ng-click="model.dataFiltersPanelModel.add()">{{ 'Add' | translate }}</button>
+        <button ng-disabled="!model.dataFiltersPanelModel.isUpdateEnabled" class="btn btn-default" ng-click="model.dataFiltersPanelModel.update()">{{ 'Update' | translate }}</button>
+        <button ng-disabled="!model.dataFiltersPanelModel.isRemoveEnabled" class="btn btn-default" ng-click="model.dataFiltersPanelModel.remove()">{{ 'Remove' | translate }}</button>
+    </div>
+    <clause-designer model="model.dataFiltersPanelModel.clauseDesignerModel"></clause-designer>
+</form>

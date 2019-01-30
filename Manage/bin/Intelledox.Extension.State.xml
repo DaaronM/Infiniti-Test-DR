@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Intelledox.Extension.State</name>
+    </assembly>
+    <members>
+        <member name="T:Intelledox.Extension.State.StateExtension">
+            <summary>
+            State extension that can be used to save answer files externally
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.State.StateExtension.ExtensionIdentity">
+            <summary>
+            Returns the unique identity for this state. Used to register inputs and outputs against.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.State.StateExtension.GlobalSettingIdentity">
+            <summary>
+            Returns the identity that is registered in Manage for global configuration settings. This identity
+            may be shared between different extensions for shared settings.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.State.StateExtension.RequiresAnswerFile">
+            <summary>
+            Whether this state extension expects to have an answer file created and passed to it during the
+            ChangingPage call. The default is false for performance reasons.
+            </summary>
+        </member>
+        <member name="M:Intelledox.Extension.State.StateExtension.AnswerFileSaving(Intelledox.QAWizard.StateProperties)">
+            <summary>
+            User has chosen to save an answer file of the current form
+            </summary>
+            <param name="properties">Wizard properties and settings</param>
+        </member>
+        <member name="M:Intelledox.Extension.State.StateExtension.UseStandardSave(Intelledox.QAWizard.StateProperties)">
+            <summary>
+            Whether to use the Produce standard save button or a custom one
+            </summary>
+            <param name="properties">Wizard properties and settings</param>
+            <returns><c>true</c> if using the Produce standard button, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:Intelledox.Extension.State.StateExtension.ChangingPage(Intelledox.QAWizard.StateProperties,Intelledox.QAWizard.PageChangeArguments)">
+            <summary>
+            User has navigated within the form
+            </summary>
+            <param name="properties">Wizard properties and settings</param>
+            <param name="direction">Forward or backwards navigation direction</param>
+        </member>
+        <member name="M:Intelledox.Extension.State.StateExtension.WriteHtml(Intelledox.QAWizard.StateProperties,System.IO.TextWriter)">
+            <summary>
+            Custom html that can be written to form to support the state extension
+            </summary>
+            <param name="properties">Wizard properties and settings</param>
+            <param name="writer"><see cref="T:System.IO.TextWriter"/> to write custom html to</param>
+        </member>
+        <member name="M:Intelledox.Extension.State.StateExtension.IsLicensed(System.Guid)">
+            <summary>
+            Custom licensing check maintained by the state connector
+            </summary>
+            <param name="businessUnitGuid">Business unit identifier</param>
+            <returns><c>true</c> if licensed, otherwise <c>false</c></returns>
+        </member>
+        <member name="T:Intelledox.Extension.State.ExtensionIdentity">
+            <summary>
+            Unique identity for a state.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.State.ExtensionIdentity.Id">
+            <summary>
+            Unique id for a state.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.State.ExtensionIdentity.Name">
+            <summary>
+            Display name for a state.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.State.ExtensionIdentity.ModuleId">
+            <summary>
+            Licensing module identifier
+            </summary>
+        </member>
+    </members>
+</doc>

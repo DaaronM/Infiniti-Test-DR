@@ -1,0 +1,59 @@
+﻿<form class="form-horizontal" ng-submit="name != '' && ok()">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title">{{ ::'SaveProject' | translate }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="saveProjectName" class="col-sm-4 control-label">{{ ::'ProjectName' | translate }}</label>
+            <div class="col-sm-8">
+                <input id="saveProjectName" class="form-control" ng-model="name" maxlength="100" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="selectFolder" class="col-sm-4 control-label">{{ ::'ContentFolder' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="selectFolder" class="form-control input-sm"
+                        ng-options="option.folderGuid as option.name for option in folders"
+                        ng-model="selectedFolder"></select>
+            </div>
+        </div>
+        <div class="form-group" ng-show="CanPublish && !ShowConvert">
+            <label for="isShowPublish" class="col-sm-4 control-label">{{ ::'Publish' | translate }}</label>
+            <div class="col-sm-8">
+                <div class="checkbox">
+                    <input type="checkbox" id="isShowPublish" ng-model="ShowPublish" />
+                    <select ng-show="ShowPublish" id="selectPublishFolder" class="form-control input-sm"
+                            ng-options="option.id as option.name for option in publishFolders"
+                            ng-model="selectedPublishFolder"></select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-show="CanConvert && !ShowPublish">
+            <label for="isConvert" class="col-sm-4 control-label">{{ ::'CopyToFragment' | translate }}</label>
+            <div class="col-sm-8">
+                <div class="checkbox">
+                    <input type="checkbox" id="group" ng-model="ShowConvert" />
+                    <select id="projectType" class="form-control input-sm"
+                            ng-model="selectedConvertType" ng-show="ShowConvert">
+                        <option value="4">{{ 'FragmentPage' | translate }}</option>
+                        <option value="5">{{ 'FragmentPortion' | translate }}</option>
+                    </select>
+                    <br />
+                    <select ng-show="ShowNodes && ShowConvert" id="selectTreeNode" class="form-control input-sm"
+                            ng-options="option.ObjectId as option.Name for option in pages"
+                            ng-model="selectedPortionNode"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-disabled="name == ''">{{ ::'OK' | translate }}</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">{{ ::'Cancel' | translate }}</button>
+    </div>
+</form>
+<script>
+    setTimeout(function() {
+        document.getElementById('saveProjectName').focus();
+    }, 500);
+</script>

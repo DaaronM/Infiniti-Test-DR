@@ -1,0 +1,141 @@
+﻿@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.ButtonQuestionViewModel>
+
+@{
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+
+    var qid = IdHelper.IdFor(Model.Question);
+    var labelId = "label" + qid;
+    var isSelected = Model.IsSelected;
+    var isDisabled = !Model.Question.IsEditable;
+    var labelClass = isSelected ? "active" : "";
+    labelClass = isDisabled ? labelClass + " disabled" : labelClass;
+    var borderColourId = "border" + qid;
+    var backgroundColourId = "background" + qid;
+    var gradientColourId = "gradient" + qid;
+    var originalRingColourId = "originalRing" + qid;
+    var focusRingColourId = "focusRing" + qid;
+    var toggleStyleId = "toggleStyle" + qid;
+    var divClass = Model.ButtonQuestionModel.Size == Intelledox.Model.ButtonSize.Large ? " tile-lg" :
+                    Model.ButtonQuestionModel.Size == Intelledox.Model.ButtonSize.Wide ? " tile-wd" :
+                    Model.ButtonQuestionModel.Size == Intelledox.Model.ButtonSize.Small ? " tile-sm" : " tile-md";
+    var clickEvent = string.Empty;
+    if (!string.IsNullOrEmpty(Model.ButtonQuestionModel.BackToggleColour))
+    {
+        clickEvent = "var toggledOn = wiz.toggleTileBackground(this, " + backgroundColourId + ", " + gradientColourId + ", '" + Model.ButtonQuestionModel.BackToggleColour + "', '" + Model.ButtonQuestionModel.BackToggleColourDark + "');  if (toggledOn){" + originalRingColourId + " = " + toggleStyleId + ";} else { " + originalRingColourId + " = " + borderColourId + "; }; ";
+    }
+    var hoverEvent = "wiz.changeTileFocusRing(this, " + originalRingColourId + ", " + (!string.IsNullOrEmpty(Model.ButtonQuestionModel.FocusRingColour) ? "'" + Model.ButtonQuestionModel.FocusRingColour + "'" : focusRingColourId) + "); ";
+}
+@if (Model.ButtonQuestionModel.ButtonType == Intelledox.Model.ButtonType.Toggle)
+{
+    <div class="btn-group" data-toggle="buttons">
+        <label id="@labelId" name="@labelId" class="btn tile @divClass @labelClass" onmouseover="@hoverEvent" onmouseout="@hoverEvent" onclick="@clickEvent">
+            <input type="checkbox" id="@qid" name="@qid" autocomplete="off" disabled="@isDisabled" value="True" checked="@isSelected" aria-describedby="@(qid)Text" @Html.Raw(Model.Question.IsRealtimeParentQuestion ? "onchange=\"wiz.reload('" + qid + "');\"" : "") @if (Model.LogInteractions) { <text>data-analyticsid="@(Model.AnalyticsID)" data-analyticsevent="buttonToggle"</text> }/>
+            @if (Model.ButtonQuestionModel.Size != Intelledox.Model.ButtonSize.Small)
+            {
+                <span class="tile-content">@Model.Question.TitleFormatted</span>
+            }
+            @if (!string.IsNullOrEmpty(Model.ButtonQuestionModel.Icon))
+            {
+                <span class="tile-icon"><img src="data:image/png;base64,@Model.ButtonQuestionModel.Icon" alt="" /></span>
+            }
+            @if (!string.IsNullOrEmpty(Model.Question.BadgeFormatted))
+            {
+                <span class="tile-badge">@Model.Question.BadgeFormatted</span>
+            }
+        </label>
+    </div>
+}
+else
+{
+    if (Model.ButtonQuestionModel.ButtonType == Intelledox.Model.ButtonType.OpenUrl)
+    {
+        if (Model.ButtonQuestionModel.NewTab)
+        {
+            clickEvent = (Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "', 'buttonGoToUrl'" + ");" : "") + "wiz.openLink('" + HttpUtility.JavaScriptStringEncode(Model.ButtonQuestionModel.LaunchUrl) + "');return false;";
+        }
+        else
+        {
+            clickEvent = (Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "', 'buttonGoToUrl'" + ");" : "") + "wiz.goToLink('" + HttpUtility.JavaScriptStringEncode(Model.ButtonQuestionModel.LaunchUrl) + "');return false;";
+        }
+    }
+    else if (Model.ButtonQuestionModel.ButtonType == Intelledox.Model.ButtonType.GoToPage)
+    {
+        if (Model.ButtonQuestionModel.GoToPageGuid == Guid.Empty)
+        {
+            clickEvent = (Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "', 'buttonGoToPage'" + ");" : "") + "wiz.jumpToGroup(" + IdHelper.FetchPageCount(Model.Question) + ", -1);return false;";
+        }
+        else
+        {
+            clickEvent = (Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "', 'buttonGoToPage'" + ");" : "") + "wiz.goToPage('" + Model.ButtonQuestionModel.GoToPageGuid.ToString() + "');return false;";
+        }
+    }
+    else if (Model.ButtonQuestionModel.ButtonType == Intelledox.Model.ButtonType.GoToProject)
+    {
+        clickEvent = (Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "', 'buttonGoToProject'" + ");" : "") +
+                                          "wiz.goToProject('" + HttpUtility.JavaScriptStringEncode(Url.Content("~/")) + "', '" +
+                                          HttpUtility.JavaScriptStringEncode(Model.ButtonQuestionModel.GoToProjectGroupGuid.ToString()) + "', '" +
+                                          HttpUtility.JavaScriptStringEncode(Request.QueryString["portal"]) + "', '" +
+                                          HttpUtility.JavaScriptStringEncode(Request.QueryString["portalsave"]) + "', '" +
+                                          HttpUtility.JavaScriptStringEncode(Request.QueryString["wizardMode"]) + "');return false;";
+    }
+    else if (Model.ButtonQuestionModel.ButtonType == Intelledox.Model.ButtonType.Refresh)
+    {
+        clickEvent = (Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "', 'buttonRefresh');" : "") +
+                                          "wiz.delayPostback();return false;";
+    }
+    <div class="btn-group">
+        <button id="@labelId" name="@labelId" class="btn tile @divClass @labelClass" onmouseover="@hoverEvent" onmouseout="@hoverEvent" onclick="@clickEvent">
+            @if (Model.ButtonQuestionModel.Size != Intelledox.Model.ButtonSize.Small)
+            {
+                <span class="tile-content">@Model.Question.TitleFormatted</span>
+            }
+            @if (!string.IsNullOrEmpty(Model.ButtonQuestionModel.Icon))
+            {
+                <span class="tile-icon"><img src="data:image/png;base64,@Model.ButtonQuestionModel.Icon" alt="" /></span>
+            }
+            @if (!string.IsNullOrEmpty(Model.Question.BadgeFormatted))
+            {
+                <span class="tile-badge">@Model.Question.BadgeFormatted</span>
+            }
+        </button>
+    </div>
+}
+
+<script>
+    var @borderColourId =  '';
+    var @backgroundColourId =  '';
+    var @gradientColourId =  '';
+    var @originalRingColourId = '';
+    var @focusRingColourId = wiz.rgbToHex('@Model.ButtonQuestionModel.FocusRingColour');
+    var @toggleStyleId = wiz.rgbToHex('@Model.ButtonQuestionModel.BackToggleColour');
+
+    $(document).ready(function() {
+        var element = document.getElementById('@qid');
+        var label = document.getElementById('@labelId');
+        if (label) {
+            label.style.borderColor = '@Model.ButtonQuestionModel.BackColour';
+            label.style.backgroundColor = '@Model.ButtonQuestionModel.BackColour';
+            label.style.backgroundImage = 'linear-gradient(to bottom,@Model.ButtonQuestionModel.BackColour 0%,@Model.ButtonQuestionModel.BackColourDark 100%)';
+        }
+        var colour1 = @Html.Raw(string.IsNullOrEmpty(Model.ButtonQuestionModel.FocusRingColour)?"wiz.getTileBorderColour('" + labelId + "');": "'" + Model.ButtonQuestionModel.FocusRingColour + "'");
+        wiz.addValueToTileDictionary('@borderColourId', colour1);
+        var colour2 = @Html.Raw(string.IsNullOrEmpty(Model.ButtonQuestionModel.BackColour)? "wiz.getTileBackgroundColour('" + labelId + "');": "'" + Model.ButtonQuestionModel.BackColour + "'");
+        wiz.addValueToTileDictionary('@backgroundColourId', colour2);
+        var colour3= @Html.Raw(string.IsNullOrEmpty(Model.ButtonQuestionModel.BackColour)? "wiz.getTileBackgroundGradientColour('" + labelId + "');": "'" + Model.ButtonQuestionModel.BackColourDark + "'");
+        wiz.addValueToTileDictionary('@gradientColourId', colour3);
+        @borderColourId =  wiz.getValueFromTileDictionary('@borderColourId');
+        @backgroundColourId =  wiz.getValueFromTileDictionary('@backgroundColourId');
+        @gradientColourId =  wiz.getValueFromTileDictionary('@gradientColourId');
+        @originalRingColourId = colour2;
+        if (@focusRingColourId === '') {
+            @focusRingColourId = wiz.rgbToHex(wiz.getStyleBySelector('.tile:hover').borderColor);
+        }
+        if (label && element && element.checked === true && @toggleStyleId !== "") {
+            label.style.borderColor = '@Model.ButtonQuestionModel.BackToggleColour';
+            label.style.backgroundColor = '@Model.ButtonQuestionModel.BackToggleColour';
+            label.style.backgroundImage = 'linear-gradient(to bottom,@Model.FormatHexColour(Model.ButtonQuestionModel.BackToggleColour) 0%,@Model.FormatHexColour(Model.ButtonQuestionModel.BackToggleColourDark) 100%)';
+            @originalRingColourId = '@Model.ButtonQuestionModel.BackToggleColour';
+        }
+    });
+</script>

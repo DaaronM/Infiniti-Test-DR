@@ -1,0 +1,65 @@
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.Master.vb" Inherits="ManagementPortal.SiteMaster" %>
+<!DOCTYPE HTML>
+<html dir="<%=IIf(System.Threading.Thread.CurrentThread.CurrentUICulture.TextInfo.IsRightToLeft, "rtl", "ltr") %>" lang="<%=System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName%>">
+<head id="Head1" runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Multi-Tenant Management Portal</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+     <asp:ContentPlaceHolder ID="Javascript" runat="server"></asp:ContentPlaceHolder>
+    <link type="text/css" href="~/Base.css?v=10.1.2" rel="stylesheet" runat="server" id="BaseStyleSheet" />
+    <link type="text/css" href="~/StyleSheet.css?v=9.7.6" rel="stylesheet" runat="server" id="StyleSheet" />
+    <meta name="msapplication-starturl" content="./" />
+    <meta name="application-name" content="Multi-Tenant Management Portal" />
+    <meta name="msapplication-tooltip" content="Multi-Tenant Management Portal" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="layout" class="base1">
+            <div id="main">
+                <div id="header">
+                    <div id="headerWrap">
+                        <img src="~/Images/intelledox.png" alt="Intelledox" runat="server" CssClass="headerLogo" />
+                        <label style="padding-left:300px;font-size:20px;color:black;text-align:center;"><%=Resources.Strings.HeaderText%></label>
+                        <span id="NavButtons">
+                            <span class="mnuRight">
+                                <span class="mnu" id="LogoutMenu" runat="server" ClientIdMode="Predictable" EnableViewState="false">
+                                    <img src="Images/NavLogoutIcon.png" alt="" /><br />
+                                    <asp:HyperLink ID="lnkSignOut" runat="server" NavigateUrl="~/Logout.aspx" Text="<%$Resources:Strings, LogOut %>"></asp:HyperLink>
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div id="content">
+                    <div id="wrapper">
+                        <div class="breadcrumbdiv" runat="server" id="BreadCrumbs"></div>
+                        <asp:ContentPlaceHolder ID="Content" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+                <div id="menu">
+                    <div style="height:6px"></div>
+                    <div id="menucontainer">
+                        <div class="menusection" id="TenantDiv" runat="server"><%=Resources.Strings.Tenant%></div>
+                        <div class="menuitemdiv"></div>
+                        <div class="menuitem" id="ProvisionMenu" runat="server">
+                            <img src="Images/usersIcon.gif" />
+                            <asp:HyperLink ID="ProvisionLink" runat="server" NavigateUrl="Default.aspx" Text="<%$Resources:Strings, Provision%>"></asp:HyperLink>
+                            <div class="menuitemdiv"></div>
+                        </div>
+                        <div class="menuitem" id="ManagementMenu" runat="server">
+                            <img src="Images/ManagementIcon.gif" />
+                            <asp:HyperLink ID="ManagementLink" runat="server" NavigateUrl="Tenants.aspx" Text="<%$Resources:Strings, Management%>"></asp:HyperLink>
+                            <div class="menuitemdiv"></div>
+                        </div>
+                    </div>
+                    <div id="footer">
+                        <div id="versionnumber">
+                                <asp:Literal ID="litVersionNumber" runat="server"></asp:Literal></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

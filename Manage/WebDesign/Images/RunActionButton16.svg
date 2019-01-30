@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.15;clip-path:url(#SVGID_2_);}
+	.st1{fill:#8B9DA5;}
+	.st2{clip-path:url(#SVGID_2_);fill:#6E7488;}
+	.st3{clip-path:url(#SVGID_2_);fill:#FFFFFF;}
+</style>
+<title>RunAction16</title>
+<g>
+	<defs>
+		<rect id="SVGID_1_" width="16" height="16"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g class="st0">
+		<polygon class="st1" points="1.1,1.1 1.1,16 16,8.5 		"/>
+	</g>
+	<path class="st2" d="M0,0v14.9l14.9-7.5L0,0z"/>
+	<path class="st3" d="M8,8c0-0.2,0-0.4,0.1-0.6C8,7.2,8,7.1,8,6.9H7.3c0-0.1-0.1-0.3-0.1-0.4l0.7-0.4c-0.1-0.4-0.3-0.7-0.6-1
+		L6.6,5.5C6.5,5.4,6.4,5.3,6.3,5.3l0.4-0.7C6.4,4.3,6.1,4.1,5.7,4L5.3,4.7L4.9,4.6V3.8c-0.2,0-0.4,0-0.6,0c-0.2,0-0.4,0-0.6,0v0.8
+		c-0.1,0-0.2,0.1-0.3,0.1L3,4C2.6,4.1,2.3,4.3,2,4.6l0.4,0.7L2.1,5.5L1.4,5.1C1.2,5.4,1,5.8,0.8,6.1l0.7,0.4c0,0.1-0.1,0.3-0.1,0.4
+		H0.7c0,0.2,0,0.4-0.1,0.6c0,0.2,0,0.3,0.1,0.5h0.8c0,0.1,0.1,0.2,0.1,0.4L0.9,8.8c0.1,0.4,0.3,0.7,0.6,1l0.7-0.4l0.3,0.3L2,10.4
+		c0.3,0.3,0.6,0.5,1,0.6l0.4-0.7c0.1,0,0.2,0.1,0.4,0.1v0.8c0.2,0,0.4,0,0.6,0c0.2,0,0.4,0,0.6,0v-0.8c0.1,0,0.3-0.1,0.4-0.1L5.7,11
+		c0.4-0.1,0.7-0.3,1-0.6L6.3,9.7l0.3-0.3l0.7,0.4c0.2-0.3,0.4-0.6,0.6-1L7.1,8.4c0-0.1,0.1-0.3,0.1-0.4H8z M4.3,8.9
+		c-0.8,0-1.4-0.7-1.4-1.5S3.6,6,4.4,6c0.8,0,1.4,0.7,1.4,1.5C5.8,8.3,5.1,8.9,4.3,8.9C4.4,8.9,4.4,8.9,4.3,8.9L4.3,8.9z"/>
+</g>
+</svg>

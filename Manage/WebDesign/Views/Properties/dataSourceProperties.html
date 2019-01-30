@@ -1,0 +1,193 @@
+﻿<div class="form-group">
+    <label for="dataSource" class="col-sm-4 control-label">{{ ::'Datasource' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="dataSource" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableDataSources"
+                ng-model="model.propertiesPanelModel.dataSource"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.hasSelectedDataSource()">
+    <label for="dataObject" class="col-sm-4 control-label">{{ ::'TableView' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="dataObject" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableDataObjects"
+                ng-model="model.propertiesPanelModel.dataObject"
+                ng-disable="!model.propertiesPanelModel.isDataObjectEnabled"></select>
+    </div>
+</div>
+<div class="form-group">
+    <label for="visibility" class="col-sm-4 control-label">{{ ::'Visible' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input type="checkbox" id="visibility" class="checkbox" ng-model="model.propertiesPanelModel.visible" />
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="selectionType" class="col-sm-4 control-label">{{ ::'Selection' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="selectionType" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableSelectionTypes"
+                ng-model="model.propertiesPanelModel.selectionType"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isDisplayTypeVisible">
+    <label for="displayType" class="col-sm-4 control-label">{{ ::'Appearance' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="displayType" class="form-control input-sm"
+                ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.availableDisplayTypes"
+                ng-model="model.propertiesPanelModel.displayType"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isTextboxWidthVisible">
+    <label for="textboxWidth" class="col-sm-4 control-label">{{ ::'WidthPX' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="textboxWidth" class="form-control input-sm" ng-model="model.propertiesPanelModel.textboxWidth" maxlength="5" pattern="\d*" />
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isDisplayFieldVisible">
+    <label for="displayField" class="col-sm-4 control-label">{{ ::'DisplayField' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="displayField" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableDisplayFields"
+                ng-model="model.propertiesPanelModel.displayField"
+                ng-disable="!model.propertiesPanelModel.isDisplayFieldEnabled"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isAnswerDisplayFieldVisible">
+    <label for="AnswerDisplayField" class="col-sm-4 control-label">{{ ::'AnswerDisplayField' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="customDisplayField" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableAnswerFields"
+                ng-model="model.propertiesPanelModel.answerDisplayField"></select>
+    </div>
+</div>
+<div class="form-group">
+    <label for="valueField" class="col-sm-4 control-label">{{ ::'UniqueField' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="valueField" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableUniqueFields"
+                ng-model="model.propertiesPanelModel.valueField"
+                ng-disable="!model.propertiesPanelModel.isValueFieldEnabled"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isGroupingFieldVisible">
+    <label for="groupingField" class="col-sm-4 control-label">{{ ::'GroupingField' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="groupingField" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableGroupingFields"
+                ng-model="model.propertiesPanelModel.groupingField"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isDataGrid">
+    <label for="resultsPerPage" class="col-sm-4 control-label">{{ ::'ResultsPerPage' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="resultsPerPage" class="form-control input-sm" ng-model="model.propertiesPanelModel.resultsPerPage" maxlength="3" pattern="\d*" />
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isDataGrid">
+    <label for="searchAll" class="col-sm-4 control-label">{{ ::'ShowSearch' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input type="checkbox" id="searchAll" class="checkbox" ng-model="model.propertiesPanelModel.searchAll" />
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.showLiveRefresh">
+    <label for="liveRefresh" class="col-sm-4 control-label">{{ ::'LiveRefresh' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input type="checkbox" id="liveRefresh" class="checkbox" ng-model="model.propertiesPanelModel.liveRefresh" />
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.liveRefresh">
+    <label for="refreshPeriod" class="col-sm-4 control-label">{{ ::'RefreshPeriod' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="refreshPeriod" class="form-control input-sm" ng-model="model.propertiesPanelModel.refreshPeriod" maxlength="5" pattern="\d*" />
+    </div>
+</div>
+<ng-include src="'Views/Properties/mandatoryProperty.html?v=106882799234227327'" ng-if="model.propertiesPanelModel.visibility"></ng-include>
+<div class="form-group" ng-if="!model.propertiesPanelModel.hasUserEnteredFilters">
+    <label for="defaultType" class="col-sm-4 control-label">{{ ::'DefaultType' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="defaultType" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableDefaultTypes"
+                ng-model="model.propertiesPanelModel.defaultType"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isDefaultVisible">
+    <label for="defaultValue" class="col-sm-4 control-label">{{ model.propertiesPanelModel.defaultTitle }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input id="defaultValue" class="form-control input-sm" ng-model="model.propertiesPanelModel.defaultValue" />
+            <span class="input-group-btn">
+                <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                        ng-click="model.propertiesPanelModel.pickDefaultValueRef('defaultValue')"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15" />
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isAllowDataUploadVisible">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.allowDataUpload" />{{ ::'AllowDataUpload' |translate }}
+            </label>
+        </div>
+    </div>
+</div>
+
+<div ng-if="model.propertiesPanelModel.canRepeat">
+    <div class="form-group">
+        <label for="minimum" class="col-sm-4 control-label">{{ ::'RepeatContent' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="radio">
+                <label>
+                    <input type="radio" ng-model="model.propertiesPanelModel.repeatContent" value="0" name="repeatContent" />{{ ::'NoneWithBrackets' | translate }}
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" ng-model="model.propertiesPanelModel.repeatContent" value="1" name="repeatContent" />{{ ::'Placeholder' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" ng-if="model.propertiesPanelModel.repeatContent === '1'">
+        <label for="repeatPlaceholder" class="col-sm-4 control-label">{{ ::'Repeating' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input id="repeatPlaceholder" class="form-control input-sm" ng-model="model.propertiesPanelModel.repeatPlaceholderText" readonly />
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-sm" type="button" ng-click="model.propertiesPanelModel.selectRepeatPlaceholder()">...</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.showWatermark">
+    <label for="watermark" class="col-sm-4 control-label">{{ ::'Watermark' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input id="watermark" class="form-control input-sm" ng-model="model.propertiesPanelModel.Watermark" />
+            <span class="input-group-btn">
+                <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                        ng-click="model.propertiesPanelModel.pickWatermarkRef('watermark')"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15" />
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.showNoResultsMessage">
+    <label for="noResultsMessage" class="col-sm-4 control-label">{{ ::'NoResultsMessage' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="noResultsMessage" class="form-control input-sm" ng-model="model.propertiesPanelModel.noResultsMessage" />
+    </div>
+</div>

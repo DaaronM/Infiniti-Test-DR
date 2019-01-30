@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Intelledox.Extension.Escalation</name>
+    </assembly>
+    <members>
+        <member name="T:Intelledox.Extension.Escalation.EscalationExtension">
+            <summary>
+            Workflow escalation extension that can be used to add custom logic for an escalation
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Escalation.EscalationExtension.ExtensionIdentity">
+            <summary>
+            Returns the unique identity for this escalation. Used to register inputs and outputs against.
+            Also for identifying individual escalations to be run.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Escalation.EscalationExtension.GlobalSettingIdentity">
+            <summary>
+            Returns the identity that is registered in Manage for global configuration settings. This identity
+            may be shared between different extensions for shared settings.
+            </summary>
+        </member>
+        <member name="M:Intelledox.Extension.Escalation.EscalationExtension.GetAvailableInputs">
+            <summary>
+            Returns all of the available inputs for this escalation.
+            </summary>
+            <returns>Available <see cref="T:Intelledox.Extension.Escalation.AvailableInput"/></returns>
+        </member>
+        <member name="M:Intelledox.Extension.Escalation.EscalationExtension.RunAsync(Intelledox.QAWizard.EscalationProperties)">
+            <summary>
+            Main entry point for running a custom escalation
+            </summary>
+            <param name="properties">Properties and settings</param>
+            <returns></returns>
+        </member>
+        <member name="M:Intelledox.Extension.Escalation.EscalationExtension.SupportsRecurring">
+            <summary>
+            Whether this escalation can be run on a recurring schedule
+            </summary>
+            <returns><c>true</c> if supported, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:Intelledox.Extension.Escalation.EscalationExtension.IsLicensed(System.Guid)">
+            <summary>
+            Custom licensing check maintained by the escalation
+            </summary>
+            <param name="businessUnitGuid">Business unit identifier</param>
+            <returns><c>true</c> if licensed, otherwise <c>false</c></returns>
+        </member>
+        <member name="T:Intelledox.Extension.Escalation.ExtensionIdentity">
+            <summary>
+            Unique identity for an escalation.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Escalation.ExtensionIdentity.Id">
+            <summary>
+            Unique id for an escalation.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Escalation.ExtensionIdentity.Name">
+            <summary>
+            Display name for an escalation.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Escalation.ExtensionIdentity.ModuleId">
+            <summary>
+            Licensing module identifier
+            </summary>
+        </member>
+        <member name="T:Intelledox.Extension.Escalation.AvailableInput">
+            <summary>
+            An available input for an escalation.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Escalation.AvailableInput.Id">
+            <summary>
+            Unique id for an input.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Escalation.AvailableInput.Name">
+            <summary>
+            Display name for an input.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Escalation.AvailableInput.Required">
+            <summary>
+            Whether it is considered an error if the designer doesn't include this input
+            in a project using this escalation.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Escalation.AvailableInput.InstanceLimit">
+            <summary>
+            Number of times the input can be added by the designer. Default is 1. Use 0
+            for unlimited.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Escalation.AvailableInput.AllowTranslation">
+            <summary>
+            Set to true to include this input in the project translation file
+            </summary>
+        </member>
+    </members>
+</doc>

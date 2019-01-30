@@ -1,0 +1,35 @@
+﻿<form class="form-horizontal" ng-submit="ok()" >
+    <div class="modal-header">
+        <h4 class="modal-title">{{ ::'SelectData' | translate }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="dataSourceModal" class="col-sm-3 control-label">{{ ::'Datasource' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="dataSourceModal" class="form-control input-sm"
+                        ng-options="option.value as option.name for option in model.dataSourcePropertiesVM.availableDataSources"
+                        ng-model="model.dataSourcePropertiesVM.dataSource"></select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.dataSourcePropertiesVM.hasSelectedDataSource()">
+            <label for="dataObjectModal" class="col-sm-3 control-label">{{ ::'TableView' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="dataObjectModal" class="form-control input-sm"
+                        ng-options="option.value as option.name for option in model.dataSourcePropertiesVM.availableDataObjects"
+                        ng-model="model.dataSourcePropertiesVM.dataObject"
+                        ng-disable="!model.dataSourcePropertiesVM.isDataObjectEnabled"></select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.dataSourcePropertiesVM.hasSelectedDataObject()">
+            <label for="addAnswers" class="col-sm-3 control-label">{{ ::'AddAnswers' | translate }}</label>
+            <div class="col-sm-8">
+                <div class="add-answers">
+                    <input type="checkbox" id="addAnswers" ng-model="model.addAnswers" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" >{{ ::'OK' | translate }}</button>
+    </div>
+</form>

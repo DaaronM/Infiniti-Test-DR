@@ -1,0 +1,4 @@
+﻿<em ng-if="node.Preview === ''">{{ ::'Custom' | translate }}</em>
+<div ng-if="node.Preview !== ''" class="custom-preview-parent">
+    <div ng-bind-html="node.Preview | customQuestionHtml"></div>
+</div>

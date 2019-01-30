@@ -1,0 +1,449 @@
+﻿
+#tblLogin .login-title {
+    background: [PrimaryColor];
+}
+
+h2.titleProgress, .titleNewForm, .page-header, #SearchUpdate > h2 {
+    background-color: [PrimaryColor];
+    color: [SecondaryColor];
+}
+
+A, A:link, A:visited {
+    color: [TextLinkColor];
+}
+
+    a:focus, a:hover, a:active {
+        color: [PrimaryColor];
+    }
+
+#listProgress thead tr th a, #listProgressForGroup thead tr th a, .datagrid-table thead tr th a {
+    color: [PrimaryColor] !important;
+}
+
+table.dataTable tbody > tr.odd.selected, table.dataTable tbody > tr.even.selected,
+table.dataTable.display tbody > tr.odd.selected, table.dataTable.stripe tbody > tr.odd.selected,
+table.dataTable.display tbody > tr.selected:hover, table.dataTable.stripe tbody > tr.selected:hover {
+    background-color: [PrimaryColor];
+    color: [PrimaryContrast];
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
+    background-color: [PrimaryColor];
+}
+
+
+#listProgress thead tr th a:focus, #listProgress thead tr th a:hover, #listProgress thead tr th a:active,
+#listProgressForGroup thead tr th a:focus, #listProgressForGroup thead tr th a:hover, #listProgressForGroup thead tr th a:active,
+.datagrid-table thead tr th a:focus, .datagrid-table thead tr th a:hover, .datagrid-table thead tr th a:active {
+    color: [TextLinkColor] !important;
+}
+
+header {
+    border-bottom: [HeaderBackgroundColor] !important;
+}
+
+    header.ix-nav {
+        background: [HeaderBackgroundColor];
+    }
+
+.navbar, .navbar-inverse .navbar-collapse {
+    background: [HeaderBackgroundColor];
+}
+
+    .navbar:hover, header.navbar:hover {
+        background: [HeaderBackgroundColor];
+    }
+
+
+
+.navbar-inverse .navbar-nav > li > a, .navbar-text {
+    color: [HeaderLinkColor] !important;
+}
+
+.navbar-text {
+    color: [HeaderFontColor] !important;
+}
+
+    .navbar-text:before {
+        color: [HeaderFontColor] !important;
+    }
+
+    .navbar-text.form-title {
+        background: [HeaderBackgroundColor] !important;
+    }
+
+.navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-nav > li > a:active, .navbar-inverse .navbar-nav > .active > a:active,
+.navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > .active > a:focus {
+    color: [HeaderHoverColor] !important;
+}
+
+.navbar-brand {
+    [Logo] background-color: [BrandColor];
+    background-size: [LogoSize];
+    [LogoPlacement];
+}
+
+    .navbar-brand:before {
+        border-right-color: [BrandColor];
+    }
+
+    .navbar-brand:hover, .navbar-brand:focus {
+        [Logo] background-color: [BrandColor];
+        background-size: [LogoSize];
+        [LogoPlacement];
+    }
+
+.table th, .table .sub-head, #grdTemplates .sub-head{
+    background-color: [Whisper] !important;
+    color: [PrimaryColor];
+}
+
+    .table th > a, .table .sub-head > a, #grdTemplates .sub-head > a {
+        color: [PrimaryColor];
+    }
+
+.pagination > .active > a, .pagination > .active > span {
+    color: [PrimaryContrast] !important;
+    background-color: [PrimaryColor];
+    border-color: [PrimaryColor];
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: [PrimaryColor];
+}
+
+    .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span:focus, .pagination > .active > span:hover,
+    .pagination > li:first-child > a:hover, .pagination > li > a:hover {
+        color: [SecondaryContrast] !important;
+        background-color: [SecondaryColor];
+        border-color: [SecondaryColor];
+    }
+
+
+#RecentProjects TH, #listProgress TH, #listProgressForGroup TH, .datagrid-table TH {
+    background-color: [SecondaryColor] !important;
+    color: [PrimaryColor] !important;
+}
+
+.form-control:hover {
+    border-color: [PrimaryColor] !important;
+}
+.form-control:disabled {
+    background-color: [RequiredFieldDisabled] !important;
+}
+
+.form-control:required, .form-control:required:focus, input:required, input:required:focus,
+.multiDataListBoxRequired, .multiDataListBoxRequired:focus, .required {
+    border-color: [RequiredFieldBackground];
+    background-color: [RequiredFieldFill];
+}
+
+#SearchWideScreen #SearchTerm {
+    color: [HeaderLinkColor];
+    border-color: [HeaderLinkColor];
+}
+
+#SearchTerm::-webkit-input-placeholder { /* Chrome */
+    color: [HeaderLinkColor] !important;
+}
+
+#SearchTerm:-ms-input-placeholder { /* IE 10+ */
+    color: [HeaderLinkColor] !important;
+}
+
+#SearchTerm::-moz-placeholder { /* Firefox 19+ */
+    color: [HeaderLinkColor] !important;
+    opacity: 1;
+}
+
+#SearchTerm:-moz-placeholder { /* Firefox 4 - 18 */
+    color: [HeaderLinkColor] !important;
+    opacity: 1;
+}
+
+#SearchWideScreen:hover #SearchTerm:hover {
+    color: [HeaderHoverColor];
+    border-color: [HeaderHoverColor];
+}
+
+#SearchTerm:hover::-webkit-input-placeholder { /* Chrome */
+    color: [HeaderHoverColor] !important;
+}
+
+#SearchTerm:hover:-ms-input-placeholder { /* IE 10+ */
+    color: [HeaderHoverColor] !important;
+}
+
+#SearchTerm:hover::-moz-placeholder { /* Firefox 19+ */
+    color: [HeaderHoverColor] !important;
+    opacity: 1;
+}
+
+#SearchTerm:hover:-moz-placeholder { /* Firefox 4 - 18 */
+    color: [HeaderHoverColor] !important;
+    opacity: 1;
+}
+
+#SearchWideScreen:hover #SearchTerm:hover {
+    border-color: [HeaderHoverColor];
+}
+
+
+
+/*  WIZARD INTERFACE  */
+
+.wizardContent {
+    border-bottom-color: [HeaderLinkColor];
+}
+
+h2.page-title, h4 {
+    color: [PrimaryColor];
+}
+
+.question-text, .question-text-inline {
+    color: [Charcoal];
+}
+
+
+.cell-title {
+    background-color: [PrimaryColor];
+    color: [PrimaryContrast];
+}
+
+.inkWrapper CANVAS:hover {
+    border-color: [PrimaryColor];
+}
+
+#ProjectAnswerFiles .indent > a, #NativeButtons .indent > a {
+    color: [PrimaryColor] !important;
+    text-decoration: none;
+}
+
+#ProjectAnswerFiles .indent:hover > a, #NativeButtons .indent:hover > a {
+    color: [PrimaryColorDark] !important;
+    text-decoration: underline;
+}
+
+#pagesList .g-complete > a {
+    color: [Gray];
+}
+
+#pagesList .active > a {
+    color: [PrimaryColor];
+    border-left-color: [PrimaryColor];
+}
+
+#pagesList .active:hover > a, #pagesList .active:focus > a {
+    color: [PrimaryColorDark];
+    border-left-color: [PrimaryColorDark];
+}
+
+.sidebarTop {
+    background-color: [PrimaryColor];
+    color: [PrimaryContrast];
+}
+
+.sidebarItem {
+    color: [NightRider];
+}
+
+.lsh {
+    color: [PrimaryContrast];
+    background-color: [PrimaryColor];
+    border-bottom-color: [Gainsboro];
+}
+
+.accordion {
+    background: [Gainsboro];
+    border-bottom-color: [Silver];
+}
+
+    .accordion A, .accordion A:link, .accordion A:visited {
+        color: [PrimaryColor] !important;
+    }
+
+.lsrepeat {
+    border-color: [SecondaryColorLight];
+}
+
+.lccell .lch {
+    color: [DoveGray];
+}
+
+.lscommand {
+    background-color: [SecondaryColorLight];
+}
+
+#divTemplateFinish .cell-title {
+    background-color: [PrimaryColor];
+}
+
+
+
+.nav-tabs > li.active > a {
+    color: [PrimaryColor];
+}
+
+.ui-datepicker .ui-datepicker-header {
+    background-color: [PrimaryColor];
+}
+
+.ui-datepicker td span:hover, .ui-datepicker td a:hover {
+    background-color: [SecondaryColor] !important;
+    color: [SecondaryContrast];
+}
+
+.ui-datepicker td a.ui-state-active {
+    background-color: [SecondaryColor] !important;
+    color: [SecondaryContrast];
+}
+
+.ui-datepicker th {
+    background-color: [LightSmoke] !important;
+    color: [PrimaryColor];
+}
+
+.ui-datepicker tbody td.ui-datepicker-today a {
+    background: [PrimaryColor];
+    color: [PrimaryContrast] !important;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    color: [PrimaryColor];
+    background-color: [PrimaryContrast];
+}
+
+.ui-datepicker td span:hover, .ui-datepicker td a:hover {
+    background: [SecondaryColor] none;
+    color: [PrimaryColor] !important;
+}
+
+.ui-datepicker tbody td.ui-datepicker-today a:hover {
+    background: [SecondaryColor] none;
+    color: [PrimaryColor] !important;
+}
+
+.ExpandButton {
+    background: [ExpandIcon];
+}
+
+    .ExpandButton:hover {
+        background: [ExpandIcon];
+    }
+
+.ContractButton {
+    background: [ContractIcon];
+}
+
+    .ContractButton:hover {
+        background: [ContractIcon];
+    }
+
+.btn-primary, .btn-primary2 {
+    color: [SecondaryColor];
+    background-color: [PrimaryColor];
+    background-image: -webkit-linear-gradient(top,[PrimaryColorLight] 0%, [PrimaryColor] 100%);
+    background-image: -o-linear-gradient(top, [PrimaryColorLight] 0%, [PrimaryColor] 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from([PrimaryColorLight]), to([PrimaryColor]));
+    background-image: linear-gradient(to bottom, [PrimaryColorLight] 0%, [PrimaryColor] 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='[PrimaryColorLightAlpha]', endColorstr='[PrimaryColorAlpha]', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+    border-color: [PrimaryColorDark];
+}
+
+    .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .btn-primary2:active, .btn-primary2:focus, .btn-primary2:hover {
+        color: [PrimaryContrast];
+        background: [PrimaryColor];
+        border-color: [PrimaryColorDark];
+    }
+
+.btn-group .btn-primary.active, .btn-group .btn-primary:hover, .btn-group .btn-primary2.active, .btn-group .btn-primary2:hover {
+    color: [SecondaryContrast];
+    background: [SecondaryColor];
+    border-color: [DarkGray];
+}
+
+.btn-group .btn-primary.disabled:hover, .btn-group .btn-primary2.disabled:hover {
+    background: [SecondaryContrast];
+    background: [SecondaryColor];
+    border-color: [DarkGray];
+}
+
+.toggle-group .btn-primary, .toggle-group .btn-primary2 {
+    color: [PrimaryContrast];
+}
+
+.toggle-group .btn-primary.active, .toggle-group .btn-primary:hover, .toggle-group .btn-primary2.active, .toggle-group .btn-primary2:hover {
+    color: [PrimaryContrast];
+    background: [PrimaryColorDark];
+    border-color: [PrimaryColorDark];
+}
+@media (min-width: 768px) {
+    .navbar-inverse .navbar-toggle .icon-bar {
+        background-color: [HeaderHoverColor];
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    .navbar-toggle {
+        background-color: transparent;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-brand {
+        [LogoMobile] background-color: [BrandColor];
+        background-size: [LogoMobileSize];
+        [LogoSmallPlacement];
+    }
+
+        .navbar-brand:before {
+            border-right-color: [BrandColor];
+        }
+
+        .navbar-brand:hover, .navbar-brand:focus {
+            [LogoMobile] background-color: [BrandColor];
+            background-size: [LogoMobileSize];
+            [LogoSmallPlacement];
+        }
+
+    .navbar-inverse .navbar-toggle {
+        border-color: transparent;
+    }
+
+    .navbar-inverse:hover, .navbar-toggle:hover, .navbar-inverse:focus, .navbar-toggle:focus {
+        border-color: [HeaderBackgroundContrast];
+    }
+
+    .navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+        background-color: transparent;
+    }
+
+    .navbar-inverse .navbar-toggle .icon-bar {
+        background-color: [HeaderBackgroundContrast];
+    }
+
+    .navbar-inverse .navbar-toggle:hover .icon-bar {
+        background-color: [HeaderBackgroundContrast];
+    }
+
+
+    #pagesList .g-complete:hover, #pagesList .g-complete:focus {
+        background-color: [PrimaryColor];
+    }
+
+    #pagesList LI:hover, #pagesList LI:focus, #pagesList .ui-sortable LI:hover {
+        background-color: [PrimaryColor];
+    }
+
+    #pagesList .g-complete:hover, #pagesList .g-complete:hover, .ui-sortable .g-complete:hover {
+        background-color: [PrimaryColor];
+    }
+
+    #pagesList .g-error:hover {
+        background-color: [PrimaryColor];
+    }
+}

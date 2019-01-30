@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  xmlns:uap4="http://schemas.microsoft.com/appx/manifest/uap/windows10/4"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  xmlns:rescap3="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/3"
+  xmlns:desktop2="http://schemas.microsoft.com/appx/manifest/desktop/windows10/2"
+  IgnorableNamespaces="rescap3 uap4 desktop2">
+
+  <Identity Version="0.0.0.0" Publisher="CN=Intelledox Pty Ltd, OU=Intelledox Pty Ltd, O=Intelledox Pty Ltd, L=Canberra, S=Australian Capital Territory, C=AU" ProcessorArchitecture="x86" Name="Infiniti"/>
+
+  <Properties>
+    <DisplayName>Infiniti GO</DisplayName>
+    <PublisherDisplayName>Intelledox Pty Ltd</PublisherDisplayName>
+    <Logo>images\Icon50x50.png</Logo>
+  </Properties>
+
+  <Resources>
+    <Resource Language="ar"/>
+    <Resource Language="de"/>
+    <Resource Language="en-US"/>
+    <Resource Language="en"/>
+    <Resource Language="es"/>
+    <Resource Language="fr"/>
+    <Resource Language="ko"/>
+    <Resource Language="nl"/>
+    <Resource Language="pt"/>
+    <Resource Language="th"/>
+    <Resource Language="zh-Hans"/>
+    <Resource Language="zh-Hant"/>
+  </Resources>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.14393.0" MaxVersionTested="10.0.15063.0" />
+  </Dependencies>
+
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+
+  <Applications>
+    <Application Id="Infiniti"
+                 Executable="Infiniti.exe"
+                 EntryPoint="Windows.FullTrustApplication">
+
+      <uap:VisualElements
+          DisplayName="Infiniti GO"
+          Description="Intelledox Infiniti GO"
+          Square150x150Logo="images\icon_large.png"
+          Square44x44Logo="images\icon.png"
+          BackgroundColor="transparent" />
+
+      <Extensions>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="infiniti">
+            <uap:Logo>images\icon.png</uap:Logo>
+            <uap:DisplayName>Infiniti GO</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+</Package>

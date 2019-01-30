@@ -1,0 +1,99 @@
+﻿<div class="prop-title">
+    {{ 'WordTemplateProperties'|translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group" ng-if="model.propertiesPanelModel.isLayoutProject">
+        <label for="contentPlaceholder" class="col-sm-4 control-label">{{ ::'ContentPlaceholder' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="contentPlaceholder" class="form-control input-sm"
+                    ng-options="option as option.displayString for option in model.propertiesPanelModel.availablePlaceholders"
+                    ng-model="model.propertiesPanelModel.contentPlaceholder"></select>
+        </div>
+    </div>
+    <div class="form-group" ng-if="!model.propertiesPanelModel.isLayoutProject">
+        <label for="templateName" class="col-sm-4 control-label">{{ ::'TemplateLabel' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="templateName" class="form-control input-sm f2-rename" ng-model="model.propertiesPanelModel.name" ng-blur="model.propertiesPanelModel.validateName()" />
+        </div>
+    </div>
+    <div class="form-group" ng-if="!model.propertiesPanelModel.isLayoutProject">
+        <label for="templateFileName" class="col-sm-4 control-label">{{ ::'FileName' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="templateFileName" class="form-control input-sm" ng-model="model.propertiesPanelModel.fileName" />
+        </div>
+    </div>
+    <div class="form-group" ng-if="!model.propertiesPanelModel.isLayoutProject">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.allowNameChange" title="{{'ChangeFilenameTooltip'|translate}}" />{{ ::'AllowChangeofFileName' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div ng-if="!model.propertiesPanelModel.isBuiltInTemplate">
+        <div class="form-group" ng-if="!model.propertiesPanelModel.isLayoutProject">
+            <label for="templateColour" class="col-sm-4 control-label">{{ ::'PlaceholderColour' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="templateColour" class="form-control input-sm"
+                        ng-options="option.value as option.name for option in model.propertiesPanelModel.availableColours"
+                        ng-model="model.propertiesPanelModel.colour"
+                        title="{{'PlaceholderColourTooltip'|translate}}"></select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="!model.propertiesPanelModel.isLayoutProject">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="model.propertiesPanelModel.isDataDriven" />{{ ::'Repeated' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isDataDriven">
+            <label for="repeatSource" class="col-sm-4 control-label">{{ ::'Source' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="repeatSource" class="form-control input-sm"
+                        ng-options="option.value as option.name for option in model.propertiesPanelModel.availableRepeatSources"
+                        ng-model="model.propertiesPanelModel.repeatSourceGuid"></select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isFragmentOutputVisible">
+            <label for="repeatFragmentOutput" class="col-sm-4 control-label">{{ ::'Output' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="repeatFragmentOutput" class="form-control input-sm"
+                        ng-options="option.RoutingOptionGuid as option.Name for option in model.propertiesPanelModel.availableFragmentOutputs"
+                        ng-model="model.propertiesPanelModel.repeatSourceAttributeGuid"></select>
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label for="templateUpload" class="col-sm-4 control-label">{{ ::'Download' | translate }}</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">
+                    <a id="templateUpload" ng-click="model.propertiesPanelModel.downloadTemplate()" style="cursor:pointer">{{model.propertiesPanelModel.name}}</a>
+                </p>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isOfficeEditable">
+            <label for="templateUpload" class="col-sm-4 control-label">Office</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">
+                    <a id="templateUpload" ng-click="model.propertiesPanelModel.editInOffice()" style="cursor:pointer">{{model.propertiesPanelModel.officeAppName}}</a>
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="templateFile" class="col-sm-4 control-label">{{ ::'Upload' | translate }}</label>
+            <div class="col-sm-8">
+                <input id="templateFile" type="file" file-change="model.propertiesPanelModel.uploadTemplate()" ng-model="model.propertiesPanelModel.newTemplate" ng-if="!model.propertiesPanelModel.isUploading" />
+                <img src="Images/IxLoading.gif" ng-if="model.propertiesPanelModel.isUploading" class="spinner-sm" />
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isUploadComplete">
+            <div class="col-sm-offset-4 col-sm-8">
+                {{::'UploadComplete' | translate}}
+            </div>
+        </div>
+    </div>
+</form>

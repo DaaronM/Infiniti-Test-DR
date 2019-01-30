@@ -1,0 +1,146 @@
+﻿<div class="prop-title">
+    {{ 'Rules' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="ruleType" class="col-sm-4 control-label">{{ ::'Type' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="ruleType" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.rulesPanelModel.availableParentTypes"
+                    ng-model="model.rulesPanelModel.selectedParentType"></select>
+        </div>
+    </div>
+
+    <!-- Question -->
+    <div class="form-group" ng-if="model.rulesPanelModel.isQuestionVisible">
+        <label for="ruleQuestion" class="col-sm-4 control-label">{{ ::'Question' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="ruleQuestion" class="form-control input-sm"
+                    ng-options="option.QuestionGuid as option.Text for option in model.rulesPanelModel.availableQuestions"
+                    ng-model="model.rulesPanelModel.selectedQuestionGuid"></select>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.rulesPanelModel.isAnswerVisible">
+        <label for="ruleAnswer" class="col-sm-4 control-label">{{ ::'Answer' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <select id="ruleAnswer" class="form-control input-sm"
+                        ng-disabled="!model.rulesPanelModel.isAnswerEnabled"
+                        ng-options="option.AnswerGuid as option.Name for option in model.rulesPanelModel.availableAnswers"
+                        ng-model="model.rulesPanelModel.selectedAnswerGuid"></select>
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                            ng-click="model.rulesPanelModel.pickAnswerRef()"
+                            ng-class="{'active': model.treeView.isInPickMode }">
+                        <img src="Images/refPick.svg" alt="" height="15" />
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fragment input -->
+    <div class="form-group" ng-if="model.rulesPanelModel.isInputVisible">
+        <label for="ruleInput" class="col-sm-4 control-label">{{ ::'Input' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="ruleInput" class="form-control input-sm"
+                    ng-options="option.routingElementTypeId as option.description for option in model.rulesPanelModel.availableInputs"
+                    ng-model="model.rulesPanelModel.selectedInput"></select>
+        </div>
+    </div>
+
+    <!-- Fragment output -->
+    <div class="form-group" ng-if="model.rulesPanelModel.isFragmentVisible">
+        <label for="ruleFragment" class="col-sm-4 control-label">{{ ::'Fragment' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="ruleFragment" class="form-control input-sm"
+                    ng-options="option.ObjectId as option.Name for option in model.rulesPanelModel.availableFragments"
+                    ng-model="model.rulesPanelModel.selectedFragment"></select>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.rulesPanelModel.isFragmentVisible">
+        <label for="ruleFragmentOutput" class="col-sm-4 control-label">{{ ::'Output' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="ruleFragmentOutput" class="form-control input-sm"
+                    ng-options="option.RoutingOptionGuid as option.Name for option in model.rulesPanelModel.availableFragmentOutputs"
+                    ng-model="model.rulesPanelModel.selectedFragmentOutput"></select>
+        </div>
+    </div>
+
+    <!-- Project Property -->
+    <div class="form-group" ng-if="model.rulesPanelModel.isProjectPropertyVisible">
+        <label for="ruleProperty" class="col-sm-4 control-label">{{ ::'ProjectProperty' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="ruleProperty" class="form-control input-sm"
+                    ng-options="option.Id as option.Name for option in model.rulesPanelModel.availableProjectProperties"
+                    ng-model="model.rulesPanelModel.selectedProjectProperty"></select>
+        </div>
+    </div>
+
+    <!-- Formula -->
+    <div class="form-group" ng-if="model.rulesPanelModel.isFormulaVisible">
+        <label for="ruleFormula" class="col-sm-4 control-label">{{ ::'Formula' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <textarea id="ruleFormula" class="form-control input-sm" rows="6"
+                          ng-model="model.rulesPanelModel.formula"></textarea>
+                <span class="input-group-btn" style="vertical-align:top">
+                    <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                            ng-click="model.rulesPanelModel.pickFormulaRef('ruleFormula')"
+                            ng-class="{'active': model.treeView.isInPickMode }">
+                        <img src="Images/refPick.svg" alt="" height="15" />
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Repeating -->
+    <div class="form-group" ng-if="model.rulesPanelModel.isRepeaterChoiceVisible">
+        <label for="ruleRepeating" class="col-sm-4 control-label">{{ ::'RepeatingQuestion' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="ruleRepeating" class="form-control input-sm"
+                    ng-options="option.ActionGuid as option.Name for option in model.rulesPanelModel.availableRepeaterChoice"
+                    ng-model="model.rulesPanelModel.selectedRepeaterChoice"></select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ruleComparison" class="col-sm-4 control-label">{{ ::'Comparison' | translate }}</label>
+        <div class="col-sm-4">
+            <select id="ruleComparison" class="form-control input-sm"
+                    ng-disabled="!model.rulesPanelModel.isComparisonTypeEnabled"
+                    ng-options="option.value as option.name for option in model.rulesPanelModel.availableComparisonTypes"
+                    ng-model="model.rulesPanelModel.selectedComparisonType"></select>
+        </div>
+        <div class="col-sm-4"
+             ng-if="model.rulesPanelModel.isCompareToTextVisible">
+            <div class="input-group">
+                <input id="ruleComparisonText" class="form-control input-sm"
+                       ng-disabled="!model.rulesPanelModel.isCompareToTextEnabled"
+                       ng-model="model.rulesPanelModel.compareTo" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                            ng-disabled="!model.rulesPanelModel.isCompareToTextEnabled"
+                            ng-click="model.rulesPanelModel.pickComparisonRef('ruleComparisonText')"
+                            ng-class="{'active': model.treeView.isInPickMode }">
+                        <img src="Images/refPick.svg" alt="" height="15" />
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-4"
+             ng-if="model.rulesPanelModel.isCompareToListVisible">
+            <select id="ruleComparisonList" class="form-control input-sm"
+                    ng-disabled="!model.rulesPanelModel.isCompareToListEnabled"
+                    ng-options="option.value as option.name for option in model.rulesPanelModel.availableCompareTos"
+                    ng-model="model.rulesPanelModel.selectedCompareTo"></select>
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <button ng-disabled="!model.rulesPanelModel.isAddEnabled" class="btn btn-default" ng-click="model.rulesPanelModel.add()">{{ 'Add' | translate }}</button>
+        <button ng-disabled="!model.rulesPanelModel.isUpdateEnabled" class="btn btn-default" ng-click="model.rulesPanelModel.update()">{{ 'Update' | translate }}</button>
+        <button ng-disabled="!model.rulesPanelModel.isRemoveEnabled" class="btn btn-default" ng-click="model.rulesPanelModel.remove()">{{ 'Remove' | translate }}</button>
+    </div>
+    <clause-designer model="model.rulesPanelModel.clauseDesignerModel"></clause-designer>
+</form>

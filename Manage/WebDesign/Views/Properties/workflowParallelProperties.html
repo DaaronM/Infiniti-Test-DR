@@ -1,0 +1,11 @@
+﻿<div class="prop-title">
+    {{ 'Parallel' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="stateTitle" class="col-sm-4 control-label">{{ ::'Name' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="stateTitle" class="form-control input-sm" ng-model="model.propertiesPanelModel.name" ng-blur="model.propertiesPanelModel.validateName()" />
+        </div>
+    </div>
+</form>

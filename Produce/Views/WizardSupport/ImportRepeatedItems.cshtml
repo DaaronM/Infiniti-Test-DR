@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_WizardSubpage.cshtml";
+}
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <script type="text/javascript">
+            function closeMe() {
+                parent.wiz.closeModal();
+            }
+
+            setTimeout(function () {
+                $("#uploadControl").focus();
+            }, 500);
+        </script>
+        <div style="padding:5px">
+            <br />
+            <div style="text-align:center">@Intelledox.Produce.Resources.Strings.ItemImportDesc</div>
+            <br />
+
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <div class="warningmsg">@ViewBag.Message</div>
+            }
+
+            <input type="file" name="uploadControl" id="uploadControl" style="width:300px;" />
+            <br />
+            <div style="text-align:center">
+                <input type="submit" name="btnImport" value="@Intelledox.Produce.Resources.Strings.Import" id="btnImport" class="btn btn-primary btn-import" />
+                <input type="button" id="btnClose" class="btn btn-default btn-close" value="@Intelledox.Produce.Resources.Strings.Close" onclick="closeMe()" />
+            </div>
+        </div>
+    </div>
+</form>

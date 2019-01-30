@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutSubpage.cshtml";
+}
+<script type="text/javascript">
+    function chkAcceptEula_OnClick() {
+        document.getElementById('btnAcceptEula').disabled = !document.getElementById('chkAcceptEula').checked;
+    }
+</script>
+<form id="Form1" method="post">
+    <span id="lblBefore">@Html.Raw(Infiniti.MvcControllers.ApplicationSettings.ThemeLoginBefore)</span>
+    <div id="divLogin" class="form-horizontal">
+        <div id="tblLogin">
+            <br /><br />
+            <div id="tblEulaAcceptance">
+                <h3 class="login-title">@Intelledox.Produce.Resources.Strings.EndUserLicenseAgreement</h3>
+                <div class="form-group" style="overflow-y:scroll; height: 500px; border: 1px solid; padding: 2px">
+                    <span id="lblEula">@Html.Raw(ViewBag.EulaText)</span>
+                </div>
+                <div class="pull-right">
+                    <span class="checkbox"><input id="chkAcceptEula" type="checkbox" name="chkAcceptEula" onclick="chkAcceptEula_OnClick();" /><label for="chkAcceptEula">@Intelledox.Produce.Resources.Strings.UnderstandAndAcceptEula</label></span>
+                </div>
+                <div class="pull-right">
+                    <input type="submit" name="btnAcceptEula" value="@Intelledox.Produce.Resources.Strings.Accept" id="btnAcceptEula" disabled="disabled" class="btn btn-primary btn-submit" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <span id="lblAfter">@Html.Raw(Infiniti.MvcControllers.ApplicationSettings.ThemeLoginAfter)</span>
+</form>

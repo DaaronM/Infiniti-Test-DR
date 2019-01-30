@@ -1,0 +1,70 @@
+﻿@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.AnswerFilePromptViewModel>
+@if (Model.Message != null)
+{
+<div id="trMsg">
+    <br />@Html.Raw(Model.HtmlMessage)<br /><br />
+</div>
+}
+@if (Model.ShowSave)
+{ 
+<div class="question-group">
+    <h3 class="question-text"><label for="rdoYes">@Intelledox.Produce.Resources.Strings.SaveAnswers</label></h3>
+        @if (Model.IsInProgress)
+        {
+            <label style="color:red">@Html.Raw(Intelledox.Produce.Resources.Strings.RemoveInProgress)</label>
+}
+    <div class="question-body">
+        <div class="radio-inline">
+            <label>
+                <input type="radio" id="rdoYes" name="rdoSaveAnswers" onclick="document.getElementById('txtAnswerDescription').disabled = false; document.getElementById('txtAnswerDescription').setAttribute('required', '');" checked="@Model.Wizard.IsSavingAnswerFile" value="Yes" @if (Model.LogInteractions) { <text>data-analyticsid="saveAnswerFileYes"</text> } />
+                @Intelledox.Produce.Resources.Strings.Yes
+            </label>
+        </div>
+        <div class="radio-inline">
+            <label>
+                <input type="radio" id="rdoNo" name="rdoSaveAnswers" onclick="document.getElementById('txtAnswerDescription').disabled = true; document.getElementById('txtAnswerDescription').removeAttribute('required');" checked="@(!Model.Wizard.IsSavingAnswerFile)" value="No" @if (Model.LogInteractions) { <text>data-analyticsid="saveAnswerFileNo"</text> } />
+                @Intelledox.Produce.Resources.Strings.No
+            </label>
+        </div>
+        <h5><label for="txtAnswerDescription">@Intelledox.Produce.Resources.Strings.IfYes</label></h5>
+        <input type="text" id="txtAnswerDescription" name="txtAnswerDescription" @if (Model.Wizard.IsSavingAnswerFile) { <text>required</text> } class="form-control" maxlength="255" value="@Model.Wizard.SaveAnswerFileName" disabled="@(!Model.Wizard.IsSavingAnswerFile)" @if (Model.LogInteractions) { <text>data-analyticsid="answerFileDescription"</text> } />
+    </div>
+</div>
+}
+        @if (Model.IsMailMerge)
+        {
+    <div class="question-group">
+        <h3 class="question-text">@Intelledox.Produce.Resources.Strings.MailMergeOptions</h3>
+        <div class="question-body">
+            <div class="radio">
+                <label>
+                    <input type="radio" id="rdoMergeToSingle" name="MergeTo" value="True" checked="@Model.MergeToSingleDoc" />
+                    @Intelledox.Produce.Resources.Strings.MergeToSingle
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" id="rdoMergeToMultiple" name="MergeTo" value="False" checked="@(!Model.MergeToSingleDoc)" />
+                    @Intelledox.Produce.Resources.Strings.MergeToSeparate
+                </label>
+            </div>
+        </div>
+    </div>
+}
+@if (Model.AllowNameChange)
+{
+    <div class="question-group">
+        <h3 class="question-text">@Intelledox.Produce.Resources.Strings.FileName</h3>
+        <div class="question-body" id="tdFileNames">
+        @foreach (var filename in Model.Filenames)
+        {
+            <input name="@filename.Id.ToString()" title="@filename.Tooltip" class="form-control" type="text" maxlength="100" value="@filename.Value" @if (Model.Wizard.LogInteractions) { <text>data-analyticsid="@filename.Id.ToString()" data-analyticsevent="filename" </text> } >
+            if (filename.Value == "")
+            {
+                <span class="wrn">@Intelledox.Produce.Resources.Strings.RequiredField</span>
+            }
+            <br />
+        }
+        </div>
+    </div>
+}

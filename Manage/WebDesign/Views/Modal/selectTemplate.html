@@ -1,0 +1,18 @@
+﻿<form class="form-horizontal" ng-submit="newTemplate != null && ok()">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title">{{ ::'FileSelection' | translate }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="newTemplateName" class="col-sm-4 control-label">{{ ::'FileName' | translate }}</label>
+            <div class="col-sm-8">
+                <input id="newTemplateName" type="file" file-change="fileSelected()" ng-model="newTemplate" accept="{{ this.extensionSuggestion }}"/>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-disabled="newTemplate == null">{{ ::'OK' | translate }}</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">{{ ::'Cancel' | translate }}</button>
+    </div>
+</form>

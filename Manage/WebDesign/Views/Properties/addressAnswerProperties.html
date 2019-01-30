@@ -1,0 +1,10 @@
+﻿<ng-include src="'Views/Properties/documentFormatProperty.html?v=106882799234227327'"></ng-include>
+<div class="form-group">
+    <label for="addressField" class="col-sm-4 control-label">{{ ::'AddressField' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="addressField" class="form-control input-sm"
+                ng-options="option.value.name as option.name for option in model.propertiesPanelModel.availableFields"
+                ng-model="model.propertiesPanelModel.field"></select>
+    </div>
+</div>
+<ng-include ng-if="model.propertiesPanelModel.isImagePropertiesVisible" src="'Views/Properties/imageProperties.html?v=106882799234227327'"></ng-include>

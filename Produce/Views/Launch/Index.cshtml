@@ -1,0 +1,13 @@
+﻿@{
+    Layout = null;
+}
+<html>
+<body onload="document.forms[0].submit()">
+    <form name="frm1" action="~/Launch/Launching?@Request.QueryString.ToString()" method="POST">
+        @foreach (string key in Request.Form.Keys)
+        {
+            <input type="hidden" name="@key" value="@Request.Form[key]">
+        }
+    </form>
+</body>
+</html>

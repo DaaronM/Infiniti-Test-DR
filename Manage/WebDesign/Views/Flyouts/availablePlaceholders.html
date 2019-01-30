@@ -1,0 +1,19 @@
+﻿<div class="flyout-title">
+    {{ 'Placeholders' | translate }}
+</div>
+<div class="flyout-subsection">
+    <div class="input-group">
+        <input class="form-control" ng-model="model.flyoutPanel.searchValue" placeholder="{{'Search'|translate}}" />
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="model.flyoutPanel.searchPlaceholders()">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+        </span>
+    </div>
+</div>
+
+<div class="flyout-container">
+    <div ng-repeat="node in model.flyoutPanel.placeholdersTreeview.nodes" class="root-node">
+        <tree-node node="node" top-editor-drop-func="editorDrop"></tree-node>
+    </div>
+</div>

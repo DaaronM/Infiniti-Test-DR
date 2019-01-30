@@ -1,0 +1,12 @@
+﻿<div class="btn-group" data-toggle="buttons">
+    <label class="btn tile"
+           ng-class="{'tile-lg': node.Size === 3, 'tile-wd': node.Size === 2, 'tile-sm': node.Size === 1, 'tile-md': node.Size === 0 }"
+           ng-style="{'border-color': (isHover ? node.FocusRingColour: node.BackColour), 'background-color': node.BackColour, 'background-image': node.BackgroundImage}"
+           ng-mouseenter="isHover = true;" ng-mouseleave="isHover = false;"
+           ng-click="onNodeSelected({ node: node }); $event.stopPropagation()">
+        <input type="checkbox" autocomplete="off" onclick="event.preventDefault();" />
+        <span class="tile-content" ng-bind="node.Title" ng-if="node.Size !== 1"></span>
+        <span class="tile-icon" ng-if="node.DataUrlIcon != ''"><img ng-src="{{node.DataUrlIcon}}" /></span>
+        <span class="tile-badge" ng-if="node.Badge != ''">{{node.Badge}}</span>
+    </label>
+</div>

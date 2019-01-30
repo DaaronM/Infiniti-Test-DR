@@ -1,0 +1,117 @@
+﻿<!-- Auto Complete-->
+<input ng-if="node.DisplayType === 9" name="form-control" placeholder="{{node.Watermark}}" class="form-control" ng-style="node.TextBoxWidth > 0 && { 'width': node.TextBoxWidth + 'px' }" onkeypress="event.preventDefault();" />
+
+<!-- Single select list -->
+<select class="form-control" ng-if="node.DisplayType === 3 && node.SelectionType === 0">
+    <option>{{ ::'Data' | translate }}</option>
+</select>
+
+<!-- Multi select list -->
+<div class="multiDataListBox" ng-if="node.DisplayType === 3 && node.SelectionType === 1">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" onkeypress="event.preventDefault();" />
+            {{ ::'Data' | translate }}
+        </label>
+    </div>
+</div>
+
+<!-- Multi select drop down -->
+<select class="form-control btn-group-multiselect" ng-if="node.DisplayType === 13 && node.SelectionType === 1">
+    <option>{{ ::'Data' | translate }}, {{ ::'Data' | translate }}, {{ ::'Data' | translate }}</option>
+</select>
+
+<!-- Pop up -->
+<div class="row"
+     ng-if="node.DisplayType === 5">
+    <div class="col-xs-3">
+        <div class="input-group">
+            <input type="text" class="form-control" disabled="disabled" />
+            <span class="input-group-btn">
+                <input type="button" value="..." class="btn btn-default" onclick="event.preventDefault();" />
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- Data search -->
+<table class="NoPadding NoSpacing NoBorder" width="100%" role="presentation"
+       ng-if="node.DisplayType === 4">
+    <tr>
+        <td class="cell-footer" style="text-align:center"></td>
+    </tr>
+    <tr>
+        <td>
+            <div class="dataFrameContainer">
+                <div class="dataFrame">
+                    <table class="dataResults table table-condensed">
+                        <tr class="cell-heading">
+                            <th>
+                                <input type="checkbox" ng-if="node.SelectionType === 1" onkeypress="event.preventDefault();" />
+                                &nbsp;
+                            </th>
+                            <th>{{ ::'Data' | translate }}</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" ng-if="node.SelectionType === 1" onkeypress="event.preventDefault();" />
+                                <a href="#void" ng-if="node.SelectionType === 0" onclick="event.preventDefault()">{{ ::'SelectString' | translate }}</a>
+                            </td>
+                            <td>{{ ::'Data' | translate }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+<table class="NoPadding NoSpacing NoBorder" width="100%" role="presentation"
+       ng-if="node.DisplayType === 14">
+    <tr>
+        <td class="cell-footer" style="text-align:center"></td>
+    </tr>
+    <tr>
+        <td>
+            <div class="gridFrameContainer">
+                <div class="gridFrame">
+                    <input ng-if="node.SearchAll" placeholder="Search" class="form-control"
+                          style="width: 200px; float:right " onkeypress="event.preventDefault();" spellcheck="false" />
+                    <table class="dataResults table table-condensed">
+                        <tr class="cell-heading">
+                            <th>{{ ::'Header' | translate }}</th>
+                            <th>{{ ::'Header' | translate }}</th>
+                            <th>{{ ::'Header' | translate }}</th>
+                            <th>{{ ::'Header' | translate }}</th>
+
+                        </tr>
+                        <tr>
+                            <td>{{ ::'Data' | translate }}</td>
+                            <td>{{ ::'Data' | translate }}</td>
+                            <td>{{ ::'Data' | translate }}</td>
+                            <td>{{ ::'Data' | translate }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ ::'Data' | translate }}</td>
+                            <td>{{ ::'Data' | translate }}</td>
+                            <td>{{ ::'Data' | translate }}</td>
+                            <td>{{ ::'Data' | translate }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ ::'Data' | translate }}</td>
+                            <td>{{ ::'Data' | translate }}</td>
+                            <td>{{ ::'Data' | translate }}</td>
+                            <td>{{ ::'Data' | translate }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ ::'Data' | translate }}</td>
+                            <td>{{ ::'Data' | translate }}</td>
+                            <td>{{ ::'Data' | translate }}</td>
+                            <td>{{ ::'Data' | translate }}</td>
+                        </tr>
+                    </table>
+                    <ul class="pagination"><li class="paginate_button previous disabled"><a href="#" data-dt-idx="0" tabindex="0">{{'Previous'|translate}}</a></li><li class="paginate_button active"><a href="#" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button disabled" id="grdData_Q16_ellipsis"><a href="#" data-dt-idx="6" tabindex="0">…</a></li><li class="paginate_button "><a href="#" data-dt-idx="7" tabindex="0">43</a></li><li class="paginate_button next" id="grdData_Q16_next"><a href="#" data-dt-idx="8">{{'Next'|translate}}</a></li></ul>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>

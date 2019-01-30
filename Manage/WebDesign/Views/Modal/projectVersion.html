@@ -1,0 +1,22 @@
+﻿<form class="form-horizontal" ng-submit="ok()">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title">{{ ::'ProjectVersionInstructions' | translate }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input id="version-comment" class="form-control" ng-model="comment" />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">{{ ::'OK' | translate }}</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">{{ ::'Cancel' | translate }}</button>
+    </div>
+</form>
+<script>
+    setTimeout(function() {
+        document.getElementById('version-comment').focus();
+    }, 500);
+</script>

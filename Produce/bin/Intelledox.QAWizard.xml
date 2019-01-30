@@ -1,0 +1,2318 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Intelledox.QAWizard</name>
+    </assembly>
+    <members>
+        <member name="T:Intelledox.QAWizard.ActionDocument">
+            <summary>
+            Generated document information
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionDocument.DocumentId">
+            <summary>
+            Unique id for the document
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionDocument.Extension">
+            <summary>
+            File name extension
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionDocument.DisplayName">
+            <summary>
+            File name without the extension
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionDocument.ActionDocumentGuid">
+            <summary>
+            Id of the template in the action
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionDocument.Document">
+            <summary>
+            File contents
+            </summary>
+        </member>
+        <member name="T:Intelledox.QAWizard.StateContext">
+            <summary>
+            Current context for a state
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.StateContext.BusinessUnitGuid">
+            <summary>
+            Current user's business unit
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.StateContext.UserGuid">
+            <summary>
+            User id of the person who created the wizard
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.StateContext.Wizard">
+            <summary>
+            Wizard that this state is executing under
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.StateContext.IsAutoSave">
+            <summary>
+             Auto save or manual save
+            </summary>
+        </member>
+        <member name="T:Intelledox.QAWizard.ActionContext">
+            <summary>
+            Current context for an action in a submission
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionContext.BusinessUnitGuid">
+            <summary>
+            Current user's business unit
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionContext.UserGuid">
+            <summary>
+            User id of the person who created the submission
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionContext.JobGuid">
+            <summary>
+            Current job id
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionContext.Wizard">
+            <summary>
+            Wizard that this action is executing under
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionContext.ProjectLinkObject">
+            <summary>
+            Link information for the next step in a workflow
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionContext.CurrentTransition">
+            <summary>
+            The workflow transition if this action is being executed as a workflow step
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionContext.ProjectLink">
+            <summary>
+            Link information for the next step in a workflow
+            </summary>
+        </member>
+        <member name="T:Intelledox.QAWizard.StateProperties">
+            <summary>
+            Properties for StateExtensions
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.StateProperties.Context">
+            <summary>
+            Current wizard properties and context
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.StateProperties.#ctor(Intelledox.QAWizard.WizardSession,System.String)">
+            <summary>
+            Creates a StateProperties object
+            </summary>
+            <param name="wiz">Current wizard</param>
+            <param name="answerFile">Answer file containing wizard value</param>
+        </member>
+        <member name="M:Intelledox.QAWizard.StateProperties.GetAnswerFile">
+            <summary>
+            Gets the wizard's current state as an answer file
+            </summary>
+            <returns>An xml string containing wizard values</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.StateProperties.GetAnswerFile(System.Boolean)">
+            <summary>
+            Optionally gets the wizard's current state as an answer file.
+            </summary>
+            <param name="createIfNeeded">When <c>true</c> the answer file will be created if it hasn't been already. When <c>false</c>
+            the answer file will only be returned if it already exists, null otherwise.</param>
+            <returns>An xml string containing wizard values or a null value</returns>
+        </member>
+        <member name="T:Intelledox.QAWizard.DatasourceContext">
+            <summary>
+            Current context for a custom question within a wizard
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.DatasourceContext.UserGuid">
+            <summary>
+            User id of the person running the wizard
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.DatasourceContext.BusinessUnitGuid">
+            <summary>
+            Current user's business unit
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.DatasourceContext.TaskListStateGuid">
+            <summary>
+            Id of the current workflow that is being resumed, Guid.Empty otherwise.
+            </summary>
+        </member>
+        <member name="T:Intelledox.QAWizard.CustomQuestionContext">
+            <summary>
+            Current context for a custom question within a wizard
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.CustomQuestionContext.BusinessUnitGuid">
+            <summary>
+            Current user's business unit
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.CustomQuestionContext.UserGuid">
+            <summary>
+            User id of the person running the wizard
+            </summary>
+        </member>
+        <member name="T:Intelledox.QAWizard.EscalationContext">
+            <summary>
+            Current context for an escalation
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.EscalationContext.BusinessUnitGuid">
+            <summary>
+            Current project's business unit
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.EscalationContext.CurrentStateGuid">
+            <summary>
+            Workflow id that the escalation was created going to
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.EscalationContext.ProjectGuid">
+            <summary>
+            Unique id of the project where the escalation was defined
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.EscalationContext.EscalationId">
+            <summary>
+            Unique id of the escalation 
+            </summary>
+        </member>
+        <member name="T:Intelledox.QAWizard.DatasourceProperties">
+            <summary>
+            Properties for data sources
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.DatasourceProperties.Context">
+            <summary>
+            Current wizard properties and context
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.DatasourceProperties.Schema">
+            <summary>
+            A predefined schema definition for the data source
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.DatasourceProperties.ExcludedFields">
+            <summary>
+            Metadata fields that have been excluded for the data source
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.DatasourceProperties.#ctor(System.Guid,System.Guid,System.Guid,System.String)">
+            <summary>
+            Creates a DatasourceProperties object
+            </summary>
+            <param name="businessUnitGuid">Current user's business unit</param>
+            <param name="userGuid">Current user</param>
+            <param name="taskListStateGuid">Workflow Task Guid</param>
+            <param name="schema">Data source schema where provided.</param>
+        </member>
+        <member name="T:Intelledox.QAWizard.GlobalSettingPropertiesBase">
+            <summary>
+            Base object for a global setting
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.GlobalSettingPropertiesBase.ClearCache">
+            <summary>
+            Clears cached global settings
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.GlobalSettingPropertiesBase.GetGlobalSettingsValue``1(System.Guid,System.Guid,``0)">
+            <summary>
+            Gets a global setting value with a fixed value fallback
+            </summary>
+            <typeparam name="T">Type to convert the value to</typeparam>
+            <param name="businessUnitGuid">Business unit id</param>
+            <param name="id">Setting unique id</param>
+            <param name="fallbackValue">Value to return if global setting is blank</param>
+            <returns>A global setting</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.GlobalSettingPropertiesBase.TryGetGlobalSettingsValue``1(System.Guid,System.Guid,``0,``0@)">
+            <summary>
+            Gets a global setting value with a fixed fallback. Returns a bool if the value can be converted to
+            the generic type
+            </summary>
+            <typeparam name="T">Type to convert the value to</typeparam>
+            <param name="businessUnitGuid">Business unit id</param>
+            <param name="id">Setting unique id</param>
+            <param name="fallbackValue">Value to return if global setting is blank</param>
+            <param name="value">A global setting</param>
+            <returns><c>true</c> if the global setting can be converted to the generic type, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.GlobalSettingPropertiesBase.TryConvertValue``1(System.String,``0@)">
+            <summary>
+            Attempts to convert a string value to a generic type
+            </summary>
+            <typeparam name="T">Type to convert the value to</typeparam>
+            <param name="value">String value</param>
+            <param name="convertedValue">Converted value</param>
+            <returns><c>true</c> if the value can be converted to the generic type, <c>false</c> otherwise</returns>
+        </member>
+        <member name="T:Intelledox.QAWizard.InputPropertiesBase">
+            <summary>
+            Input properties base class
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.InputPropertiesBase.GetInputValue``1(System.Guid,``0)">
+            <summary>
+            Gets the value passed in as an input with a fixed fallback
+            </summary>
+            <typeparam name="T">Type to convert the input to</typeparam>
+            <param name="id">Input unique id</param>
+            <param name="fallbackValue">Value to return if input is blank</param>
+            <returns>An input value</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.InputPropertiesBase.GetInputKeyValues``1(System.Guid)">
+            <summary>
+            Gets the list of values passed in as an input in a dictionary format
+            </summary>
+            <typeparam name="T">Type to convert the input values to</typeparam>
+            <param name="id">Input unique id</param>
+            <returns>Inputs as a dictionary of key/values</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.InputPropertiesBase.TryGetInputValue``1(System.Guid,``0,``0@)">
+            <summary>
+            Gets an input value with a fixed fallback. Returns a bool if the value can be converted to
+            the generic type
+            </summary>
+            <typeparam name="T">Type to convert the input values to</typeparam>
+            <param name="id">Input unique id</param>
+            <param name="fallbackValue">Value to return if input is blank</param>
+            <param name="value">An input</param>
+            <returns><c>true</c> if the input can be converted to the generic type, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.InputPropertiesBase.TryGetInputValueList``1(System.Guid,System.Collections.Generic.IList{``0}@)">
+            <summary>
+            Gets the list of values passed in as an input. Pipe separated values are split into individual entries.
+            Returns a bool if the value can be converted to the generic type.
+            </summary>
+            <typeparam name="T">Type to convert the input values to</typeparam>
+            <param name="id">Input unique id</param>
+            <param name="valueList">A list of inputs</param>
+            <returns><c>true</c> if the inputs can be converted to the generic type, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.InputPropertiesBase.TryGetInputKeyValues``1(System.Guid,System.Collections.Generic.IDictionary{System.String,``0}@)">
+            <summary>
+            Gets the list of values passed in as an input in a dictionary format. Returns a bool if the value can be converted to
+            the generic type
+            </summary>
+            <typeparam name="T">Type to convert the input values to</typeparam>
+            <param name="id">Input unique id</param>
+            <param name="valueList">A list of inputs</param>
+            <returns><c>true</c> if the inputs can be converted to the generic type, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.InputPropertiesBase.GetInputValue``1(System.Guid,System.Guid,``0)">
+            <summary>
+            Gets the value passed in as an input with a global settings and a fixed fallback
+            </summary>
+            <typeparam name="T">Type to convert the input to</typeparam>
+            <param name="id">Input unique id</param>
+            <param name="globalSettingsId">Global setting to return if input is blank</param>
+            <param name="fallbackValue">Value to return if input and global setting is blank</param>
+            <returns>An input value</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.InputPropertiesBase.GetInputValueList``1(System.Guid)">
+            <summary>
+            Gets the list of values passed in as an input. Pipe separated values are split into individual entries.
+            </summary>
+            <typeparam name="T">Type to convert the input values to</typeparam>
+            <param name="id">Input unique id</param>
+            <returns>A list of inputs.</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.InputPropertiesBase.TryGetInputValue``1(System.Guid,``0,System.Globalization.CultureInfo,``0@)">
+            <summary>
+            Gets the value passed in as an input matching the provided language. Returns a bool if the value can be converted to
+            the generic type.
+            </summary>
+            <typeparam name="T">Type to convert the input to</typeparam>
+            <param name="id">Input unique id</param>
+            <param name="fallbackValue">Value to return if input and global setting is blank</param>
+            <param name="culture">Language to match against the most appropriate input. Exact language matches are preferred, followed
+            by the two letter ISO code, followed by neutral or no language.</param>
+            <param name="value">An inputs</param>
+            <returns><c>true</c> if the inputs can be converted to the generic type, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.InputPropertiesBase.TryGetInputValue``1(System.Guid,System.Guid,``0,System.Globalization.CultureInfo,``0@)">
+            <summary>
+            Gets the value passed in as an input matching the provided language with a global settings and a fixed fallback. Returns a 
+            bool if the value can be converted to the generic type.
+            </summary>
+            <typeparam name="T">Type to convert the input to</typeparam>
+            <param name="id">Input unique id</param>
+            <param name="globalSettingsId">Global setting to return if input is blank</param>
+            <param name="fallbackValue">Value to return if input and global setting is blank</param>
+            <param name="culture">Language to match against the most appropriate input. Exact language matches are preferred, followed
+            by the two letter ISO code, followed by neutral or no language.</param>
+            <param name="value">An inputs</param>
+            <returns><c>true</c> if the inputs can be converted to the generic type, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.InputPropertiesBase.GetInputValue``1(System.Guid,``0,System.Globalization.CultureInfo)">
+            <summary>
+            Gets the value passed in as an input matching the provided language with a fixed fallback.
+            </summary>
+            <typeparam name="T">Type to convert the input to</typeparam>
+            <param name="id">Input unique id</param>
+            <param name="fallbackValue">Value to return if input and global setting is blank</param>
+            <param name="culture">Language to match against the most appropriate input. Exact language matches are preferred, followed
+            by the two letter ISO code, followed by neutral or no language.</param>
+            <returns>An input.</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.InputPropertiesBase.GetInputValue``1(System.Guid,System.Guid,``0,System.Globalization.CultureInfo)">
+            <summary>
+            Gets the value passed in as an input matching the provided language with a global settings and a fixed fallback.
+            </summary>
+            <typeparam name="T">Type to convert the input to</typeparam>
+            <param name="id">Input unique id</param>
+            <param name="globalSettingsId">Global setting to return if input is blank</param>
+            <param name="fallbackValue">Value to return if input and global setting is blank</param>
+            <param name="culture">Language to match against the most appropriate input. Exact language matches are preferred, followed
+            by the two letter ISO code, followed by neutral or no language.</param>
+            <returns>An input.</returns>
+        </member>
+        <member name="T:Intelledox.QAWizard.ActionProperties">
+            <summary>
+            Wizard and settings properties object for an action
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionProperties.Documents">
+            <summary>
+            Generated documents list
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionProperties.Context">
+            <summary>
+            Current wizard properties and context
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionProperties.Action">
+            <summary>
+            Current action that is being executed as defined in Design
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.ActionProperties.#ctor(System.Guid,System.Guid,System.Guid,Intelledox.Model.DocumentCollection,Intelledox.QAWizard.WizardSession,Intelledox.Common.ProjectLink)">
+            <summary>
+            Creates an ActionProperties object
+            </summary>
+            <param name="businessUnitGuid">Business unit id</param>
+            <param name="userId">Current user</param>
+            <param name="jobId">Current job</param>
+            <param name="docs">Generated docs that have been configured to be sent to this action</param>
+            <param name="wiz">Current wizard</param>
+            <param name="projectLink">Link information for the next step in a workflow</param>
+        </member>
+        <member name="M:Intelledox.QAWizard.ActionProperties.AddMessage(System.String)">
+            <summary>
+            Adds an action failure message to the submission
+            </summary>
+            <param name="message">Custom message</param>
+        </member>
+        <member name="M:Intelledox.QAWizard.ActionProperties.AddMessage(System.String,System.String)">
+            <summary>
+            Adds an action failure message to the submisson
+            </summary>
+            <param name="message">Custom message</param>
+            <param name="name">Heading or grouping name</param>
+        </member>
+        <member name="M:Intelledox.QAWizard.ActionProperties.AddInfoMessage(System.String)">
+            <summary>
+            Adds an action information message to the submission
+            </summary>
+            <param name="message">Custom message</param>
+        </member>
+        <member name="M:Intelledox.QAWizard.ActionProperties.AddInfoMessage(System.String,System.String)">
+            <summary>
+            Adds an action information message to the submission
+            </summary>
+            <param name="message">Custom message</param>
+            <param name="name">Heading or grouping name</param>
+        </member>
+        <member name="M:Intelledox.QAWizard.ActionProperties.GetDocumentStream(Intelledox.Model.Document)">
+            <summary>
+            Gets a generated document binary
+            </summary>
+            <param name="doc">Document information from the Documents list</param>
+            <returns>A stream containing the document binary</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.ActionProperties.GetDocumentStreamAsync(Intelledox.Model.Document)">
+            <summary>
+            Gets a generated document binary
+            </summary>
+            <param name="doc">Document information from the Documents list</param>
+            <returns>A stream containing the document binary</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.ActionProperties.UpdateDocumentBinary(Intelledox.Model.Document,System.Byte[])">
+            <summary>
+            Updates an existing generated document with new contents
+            </summary>
+            <param name="doc">Document information from the Documents list</param>
+            <param name="documentBinary">File contents</param>
+        </member>
+        <member name="M:Intelledox.QAWizard.ActionProperties.UpdateDocumentBinaryAsync(Intelledox.Model.Document,System.IO.Stream)">
+            <summary>
+            Updates an existing generated document with new contents
+            </summary>
+            <param name="doc">Document information from the Documents list</param>
+            <param name="documentBinary">File contents</param>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionProperties.ActionInputs">
+            <summary>
+            Inputs for the action that have been defined on the project. It is recommended to use functions such as GetInputValue
+            instead of accessing directly
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.ActionProperties.SetProperty(System.String,System.Object)">
+            <summary>
+            Adds a temporary property to the wizard that can later be retrieved via GetProperty
+            </summary>
+            <param name="name">Property name</param>
+            <param name="value">Custom value</param>
+        </member>
+        <member name="M:Intelledox.QAWizard.ActionProperties.GetProperty(System.String)">
+            <summary>
+            Gets a temporary property that was previously added via SetProperty
+            </summary>
+            <param name="name">Property name</param>
+            <returns>Custom value</returns>
+        </member>
+        <member name="T:Intelledox.QAWizard.CustomQuestionProperties">
+            <summary>
+            Properties for custom questions
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.CustomQuestionProperties.Messages">
+            <summary>
+            Custom messages to add to the wizard. Use the AddMessage functions to modify.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.CustomQuestionProperties.Question">
+            <summary>
+            Current wizard question that represents this custom question
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.CustomQuestionProperties.Context">
+            <summary>
+            Current wizard properties and context
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.CustomQuestionProperties.QuestionInputs">
+            <summary>
+            Inputs for the question that have been defined on the project. It is recommended to use functions such as GetInputValue
+            instead of accessing directly
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.CustomQuestionProperties.#ctor(System.Collections.Generic.Dictionary{System.Guid,System.Object},Intelledox.QAWizard.CustomQuestion)">
+            <summary>
+            Creates a CustomQuestionProperties object
+            </summary>
+            <param name="questionAttributes">Custom attributes previously stored by the question</param>
+            <param name="parentQuestion">Wizard question that represents this custom question</param>
+        </member>
+        <member name="M:Intelledox.QAWizard.CustomQuestionProperties.AddMessage(System.String)">
+            <summary>
+            Adds a question failure message to the submission
+            </summary>
+            <param name="message">Custom message</param>
+        </member>
+        <member name="M:Intelledox.QAWizard.CustomQuestionProperties.AddMessage(System.String,System.String)">
+            <summary>
+            Adds a question failure message to the submisson
+            </summary>
+            <param name="message">Custom message</param>
+            <param name="name">Heading or grouping name</param>
+        </member>
+        <member name="M:Intelledox.QAWizard.CustomQuestionProperties.AddMessage(Intelledox.Model.Message)">
+            <summary>
+            Adds a question message to the submission
+            </summary>
+            <param name="message">Custom message</param>
+        </member>
+        <member name="M:Intelledox.QAWizard.CustomQuestionProperties.UpdateAttribute(System.Guid,System.Object)">
+            <summary>
+            Updates a custom question defined property to a given value
+            </summary>
+            <param name="attributeGuid">Unique id for the custom attribute</param>
+            <param name="attributeValue">Value to set</param>
+        </member>
+        <member name="M:Intelledox.QAWizard.CustomQuestionProperties.GetAttribute(System.Guid)">
+            <summary>
+            Gets the value of the attribute as an object
+            </summary>
+            <param name="attributeGuid">Unique id for the custom attribute</param>
+            <returns>Attribute value, null if value hasn't been set</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.CustomQuestionProperties.GetAttributeString(System.Guid)">
+            <summary>
+            Gets the value of the attribute as a string
+            </summary>
+            <param name="attributeGuid">Unique id for the custom attribute</param>
+            <returns>Attribute value, blank string if value hasn't been set</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.CustomQuestionProperties.GetAttributeBool(System.Guid)">
+            <summary>
+            Gets the value of the attribute as an boolean
+            </summary>
+            <param name="attributeGuid">Unique id for the custom attribute</param>
+            <returns>Attribute value, null if value hasn't been set</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.CustomQuestionProperties.ContainsAttribute(System.Guid)">
+            <summary>
+            Whether the custom attribute has been set at any time in the past
+            </summary>
+            <param name="attributeGuid">Unique id for the custom attribute</param>
+            <returns><c>true</c> if the value has previously been set, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:Intelledox.QAWizard.CustomQuestionProperties.Attributes">
+            <summary>
+            List of custom attribute ids that have previously been set
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Intelledox.QAWizard.EscalationProperties">
+            <summary>
+            Properties for escalations
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.EscalationProperties.EscalationInputs">
+            <summary>
+            Inputs for the escalation that have been defined on the project. It is recommended to use functions such as GetInputValue
+            instead of accessing directly
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.EscalationProperties.Context">
+            <summary>
+            Current properties and context
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.EscalationProperties.#ctor(System.Guid)">
+            <summary>
+            Creates an EscalationProperties object
+            </summary>
+            <param name="escalationId"></param>
+        </member>
+        <member name="M:Intelledox.QAWizard.CustomQuestionInput.#ctor(Intelledox.Model.RoutingOption,Intelledox.QAWizard.CustomQuestion)">
+            <summary>
+             Runtime constructor
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.CustomQuestionInput.#ctor(Intelledox.Model.RoutingOption,Intelledox.QAWizard.RepeatRow,System.String,Intelledox.QAWizard.CustomQuestion)">
+            <summary>
+             Clone constructor
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.WizardFragment.SubscribeToRowChangedEventsByChildQuestionModel(System.Guid,Intelledox.QAWizard.RepeatRow,Intelledox.QAWizard.RowsModifiedEventHandler,Intelledox.QAWizard.RowMovedEventHandler)">
+            <summary>
+            Subscribe to row changed events to a question that doesn't exist yet (zero row parents)
+            </summary>
+            <param name="questionGuid">Question to find the repeat path to</param>
+            <param name="layoutRepeatParent">Stop at this level parent</param>
+            <param name="rowsModifiedHandler">Modified event handler</param>
+            <param name="rowMovedHandler">Moved event handler</param>
+        </member>
+        <member name="T:Intelledox.QAWizard.PageChangeArguments">
+            <summary>
+            Page change information
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.PageChangeArguments.OldPage">
+            <summary>
+            Page that is being navigated away from
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.PageChangeArguments.NewPage">
+            <summary>
+            Page that is being navigated to
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.PageChangeArguments.OldRepeatIndex">
+            <summary>
+            For repeating pages, the row index that is being navigated away from. -1 otherwise.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.PageChangeArguments.NewRepeatIndex">
+            <summary>
+            For repeating pages, the row index that is being navigated to. -1 otherwise.
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.PageChangeArguments.#ctor">
+            <summary>
+            Creates a <see cref="T:Intelledox.QAWizard.PageChangeArguments"/>
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.Condition.#ctor(Intelledox.QAWizard.Design.Condition,Intelledox.QAWizard.RepeatRow,System.Action)">
+            <summary>
+             Runtime constructor
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.Condition.#ctor(System.Boolean,System.Boolean,Intelledox.QAWizard.Design.Condition,Intelledox.QAWizard.RepeatRow,Intelledox.QAWizard.Action)">
+            <summary>
+             Clone constructor
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.Filter.#ctor(Intelledox.QAWizard.Design.Filter)">
+            <summary>
+             Runtime constructor
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.Filter.#ctor(Intelledox.QAWizard.Design.Filter,Intelledox.QAWizard.RepeatRow,System.String)">
+            <summary>
+             Clone constructor
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.GeneralFunctions.FromOADate(System.Double)">
+            <summary>
+            From System.DateTime.FromOADate()
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.GeneralFunctions.ToOADate(System.DateTime)">
+            <summary>
+            From System.DateTime.ToOADate()
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.GeneralFunctions.DateDiff(System.Int32,System.DateTime,System.DateTime)">
+            <summary>
+            From Microsoft.VisualBasic.DateAndTime.DateDiff()
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.GeneralFunctions.DateAdd(System.Int32,System.Double,System.DateTime)">
+            <summary>
+            From Microsoft.VisualBasic.DateAndTime.DateAdd()
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.GeneralFunctions.Fix(System.Double)">
+            <summary>
+            From Microsoft.VisualBasic.Conversion.Fix()
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.GeneralFunctions.GetDayOfWeek(System.DateTime)">
+            <summary>
+            From Microsoft.VisualBasic.DateAndTime.GetDayOfWeek()
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.GeneralFunctions.IsDBNull(System.Object)">
+            <summary>
+            From Microsoft.VisualBasic.Information.IsDBNull()
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.GeneralFunctions.Format(System.Object,System.String)">
+            <summary>
+            From Microsoft.VisualBasic.String.Format()
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.GeneralFunctions.FormatNamed(System.Object,System.String,System.String@)">
+            <summary>
+            From Microsoft.VisualBasic.String.FormatNamed()
+            </summary>
+        </member>
+        <member name="T:Intelledox.QAWizard.ActionInput">
+            <summary>
+            An input into an action as defined in Design
+            </summary>
+        </member>
+        <member name="T:Intelledox.QAWizard.ActionResult">
+            <summary>
+            A result from an action
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionResult.Result">
+            <summary>
+            The status of the action after executing
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionResult.Outputs">
+            <summary>
+            Output value from an action
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionResult.AllowRetry">
+            <summary>
+            Flag whether a retry is appropriate. Default is True
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.ActionResult.Documents">
+            <summary>
+            Generated documents from an action
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.ActionResult.#ctor">
+            <summary>
+            Creates an action result
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.Rule.#ctor(Intelledox.QAWizard.Design.Rule)">
+            <summary>
+             Runtime constructor
+            </summary>
+        </member>
+        <member name="M:Intelledox.QAWizard.Rule.#ctor(Intelledox.QAWizard.Design.Rule,Intelledox.QAWizard.RepeatRow)">
+            <summary>
+             Clone constructor
+            </summary>
+        </member>
+        <member name="T:Intelledox.QAWizard.Resources.Strings">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.And">
+            <summary>
+              Looks up a localized string similar to and.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.AnExpiryDateHasNotBeenConfigured">
+            <summary>
+              Looks up a localized string similar to An expiry date has not been configured.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Baht">
+            <summary>
+              Looks up a localized string similar to Baht.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.BahtPlural">
+            <summary>
+              Looks up a localized string similar to Baht.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.BeginsWith">
+            <summary>
+              Looks up a localized string similar to begins with.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.BeginWith">
+            <summary>
+              Looks up a localized string similar to begin with.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.BeGreaterThan">
+            <summary>
+              Looks up a localized string similar to be greater than.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.BeGreaterThanOrEqualTo">
+            <summary>
+              Looks up a localized string similar to be greater than or equal to.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.BeLessThan">
+            <summary>
+              Looks up a localized string similar to be less than.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.BeLessThanOrEqualTo">
+            <summary>
+              Looks up a localized string similar to be less than or equal to.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Billion">
+            <summary>
+              Looks up a localized string similar to Billion.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Billions">
+            <summary>
+              Looks up a localized string similar to Trillion.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Bolivar">
+            <summary>
+              Looks up a localized string similar to Bolivar Fuerte.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.BolivarPlural">
+            <summary>
+              Looks up a localized string similar to Bolívares Fuertes.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Cent">
+            <summary>
+              Looks up a localized string similar to Cent.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Centavo">
+            <summary>
+              Looks up a localized string similar to Centavo.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.CentavoPlural">
+            <summary>
+              Looks up a localized string similar to Centavos.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Centesimo">
+            <summary>
+              Looks up a localized string similar to Centésimo.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.CentesimoPlural">
+            <summary>
+              Looks up a localized string similar to Centésimos.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Centime">
+            <summary>
+              Looks up a localized string similar to Centime.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.CentimePlural">
+            <summary>
+              Looks up a localized string similar to Centimes.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Centimo">
+            <summary>
+              Looks up a localized string similar to Céntimo.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.CentimoPlural">
+            <summary>
+              Looks up a localized string similar to Céntimos.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.CentPlural">
+            <summary>
+              Looks up a localized string similar to Cents.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Change">
+            <summary>
+              Looks up a localized string similar to Change.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ChoiceAnswerNotFound">
+            <summary>
+              Looks up a localized string similar to [{0} choice answer not found].
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ChoiceMustReferenceCorrectAnswerType">
+            <summary>
+              Looks up a localized string similar to [{0} is not a multiple choice or button].
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ChoiceQuestionNotFound">
+            <summary>
+              Looks up a localized string similar to [{0} choice reference could not be evaluated. Verify the reference is in a correct format and is not in a repeated section/page].
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Chon">
+            <summary>
+              Looks up a localized string similar to Chon.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ChonPlural">
+            <summary>
+              Looks up a localized string similar to Chon.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.CircularReferenceError">
+            <summary>
+              Looks up a localized string similar to @@CIRCULAR REFERENCE ERROR@@.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Comments">
+            <summary>
+              Looks up a localized string similar to Comments.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Contain">
+            <summary>
+              Looks up a localized string similar to contain.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Contains">
+            <summary>
+              Looks up a localized string similar to contains.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ContentItemNameRequired">
+            <summary>
+              Looks up a localized string similar to Please enter a name for your Content Item.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ContentItemNotFound">
+            <summary>
+              Looks up a localized string similar to Content Item Not Found.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.DanishOre">
+            <summary>
+              Looks up a localized string similar to Øre.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.DanishOrePlural">
+            <summary>
+              Looks up a localized string similar to Øre.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.DoesntContain">
+            <summary>
+              Looks up a localized string similar to doesn&apos;t contain.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Dollar">
+            <summary>
+              Looks up a localized string similar to Dollar.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.DollarPlural">
+            <summary>
+              Looks up a localized string similar to Dollars.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Dong">
+            <summary>
+              Looks up a localized string similar to Dong.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.DongPlural">
+            <summary>
+              Looks up a localized string similar to Dong.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Eight">
+            <summary>
+              Looks up a localized string similar to Eight.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Eighteen">
+            <summary>
+              Looks up a localized string similar to Eighteen.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Eighty">
+            <summary>
+              Looks up a localized string similar to Eighty.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Eleven">
+            <summary>
+              Looks up a localized string similar to Eleven.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.EndsWith">
+            <summary>
+              Looks up a localized string similar to ends with.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.EndWith">
+            <summary>
+              Looks up a localized string similar to end with.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Equal">
+            <summary>
+              Looks up a localized string similar to equal.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ErrorLoadingQuestion">
+            <summary>
+              Looks up a localized string similar to Error Loading Question.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Euro">
+            <summary>
+              Looks up a localized string similar to Euro.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.EuroCent">
+            <summary>
+              Looks up a localized string similar to Cent.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.EuroCentPlural">
+            <summary>
+              Looks up a localized string similar to Cent.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.EuroPlural">
+            <summary>
+              Looks up a localized string similar to Euro.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ExtensionNotInstalled">
+            <summary>
+              Looks up a localized string similar to Datasource extension has not been loaded, check the config file for the datasource section.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ExtensionNotLicensed">
+            <summary>
+              Looks up a localized string similar to Datasource extension is unlicensed.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Fen">
+            <summary>
+              Looks up a localized string similar to Fēn.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.FenPlural">
+            <summary>
+              Looks up a localized string similar to Fēn.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Fifteen">
+            <summary>
+              Looks up a localized string similar to Fifteen.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Fifty">
+            <summary>
+              Looks up a localized string similar to Fifty.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.FirstNameAndLastNameRequired">
+            <summary>
+              Looks up a localized string similar to First and last names are required when adding to contacts.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Five">
+            <summary>
+              Looks up a localized string similar to Five.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.FiveHundred">
+            <summary>
+              Looks up a localized string similar to Five Hundred.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Forty">
+            <summary>
+              Looks up a localized string similar to Forty.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Four">
+            <summary>
+              Looks up a localized string similar to Four.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Fourteen">
+            <summary>
+              Looks up a localized string similar to Fourteen.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Franc">
+            <summary>
+              Looks up a localized string similar to Franc.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.FrancPlural">
+            <summary>
+              Looks up a localized string similar to Francs.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Generated">
+            <summary>
+              Looks up a localized string similar to Generated.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Halalah">
+            <summary>
+              Looks up a localized string similar to Halalah.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.HalalahPlural">
+            <summary>
+              Looks up a localized string similar to Halalahs.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Hundred">
+            <summary>
+              Looks up a localized string similar to Hundred.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Hundreds">
+            <summary>
+              Looks up a localized string similar to Hundred.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.InvalidBackgroundImage">
+            <summary>
+              Looks up a localized string similar to Invalid Background Image.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.InvalidCurrencyCode">
+            <summary>
+              Looks up a localized string similar to Error - Invalid currency code.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.InvalidDate">
+            <summary>
+              Looks up a localized string similar to A valid date is required.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.InvalidEmail">
+            <summary>
+              Looks up a localized string similar to A valid email is required.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.InvalidImage">
+            <summary>
+              Looks up a localized string similar to Invalid Image.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.InvalidTime">
+            <summary>
+              Looks up a localized string similar to Invalid Time.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.InvalidValue">
+            <summary>
+              Looks up a localized string similar to Invalid {0}..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Jeon">
+            <summary>
+              Looks up a localized string similar to Jeon.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.JeonPlural">
+            <summary>
+              Looks up a localized string similar to Jeon.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Kapeyka">
+            <summary>
+              Looks up a localized string similar to Kapeyka.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.KapeykaPlural">
+            <summary>
+              Looks up a localized string similar to Kapeek.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Kopek">
+            <summary>
+              Looks up a localized string similar to Kopek.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.KopekPlural">
+            <summary>
+              Looks up a localized string similar to Kopeks.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Krona">
+            <summary>
+              Looks up a localized string similar to Krona.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.KronaPlural">
+            <summary>
+              Looks up a localized string similar to Kronor.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Krone">
+            <summary>
+              Looks up a localized string similar to Krone.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.KronePlural">
+            <summary>
+              Looks up a localized string similar to Kroner.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.LengthAtLeast">
+            <summary>
+              Looks up a localized string similar to {1} length must be at least {0} characters..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.LengthNoMoreThan">
+            <summary>
+              Looks up a localized string similar to {1} length must be no more than {0} characters..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.MandatoryFieldEmpty">
+            <summary>
+              Looks up a localized string similar to Required field is blank.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.MandatoryQuestionNotAnswered">
+            <summary>
+              Looks up a localized string similar to Mandatory question not answered.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.MaximumPagesExceeded">
+            <summary>
+              Looks up a localized string similar to Maximum number of pages ({0}) exceeded.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.MaximumRepeaterNameRequired">
+            <summary>
+              Looks up a localized string similar to {0} maximum ({1}) not met.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.MaximumRowsInSectionExceeded">
+            <summary>
+              Looks up a localized string similar to Maximum number of rows ({0}) in section exceeded..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Million">
+            <summary>
+              Looks up a localized string similar to Million.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.MinimumPagesRequired">
+            <summary>
+              Looks up a localized string similar to Minimum number of pages ({0}) required..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.MinimumRepeaterNameRequired">
+            <summary>
+              Looks up a localized string similar to {0} minimum ({1}) not met.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.MinimumRowsInSectionRequired">
+            <summary>
+              Looks up a localized string similar to Minimum number of rows ({0}) in section required..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Minus">
+            <summary>
+              Looks up a localized string similar to Minus.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.MsgNameInUse">
+            <summary>
+              Looks up a localized string similar to Name &quot;{0}&quot; is already in use..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.NameRequired">
+            <summary>
+              Looks up a localized string similar to A valid name is required for a new Content Item.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Nine">
+            <summary>
+              Looks up a localized string similar to Nine.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.NineHundred">
+            <summary>
+              Looks up a localized string similar to Nine Hundred.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Nineteen">
+            <summary>
+              Looks up a localized string similar to Nineteen.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Ninety">
+            <summary>
+              Looks up a localized string similar to Ninety.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.NoAnswer">
+            <summary>
+              Looks up a localized string similar to No answer.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.NoGroupToTransitionTo">
+            <summary>
+              Looks up a localized string similar to No group to transition to.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.NoneSelected">
+            <summary>
+              Looks up a localized string similar to None Selected.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.NoNextState">
+            <summary>
+              Looks up a localized string similar to There is no next step for this task..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.NotContain">
+            <summary>
+              Looks up a localized string similar to not contain.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.NotEqual">
+            <summary>
+              Looks up a localized string similar to not equal.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.NoUserToTransitionTo">
+            <summary>
+              Looks up a localized string similar to No user to transition to.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.NumberSelected">
+            <summary>
+              Looks up a localized string similar to {0} Selected.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.NumericType">
+            <summary>
+              Looks up a localized string similar to A valid number is required.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Off">
+            <summary>
+              Looks up a localized string similar to Off.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.On">
+            <summary>
+              Looks up a localized string similar to On.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.One">
+            <summary>
+              Looks up a localized string similar to One.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.OneBillion">
+            <summary>
+              Looks up a localized string similar to One Billion.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.OneHundred">
+            <summary>
+              Looks up a localized string similar to One Hundred.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.OneMillion">
+            <summary>
+              Looks up a localized string similar to One Million.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.OneNoO">
+            <summary>
+              Looks up a localized string similar to One.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Paisa">
+            <summary>
+              Looks up a localized string similar to Paisa.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.PaisaPlural">
+            <summary>
+              Looks up a localized string similar to Paise.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Paisas">
+            <summary>
+              Looks up a localized string similar to Paisas.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.PaisasPlural">
+            <summary>
+              Looks up a localized string similar to Paisas.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Penny">
+            <summary>
+              Looks up a localized string similar to Penny.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.PennyPlural">
+            <summary>
+              Looks up a localized string similar to Pence.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Peso">
+            <summary>
+              Looks up a localized string similar to Peso.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.PesoPlural">
+            <summary>
+              Looks up a localized string similar to Pesos.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Piastre">
+            <summary>
+              Looks up a localized string similar to Piastre.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.PiastrePlural">
+            <summary>
+              Looks up a localized string similar to Piastres.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Piso">
+            <summary>
+              Looks up a localized string similar to Piso.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.PisoPlural">
+            <summary>
+              Looks up a localized string similar to Pisos.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.PleaseEnterAComment">
+            <summary>
+              Looks up a localized string similar to Please enter a comment..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.PleaseSelectAWeekDay">
+            <summary>
+              Looks up a localized string similar to Please select a weekday.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.PleaseSelectNextGroup">
+            <summary>
+              Looks up a localized string similar to Please select a group to send this task to..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.PleaseSelectNextState">
+            <summary>
+              Looks up a localized string similar to Please select the next step for this task..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.PleaseSelectNextUser">
+            <summary>
+              Looks up a localized string similar to Please select the person to send this task to..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Point">
+            <summary>
+              Looks up a localized string similar to Point.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Pound">
+            <summary>
+              Looks up a localized string similar to Pound.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.PoundPlural">
+            <summary>
+              Looks up a localized string similar to Pounds.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Quadrillion">
+            <summary>
+              Looks up a localized string similar to Quadrillion.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Rand">
+            <summary>
+              Looks up a localized string similar to Rand.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.RandPlural">
+            <summary>
+              Looks up a localized string similar to Rand.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Real">
+            <summary>
+              Looks up a localized string similar to Real.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.RealPlural">
+            <summary>
+              Looks up a localized string similar to Reais.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ReferenceError_CannotFindAnswer">
+            <summary>
+              Looks up a localized string similar to @@REFERENCE ERROR: Cannot find answer {0} @@.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ReferenceError_CannotFindQuestion">
+            <summary>
+              Looks up a localized string similar to @@REFERENCE ERROR: Cannot find question {0} @@.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ReferenceError_Generic">
+            <summary>
+              Looks up a localized string similar to @@REFERENCE ERROR: {0} @@.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.RequiredField">
+            <summary>
+              Looks up a localized string similar to This is a required field.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Ringgit">
+            <summary>
+              Looks up a localized string similar to Ringgit.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.RinggitPlural">
+            <summary>
+              Looks up a localized string similar to Ringgit.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Riyal">
+            <summary>
+              Looks up a localized string similar to Riyal.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.RiyalPlural">
+            <summary>
+              Looks up a localized string similar to Riyals.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Ruble">
+            <summary>
+              Looks up a localized string similar to Ruble.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.RublePlural">
+            <summary>
+              Looks up a localized string similar to Rubles.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Rupee">
+            <summary>
+              Looks up a localized string similar to Rupee.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.RupeePlural">
+            <summary>
+              Looks up a localized string similar to Rupees.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Rupiah">
+            <summary>
+              Looks up a localized string similar to Rupiah.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.RupiahPlural">
+            <summary>
+              Looks up a localized string similar to Rupiahs.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Satang">
+            <summary>
+              Looks up a localized string similar to Satang.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.SatangPlural">
+            <summary>
+              Looks up a localized string similar to Satang.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.SearchAndSelectAnOption">
+            <summary>
+              Looks up a localized string similar to Please search for and select an option.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.SelectAnOption">
+            <summary>
+              Looks up a localized string similar to Please select an option.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Sen">
+            <summary>
+              Looks up a localized string similar to Sen.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.SenPlural">
+            <summary>
+              Looks up a localized string similar to Sen.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Sentimo">
+            <summary>
+              Looks up a localized string similar to Sentimo.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.SentimoPlural">
+            <summary>
+              Looks up a localized string similar to Sentimos.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Seven">
+            <summary>
+              Looks up a localized string similar to Seven.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.SevenHundred">
+            <summary>
+              Looks up a localized string similar to Seven Hundred.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Seventeen">
+            <summary>
+              Looks up a localized string similar to Seventeen.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Seventy">
+            <summary>
+              Looks up a localized string similar to Seventy.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Six">
+            <summary>
+              Looks up a localized string similar to Six.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Sixteen">
+            <summary>
+              Looks up a localized string similar to Sixteen.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Sixty">
+            <summary>
+              Looks up a localized string similar to Sixty.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.SwedishOre">
+            <summary>
+              Looks up a localized string similar to Öre.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.SwedishOrePlural">
+            <summary>
+              Looks up a localized string similar to Öre.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Ten">
+            <summary>
+              Looks up a localized string similar to Ten.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.TenAnd">
+            <summary>
+              Looks up a localized string similar to Ten.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Thirteen">
+            <summary>
+              Looks up a localized string similar to Thirteen.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Thirty">
+            <summary>
+              Looks up a localized string similar to Thirty.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Thousand">
+            <summary>
+              Looks up a localized string similar to Thousand.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Three">
+            <summary>
+              Looks up a localized string similar to Three.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Trillion">
+            <summary>
+              Looks up a localized string similar to Trillion.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Twelve">
+            <summary>
+              Looks up a localized string similar to Twelve.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Twenty">
+            <summary>
+              Looks up a localized string similar to Twenty.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.TwentyAnd">
+            <summary>
+              Looks up a localized string similar to Twenty.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.TwentyOne">
+            <summary>
+              Looks up a localized string similar to Twenty One.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.TwentySix">
+            <summary>
+              Looks up a localized string similar to Twenty Six.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.TwentyThree">
+            <summary>
+              Looks up a localized string similar to Twenty Three.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.TwentyTwo">
+            <summary>
+              Looks up a localized string similar to Twenty Two.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Two">
+            <summary>
+              Looks up a localized string similar to Two.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.UnableToFetchData">
+            <summary>
+              Looks up a localized string similar to Unable to fetch data.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.User">
+            <summary>
+              Looks up a localized string similar to User.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Value">
+            <summary>
+              Looks up a localized string similar to Value.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Value1CompareTo2">
+            <summary>
+              Looks up a localized string similar to {2} must {0} &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.ValueTooSmallOrLarge">
+            <summary>
+              Looks up a localized string similar to Value was either too small or too large.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Won">
+            <summary>
+              Looks up a localized string similar to Won.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.WonPlural">
+            <summary>
+              Looks up a localized string similar to Won.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Xu">
+            <summary>
+              Looks up a localized string similar to Xu.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.XuPlural">
+            <summary>
+              Looks up a localized string similar to Xu.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Yen">
+            <summary>
+              Looks up a localized string similar to Yen.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.YenPlural">
+            <summary>
+              Looks up a localized string similar to Yen.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Yuan">
+            <summary>
+              Looks up a localized string similar to Yuan.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.YuanPlural">
+            <summary>
+              Looks up a localized string similar to Yuan.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Resources.Strings.Zero">
+            <summary>
+              Looks up a localized string similar to Zero.
+            </summary>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.PrepareParams(System.Object[]@,System.String,System.Boolean)">
+            <summary>
+            Prepares the parameter list for calling inbuilt functions
+            </summary>
+            <param name="args">List of arguments to return</param>
+            <param name="paramstring">String that was between the brackets of a function call</param>
+            <param name="retainReference">Keep the {s1} as the value or resolve the actual value</param>
+            <returns>Index of parameter with errors, -1 if no errors</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.AddFunctionError(System.String)">
+            <summary>
+            Records a calculation error
+            </summary>
+            <param name="message">Error message</param>
+            <returns>Error reference eg "{e1}"</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnRound(System.Object[])">
+            <summary>
+            Rounds a number to the specified precision
+            </summary>
+            <param name="args">
+            param 0 = number to be rounded
+            param 1 = optional precision, if left out then round to whole number
+            </param>
+            <returns>Rounded decimal</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnRangeIndex(System.Object[])">
+            <summary>
+            Returns the index of the range that a number belongs to. Index is 0-based
+            </summary>
+            <param name="args">
+            param 0 = number to be tested against ranges
+            param 1... = optional parameter array, each representing the start of a numerical range
+            should be at least 1 parameter
+            </param>
+            <returns>Range index, otherwise 0</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnReplace(System.Object[])">
+            <summary>
+            Replaces part of a string
+            </summary>
+            <param name="args">
+            param 0 = Original string
+            param 1 = Old value to find
+            param 2 = New value to replace with
+            </param>
+            <returns>Returns a string that has part of it replaced with other string.</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnDateDiff(System.Object[])">
+             <summary>
+             Gets the number of time intervals between two date/time values
+             </summary>
+             <param name="args">
+             param 0 = integer representing time interval
+             param 1 = first date/time value
+             param 2 = second date/time value
+             param 3 = [optional] 1 to return absolute of result (always positive)
+             param 4 = [optional] 1 to calculate whole units of difference (years or months only)
+                       Example: date of birth = 25/09/1977, current date = 30/05/2006, age is 28 whole years instead of reporting 29.
+            
+             Time Interval values (listed alphabetically)
+               Day = 4
+               DayOfYear = 3
+               Hour = 7
+               Minute = 8
+               Month = 2
+               Quarter = 1
+               Second = 9
+               Weekday = 6
+               WeekOfYear = 5
+               Year = 0
+             </param>
+             <returns>Decimal time interval</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnErrorMask(System.Object[])">
+            <summary>
+            Handles a calculation error and can return another value
+            </summary>
+            <param name="args">
+            param 0 = numeric formula result {e.g. ErrorMask(10/0, 0)}
+            param 1 = numeric or string value to return in case of error
+            </param>
+            <returns>The value of param 1 if an error has been generated in the formula in param 0, otherwise returns param 0</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnAbs(System.Object[])">
+            <summary>
+            Returns the absolute (positive) of param 0.
+            </summary>
+            <param name="args">
+            param 0 = numeric value
+            </param>
+            <returns>Positive decimal</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnIsTrue(System.Object[])">
+            <summary>
+            Returns the value 1 if param 0 can be evaluated as true, otherwise returns 0.
+            </summary>
+            <param name="args">
+            param 0 = numeric or string value to evaluate for true
+            param 1 = [optional] provide a custom value to match for true
+            </param>
+            <returns>1 if true, otherwise 0</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnChr(System.Object[])">
+            <summary>
+            Converts an integer into its unicode character equivalent
+            </summary>
+            <param name="args">
+            param 0 = numeric character code
+            </param>
+            <returns>Single character string</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnConcat(System.Object[])">
+            <summary>
+            Returns all parameters concatenated
+            </summary>
+            <param name="args">
+            param 0..n = Any value
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnToday">
+            <summary>
+            Returns the current date in the current user's locale.
+            </summary>
+            <returns>Local date</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnUtcToday">
+            <summary>
+            Returns the current date in UTC
+            </summary>
+            <returns>UTC date</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnNow">
+            <summary>
+            Returns the current date and time in the current user's locale
+            </summary>
+            <returns>Local date</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnUtcNow">
+            <summary>
+            Returns the current date and time in UTC
+            </summary>
+            <returns>UTC date</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnDateAdd(System.Object[])">
+            <summary>
+            Adds an interval onto an existing date
+            </summary>
+            <param name="args">
+            param 0 = numeric value indicating Date Interval
+             4 = day
+             3 = day of year
+             7 = hour*
+             8 = minute*
+             2 = month
+             1 = quarter
+             9 = second*
+             6 = Weekday
+             5 = Week of year
+             0 = Year
+             * items marked with asterisk should not be published as valid options
+            param 1 = number to be added
+            param 2 = date to be added
+            </param>
+            <returns>Modified date</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnFormat(System.Object[])">
+            <summary>
+            Returns a formatted string
+            </summary>
+            <param name="args">
+            param 0 = string to be formatted
+            param 1 = format string
+            </param>
+            <returns>Formatted string</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnIsEqual(System.Object[])">
+            <summary>
+            Returns a boolean int (0 or 1) if all parameters are equal.
+            </summary>
+            <param name="args">
+            param 0..n = any value
+            </param>
+            <returns>1 if all equal, 0 otherwise</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnIsNotEqual(System.Object[])">
+            <summary>
+            Accepts 2 parameters and returns a boolean int (0 or 1) if all parameters are not equal.
+            </summary>
+            <param name="args">
+            param 0 = any value
+            param 1 = any value
+            </param>
+            <returns>1 if values are not equal, 0 otherwise</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnIsGreaterThan(System.Object[])">
+            <summary>
+            Accepts 2 parameters and returns a boolean int (1) if a parameter is greater than the other else returns 0.
+            </summary>
+            <param name="args">
+            param 0 = any value
+            param 1 = any value
+            </param>
+            <returns>1 if a parameter is greater than the other, otherwise 0</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnIsGreaterThanOrEqualTo(System.Object[])">
+            <summary>
+            Accepts 2 parameters and returns a boolean int (1) if a parameter is greater than or equal to the other else returns 0.
+            </summary>
+            <param name="args">
+            param 0 = any value
+            param 1 = any value
+            </param>
+            <returns>1 if a parameter is greater than or equal to the other otherwise 0</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnIsLessThan(System.Object[])">
+            <summary>
+            Accepts 2 parameters and returns  a boolean decimal (1) if a parameter is less than the other else returns 0.
+            </summary>
+            <param name="args">
+            param 0 = any value
+            param 1 = any value
+            </param>
+            <returns>1 if a parameter is less than the other otherwise 0.</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnIsLessThanOrEqualTo(System.Object[])">
+            <summary>
+            Accepts 2 parameters and returns a boolean decimal (1) if a parameter is less than or equal to the other else returns 0
+            </summary>
+            <param name="args">
+            param 0 = any value
+            param 1 = any value
+            </param>
+            <returns>1 if a parameter is less than or equal to the other otherwise 0</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnFirst(System.Object[])">
+            <summary>
+            Returns the first value of a "|" seperated expression
+            </summary>
+            <param name="args">
+            param 0 = a single value or "|" seperated string
+            </param>
+            <returns>Single value or the first in the "|" seperated string</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnLast(System.Object[])">
+            <summary>
+            Returns the last value of a "|" seperated expression
+            </summary>
+            <param name="args">
+            param 0 = a single value or "|" seperated string
+            </param>
+            <returns>Single value or the last in the "|" seperated string</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnSubstring(System.Object[])">
+            <summary>
+            Accepts at least 2 or at the max 3 params and returns a string
+            The string returned is equivalent to the substring of length(param 2), length that begins at startIndex(param 1) in this instance, 
+            or Empty if startIndex is equal to the length of this instance and length is zero.
+            </summary>
+            <param name="args">            
+            param 0 = The original string 
+            param 1 = The one-based starting character position of a substring in this instance. 
+            param 2 = The number of characters in the substring. 
+            </param>
+            <returns>Partial string</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnLeft(System.Object[])">
+            <summary>
+            Accepts 2 params and returns the left part of a string
+            </summary>
+            <param name="args">
+            param 0 = The string expression
+            param 1 = Is a positive integer that specifies how many characters of the character_expression will be returned. 
+            </param>
+            <returns>String, If integer_expression is negative, an error is returned</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnRight(System.Object[])">
+            <summary>
+            Accepts 2 params and returns the right part of a string
+            </summary>
+            <param name="args">
+            param 0 = The original string 
+            param 1 = Is a positive integer that specifies how many characters of the character_expression from the right will be returned. 
+            </param>
+            <returns>String, If integer_expression is negative, an error is returned</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnProperCase(System.Object[])">
+            <summary>
+            Accepts 3 params and returns the 1st param in proper case
+            </summary>
+            <param name="args">            
+            param 0 = The string to be converted to proper case
+            param 1 = words to exclude from proper case such as and, of, the etc
+            param 2 = words for which the next letter needs to be to capitalised ex: Mc, -Mc  (must include the space to not hurt the middle of a word)
+            </param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnIIf(System.Object[],System.Object[])">
+            <summary>
+            Returns a param 1 if param 0 is true, or param 2 if param 0 is false
+            </summary>
+            <param name="args">
+            param 0 = true or false boolean
+            param 1 = true part
+            param 2 = false part
+            </param>
+            <param name="rawArgs">Same as args but with the argument values unresolved</param>
+            <returns>param 1 if param 0 is true, or param 2 if param 0 is false</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnSum(System.Object[])">
+            <summary>
+            Returns the sum of the bar  and comma separated numeric values contained in params
+            </summary>
+            <param name="args">
+            param 0..n = Any numeric value
+            </param>
+            <returns>Decimal sum</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnCountNumber(System.Object[])">
+            <summary>
+            Returns the number of the bar and comma separated numeric values. Non-numeric are ignored
+            </summary>
+            <param name="args">
+            param 0..n = Any value
+            </param>
+            <returns>Count of numeric values</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnCount(System.Object[])">
+            <summary>
+            Returns the number of the bar or comma separated values. Null values ignored.
+            </summary>
+            <param name="args">
+            param 0..n = Any value
+            </param>
+            <returns>Count of values</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnCountIf(System.Object[])">
+            <summary>
+            Returns the number of the bar separated values that match param 1
+            </summary>
+            <param name="args">
+            param 0 = "|" seperated values
+            param 1 = Value to compare param 0 against
+            </param>
+            <returns>Count of values that match param 1, 0 otherwise</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnAverage(System.Object[])">
+            <summary>
+            Returns the average of the bar and comma separated numeric values contained in params
+            </summary>
+            <param name="args">
+            param 0..n = Any numeric value
+            </param>
+            <returns>Average of values</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnMin(System.Object[])">
+            <summary>
+             Returns the minimum of the bar and comma separated numeric values contained in params
+            </summary>
+            <param name="args">
+            param 0..n = Any numeric value
+            </param>
+            <returns>Min of values</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnMax(System.Object[])">
+            <summary>
+            Returns the maximum of the bar and comma separated numeric values contained in params
+            </summary>
+            <param name="args">
+            param 0..n = Any numeric value
+            </param>
+            <returns>Max of values</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnJoin(System.Object[])">
+            <summary>
+            Returns a string that is the parameters separated by param 0
+            If one of the parameters has | characters, the bars will be replaced with the separator
+            If a parameter is blank it will not be included
+            </summary>
+            <param name="args">
+            param 0 = String delimiter value for new string
+            param 1..n = Any value
+            </param>
+            <returns>Param 0 delimited string</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnJoinAnd(System.Object[])">
+            <summary>
+            Returns a string that is the parameters separated by param 0
+            The last two will be separated by param 1 instead
+            If one of the parameters has | characters, the bars will be replaced with the separator
+            If a parameter is blank it will not be included
+            </summary>
+            <param name="args">
+            param 0 = String delimiter value for new string
+            param 1 = String delimiter for last concatenation
+            param 2..n = Any value
+            </param>
+            <returns>Param 0 and 1 joined string</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnContains(System.Object[])">
+            <summary>
+            Returns 1 if one of the other parameters equal the first parameter, otherwise 0
+            Parameters containing bars will be split and checked
+            </summary>
+            <param name="args">
+            param 0 = String to compare against
+            param 1..n = Any value
+            </param>
+            <returns>1 if match is found, otherwise 0</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnStringContains(System.Object[])">
+            <summary>
+            Returns 1 if the second parameter contains the first parameter, otherwise 0
+            </summary>
+            <param name="args">
+            param 0 = String to search in
+            param 1 = String to find
+            </param>
+            <returns>1 if match is found, otherwise 0</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnNotContains(System.Object[])">
+            <summary>
+            Returns 0 if one of the other parameters equal the first parameter, otherwise 1
+            Parameters containing bars will be split and checked
+            </summary>
+            <param name="args">
+            param 0 = String to compare against
+            param 1..n = Any value
+            </param>
+            <returns>1 if match is not found, otherwise 0</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnStartsWith(System.Object[])">
+            <summary>
+            Returns 1 if param 0 begins with the text of param 1, returns 0 otherwise
+            </summary>
+            <param name="args">
+            param 0 = String to search in
+            param 1 = String to find
+            </param>
+            <returns>1 if match is found, otherwise 0</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnEndsWith(System.Object[])">
+            <summary>
+            Returns 1 if param 0 ends with the text of param 1, returns 0 otherwise
+            </summary>
+            <param name="args">
+            param 0 = String to search in
+            param 1 = String to find
+            </param>
+            <returns>1 if match is found, otherwise 0</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnTrim(System.Object[])">
+            <summary>
+            Removes leading and trailing spaces
+            </summary>
+            <param name="args">
+            param 0 = String to trim
+            </param>
+            <returns>Trimmed string</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnLen(System.Object[])">
+            <summary>
+            Returns the length of the string in param 0
+            </summary>
+            <param name="args">
+            param 0 = String to measure
+            </param>
+            <returns>Int length of string</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnUtcToLocal(System.Object[])">
+            <summary>
+            Converts a UTC date time into the current user's locale
+            </summary>
+            <param name="args">
+            param 0 = UTC date time
+            </param>
+            <returns>Local date time</returns>
+        </member>
+        <member name="M:Intelledox.CalcEngine.CalcEngine.fnLocalToUtc(System.Object[])">
+            <summary>
+            Converts a current user's date time into a UTC date time
+            </summary>
+            <param name="args">
+            param 0 = Local date time
+            </param>
+            <returns>UTC date time</returns>
+        </member>
+    </members>
+</doc>

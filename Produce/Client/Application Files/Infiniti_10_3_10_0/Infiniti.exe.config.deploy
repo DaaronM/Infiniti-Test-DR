@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <section name="Infiniti.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+    </sectionGroup>
+    <section name="nlog" type="NLog.Config.ConfigSectionHandler, NLog" />
+  </configSections>
+  <nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <targets>
+      <target name="file" xsi:type="File" layout="${longdate}|${level:uppercase=true}|${logger}|${message}${onexception:inner=${newline}${exception:format=tostring}}" fileName="${tempdir}/infinitilogfile.txt" keepFileOpen="false" deleteOldFileOnStartup="true" />
+    </targets>
+
+    <rules>
+      <logger name="*" minlevel="Debug" writeTo="file" />
+    </rules>
+  </nlog>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="System.Windows.Interactivity" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.9.9.9" newVersion="4.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Kent.Boogaart.HelperTrinity" publicKeyToken="cc96fa93a217f7a1" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-2.0.3.0" newVersion="2.0.3.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+    <gcServer enabled="true" />
+  </runtime>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.6" />
+  </startup>
+  <userSettings>
+    <Infiniti.Properties.Settings>
+      <setting name="Height" serializeAs="String">
+        <value>700</value>
+      </setting>
+      <setting name="Width" serializeAs="String">
+        <value>1000</value>
+      </setting>
+      <setting name="Left" serializeAs="String">
+        <value>50</value>
+      </setting>
+      <setting name="Top" serializeAs="String">
+        <value>50</value>
+      </setting>
+      <setting name="WindowState" serializeAs="String">
+        <value>Maximized</value>
+      </setting>
+    </Infiniti.Properties.Settings>
+  </userSettings>
+  <system.net>
+    <settings>
+      <servicePointManager expect100Continue="false" />
+    </settings>
+  </system.net>
+</configuration>

@@ -1,0 +1,53 @@
+﻿<div class="prop-title">
+    {{ 'SortFields' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="sortField" class="col-sm-4 control-label">{{ ::'SortField' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="sortField" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.sortPanelModel.availableFields"
+                    ng-model="model.sortPanelModel.selectedField"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sortDirection" class="col-sm-4 control-label">{{ ::'Direction' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="sortDirection" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.sortPanelModel.availableDirections"
+                    ng-model="model.sortPanelModel.selectedDirection"></select>
+        </div>
+    </div>
+
+    <div class="form-group text-center">
+        <button ng-disabled="!model.sortPanelModel.isAddEnabled" class="btn btn-default" ng-click="model.sortPanelModel.add()">{{ 'Add' | translate }}</button>
+        <button ng-disabled="!model.sortPanelModel.isUpdateEnabled" class="btn btn-default" ng-click="model.sortPanelModel.update()">{{ 'Update' | translate }}</button>
+        <button ng-disabled="!model.sortPanelModel.isRemoveEnabled" class="btn btn-default" ng-click="model.sortPanelModel.remove()">{{ 'Remove' | translate }}</button>
+    </div>
+
+    <div>
+        <div class="tool-bar">
+            <button title="{{ 'MoveUpGroup' | translate }}" ng-click="model.sortPanelModel.moveUp()" ng-disabled="!model.sortPanelModel.isMoveUpEnabled" class="tool-btn">
+                <img src="Images/moveUp.png" />
+            </button>
+            <button title="{{ 'MoveDownGroup' | translate }}" ng-click="model.sortPanelModel.moveDown()" ng-disabled="!model.sortPanelModel.isMoveDownEnabled" class="tool-btn">
+                <img src="Images/moveDown.png" />
+            </button>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-condensed selection-grid">
+        <thead>
+            <tr>
+                <th>{{ 'SortField' | translate }}</th>
+                <th>{{ 'Direction' | translate }}</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="sort in model.sortPanelModel.existingSortFields"
+            ng-click="model.sortPanelModel.selectExistingSort(sort.tag)"
+            ng-class="{'active': sort.selected}">
+            <td>{{ sort.field }}</td>
+            <td>{{ sort.direction }}</td>
+        </tr>
+    </table>
+</form>

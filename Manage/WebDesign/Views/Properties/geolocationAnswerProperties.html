@@ -1,0 +1,9 @@
+﻿<ng-include src="'Views/Properties/documentFormatProperty.html?v=106882799234227327'"></ng-include>
+<div class="form-group">
+    <label for="geolocationType" class="col-sm-4 control-label">{{ ::'Field' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="geolocationType" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableFields"
+                ng-model="model.propertiesPanelModel.field"></select>
+    </div>
+</div>

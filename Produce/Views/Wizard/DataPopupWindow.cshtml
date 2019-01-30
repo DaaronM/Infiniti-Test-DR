@@ -1,0 +1,46 @@
+﻿@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.DataFieldQuestionViewModel>
+@{
+    Layout = "~/Views/Shared/_WizardSubpage.cshtml";
+}
+@section AddToHead
+{
+    <script src="~/scripts/wizard.js?v=10.2.11" type="text/javascript"></script>
+    @if (Infiniti.MvcControllers.ApplicationSettings.UseCdn)
+    {
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    }
+    else
+    {
+        <script src="~/scripts/bootstrap.min.js?v=337"></script>
+    }
+    <script src="~/scripts/popupPost.js"></script>
+}
+<form method="post" action="~/wizard/dataPopupWindow/@Model.Question.QuestionGuid.ToString()@(Model.QueryString)" onsubmit="return popupPost(this);">
+    <div>
+        <script type="text/javascript">
+            function closeMe() {
+                if (parent.wiz.isCapturingData) {
+                    parent.wiz.dataAnalyticsFocusAndBlur('@("Unique Field_" + Model.Question.DatasourceQuestionModel.ValueField + "_q" + @Model.Question.QuestionModel.ID)', "popupCancel");
+                }
+                parent.wiz.closeLargeModal();
+            }
+            function clickOK() {
+                if (parent.wiz.isCapturingData) {
+                    parent.wiz.dataAnalyticsFocusAndBlur('@("Unique Field_" + Model.Question.DatasourceQuestionModel.ValueField + "_q" + @Model.Question.QuestionModel.ID)', "popupOk");
+                }
+            }
+        </script>
+        <div id="contentinner" class="base1" style="margin-bottom:40px">
+            <div class="body">
+                @Html.Partial("DataField", Model)
+            </div>
+            <div class="popupFooter">
+                @if (Model.Question.IsEditable)
+                {
+                    <input type="submit" id="btnOK" class="btn btn-primary btn-submit" value="@Intelledox.Produce.Resources.Strings.OK" onclick="clickOK()" />
+                }
+                <input type="button" id="btnCancel" class="btn btn-default btn-close" onclick="closeMe()" value="@Intelledox.Produce.Resources.Strings.Cancel" />
+            </div>
+        </div>
+    </div>
+</form>

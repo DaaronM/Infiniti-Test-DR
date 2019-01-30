@@ -1,0 +1,67 @@
+<asp:label runat="server" SkinId="PageTitle" text="Infiniti Produce - Powered by Intelledox Infiniti"></asp:label>
+<asp:label runat="server" SkinId="LoginBeforeSkin">
+<div id="wrapper">
+<div id="sidecontent">
+
+<img src="../App_Themes/InfinitiX/images/IntelledoxInfinitiProduceLogo.svg" width="400" alt="Intelledox Infiniti Produce - Powered by Infiniti" class="wizLogo" />
+</asp:label>
+<asp:label runat="server" SkinId="LoginAfterSkin">
+<div id="divDisclaimer">
+We care about the security and privacy of your data. For further information,<br />
+please review the <a href="https://www.intelledox.com/intelledox-infiniti-produce-terms-conditions/" target="_blank">Terms &amp; Conditions</a> as set out by Intelledox Pty Ltd.
+</div>
+
+<a href="http://intelledox.com/" id="ixPowerLogo"><img src="../App_Themes/InfinitiX/images/PoweredByInfiniti.png" width="150" alt="Powered by Intelledox" class="ixPowerLogoImg" /></a>
+
+</div>
+</div>
+<script type="text/javascript">
+
+var images = [
+    '../App_Themes/InfinitiX/images/IxIcon-Red-1920x1024-Alt.jpg',
+    '../App_Themes/InfinitiX/images/IxIcon-Teal-1920x1024-Alt.jpg',
+    '../App_Themes/InfinitiX/images/IxIcon-Orange-1920x1024-Alt.jpg',
+    '../App_Themes/InfinitiX/images/IxIcon-Grey-1920x1024-Alt.jpg']
+
+var wrapper = document.getElementById("wrapper");
+var randomness = Math.random() * images.length;
+var randomRounded = Math.floor(randomness);
+var randomImage = images[randomRounded];
+
+wrapper.style.backgroundImage = 'url(' + randomImage + ')';
+
+</script>
+</asp:label>
+<asp:label runat="server" SkinId="HomePageTopLeft">
+</asp:label>
+<asp:label runat="server" SkinId="HomePageBottomLeft">
+</asp:label>
+<asp:label runat="server" SkinId="HeaderLogoSkin">
+    <script>
+    $( 'header.navbar').on('focusin', function() 
+        { 
+            $( 'header.navbar').css('width','250px');
+        });
+        $( 'header.navbar').on('focusout', function() 
+        { 
+            $( 'header.navbar').css('width','initial');
+            $( 'header.navbar').removeAttr('style');
+        });
+    </script>
+</asp:label>
+<asp:label runat="server" SkinId="WizardHeaderLogoSkin">
+</asp:label>
+<asp:label runat="server" SkinId="WizardFooterSkin">
+    <script>
+        $( 'p.navbar-text.form-title.hidden-xs' ).prependTo( '.wizardContent' );
+        $( '.cell-footer').appendTo( '#PageBody' );
+        $( 'header.navbar').on('focusin', function() 
+            { 
+                $( 'header.navbar').css('width','250px');
+            });
+            $( 'header.navbar').on('focusout', function() 
+            { 
+                $( 'header.navbar').css('width','60px');
+            });
+    </script>
+</asp:label>

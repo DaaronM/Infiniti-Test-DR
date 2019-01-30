@@ -1,0 +1,20 @@
+﻿<input ng-if="node.TextRows < 2 && node.ValidationType !== 1" placeholder="{{node.Watermark}}" class="form-control" value="{{node.DefaultValue}}"
+       ng-class="{ 'right': node.IsRightAligned }" ng-style="node.TextBoxWidth > 0 && { 'width': node.TextBoxWidth + 'px' }" onkeypress="event.preventDefault();" spellcheck="false" />
+
+<textarea ng-if="node.TextRows > 1 && node.ValidationType !== 1" placeholder="{{node.Watermark}}" class="form-control" cols="20" 
+          ng-style="node.TextBoxWidth > 0 && { 'width': node.TextBoxWidth + 'px' }" rows="{{node.TextRows}}" onkeypress="event.preventDefault();" spellcheck="false">{{node.DefaultValue}}</textarea>
+
+<div class="input-group" style="width:200px" ng-if="node.ValidationType === 1 && node.DisplayType !== 17">
+    <input class="form-control" value="{{node.DefaultValue}}" onkeypress="event.preventDefault();" spellcheck="false" />
+    <span class="input-group-btn">
+        <button class="btn btn-default btn-calendar" type="button">
+            <img height="16" src="Images/IX_Calendar.svg" />
+        </button>
+    </span>
+</div>
+
+<div class="input-group" style="width:200px" ng-if="node.ValidationType === 1 && node.DisplayType === 17">
+    <input class="form-control mm" onkeypress="event.preventDefault();" spellcheck="false" />
+    <input class="form-control dd" onkeypress="event.preventDefault();" spellcheck="false" />
+    <input class="form-control yyyy" onkeypress="event.preventDefault();" spellcheck="false" />
+</div>

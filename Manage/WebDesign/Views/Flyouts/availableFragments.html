@@ -1,0 +1,22 @@
+﻿<div class="flyout-title">
+    {{ 'Fragments' | translate }}
+</div>
+<div class="flyout-subsection">
+    <div class="input-group">
+        <input class="form-control" ng-model="model.flyoutPanel.searchValue" placeholder="{{'Search'|translate}}" />
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="model.flyoutPanel.searchFragments()">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+        </span>
+    </div>
+</div>
+
+<div class="flyout-container">
+    <ul class="li-fragment">
+        <li toolbox-draggable ng-repeat="frag in model.flyoutPanel.filteredFragments" id="toolbox_fragment.{{frag.projectGuid}}.{{frag.projectTypeId}}">
+            <span ng-bind="frag.name"></span>
+        </li>
+    </ul>
+    <span class="noresults" ng-show="!model.flyoutPanel.filteredFragments.length" ng-bind="'NoMatchesFound'|translate"></span>
+</div>

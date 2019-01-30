@@ -1,0 +1,37 @@
+﻿<div>
+    <div class="tool-bar">
+        <button title="{{ 'CopyString' | translate }}" ng-disabled="!model.isCopyEnabled" ng-click="clauseCopy()" class="tool-btn">
+            <img src="Images/copy.png" />
+        </button>
+        <button title="{{ model.pasteText }}" ng-disabled="!model.isPasteEnabled" ng-click="clausePaste()" class="tool-btn">
+            <img src="Images/paste.png" />
+        </button>
+        |
+        <button title="{{ 'MoveUpGroup' | translate }}" ng-click="clauseMoveUp()" class="tool-btn">
+            <img src="Images/moveUp.png" />
+        </button>
+        <button title="{{ 'MoveDownGroup' | translate }}" ng-click="clauseMoveDown()" class="tool-btn">
+            <img src="Images/moveDown.png" />
+        </button>
+        |
+        <button title="{{ 'CreateAllOfGroup' | translate }}" ng-disabled="!model.supportsNesting" ng-click="clauseAddAnd()" class="tool-btn">
+            <img src="Images/createAllOf.png" />
+        </button>
+        <button title="{{ 'CreateAnyOfGroup' | translate }}" ng-disabled="!model.supportsNesting" ng-click="clauseAddOr()" class="tool-btn">
+            <img src="Images/createAnyOf.png" />
+        </button>
+        <button title="{{ 'ClauseConvert' | translate }}" ng-disabled="!model.isConvertEnabled || !model.supportsNesting" ng-click="clauseConvert()" class="tool-btn">
+            <img src="Images/toggleAllOfAnyOf.png" />
+        </button>
+        |
+        <button title="{{ 'Remove' | translate }}" ng-disabled="!model.isRemoveEnabled" ng-click="clauseDelete()" class="tool-btn">
+            <img src="Images/delete.png" />
+        </button>
+    </div>
+    <div class="clause-treeview" clause-droppable="model.clausesTreeView">
+        <div ng-repeat="node in model.clausesTreeView.nodes" class="root-node">
+            <clause-node node="node"
+                         on-clause-selected="clauseSelected(node)" top-selected-func="clauseSelected"></clause-node>
+        </div>
+    </div>
+</div>

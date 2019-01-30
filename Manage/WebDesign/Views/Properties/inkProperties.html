@@ -1,0 +1,85 @@
+﻿<ng-include src="'Views/Properties/mandatoryProperty.html?v=106882799234227327'"></ng-include>
+<div class="form-group">
+    <label for="backgroundSource" class="col-sm-4 control-label">{{ ::'Background' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="backgroundSource" class="form-control input-sm"
+                ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.BackgroundSourceOptions"
+                ng-model="model.propertiesPanelModel.backgroundSource"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isStaticImageField">
+    <label for="backgroundImage" class="col-sm-4 control-label">{{ ::'BackgroundImage' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="ink-background-container">
+            <img ng-src="{{model.propertiesPanelModel.backgroundImage}}" class="ink-background" />
+        </div>
+        <button ng-click="model.propertiesPanelModel.openImage();">...</button>
+    </div>
+</div>
+<ng-include ng-if="!model.propertiesPanelModel.isStaticImageField" src="'Views/Properties/questionReference.html?v=106882799234227327'"></ng-include>
+<div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.allowZoom" />{{ ::'AllowZoom' | translate }}
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.allowZoom">
+    <label for="maxThumbnailWidth" class="col-sm-4 control-label">{{ ::'ThumbnailMaxWidth' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="maxThumbnailWidth" class="form-control input-sm" ng-model="model.propertiesPanelModel.thumbnailMaxWidth" maxlength="5" pattern="\d*" />
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.allowZoom">
+    <label for="maxThumbnailHeight" class="col-sm-4 control-label">{{ ::'ThumbnailMaxHeight' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="maxThumbnailHeight" class="form-control input-sm" ng-model="model.propertiesPanelModel.thumbnailMaxHeight" maxlength="5" pattern="\d*" />
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.includeBackground" />{{ ::'IncludeBackground' |translate }}
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isStaticImageField">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.allowBackgroundUpload" />{{ ::'AllowBackgroundUpload' |translate }}
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isResizeBackgroundVisible">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.resizeBackground" />{{ ::'ResizeBackgroundUpload' |translate }}
+            </label>
+        </div>
+    </div>
+</div>
+<ng-include ng-if="model.propertiesPanelModel.isImagePropertiesVisible" src="'Views/Properties/imageProperties.html?v=106882799234227327'"></ng-include>
+<div class="form-group">
+    <label for="dataType" class="col-sm-4 control-label">{{ ::'InkColour' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="dataType" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableInkColours"
+                ng-model="model.propertiesPanelModel.inkColour"></select>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.allowInkColourChoice" />{{ ::'AllowInkColourChoice' |translate }}
+            </label>
+        </div>
+    </div>
+</div>

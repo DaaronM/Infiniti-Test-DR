@@ -1,0 +1,80 @@
+﻿@using Intelledox.Produce
+@inherits System.Web.Mvc.WebViewPage<Intelledox.QAWizard.Section>
+@helper RenderColumnHeader(Intelledox.QAWizard.ColumnHeading col, string path, Guid logGuid, bool inlineHeader)
+{
+    Intelledox.QAWizard.Design.Column colModel = col.ColumnModel;
+
+    if (colModel.Width == 0 && string.IsNullOrEmpty(colModel.Title))
+    {
+        if (!inlineHeader)
+        {
+            <div class="l-cell l-cell-header lccell" style="display:table-cell"></div>
+        }
+    }
+    else
+    {
+        <div class="l-cell lccell@(inlineHeader ? " l-cell-header-inline" : " l-cell-header")" style="@(colModel.Width > 0 ? "width: " + colModel.Width.ToString() + (colModel.WidthType == Intelledox.QAWizard.Design.WidthType.Pixel ? "px" : "%"): "")">
+            @if (!string.IsNullOrEmpty(colModel.Title))
+            {
+                <h3 class="lch">
+                    @Html.Raw(Intelledox.Common.HtmlParsing.Sanitize(col.TitleFormatted))
+
+                    @if (colModel.HelpText != "")
+                    {
+                        <a href="#void" data-path="@path" data-objectid="@col.ColumnModel.ColumnGuid.ToString()" data-log="@logGuid.ToString()" class="helpIcon help-object" title="@Intelledox.Produce.Resources.Strings.ClickForHelp"><span class="sr-only">@Intelledox.Produce.Resources.Strings.Help</span></a>
+                    }
+                </h3>
+            }
+        </div>
+    }
+}
+@{
+    var path = Url.Content("~/");
+    var hasTitles = Model.HasColumnHeadings;
+}
+<div class="ls @(Model.SectionModel.CssStyle)">
+    @if (!String.IsNullOrEmpty(Model.SectionModel.Title))
+    {
+        <h3 class="lsh">@Html.Raw(Intelledox.Common.HtmlParsing.Sanitize(Model.TitleFormatted))</h3>
+    }
+    @if (!String.IsNullOrEmpty(Model.SectionModel.Description))
+    {
+        <div class="lsd">@Html.Raw(Intelledox.Common.HtmlParsing.Sanitize(Model.DescriptionFormatted))</div>
+    }
+    <div class="l-table">
+        <div class="l-row">
+            @* Add column titles *@
+            @foreach (Intelledox.QAWizard.ColumnHeading col in Model.ColumnHeadings)
+            {
+                if (col.IsVisible)
+                {
+                    @RenderColumnHeader(col, path, Model.WizardFragment.WizardSession.ProjectLog, false)
+                }
+            }
+        </div>
+        <div class="l-row">
+            @* Column children *@
+            @for (var index = 0; index < Model.Rows[0].Children.Count; index++)
+            {
+                if (Model.ColumnHeadings[index].IsVisible)
+                {
+                    if (hasTitles)
+                    {
+                        @RenderColumnHeader(Model.ColumnHeadings[index], path, Model.WizardFragment.WizardSession.ProjectLog, true)
+                    }
+                    <div class="l-cell lccell@(index == 0 ? " lccellfirst" : "") @Model.ColumnHeadings[index].ColumnModel.CssStyle">
+                        <div class="lc">
+                            @foreach (Intelledox.QAWizard.ILayoutNode itemNode in ((Intelledox.QAWizard.Column)Model.Rows[0].Children[index]).Children)
+                            {
+                                if (itemNode.IsVisible)
+                                {
+                                    Html.RenderNode(itemNode);
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

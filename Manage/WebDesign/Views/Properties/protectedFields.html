@@ -1,0 +1,48 @@
+﻿<div class="prop-title">
+    {{ 'ProtectedFields' | translate }}
+</div>
+<form class="form-horizontal">
+
+    <table class="table table-bordered table-condensed selection-grid">
+        <thead>
+            <tr>
+                <th>{{ 'Name' | translate }}</th>
+                <th>{{ 'Reference' | translate }}</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="protectedField in model.protectedFieldsPanelModel.Wizard.ProtectedFields"
+            ng-click="model.protectedFieldsPanelModel.selectProtectedField(protectedField)"
+            ng-class="{'active': protectedField.selected}">
+            <td>{{ protectedField.Name }}</td>
+            <td>{{ protectedField.Reference }}</td>
+        </tr>
+    </table>
+
+    <div class="form-group">
+        <label for="fieldName" class="col-sm-4 control-label">{{ ::'Name' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="fieldName" class="form-control input-sm" ng-model="model.protectedFieldsPanelModel.selectedName" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fieldReference" class="col-sm-4 control-label">{{ ::'Reference' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input id="fieldReference" class="form-control input-sm" ng-model="model.protectedFieldsPanelModel.selectedReference" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                            ng-click="model.protectedFieldsPanelModel.pickRef()"
+                            ng-class="{'active': model.treeView.isInPickMode }">
+                        <img src="Images/refPick.svg" alt="" height="15"/>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <button ng-disabled="!model.protectedFieldsPanelModel.isAddEnabled" class="btn btn-default" ng-click="model.protectedFieldsPanelModel.add()">{{ 'Add' | translate }}</button>
+        <button ng-disabled="!model.protectedFieldsPanelModel.isUpdateEnabled" class="btn btn-default" ng-click="model.protectedFieldsPanelModel.update()">{{ 'Update' | translate }}</button>
+        <button ng-disabled="!model.protectedFieldsPanelModel.isRemoveEnabled" class="btn btn-default" ng-click="model.protectedFieldsPanelModel.remove()">{{ 'Remove' | translate }}</button>
+    </div>
+
+</form>

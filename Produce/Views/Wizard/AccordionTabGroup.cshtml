@@ -1,0 +1,71 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.TabGroupLayoutViewModel>
+@{
+    var index = -1;
+    var objectId = Model.TabGroup.TabGroupModel.TabGroupGuid.ToString();
+    var repeatPath = Model.RepeatPath;
+    var fragmentGuid = Model.TabGroup.WizardFragment.InstanceId.ToString();
+    var selectedIndex = Model.SelectedTabIndex; // Force initial selection
+}
+<div data-fragmentguid="@(fragmentGuid)" data-objectid="@(objectId)" data-repeatpath="@(repeatPath)" class="@(Model.TabGroup.TabGroupModel.CssStyle)">
+    @foreach (Intelledox.QAWizard.TabPage tab in Model.TabGroup.TabPages)
+    {
+        index++;
+
+        if (tab.IsVisible)
+        {
+            var changeTab = index;
+            var buttonClass = "AccordionExpandButton";
+            var buttonText = Intelledox.Produce.Resources.Strings.Expand;
+            var divStyle = "accordion";
+            var valid = true;
+            if (Model.TabGroup.ActivePage == index)
+            {
+                changeTab = -1;
+                buttonClass = "AccordionContractButton";
+                buttonText = Intelledox.Produce.Resources.Strings.Contract;
+                divStyle += " accordionExpanded";
+            }
+
+            if (Model.TabGroup.MaximumVisitedTabIndex > index || Model.TabGroup.WizardFragment.WizardSession.MaximumVisitedPageIndex > Model.TabGroup.WizardFragment.WizardSession.CurrentPageIndex)
+            {
+                if (tab.Validate(true))
+                {
+                    divStyle += " accordionValid";
+                }
+                else
+                {
+                    divStyle += " accordionInvalid";
+                    valid = false;
+                }
+            }
+
+            <div class="@divStyle @Html.Raw(Model.LogInteractions ? "analyticslog" : "")"
+                 onclick="wiz.tabClick($(this), '@changeTab');@Html.Raw(Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" +  HttpUtility.JavaScriptStringEncode(String.IsNullOrWhiteSpace(tab.TabPageModel.Title) ? Intelledox.Produce.Resources.Strings.TabPage : tab.TabPageModel.Title) + "', 'tabSelectAccordion'" + ");" : "")return false;" >
+                <span class="@buttonClass"><span class="sr-only">@buttonText</span></span>
+                <a href="#void" id="@(IdHelper.IdFor(Model.TabGroup) + "_" + index.ToString())">@(String.IsNullOrWhiteSpace(tab.TabPageModel.Title) ? Intelledox.Produce.Resources.Strings.TabPage : tab.TabPageModel.Title)</a>
+
+                @if (Model.TabGroup.MaximumVisitedTabIndex > index || Model.TabGroup.WizardFragment.WizardSession.MaximumVisitedPageIndex > Model.TabGroup.WizardFragment.WizardSession.CurrentPageIndex)
+                {
+                    if (valid)
+                    {
+                        <span class="ValidatedTab"><span class="sr-only">@Intelledox.Produce.Resources.Strings.Validated</span></span>
+                    }
+                    else
+                    {
+                        <span class="InvalidTab"><span class="sr-only">@Intelledox.Produce.Resources.Strings.Invalid</span></span>
+                    }
+                }
+
+            </div>
+
+            if (Model.TabGroup.ActivePage == index)
+            {
+                <div class="ExpandedAccordion">
+                    @{Html.RenderNode(Model.TabGroup.TabPages[Model.TabGroup.ActivePage]);}
+                </div>
+            }
+        }
+    }
+</div>

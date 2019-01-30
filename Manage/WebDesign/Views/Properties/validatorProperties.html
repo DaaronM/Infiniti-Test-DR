@@ -1,0 +1,62 @@
+﻿<hr />
+
+<!-- Question -->
+<div class="form-group">
+    <label for="validQuestion" class="col-sm-4 control-label">{{ ::'Question' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="validQuestion" class="form-control input-sm"
+                ng-options="option.QuestionGuid as option.Text for option in model.propertiesPanelModel.availableQuestions"
+                ng-model="model.propertiesPanelModel.selectedQuestionGuid"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isAnswerVisible">
+    <label for="validAnswer" class="col-sm-4 control-label">{{ ::'Answer' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="validAnswer" class="form-control input-sm"
+                ng-options="option.AnswerGuid as option.Name for option in model.propertiesPanelModel.availableAnswers"
+                ng-model="model.propertiesPanelModel.selectedAnswerGuid"></select>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="validationType" class="col-sm-4 control-label">{{ ::'Type' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="validationType" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableValidationTypes"
+                ng-model="model.propertiesPanelModel.selectedValidationType"></select>
+    </div>
+</div>
+<div class="form-group">
+    <label for="validComparison" class="col-sm-4 control-label">{{ ::'Comparison' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="validComparison" class="form-control input-sm"
+                ng-disabled="!model.propertiesPanelModel.isComparisonTypeEnabled"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableComparisons"
+                ng-model="model.propertiesPanelModel.selectedComparison"></select>
+    </div>
+</div>
+<div class="form-group">
+    <label for="comparisonExpression" class="col-sm-4 control-label">{{ ::'Expression' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <textarea id="comparisonExpression" class="form-control input-sm" rows="4"
+                      ng-model="model.propertiesPanelModel.expression"
+                      ng-disabled="!model.propertiesPanelModel.isExpressionEnabled"></textarea>
+            <span class="input-group-btn" style="vertical-align:top">
+                <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                        ng-disabled="!model.propertiesPanelModel.isExpressionEnabled"
+                        ng-click="model.propertiesPanelModel.pickRef('comparisonExpression')"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15"/>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="form-group text-center">
+    <button ng-disabled="!model.propertiesPanelModel.isAddEnabled" class="btn btn-default" ng-click="model.propertiesPanelModel.add()">{{ 'Add' | translate }}</button>
+    <button ng-disabled="!model.propertiesPanelModel.isUpdateEnabled" class="btn btn-default" ng-click="model.propertiesPanelModel.update()">{{ 'Update' | translate }}</button>
+    <button ng-disabled="!model.propertiesPanelModel.isRemoveEnabled" class="btn btn-default" ng-click="model.propertiesPanelModel.remove()">{{ 'Remove' | translate }}</button>
+</div>
+<clause-designer model="model.propertiesPanelModel.clauseDesignerModel"></clause-designer>

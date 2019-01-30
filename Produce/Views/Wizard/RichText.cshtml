@@ -1,0 +1,100 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.RichTextQuestionViewModel>
+@{
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+    var qid = IdHelper.IdFor(Model.Question);
+    var isDirtyId = "isDirty" + qid;
+}
+@if (!Model.Question.IsEditable && (Model.Question.Value == null || String.IsNullOrEmpty(Model.Question.Value.ToString())))
+{
+    <div id="@qid" class="label notAnswered">@Intelledox.Produce.Resources.Strings.NotAnswered</div>
+}
+else
+{
+    <div class="@Html.Raw(Model.Question.IsMandatory ? "mce-required" : "")">
+<textarea id="@qid" name="@qid" class="field tinyMCE" style="width:99%;display:none" rows="@Model.TextRows.ToString()" cols="20"
+          @Html.Raw(Model.Question.HasValidationErrors() ? "aria-invalid=\"true\" aria-describedby=\"error_" + qid + "\"" : "")>
+    @Model.HtmlValue
+</textarea>
+        </div>
+    <input type="hidden" id="@isDirtyId" name="@isDirtyId" value="false" />
+    @Html.DisplayValidation(Model.Question.LastValidationMessage, qid)
+    <script type="text/javascript">
+        wiz.addScript('richTextJs', '@Url.Content("~/scripts/tinymce/tinymce.min.js?v=4.2.6")').then(
+            function () {
+    setTimeout(function () {
+        $('#@qid').show();
+
+        tinyMCE.init({
+            selector: "#@qid",
+            theme: "modern",
+            skin: "lightgray",
+            readonly : @((!Model.Question.IsEditable).ToString().ToLowerInvariant()),
+            content_css: "@Url.Content("~/Content/tinymce.css")",
+            plugins:"advlist,spellchecker,table,paste,link,charmap,colorpicker,noneditable",
+            menubar: false,
+            statusbar: false,
+            toolbar: [
+                "@(Model.Question.RichTextQuestionModel.ShowStyles ? "styleselect,|," : "")bold,italic,underline,strikethrough,|,alignleft,aligncenter,alignright,alignjustify@(Model.Question.RichTextQuestionModel.ShowSpellCheck && Model.ServerSpellCheck ? ",|,spellchecker" : "")",
+                "@(Model.ShowCopyAndPaste ? "cut,copy,paste,pastetext,|," : "")@(Model.Question.RichTextQuestionModel.ShowBullets ? "bullist,numlist,outdent,indent,|," : "")undo,redo,|,subscript,superscript,|,charmap,protectedFields",
+                "@(Model.Question.RichTextQuestionModel.ShowHyperlink ? "link,unlink,|," : "")@(Model.Question.RichTextQuestionModel.ShowTables ? "table" : "")"
+            ],
+            advlist_number_styles: "default,lower-alpha,lower-roman,upper-alpha,upper-roman",
+            width:"99%",
+            height:"@(14 * Model.TextRows)",
+            language:"@Model.Language",
+            browser_spellcheck: true,
+            spellchecker_languages: "+English=en-us",
+            add_form_submit_trigger: false,
+            setup: function(editor) {
+                editor.on('change', function (e) { editor.save(); document.getElementById('@isDirtyId').value = 'true'; });
+
+                @if (Model.LogInteractions) {
+                    @Html.Raw("editor.on('focus', function(e) { wiz.dataAnalyticsFocus('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "');} );")
+                }
+                @Html.Raw(Model.ProtectedFieldsButton())
+                @if (Model.Question.IsRealtimeParentQuestion || Model.LogInteractions)
+                {
+                    string onblur = "editor.on('blur', function() {";
+                    if (Model.Question.IsRealtimeParentQuestion)
+                    {
+                        onblur += " if (document.getElementById('" + isDirtyId + "').value == 'true') { wiz.delayPostback(); } ";
+                    }
+                    if (Model.LogInteractions)
+                    {
+                        onblur += "wiz.dataAnalyticsBlur();";
+                    }
+                    onblur += "});";
+                    @Html.Raw(onblur)
+                }                
+            },
+            @Html.Raw(Model.ServerSpellCheck ? "   spellchecker_rpc_url:'" + Url.Content("~/api/v1/spellcheck") + "', " : "")
+            style_formats: [@{
+                for (var i = 0; i < Model.Styles.Count(); i++)
+                    {
+                        var wordStyle = Model.Styles[i];
+                     @Html.Raw("{title:'" +
+                         HttpUtility.JavaScriptStringEncode(wordStyle.Title) +
+                         "', inline:'span', styles:{'font-size': '" +
+                         (wordStyle.Size * 96.0 / 72.0).ToString("0.0", System.Globalization.CultureInfo.InvariantCulture) +
+                         "px', 'font-family':'" +
+                         HttpUtility.JavaScriptStringEncode(wordStyle.FontName) +
+                         "', 'color':'" +
+                         Model.ConvertColour(wordStyle.FontColour) + "'" +
+                         (wordStyle.Bold ? ", 'font-weight':'bold'" : "") +
+                         (wordStyle.Italic ? ", 'font-style':'italic'" : "") +
+                         (wordStyle.Underline ? ", 'text-decoration':'underline'" : "") +
+                         "}}");
+                        if (i < Model.Styles.Count() - 1)
+                        {
+                            @:,
+                            }
+                    }
+                }],
+            paste_data_images: true
+        })
+    }, 1)
+    });
+    </script>
+    }

@@ -1,0 +1,39 @@
+﻿<div class="{{node.CssStyle}}">
+    <div class="ls"
+         ng-class="{ 'lsrepeat': node.IsRepeated }"
+         ng-click="onNodeSelected({ node: node}); $event.stopPropagation()"
+         editor-droppable="node" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)">
+        <h3 class="lsh" ng-if="node.Title" ng-bind-html="node.Title | infinitiHtml"></h3>
+        <div class="lsd" ng-if="node.Description" ng-bind-html="node.Description | infinitiHtml"></div>
+        <table class="NoPadding NoSpacing NoBorder" width="100%" role="presentation">
+            <tr>
+                <td class="lccell lccellselect" ng-if="node.IsRepeated"></td>
+                <td class="lccell" ng-repeat="column in node.Children" ng-style="column.Width > 0 && {'width': column.Width + (column.WidthType === 1 ? 'px' : '%')}"
+                    ng-click="onNodeSelected({ node: column }); $event.stopPropagation()"
+                    editor-droppable="column" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)">
+                    <h3 class="lch" ng-if="column.Title">
+                        <span ng-bind-html="column.Title | infinitiHtml"></span>
+                        <span class="helpIcon help-object" ng-show="column.HelpText"><span class="sr-only">Help</span></span>
+                    </h3>
+                </td>
+            </tr>
+            <tr>
+                <td class="lccell lccellselect" ng-if="node.IsRepeated"></td>
+                <td class="lccell"
+                    ng-repeat="column in node.Children"
+                    editor-droppable="column" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)">
+                    <div class="lc {{column.CssStyle}}">
+                        <div ng-repeat="child in column.Children">
+                            <preview-node node="child"
+                                          on-node-selected="topSelectedFunc(node)" top-selected-func="topSelectedFunc"
+                                          on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)" top-editor-drop-func="topEditorDropFunc"></preview-node>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="lscommand" ng-if="node.IsRepeated">
+            &nbsp;
+        </div>
+    </div>
+</div>

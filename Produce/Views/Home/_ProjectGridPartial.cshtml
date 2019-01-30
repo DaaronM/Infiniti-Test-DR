@@ -1,0 +1,51 @@
+﻿@using Intelledox.Produce
+@model Intelledox.Produce.HomeViewModel
+<div id="up" class="row-fluid">
+    @if (Model.Projects.Count > 0)
+    {
+        var grid = new WebGrid(source: Model.Projects, canPage: true, rowsPerPage: 20, ajaxUpdateContainerId: "up", ajaxUpdateCallback: "showGroups");
+
+        @grid.Table(
+                displayHeader: false,
+                tableStyle: "table table-striped table-condensed",
+                htmlAttributes: new { id = "grdTemplates" },
+                fillEmptyRows: false,
+                columns: grid.Columns(
+                    grid.Column(format: @<text>
+                        @if (item.ProjectGroupGuid == Guid.Empty)
+                        {
+                            <span class="isfolder">@item.Name</span>
+                        }
+                        else
+                        {
+                            <a href="~/wizard/@item.ProjectGroupGuid/" class="form-link">@item.Name</a>
+                        }
+                    </text>),
+                    grid.Column("HelpText")
+                )
+            )
+        <div class="paginationList">
+            @grid.PagerList(mode: WebGridPagerModes.Numeric | WebGridPagerModes.FirstLast,
+            firstText: Intelledox.Produce.Resources.Strings.First,
+            lastText: Intelledox.Produce.Resources.Strings.Last,
+            paginationStyle: "pagination")
+        </div>
+        <script type="text/javascript">
+            function showGroups() {
+                $('#grdTemplates .isfolder').parent().next().remove();
+                $('#grdTemplates .isfolder').parent().addClass('sub-head').prop('colspan', 2);
+            }
+            showGroups();
+        </script>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped table-condensed">
+            <tbody>
+                <tr>
+                    <td>@Intelledox.Produce.Resources.Strings.NoResults</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+</div>

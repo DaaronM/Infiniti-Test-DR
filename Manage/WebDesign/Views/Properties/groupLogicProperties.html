@@ -1,0 +1,40 @@
+﻿<ng-include src="'Views/Properties/mandatoryProperty.html?v=106882799234227327'"></ng-include>
+<div class="form-group">
+    <label for="selectionType" class="col-sm-4 control-label">{{ ::'SelectionType' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="selectionType" class="form-control input-sm"
+                ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.SelectionTypes"
+                ng-model="model.propertiesPanelModel.SelectionType"></select>
+    </div>
+</div>
+<div class="form-group">
+    <label for="displayType" class="col-sm-4 control-label">{{ ::'DisplayType' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="displayType" class="form-control input-sm"
+                ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.DisplayTypes"
+                ng-model="model.propertiesPanelModel.DisplayType"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.ShowDisplayDirection">
+    <label for="displayDirection" class="col-sm-4 control-label">{{ ::'DisplayDirection' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="displayDirection" class="form-control input-sm"
+                ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.DisplayDirections"
+                ng-model="model.propertiesPanelModel.DisplayDirection"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.ShowWatermark">
+    <label for="watermark" class="col-sm-4 control-label">{{ ::'Watermark' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input id="watermark" class="form-control input-sm" ng-model="model.propertiesPanelModel.Watermark" />
+            <span class="input-group-btn">
+                <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                        ng-click="model.propertiesPanelModel.pickWatermarkRef('watermark')"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15" />
+                </button>
+            </span>
+        </div>
+    </div>
+</div>

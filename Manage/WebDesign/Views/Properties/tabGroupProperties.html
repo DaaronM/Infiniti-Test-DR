@@ -1,0 +1,17 @@
+﻿<div class="prop-title">
+    {{ 'TabGroupPropertiesTitle' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.IsAccordion" />{{ ::'Accordion' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div>
+        <ng-include src="'Views/Properties/styleProperty.html?v=106882799234227327'"></ng-include>
+    </div>
+</form>

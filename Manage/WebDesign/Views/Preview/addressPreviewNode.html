@@ -1,0 +1,80 @@
+﻿<div>
+    <div class="radio">
+        <label>
+            <input type="radio" checked onclick="event.preventDefault();" />
+            {{'NewAddress'| translate }}
+        </label>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" onclick="event.preventDefault();" />
+            {{'ExistingAddress' | translate }}
+        </label>
+        <select class="form-control" disabled></select>
+    </div>
+    <br />
+    <label>
+        <input type="checkbox" onclick="event.preventDefault();" />
+        {{'AddtoAddressBook' | translate}}
+    </label>
+    <p></p>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#General" data-toggle="tab" onclick="event.preventDefault();">{{'General' | translate}}</a></li>
+        <li><a href="#Street" data-toggle="tab" onclick="event.preventDefault();">{{'StreetAddress' | translate}}</a></li>
+        <li><a href="#Postal" data-toggle="tab" onclick="event.preventDefault();">{{'PostalAddress' | translate}}</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'Prefix' | translate}}</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" onkeypress="event.preventDefault();" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FirstName' | translate}}</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" onkeypress="event.preventDefault();" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'LastName' | translate}}</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" onkeypress="event.preventDefault();" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'JobTitle' | translate}}</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" onkeypress="event.preventDefault();" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'Organisation' | translate}}</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" onkeypress="event.preventDefault();" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'PhoneNumber' | translate}}</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" onkeypress="event.preventDefault();" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'FaxNumber' | translate}}</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" onkeypress="event.preventDefault();" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{'Email' | translate}}</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" onkeypress="event.preventDefault();" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

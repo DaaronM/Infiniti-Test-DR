@@ -1,0 +1,17 @@
+﻿<div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.isRepeated" />{{ ::'RepeatWithADataSource' | translate }}
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isRepeated">
+    <label for="autoLogicRepeat" class="col-sm-4 control-label">{{ ::'DataQuestion' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="autoLogicRepeat" class="form-control input-sm"
+                ng-options="option.QuestionGuid as option.Text for option in model.propertiesPanelModel.availableQuestions"
+                ng-model="model.propertiesPanelModel.selectedQuestion"></select>
+    </div>
+</div>

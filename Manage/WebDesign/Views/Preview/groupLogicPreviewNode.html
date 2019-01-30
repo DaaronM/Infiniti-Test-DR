@@ -1,0 +1,78 @@
+﻿<select ng-if="node.DisplayType === 2" class="form-control watermarked select-watermark">
+    <option class="select-watermark">{{node.Watermark}}</option>
+    <option ng-repeat="answer in node.Answers">{{answer.DisplayText}}</option>
+</select>
+
+<div ng-if="node.DisplayType === 11 || node.DisplayType === 12" class="btn-group" data-toggle="buttons">
+    <label ng-repeat="answer in node.Answers" class="btn btn-primary" ng-class="{ 'active': answer.IsDefaultSelected || node.DefaultValue === answer.AnswerGuid }"
+           ng-click="onNodeSelected({ node: answer }); $event.stopPropagation()"
+           editor-droppable="answer" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)">
+        <input type="radio" autocomplete="off" onclick="event.preventDefault();" ng-checked="node.DefaultValue === answer.AnswerGuid" ng-if="node.DisplayType === 11" />
+        <input type="checkbox" autocomplete="off" onclick="event.preventDefault();" ng-checked="answer.IsDefaultSelected" ng-if="node.DisplayType === 12" />
+        <span ng-bind-html="answer.DisplayText | infinitiHtml"></span>
+    </label>
+</div>
+
+<div ng-if="node.DisplayType === 10" class="likert">
+    <div class="likert-line"><div /></div>
+    <div>
+        <div ng-repeat="answer in node.Answers" class="likert-section"
+             ng-click="onNodeSelected({ node: answer }); $event.stopPropagation()"
+             editor-droppable="answer" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)">
+            <div class="cover">&nbsp;</div>
+            <label>
+                <input type="radio" onclick="event.preventDefault();" ng-checked="node.DefaultValue === answer.AnswerGuid" /><br />
+                <span ng-bind-html="answer.DisplayText | infinitiHtml"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<div ng-if="node.DisplayType === 0 || node.DisplayType === 1">
+    <table ng-if="node.DisplayDirection === 2 || node.DisplayDirection === 3 || node.DisplayDirection === 4" class="NoBorder NoSpacing NoPadding" role="presentation">
+        <tr ng-repeat="index in node.Answers | divideLength:node.DisplayDirection">
+            <td ng-repeat="answer in node.Answers | limitFromTo:index:index + node.DisplayDirection"
+                ng-click="onNodeSelected({ node: answer }); $event.stopPropagation()"
+                editor-droppable="answer" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)"
+                style="padding-right:10px">
+                <div ng-if="node.DisplayType === 0"
+                     class="radio-inline">
+                    <label>
+                        <input type="radio" onclick="event.preventDefault();" ng-checked="node.DefaultValue === answer.AnswerGuid" />
+                        <span ng-bind-html="answer.DisplayText | infinitiHtml"></span>
+                    </label>
+                </div>
+
+                <div ng-if="node.DisplayType === 1"
+                     class="checkbox-inline">
+                    <label>
+                        <input type="checkbox" onclick="event.preventDefault();" ng-checked="answer.IsDefaultSelected" />
+                        <span ng-bind-html="answer.DisplayText | infinitiHtml"></span>
+                    </label>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div ng-if="node.DisplayType === 0 && (node.DisplayDirection === 0 || node.DisplayDirection === 1)"
+         ng-class="{ 'radio': node.DisplayDirection === 0, 'radio-inline': node.DisplayDirection === 1 }"
+         ng-repeat="answer in node.Answers"
+         ng-click="onNodeSelected({ node: answer }); $event.stopPropagation()"
+         editor-droppable="answer" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)">
+        <label>
+            <input type="radio" onclick="event.preventDefault();" ng-checked="node.DefaultValue === answer.AnswerGuid" />
+            <span ng-bind-html="answer.DisplayText | infinitiHtml"></span>
+        </label>
+    </div>
+
+    <div ng-if="node.DisplayType === 1 && (node.DisplayDirection === 0 || node.DisplayDirection === 1)"
+         ng-class="{ 'checkbox': node.DisplayDirection === 0, 'checkbox-inline': node.DisplayDirection === 1 }"
+         ng-repeat="answer in node.Answers"
+         ng-click="onNodeSelected({ node: answer }); $event.stopPropagation()"
+         editor-droppable="answer" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)">
+        <label>
+            <input type="checkbox" onclick="event.preventDefault();" ng-checked="answer.IsDefaultSelected" />
+            <span ng-bind-html="answer.DisplayText | infinitiHtml"></span>
+        </label>
+    </div>
+</div>

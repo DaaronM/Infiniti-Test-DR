@@ -1,0 +1,134 @@
+﻿{{ model.propertiesPanelModel.inputsPanelModel.frameTitle }}
+<div class="form-group">
+    <label for="availableElement" class="col-sm-4 control-label">{{ ::'Input' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="availableElement" class="form-control input-sm"
+                ng-options="option.value.routingElementTypeId as option.name for option in model.propertiesPanelModel.inputsPanelModel.availableInputs"
+                ng-model="model.propertiesPanelModel.inputsPanelModel.selectedAvailableInput"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.inputsPanelModel.isKeyVisible">
+    <label for="inputKey" class="col-sm-4 control-label">{{ ::'Name' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="inputKey" class="form-control input-sm" ng-model="model.propertiesPanelModel.inputsPanelModel.key" />
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.inputsPanelModel.isTypeVisible">
+    <label for="availableType" class="col-sm-4 control-label">{{ ::'Type' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="availableType" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.inputsPanelModel.availableTypes"
+                ng-model="model.propertiesPanelModel.inputsPanelModel.selectedType"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.inputsPanelModel.isQuestionVisible">
+    <label for="inputQuestion" class="col-sm-4 control-label">{{ model.propertiesPanelModel.inputsPanelModel.questionTitle }}</label>
+    <div class="col-sm-8">
+        <select id="inputQuestion" class="form-control input-sm"
+                ng-options="option.QuestionGuid as option.Text for option in model.propertiesPanelModel.inputsPanelModel.availableQuestions"
+                ng-model="model.propertiesPanelModel.inputsPanelModel.selectedQuestionGuid"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.inputsPanelModel.isQuestionVisible">
+    <label for="inputAnswer" class="col-sm-4 control-label">{{ model.propertiesPanelModel.inputsPanelModel.answerTitle }}</label>
+    <div class="col-sm-8">
+        <select id="inputAnswer" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.inputsPanelModel.availableAnswers"
+                ng-model="model.propertiesPanelModel.inputsPanelModel.selectedAnswerGuidOrField"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.inputsPanelModel.isRepeatSourcesVisible">
+    <label for="inputRepeat" class="col-sm-4 control-label">{{ ::'Repeat' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="inputRepeat" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.inputsPanelModel.availableRepeatSources"
+                ng-model="model.propertiesPanelModel.inputsPanelModel.selectedInputRepeat"></select>
+    </div>
+</div>
+
+<div class="form-group" ng-if="model.propertiesPanelModel.inputsPanelModel.isFragmentVisible">
+    <label for="conditionFragment" class="col-sm-4 control-label">{{ ::'Fragment' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="conditionFragment" class="form-control input-sm"
+                ng-options="option.ObjectId as option.Name for option in model.propertiesPanelModel.inputsPanelModel.availableFragments"
+                ng-model="model.propertiesPanelModel.inputsPanelModel.selectedFragment"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.inputsPanelModel.isFragmentOutputVisible">
+    <label for="conditionFragmentOutput" class="col-sm-4 control-label">{{ ::'Output' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <select id="conditionFragmentOutput" class="form-control input-sm"
+                    ng-options="option.RoutingOptionGuid as option.Name for option in model.propertiesPanelModel.inputsPanelModel.availableFragmentOutputs"
+                    ng-model="model.propertiesPanelModel.inputsPanelModel.selectedFragmentOutput"></select>
+            <span class="input-group-btn">
+                <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                        ng-click="model.propertiesPanelModel.inputsPanelModel.pickRef()"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15" />
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="form-group" ng-if="model.propertiesPanelModel.inputsPanelModel.isCurrentProjectAvailableInputsVisible">
+    <label for="inputCurrentProject" class="col-sm-4 control-label">{{ ::'Input' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="inputCurrentProject" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.inputsPanelModel.availableCurrentProjectInputs"
+                ng-model="model.propertiesPanelModel.inputsPanelModel.selectedCurrentProjectAvailableInput"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.inputsPanelModel.isTextVisible">
+    <label for="inputExpression" class="col-sm-4 control-label">{{ ::'TextValue' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <textarea id="inputExpression" class="form-control input-sm" rows="4"
+                      ng-model="model.propertiesPanelModel.inputsPanelModel.textValue"></textarea>
+            <span class="input-group-btn" style="vertical-align:top">
+                <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                        ng-click="model.propertiesPanelModel.inputsPanelModel.pickTextValueRef('inputExpression')"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15" />
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.inputsPanelModel.isTypeBoolVisible">
+    <label for="inputBool" class="col-sm-4 control-label">{{ 'Value'|translate }}</label>
+    <div class="col-sm-8">
+        <input id="inputBool" type="checkbox"
+               ng-model="model.propertiesPanelModel.inputsPanelModel.typeValueBool" />
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.inputsPanelModel.isTypeValuesVisible">
+    <label for="inputValue" class="col-sm-4 control-label">{{ 'Value'|translate }}</label>
+    <div class="col-sm-8">
+        <select id="inputValue" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.inputsPanelModel.availableValues"
+                ng-model="model.propertiesPanelModel.inputsPanelModel.typeValue"></select>
+    </div>
+</div>
+
+<div class="form-group text-center">
+    <button ng-disabled="!model.propertiesPanelModel.inputsPanelModel.isAddEnabled" class="btn btn-default" ng-click="model.propertiesPanelModel.inputsPanelModel.add()">{{ 'Add' | translate }}</button>
+    <button ng-disabled="!model.propertiesPanelModel.inputsPanelModel.isUpdateEnabled" class="btn btn-default" ng-click="model.propertiesPanelModel.inputsPanelModel.update()">{{ 'Update' | translate }}</button>
+    <button ng-disabled="!model.propertiesPanelModel.inputsPanelModel.isRemoveEnabled" class="btn btn-default" ng-click="model.propertiesPanelModel.inputsPanelModel.remove()">{{ 'Remove' | translate }}</button>
+</div>
+
+<div id="inputs-section">
+    <div class="tool-bar tool-header">
+        <span>{{ 'Inputs' | translate }}</span>
+        <button title="{{ 'MoveUpGroup' | translate }}" ng-click="model.propertiesPanelModel.inputsPanelModel.moveUp()" class="tool-btn">
+            <img src="Images/moveUp.png" />
+        </button>
+        <button title="{{ 'MoveDownGroup' | translate }}" ng-click="model.propertiesPanelModel.inputsPanelModel.moveDown()" class="tool-btn">
+            <img src="Images/moveDown.png" />
+        </button>
+    </div>
+    <div ng-repeat="node in model.propertiesPanelModel.inputsPanelModel.inputsTreeview.nodes" class="root-node">
+        <tree-node node="node"></tree-node>
+    </div>
+</div>

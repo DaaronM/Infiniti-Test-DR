@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FormatWith</name>
+    </assembly>
+    <members>
+        <member name="M:FormatWith.FormatHelpers.ProcessTokens(System.Collections.Generic.IEnumerable{FormatWith.FormatToken},System.Collections.Generic.IDictionary{System.String,System.Object},FormatWith.MissingKeyBehaviour,System.String)">
+            <summary>
+            Processes a list of format tokens into a string
+            </summary>
+            <param name="tokens">List of tokens to turn into a string</param>
+            <param name="replacements">An <see cref="!:IDictionary"/> with keys and values to inject into the formatted result</param>
+            <param name="missingKeyBehaviour">The behaviour to use when the format string contains a parameter that is not present in the lookup dictionary</param>
+            <param name="fallbackReplacementValue">When the <see cref="F:FormatWith.MissingKeyBehaviour.ReplaceWithFallback"/> is specified, this string is used as a fallback replacement value when the parameter is present in the lookup dictionary.</param>
+            <returns>The processed result of joining the tokens with the replacement dictionary.</returns>
+        </member>
+        <member name="M:FormatWith.FormatHelpers.ProcessTokens(System.Collections.Generic.IEnumerable{FormatWith.FormatToken},System.Action{FormatWith.FormatToken,System.Text.StringBuilder})">
+            <summary>
+            Processes a list of format tokens into a string
+            </summary>
+            <param name="tokens">List of tokens to turn into a string</param>
+            <param name="parameterHandler">The handler for parameters. The handler is fed all parameters sequentially, and modifies the StringBuilder accordingly.</param>
+        </member>
+        <member name="M:FormatWith.FormatHelpers.Tokenize(System.String,System.Char,System.Char)">
+            <summary>
+            Tokenizes a named format string into a list of text and parameter tokens for later processing.
+            </summary>
+            <param name="formatString">The format string, containing keys like {foo}</param>
+            <param name="openBraceChar">The character used to begin parameters</param>
+            <param name="closeBraceChar">The character used to end parameters</param>
+            <returns>A list of text and parameter tokens representing the input format string</returns>
+        </member>
+        <member name="M:FormatWith.FormatStringExtensions.FormatWith(System.String,System.Object,FormatWith.MissingKeyBehaviour,System.String,System.Char,System.Char)">
+            <summary>
+            Extension method that replaces keys in a string with the values of matching object properties.
+            </summary>
+            <param name="formatString">The format string, containing keys like {foo}</param>
+            <param name="injectionObject">The object whose properties should be injected in the string</param>
+            <param name="missingKeyBehaviour">The behaviour to use when the format string contains a parameter that is not present in the lookup dictionary</param>
+            <param name="fallbackReplacementValue">When the <see cref="F:FormatWith.MissingKeyBehaviour.ReplaceWithFallback"/> is specified, this string is used as a fallback replacement value when the parameter is present in the lookup dictionary.</param>
+            <param name="openBraceChar">The character used to begin parameters</param>
+            <param name="closeBraceChar">The character used to end parameters</param>
+            <returns>A version of the formatString string with dictionary keys replaced by (formatted) key values</returns>
+        </member>
+        <member name="M:FormatWith.FormatStringExtensions.FormatWith(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},FormatWith.MissingKeyBehaviour,System.String,System.Char,System.Char)">
+            <summary>
+            Extension method that replaces keys in a string with the values of matching dictionary entries.
+            </summary>
+            <param name="formatString">The format string, containing keys like {foo}</param>
+            <param name="replacements">An <see cref="!:IDictionary"/> with keys and values to inject into the string</param>
+            <param name="missingKeyBehaviour">The behaviour to use when the format string contains a parameter that is not present in the lookup dictionary</param>
+            <param name="fallbackReplacementValue">When the <see cref="F:FormatWith.MissingKeyBehaviour.ReplaceWithFallback"/> is specified, this string is used as a fallback replacement value when the parameter is present in the lookup dictionary.</param>
+            <param name="openBraceChar">The character used to begin parameters</param>
+            <param name="closeBraceChar">The character used to end parameters</param>
+            <returns>A version of the formatString string with dictionary keys replaced by (formatted) key values</returns>
+        </member>
+        <member name="M:FormatWith.FormatStringExtensions.FormatWith(System.String,System.Action{FormatWith.FormatToken,System.Text.StringBuilder},System.Char,System.Char)">
+            <summary>
+            Extension method formats a string based on the hanlder specified.
+            </summary>
+            <param name="formatString">The format string, containing keys like {foo}</param>
+            <param name="replacements">An <see cref="!:IDictionary"/> with keys and values to inject into the string</param>
+            <param name="missingKeyBehaviour">The behaviour to use when the format string contains a parameter that is not present in the lookup dictionary</param>
+            <param name="fallbackReplacementValue">When the <see cref="F:FormatWith.MissingKeyBehaviour.ReplaceWithFallback"/> is specified, this string is used as a fallback replacement value when the parameter is present in the lookup dictionary.</param>
+            <param name="openBraceChar">The character used to begin parameters</param>
+            <param name="closeBraceChar">The character used to end parameters</param>
+            <returns>The resultant string</returns>
+        </member>
+        <member name="M:FormatWith.FormatStringExtensions.GetFormatParameters(System.String,System.Char,System.Char)">
+            <summary>
+            Gets a list of format parameters used within the format string.
+            </summary>
+            <param name="formatString">The format string to be parsed</param>
+            <param name="openBraceChar">The character used to begin parameters</param>
+            <param name="closeBraceChar">The character used to end parameters</param>
+            <returns></returns>
+        </member>
+        <member name="P:FormatWith.FormatToken.SourceString">
+            <summary>
+            The source format string that the token exists within
+            </summary>
+        </member>
+        <member name="P:FormatWith.FormatToken.StartIndex">
+            <summary>
+            The index of the start of the whole token, relative to the start of the source format string.
+            </summary>
+        </member>
+        <member name="P:FormatWith.FormatToken.Length">
+            <summary>
+            The length of the whole token.
+            </summary>
+        </member>
+        <member name="P:FormatWith.FormatToken.Text">
+            <summary>
+            Gets the complete token text. Note that this performs a substring operation and allocates a new string object. The string object is cached for all subsiquent requests.
+            </summary>
+        </member>
+        <member name="T:FormatWith.MissingKeyBehaviour">
+            <summary>
+            Behaviour to use when a parameter is given that has no key in the replacement dictionary
+            </summary>
+        </member>
+        <member name="F:FormatWith.MissingKeyBehaviour.ThrowException">
+            <summary>
+            Throws a FormatException 
+            </summary>
+        </member>
+        <member name="F:FormatWith.MissingKeyBehaviour.ReplaceWithFallback">
+            <summary>
+            Replaces the parameter with a given fallback string
+            </summary>
+        </member>
+        <member name="F:FormatWith.MissingKeyBehaviour.Ignore">
+            <summary>
+            Ignores the parameter, leaving it unprocessed in the output string
+            </summary>
+        </member>
+        <member name="M:FormatWith.ObjectHelpers.GetPropertiesDictionary(System.Object,System.Boolean)">
+            <summary>
+            Creates a Dictionary from an objects properties, with the Key being the property's
+            name and the Value being the properties value (of type object)
+            </summary>
+            <param name="properties">An object who's properties will be used</param>
+            <param name="recurse">Whether to recursively process enumerable parameters, adding them as extra keys.</param>
+            <returns>A <see cref="!:Dictionary"/> of property values</returns>
+        </member>
+        <member name="P:FormatWith.ParameterToken.KeyStartIndex">
+            <summary>
+            The index of the start of the parameter key
+            </summary>
+        </member>
+        <member name="P:FormatWith.ParameterToken.KeyLength">
+            <summary>
+            The length of the parameter key (excluding surrounding braces)
+            </summary>
+        </member>
+        <member name="P:FormatWith.ParameterToken.ParameterKey">
+            <summary>
+            Gets the parameter key (without the surrounding braces), as a string. Note that this performs a substring operation and allocates a new string object. The string object is cached for all subsiquent requests.
+            </summary>
+        </member>
+    </members>
+</doc>

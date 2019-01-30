@@ -1,0 +1,35 @@
+﻿@using Intelledox.Produce
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.CustomFieldViewModel>
+<div class="form-group">
+    <label for="@(Model.Prefix)Value" class="col-sm-2 control-label">@Model.Title</label>
+    <div class="col-sm-10">
+        @if (Model.ValidationType == Intelledox.Model.ValidationType.Text)
+        {
+            <input type="text" id="@(Model.Prefix)Value" name="@(Model.Prefix)Value" style="width:200px" class="form-control" value="@Model.Value" data-id="@Model.Id" disabled="@(!Model.IsEditable)" />
+        }
+        else if (Model.ValidationType == Intelledox.Model.ValidationType.Date)
+        {
+            <div class="input-group" style="width:200px">
+                <input type="text" id="@(Model.Prefix)Value" name="@(Model.Prefix)Value" value="@Model.Value" class="form-control" style="width:auto" disabled="@(!Model.IsEditable)" />
+                @if (Model.IsEditable)
+                {
+                    <label for="@(Model.Prefix)Value" class="input-group-addon btn-calendar" onclick="$('#@(Model.Prefix)Value').datepicker('show');">
+                        <img height="16" title="@Intelledox.Produce.Resources.Strings.SelectDate" alt="@Intelledox.Produce.Resources.Strings.SelectDate" class="datepicker-trigger" src="~/Images/IX_Calendar.svg" />
+                    </label>
+                    <script type="text/javascript">
+                        $('#@(Model.Prefix)Value').datepicker({
+                            showOn: 'none', changeMonth: true, changeYear: true, nextText: '>', prevText: '<', dayNames: [@Html.JQueryDate().DayNames], dayNamesMin: [@Html.JQueryDate().DayNamesMin],
+                            monthNamesShort: [@Html.JQueryDate().MonthNames], dateFormat: '@Html.JQueryDate().DatePattern',
+                            yearRange: 'c-100:c+100', constrainInput: false
+                        });</script>
+                }
+            </div>
+        }
+        else
+        {
+            <img id="@(Model.Prefix)Value" src="~/WizardSupport/GetImage?Thumb=1&DataGuid=@Model.Value" alt=" " data-id="@Model.Id" />
+            <input type="hidden" id="@(Model.Prefix)ValueHid" name="@(Model.Prefix)ValueHid" value="@Model.Value" data-id="@Model.Id" />
+        }
+        <br /><input type="hidden" id="@(Model.Prefix)hidCustomFieldID" name="@(Model.Prefix)hidCustomFieldID" value="@Model.Id" />
+    </div>
+</div>

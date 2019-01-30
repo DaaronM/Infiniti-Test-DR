@@ -1,0 +1,20 @@
+﻿<form class="form-horizontal" ng-submit="ok()">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title">Intelledox Infiniti</h4>
+    </div>
+    <div class="modal-body">
+        <p>
+            <div ng-bind-html="message"></div>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" id="delete-button">{{ ::'Delete' | translate }}</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">{{ ::'Cancel' | translate }}</button>
+    </div>
+</form>
+<script>
+    setTimeout(function() {
+        document.getElementById('delete-button').focus();
+    }, 500);
+</script>

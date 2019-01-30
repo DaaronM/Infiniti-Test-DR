@@ -1,0 +1,52 @@
+﻿<ng-include src="'Views/Properties/documentFormatProperty.html?v=106882799234227327'"></ng-include>
+<div class="form-group">
+    <label for="dataField" class="col-sm-4 control-label">{{ ::'DataField' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="dataField" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableFields"
+                ng-model="model.propertiesPanelModel.dataField"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isFormulaVisible">
+    <label for="formula" class="col-sm-4 control-label">{{ ::'Formula' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <div id="formula"
+                 ng-model="model.propertiesPanelModel.formula"
+                 ui-ace="{
+                 useWrapMode:true,
+                 showGutter:false,
+                 theme:'infiniti',
+                 mode:'infiniti',
+                 onLoad: model.propertiesPanelModel.onEditorLoad(),
+                 advanced: {
+                    enableSnippets: false,
+                    enableBasicAutocompletion: true,
+                    enableLiveAutocompletion: true,
+                    tabSize: 0
+                  }
+                 }"></div>
+
+            <span class="input-group-btn" style="vertical-align:top">
+                <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                        ng-click="model.propertiesPanelModel.pickAceRef('formula')"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15" />
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isConvertVisible">
+    <label for="dataConvert" class="col-sm-4 control-label">{{ ::'DataConvert' | translate }}</label>
+    <div class="col-sm-4">
+        <select id="dataConvert" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableConverts"
+                ng-model="model.propertiesPanelModel.convertType"></select>
+    </div>
+    <label for="pattern" class="col-sm-2 control-label" ng-if="model.propertiesPanelModel.isConvertPatternVisible">{{ ::'Pattern' | translate }}</label>
+    <div class="col-sm-4" ng-if="model.propertiesPanelModel.isConvertPatternVisible">
+        <input id="pattern" class="form-control input-sm" ng-model="model.propertiesPanelModel.convertPattern" />
+    </div>
+</div>
+<ng-include ng-if="model.propertiesPanelModel.isConvertVisible && model.propertiesPanelModel.isImagePropertiesVisible" src="'Views/Properties/imageProperties.html?v=106882799234227327'"></ng-include>

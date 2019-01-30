@@ -1,0 +1,44 @@
+﻿<div class="prop-title">
+    {{ 'PageProperties' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="pageName" class="col-sm-4 control-label">{{ ::'PageTitle' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input id="pageName" ng-model="model.propertiesPanelModel.name" class="form-control input-sm f2-rename"
+                       ng-focus="model.highlightText('pageName')" xng-focus="model.hasDefaultText('pageName')" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                            ng-click="model.propertiesPanelModel.pickTitleRef('pageName')"
+                            ng-class="{'active': model.treeView.isInPickMode }">
+                        <img src="Images/refPick.svg" alt="" height="15" />
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div ng-show="model.propertiesPanelModel.canRepeat">
+        <ng-include src="'Views/Properties/repeatProperty.html?v=106882799234227327'"></ng-include>
+    </div>
+    <div ng-show="model.propertiesPanelModel.repeatModel.isRepeated">
+        <div class="form-group">
+            <label for="repeatTitle" class="col-sm-4 control-label">{{ ::'RepeatTitle' | translate }}</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <input id="repeatTitle" ng-model="model.propertiesPanelModel.repeatTitle" class="form-control input-sm" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                                ng-click="model.propertiesPanelModel.pickRepeatTitleRef('repeatTitle')"
+                                ng-class="{'active': model.treeView.isInPickMode }">
+                            <img src="Images/refPick.svg" alt="" height="15" />
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <ng-include src="'Views/Properties/styleProperty.html?v=106882799234227327'"></ng-include>
+    </div>
+</form>

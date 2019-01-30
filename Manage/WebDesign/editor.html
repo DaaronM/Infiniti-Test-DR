@@ -1,0 +1,456 @@
+﻿<!DOCTYPE html>
+<html ng-app="Design" ng-strict-di>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8,IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Infiniti Design</title>
+    <link rel="icon" type="image/x-icon" href="Content/design.ico" />
+    <script>
+        var iosDragDropShim = { enableEnterLeave: true }
+    </script>
+    <link href="../Content/bootstrap.min.css?v=337" rel="stylesheet" type="text/css" />
+    <link href="../Content/bootstrap-theme.min.css?v=337" rel="stylesheet" />
+    <link href="Content/Produce.css?v=106882799234227327" rel="stylesheet" />
+    <link href="Content/Site.css?v=106882799234227327" rel="stylesheet" />
+
+    <script src="../Scripts/jquery-3.1.1.js"></script>
+    <script src="../Scripts/bootstrap.min.js?v=337"></script>
+    <script src="../Scripts/angular.min.js?v=140"></script>
+    <script src="../Scripts/angular-translate.min.js"></script>
+    <script src="../Scripts/angular-translate-loader-static-files.min.js"></script>
+    <script src="../Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <link rel="stylesheet" href="../node_modules/angularjs-color-picker/dist/angularjs-color-picker.min.css" />
+    <link rel="stylesheet" href="../node_modules/angularjs-color-picker/dist/themes/angularjs-color-picker-bootstrap.min.css" />
+    <script src="../node_modules/tinycolor2/dist/tinycolor-min.js"></script>
+    <script src="../node_modules/angularjs-color-picker/dist/angularjs-color-picker.min.js"></script>
+    <script src="Content/QAWizardDesign/Strings.js?v=106882799234227327"></script>
+    <script src="scripts/app.js?v=106882799234227327"></script>
+    <script src="scripts/ios-drag-drop.js"></script>
+    <script src="scripts/Ace/ace-min.js"></script>
+    <script src="scripts/Ace/ext-language_tools.js"></script>
+    <script src="scripts/Ace/mode-infiniti.js"></script>
+    <script src="scripts/Ace/theme-infiniti.js"></script>
+    <script src="scripts/Ace/ui-ace.js?v=1"></script>
+    <script src="../Scripts/tinymce/tinymce.min.js"></script>
+    <script>
+        $(function () {
+
+            var $contextMenu = $("#contextMenu");
+            var hideMenu = function () {
+                $contextMenu.hide();
+                $("*").off("click", hideMenu);
+            };
+
+            $("body").on("contextmenu", "#treeview-section .tree-content", function (e) {
+                $(this).click();
+
+                var heightOfMenu = 230;
+                var spaceDown = $(window).scrollTop() + $(window).height() - (e.pageY + heightOfMenu);
+                if (spaceDown < 0) {
+                    $contextMenu.css({
+                        display: "block",
+                        left: e.pageX,
+                        top: e.pageY - heightOfMenu,
+                        'z-index': 1000
+                    });
+                } else {
+                    $contextMenu.css({
+                        display: "block",
+                        left: e.pageX,
+                        top: e.pageY,
+                        'z-index': 1000
+                    });
+                }
+                $("*").on('click', hideMenu);
+                return false;
+            });
+
+            $contextMenu.on("click", "a", hideMenu);
+
+        });
+    </script>
+</head>
+<body ng-controller="appCtrl">
+    <div class="header">
+        <div id="headerInner">
+            <button id="GoBack" ng-click="closeProject()" title="{{'Back'|translate}}">{{'Back'|translate}}</button>
+            <span ng-bind="model.projectName"></span>
+
+            <div id="ProjectOptions">
+                <button id="SaveProjectAs" ng-click="saveAs()" ng-disabled="model.wizard == null" title="{{'SaveProjectAs'|translate}}" value="{{'mnuFileSaveAs'|translate}}"></button>
+                <button id="SaveProject" ng-click="save()" ng-disabled="!model.wizChanged" title="{{'SaveProject'|translate}}" value="{{'mnuFileSave'|translate}}" accesskey="s"></button>
+                <img src="Images/Separator32.svg?v=3" id="ProjectSeparator" alt="|" height="32" width="10" />
+                <button ng-click="model.workflowSwitch()" id="Workflow" ng-show="model.isWorkflowAvailable" title="{{ 'Workflow' | translate }}" accesskey="w"></button>
+                <img src="Images/Separator32.svg?v=3" id="NavSeparator" alt="|" height="32" width="10" ng-show="model.isWorkflowAvailable" />
+                <button ng-click="model.editorRefreshLists()" id="RefreshLists" ng-show="model.wizard != null" title="{{ 'RefreshListsToolStripMenuItem' | translate }}"></button>
+                <button ng-click="model.projectProperties()" id="projectProperties" ng-show="model.wizard != null" title="{{ 'mnuSetProjectProperties' | translate }}"></button>
+                <button ng-click="model.validateProject()" id="ValidateProject" ng-show="model.wizard != null" title="{{ 'ValidateString' | translate }}"></button>
+                <button ng-click="model.editorFind()" id="Find" ng-show="model.wizard != null" title="{{ 'FindString' | translate }} / {{ 'mnuActionFindAndReplace' | translate }}" accesskey="f"></button>
+                <img src="Images/Separator32.svg?v=3" id="NavHelpSeparator" alt="|" height="32" width="10" ng-show="model.helpUrl" />
+                <button ng-click="model.help()" id="KBHelp" ng-show="model.helpUrl !== ''" title="{{ 'Help' | translate }}" accesskey="w"></button>
+            </div>
+            <div class="tree-title">
+                <div id="pageOptions">
+                    <a ng-if="!model.isWorkflowPage" ng-click="uiModel.showTreeView = true; uiModel.showPreview = false" id="treeView" title="{{ 'ShowTreeView' | translate }}"><span class="sr-only">{{ 'ShowTreeView' | translate }}</span></a>
+                    <a ng-if="!model.isWorkflowPage" ng-click="uiModel.showTreeView = false; uiModel.showPreview = true" id="pageView" title="{{ 'ShowPreview' | translate }}"><span class="sr-only">{{ 'ShowPreview' | translate }}</span></a>
+                    <a ng-if="!model.isWorkflowPage" ng-click="uiModel.showTreeView = true; uiModel.showPreview = true" id="treePageView" title="{{ 'ShowTreeViewAndPreview' | translate }}"><span class="sr-only">{{ 'ShowTreeViewAndPreview' | translate }}</span></a>
+                    <a ng-click="editorCopy()" ng-show="model.canCutCopy" id="optionCopy" title="{{ 'CopyMenu' | translate }}"><span class="sr-only">{{ 'CopyMenu' | translate }}</span></a>
+                    <a ng-click="editorCut()" ng-show="model.canCutCopy" id="optionCut" title="{{ 'CutMenu' | translate }}"><span class="sr-only">{{ 'CutMenu' | translate }}</span></a>
+                    <a ng-click="editorPaste()" ng-show="model.canPaste" id="optionPaste" title="{{ 'PasteString' | translate }}"><span class="sr-only">{{ 'PasteString' | translate }}</span></a>
+                    <a ng-click="editorDelete()" ng-show="model.canDeleteItem" id="optionDelete" title="{{ 'Delete' | translate }}"><span class="sr-only">{{ 'Delete' | translate }}</span></a>
+                    <a ng-if="!model.isWorkflowPage" ng-click="model.treeView.collapseAll()" id="collapseAll" title="{{ 'tbrMainCollapseAllToolTip' | translate }}"><span class="sr-only">{{ 'Collapse' | translate }}</span></a>
+                    <a ng-if="!model.isWorkflowPage" ng-click="model.treeView.expandAll()" id="expandAll" title="{{ 'tbrMainExpandAllToolTip' | translate }}"><span class="sr-only">{{ 'Expand' | translate }}</span></a>
+                    <button ng-click="model.toggleState()" ng-if="model.canToggleState" id="optionToggleState" title="{{ 'ToggleView' | translate }}" ng-class="{'active': model.isToggleStateOn}"><span class="sr-only">{{ 'ToggleView' | translate }}</span></button>
+                </div>
+            </div>
+        </div>
+        <div class="toolbox">
+            <div>
+                <div class="btn-group" ng-if="!model.isWorkflowPage">
+                    <label class="btn btn-primary btn-group-toolbar" ng-model="uiModel.toolboxSelection" uib-btn-radio="'|common|'" ng-bind="'Common'|translate"></label>
+                    <label class="btn btn-primary btn-group-toolbar" ng-model="uiModel.toolboxSelection" uib-btn-radio="'|layout|'" ng-bind="'Layout'|translate"></label>
+                    <label class="btn btn-primary btn-group-toolbar" ng-model="uiModel.toolboxSelection" uib-btn-radio="'|question|'" ng-bind="'Questions'|translate"></label>
+                    <label class="btn btn-primary btn-group-toolbar" ng-model="uiModel.toolboxSelection" uib-btn-radio="'|template|'" ng-bind="'Templates'|translate" ng-if="model.isTemplatesAvailable"></label>
+                    <label class="btn btn-primary btn-group-toolbar" ng-model="uiModel.toolboxSelection" uib-btn-radio="'|all|'" ng-bind="'All'|translate"></label>
+                </div>
+                <div class="btn-group" ng-if="model.isWorkflowPage">
+                    <label class="btn btn-primary btn-group-toolbar" ng-bind="'Workflow'|translate"></label>
+                </div>
+            </div>
+            <div class="toolbox-panel">
+                <div ng-if="!model.isWorkflowPage">
+                    <div toolbox-draggable doubleclick-to-add="model" ng-repeat="item in model.toolboxItems| filter:model.toolboxFilter(uiModel.toolboxSelection)" id="{{item.id}}" class="toolbox-item">
+                        <div class="tool-icon" ng-class="item.imageKey" ng-style="item.style"></div>
+                        <span ng-bind="item.name"></span>
+                    </div>
+                </div>
+                <div ng-if="model.isWorkflowPage">
+                    <div toolbox-draggable ng-repeat="item in model.workflowToolboxItems" id="{{item.id}}" class="toolbox-item">
+                        <div class="tool-icon" ng-class="item.imageKey" ng-style="item.style"></div>
+                        <span ng-bind="item.name"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contextMenu" class="dropdown clearfix">
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+            <li ng-if="model.canAddAnswer"><a ng-click="model.editorDrop('toolbox_misc.answer', model.treeView.selectedNode)" id="contextAddAnswer">{{ 'AddAnswer' | translate }}</a></li>
+            <li class="divider" ng-if="model.canAddAnswer"></li>
+            <li ng-class="{'disabled': !model.canCutCopy}"><a ng-click="model.canCutCopy && editorCopy()" id="contextCopy">{{ 'CopyMenu' | translate }}</a></li>
+            <li ng-class="{'disabled': !model.canCutCopy}"><a ng-click="model.canCutCopy && editorCut()" id="contextCut">{{ 'CutMenu' | translate }}</a></li>
+            <li ng-class="{'disabled': !model.canPaste}"><a ng-click="model.canPaste && editorPaste()" id="contextPaste">{{ 'PasteString' | translate }}</a></li>
+            <li ng-class="{'disabled': !model.canDeleteItem}"><a ng-click="model.canDeleteItem && editorDelete()" id="contextDelete">{{ 'Delete' | translate }}</a></li>
+            <li class="divider"></li>
+            <li><a ng-click="model.collapseSelected()" id="contextCollapse">{{ 'Collapse' | translate }}</a></li>
+            <li><a ng-click="model.expandSelected()" id="contextExpand">{{ 'Expand' | translate }}</a></li>
+        </ul>
+    </div>
+    <div class="col"
+         ng-if="(!model.isWorkflowPage && uiModel.showTreeView) || uiModel.tempShowTreeView"
+         ng-class="(uiModel.showTreeView || uiModel.tempShowTreeView) && uiModel.showPreview ? 'left' : 'left-full'"
+         ng-style="(uiModel.showTreeView || uiModel.tempShowTreeView) && uiModel.showPreview && { 'width': uiModel.leftPanelSize } || { 'right': uiModel.rightPanelSize }">
+        <div id="treeview-section" editor-droppable="null" on-editor-drop="editorDrop(mode, dropped, targetNode)">
+            <div ng-repeat="node in model.treeView.nodes" class="root-node">
+                <tree-node node="node" top-editor-drop-func="editorDrop"></tree-node>
+            </div>
+        </div>
+    </div>
+    <div class="col"
+         ng-if="model.isWorkflowPage || uiModel.showPreview"
+         ng-class="!model.isWorkflowPage && uiModel.showTreeView && uiModel.showPreview ? 'middle' : 'left-full'"
+         ng-style="!model.isWorkflowPage && uiModel.showTreeView && uiModel.showPreview && { 'left': uiModel.leftPanelSize, 'right': uiModel.rightPanelSize } || { 'right': uiModel.rightPanelSize }">
+        <select ng-if="!model.isWorkflowPage" ng-model="model.currentPage" ng-options="page.Name for page in model.displayPages" id="pageSelect"></select>
+        <div id="preview-section">
+            <div class="Group" id="QuestionsInner" style="vertical-align: top">
+                <div ng-if="!model.isFinishPage && !model.isWorkflowPage">
+                    <preview-node ng-if="model.currentPage" node="model.currentPage"
+                                  on-node-selected="nodeSelected(node)" top-selected-func="nodeSelected"
+                                  on-editor-drop="previewDrop(mode, dropped, targetNode)" top-editor-drop-func="editorDrop"></preview-node>
+                </div>
+                <div ng-if="model.isFinishPage" ng-include="'Views/Preview/answerFilePreviewNode.html?v=106882799234227327'"></div>
+                <div ng-if="model.isWorkflowPage" ng-include="'Views/Preview/workflowPreviewNode.html?v=106882799234227327'"></div>
+            </div>
+        </div>
+    </div>
+    <div class="right col"
+         ng-style="{ width: uiModel.rightPanelSize - 50 }">
+        <div ng-switch on="model.panelCode">
+            <div ng-switch-when="properties" ng-switch on="model.propertiesPanelCode" class="properties-panel">
+                <div ng-switch-when="page">
+                    <ng-include src="'Views/Properties/pageProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="question">
+                    <ng-include src="'Views/Properties/questionProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="answer">
+                    <ng-include src="'Views/Properties/answerProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="section">
+                    <ng-include src="'Views/Properties/sectionProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="column">
+                    <ng-include src="'Views/Properties/columnProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="tabGroup">
+                    <ng-include src="'Views/Properties/tabGroupProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="tabPage">
+                    <ng-include src="'Views/Properties/tabPageProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="answerFile">
+                    <ng-include src="'Views/Properties/answerFileProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="action">
+                    <ng-include src="'Views/Properties/actionProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="fragment">
+                    <ng-include src="'Views/Properties/fragmentProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="availableInput">
+                    <ng-include src="'Views/Properties/availableInputProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="fragmentOutput">
+                    <ng-include src="'Views/Properties/fragmentOutputProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="fragmentDocument">
+                    <ng-include src="'Views/Properties/fragmentDocumentProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="contentItem">
+                    <ng-include src="'Views/Properties/contentItemProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="workflowParallel">
+                    <ng-include src="'Views/Properties/workflowParallelProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="workflowState">
+                    <ng-include src="'Views/Properties/workflowStateProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="workflowTransition">
+                    <ng-include src="'Views/Properties/workflowTransitionProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="placeholder">
+                    <ng-include src="'Views/Properties/placeholderProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="template">
+                    <ng-include src="'Views/Properties/templateProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-when="escalation">
+                    <ng-include src="'Views/Properties/escalationProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+                <div ng-switch-default>
+                    <ng-include src="'Views/Properties/noProperties.html?v=106882799234227327'"></ng-include>
+                </div>
+            </div>
+
+            <div ng-switch-when="conditions" class="properties-panel">
+                <ng-include src="'Views/Properties/conditions.html?v=106882799234227327'"></ng-include>
+            </div>
+
+            <div ng-switch-when="validations" class="properties-panel">
+                <ng-include src="'Views/Properties/validations.html?v=106882799234227327'"></ng-include>
+            </div>
+
+            <div ng-switch-when="dataFilters" class="properties-panel">
+                <ng-include src="'Views/Properties/filters.html?v=106882799234227327'"></ng-include>
+            </div>
+
+            <div ng-switch-when="sorting" class="properties-panel">
+                <ng-include src="'Views/Properties/sorting.html?v=106882799234227327'"></ng-include>
+            </div>
+
+            <div ng-switch-when="displayFields" class="properties-panel">
+                <ng-include src="'Views/Properties/displayFields.html?v=106882799234227327'"></ng-include>
+            </div>
+
+            <div ng-switch-when="rules" class="properties-panel">
+                <ng-include src="'Views/Properties/rules.html?v=106882799234227327'"></ng-include>
+            </div>
+
+            <div ng-switch-when="actionDocuments" class="properties-panel">
+                <ng-include src="'Views/Properties/actionDocuments.html?v=106882799234227327'"></ng-include>
+            </div>
+
+            <div ng-switch-when="series" class="properties-panel">
+                <ng-include src="'Views/Properties/series.html?v=106882799234227327'"></ng-include>
+            </div>
+
+            <div ng-switch-when="answerFileOptions" class="properties-panel">
+                <ng-include src="'Views/Properties/answerFileOptions.html?v=106882799234227327'"></ng-include>
+            </div>
+
+            <div ng-switch-when="protectedFields" class="properties-panel">
+                <ng-include src="'Views/Properties/protectedFields.html?v=106882799234227327'"></ng-include>
+            </div>
+
+            <div ng-switch-when="projectProperties" class="properties-panel">
+                <ng-include src="'Views/Properties/projectProperties.html?v=106882799234227327'"></ng-include>
+            </div>
+
+            <div ng-switch-when="summarySettings" class="properties-panel">
+                <ng-include src="'Views/Properties/summarySettings.html?v=106882799234227327'"></ng-include>
+            </div>
+        </div>
+    </div>
+    <div id="panel-flyout" class="panel-flyout col" ng-switch on="model.flyoutPanelCode" properties-droppable="null">
+        <div ng-switch-when="placeholders" class="panel-flyout-inner">
+            <ng-include src="'Views/Flyouts/availablePlaceholders.html?v=106882799234227327'"></ng-include>
+        </div>
+        <div ng-switch-when="actions" class="panel-flyout-inner">
+            <ng-include src="'Views/Flyouts/availableActions.html?v=106882799234227327'"></ng-include>
+        </div>
+        <div ng-switch-when="actionsWorkflow" class="panel-flyout-inner">
+            <ng-include src="'Views/Flyouts/availableActions.html?v=106882799234227327'"></ng-include>
+        </div>
+        <div ng-switch-when="projectFragments" class="panel-flyout-inner">
+            <ng-include src="'Views/Flyouts/availableFragments.html?v=106882799234227327'"></ng-include>
+        </div>
+        <div ng-switch-when="contentItems" class="panel-flyout-inner">
+            <ng-include src="'Views/Flyouts/availableContentItems.html?v=106882799234227327'"></ng-include>
+        </div>
+        <div ng-switch-when="escalations" class="panel-flyout-inner">
+            <ng-include src="'Views/Flyouts/availableEscalations.html?v=106882799234227327'"></ng-include>
+        </div>
+    </div>
+    <div class="panel-select col">
+        <div>
+            <div class="selection-arrow">
+                <img src="Images/selection.png" ng-if="model.panelCode === 'properties'" />
+            </div>
+            <button ng-click="model.activatePanel('properties');" class="prop-btn prop-prop" title="{{'Properties'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.hasConditions">
+            <div class="selection-arrow">
+                <img src="Images/selection.png" ng-if="model.panelCode === 'conditions'" />
+            </div>
+            <button ng-click="model.activatePanel('conditions');" class="prop-btn prop-cond" title="{{'Conditions'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.hasProjectProperties">
+            <div class="selection-arrow">
+                <img src="Images/selection.png" ng-if="model.panelCode === 'projectProperties'" />
+            </div>
+            <button ng-click="model.activatePanel('projectProperties');" class="prop-btn prop-alter" title="{{'ProjectProperties'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.hasDataFilters">
+            <div class="selection-arrow">
+                <img src="Images/selection.png" ng-if="model.panelCode === 'dataFilters'" />
+            </div>
+            <button ng-click="model.activatePanel('dataFilters');" class="prop-btn prop-filt" title="{{'DataFilterTab'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.hasSorting">
+            <div class="selection-arrow">
+                <img src="Images/selection.png" ng-if="model.panelCode === 'sorting'" />
+            </div>
+            <button ng-click="model.activatePanel('sorting');" class="prop-btn prop-sort" title="{{'SortFields'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.hasDisplayFields">
+            <div class="selection-arrow">
+                <img src="Images/selection.png" ng-if="model.panelCode === 'displayFields'" />
+            </div>
+            <button ng-click="model.activatePanel('displayFields');" class="prop-btn prop-disp" title="{{'DisplayFields'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.hasValidations">
+            <div class="selection-arrow">
+                <img src="Images/selection.png" ng-if="model.panelCode === 'validations'" />
+            </div>
+            <button ng-click="model.activatePanel('validations');" class="prop-btn prop-val" title="{{'Validation'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.hasRules">
+            <div class="selection-arrow">
+                <img src="Images/selection.png" ng-if="model.panelCode === 'rules'" />
+            </div>
+            <button ng-click="model.activatePanel('rules');" class="prop-btn prop-rule" title="{{'Rules'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.hasActionDocuments">
+            <div class="selection-arrow">
+                <img src="Images/selection.png" ng-if="model.panelCode === 'actionDocuments'" />
+            </div>
+            <button ng-click="model.activatePanel('actionDocuments');" class="prop-btn prop-actdoc" title="{{'Documents'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.hasSeries">
+            <div class="selection-arrow">
+                <img src="Images/selection.png" ng-if="model.panelCode === 'series'" />
+            </div>
+            <button ng-click="model.activatePanel('series');" class="prop-btn prop-series" title="{{'Series'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.hasAnswerFileOptions">
+            <div class="selection-arrow">
+                <img src="Images/selection.png" ng-if="model.panelCode === 'answerFileOptions'" />
+            </div>
+            <button ng-click="model.activatePanel('answerFileOptions');" class="prop-btn prop-ans" title="{{'AnswerFileProperties'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.hasSummarySettings">
+            <div class="selection-arrow">
+                <img src="Images/selection.png" ng-if="model.panelCode === 'summarySettings'" />
+            </div>
+            <button ng-click="model.activatePanel('summarySettings');" class="prop-btn prop-sum" title="{{'Summary'|translate}}">
+            </button>
+        </div>
+
+        <hr />
+
+        <div ng-if="model.hasProtectedFields">
+            <button ng-click="model.activatePanel('protectedFields');" class="prop-btn prop-prot" title="{{'ProtectedFields'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.isPlaceholdersAvailable">
+            <button ng-click="model.activateFlyout('placeholders');" class="prop-btn prop-plac" title="{{'Placeholders'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.isProjectFragmentsAvailable">
+            <button ng-click="model.activateFlyout('projectFragments');" class="prop-btn prop-frag" title="{{'Fragment'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.isActionsAvailable">
+            <button ng-click="model.activateFlyout('actions');" class="prop-btn prop-act" title="{{'Actions'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.isContentItemsAvailable">
+            <button ng-click="model.activateFlyout('contentItems');" class="prop-btn prop-cont" title="{{'ContentItems'|translate}}">
+            </button>
+        </div>
+        <div ng-if="model.isEscalationsAvailable">
+            <button ng-click="model.activateFlyout('escalations');" class="prop-btn prop-esc" title="{{'Escalations'|translate}}">
+            </button>
+        </div>
+    </div>
+
+    <div id="found-results" ng-if="model.showFoundResults">
+        <div id="foundresults-title">
+            {{model.foundItemsTitle}}
+            <button title="{{'Close'|translate}}" class="close" ng-click="model.showFoundResults = false">
+                <img src="Images/close.png" alt="" />
+            </button>
+        </div>
+        <div style="height:100%;padding-top:28px;">
+            <div style="overflow-y:scroll;height:100%;">
+                <table style="width:100%" class="selection-grid">
+                    <tr>
+                        <th style="width:24px"></th>
+                        <th style="width:90px">{{'Type'|translate}}</th>
+                        <th>{{'Description'|translate}}</th>
+                    </tr>
+                    <tr ng-repeat="row in model.foundItems"
+                        ng-click="model.selectFoundItem(row)"
+                        ng-class="{'active': row.selected}">
+                        <td><div ng-class="row.icon"></div></td>
+                        <td>{{row.type}}</td>
+                        <td>{{row.message}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

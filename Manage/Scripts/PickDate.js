@@ -1,0 +1,1 @@
+function pickDate(page,dateControl){'use strict';window.open(page+'?src='+dateControl+'&SelDate='+document.getElementById(dateControl).value,'_blank','height=320, width=230, left=450, top=100, '+'location=no, menubar=no, resizable=yes, '+'scrollbars=no, titlebar=no, toolbar=no',true)}

@@ -1,0 +1,45 @@
+﻿@model Infiniti.MvcControllers.TemporaryUserLoginViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutSubpage.cshtml";
+}
+<!-- Version @Intelledox.Produce.General.GetVersion -->
+<form id="Form1" method="post" autocomplete="off">
+    @Html.AntiForgeryToken()
+    <span id="lblBefore">@Html.Raw(Infiniti.MvcControllers.ApplicationSettings.ThemeLoginBefore)</span>
+    <div id="divLogin" class="form-horizontal">
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+        <div id="divLoginMessage">@ViewBag.Message</div>
+        }
+        <div id="tblLogin">
+            <h3 class="login-title">@Intelledox.Produce.Resources.Strings.Login</h3>
+            <div class="form-group">
+                <label for="txtAccessCode" id="lblAccessCode" class="col-sm-3 control-label">@ViewBag.AccessCodeTitle</label>
+                <div class="col-sm-9">
+                    <input name="AccessCode" type="text" id="txtAccessCode" class="form-control" autofocus="autofocus" autocomplete="off" value="@Model.AccessCode" />
+                    @Html.ValidationMessage("AccessCode")
+                </div>
+            </div>
+            @if (!string.IsNullOrEmpty(ViewBag.EmailRequired))
+            {
+            <div class="form-group">
+                <label for="txtEmail" class="col-sm-3 control-label">@Intelledox.Produce.Resources.Strings.Email</label>
+                <div class="col-sm-9">
+                    <input name="Email" type="text" id="txtEmail" class="form-control" autocomplete="off" value="@Model.Email" />
+                    @Html.ValidationMessage("Email")
+                </div>
+            </div>
+            }
+
+            <div class="pull-right">
+                <input type="submit" value="@Intelledox.Produce.Resources.Strings.Login" id="btnSignIn" class="btn btn-primary btn-submit" />
+            </div>
+        </div>
+        <br /><br />
+        @if (!string.IsNullOrEmpty(ViewBag.ConfirmationMessage))
+        {
+        <div id="divConfirmMessage">@ViewBag.ConfirmationMessage</div>
+        }
+    </div>
+    <span id="lblAfter">@Html.Raw(Infiniti.MvcControllers.ApplicationSettings.ThemeLoginAfter)</span>
+</form>

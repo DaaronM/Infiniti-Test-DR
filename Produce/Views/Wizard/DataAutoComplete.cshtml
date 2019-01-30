@@ -1,0 +1,118 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.DataAutoCompleteQuestionViewModel>
+@{
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+    var qid = IdHelper.IdFor(Model.Question);
+    var questionModel = ((Intelledox.QAWizard.Design.DatasourceQuestion)Model.Question.QuestionModel);
+    var noResultsMessage = questionModel.NoResultsMessage;
+
+    var autoCompleteChange = string.Empty;
+    var mandCheck = "validate.checkMandatory('" + qid + "');";
+
+    if (Model.Question.IsRealtimeParentQuestion)
+    {
+        autoCompleteChange = "if (!wiz.pgReloaded) { wiz.delayPostback(); };";
+    }
+    else if (Model.Question.IsMandatory)
+    {
+        autoCompleteChange = mandCheck;
+    }
+
+    if (Model.Question.HasValidationErrors())
+    {
+        Model.Question.Validate();
+    }
+}
+
+<script type="text/javascript">
+    wiz.pgReloaded = false;
+
+    $.ajaxSetup({ cache: false });
+    $(function () {
+        $("#@qid").autocomplete({
+            source: function (request, response) {
+                var url = "@Url.Content("~/")data/autoComplete@(Html.Raw(questionModel.HasUserEnteredFilters ? "UserEnteredToDataFilter" : ""))?fragmentGuid=@Model.Question.WizardFragment.InstanceId.ToString()&QuestionId=@Model.Question.QuestionGuid.ToString()&repeatPath=@Model.RepeatPath&logGuid=@Model.Question.WizardFragment.WizardSession.ProjectLog.ToString()&term=" + encodeURIComponent(request['term']);
+                if (wiz.isNative) {
+                    NativeFunc("doGetUrl", url, function (data) {
+                        response(JSON.parse(data));
+                    });
+                } else {
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        success: function (data) {
+                            response(data);
+                        },
+                        error: function (data) {
+                            response(data);
+                        }
+                    })
+                }
+            }
+            @Html.Raw(Model.Question.IsRealtimeParentQuestion ? ",select: function(event,ui) {" + (questionModel.HasUserEnteredFilters ? "$(\"#" + qid + "_Original\").val(\"dirty\");" : "") + "wiz.pgReloaded=true; wiz.delayPostback();}" : (questionModel.HasUserEnteredFilters ? ",change: function (event, ui) {$(\"#" + qid + "_Original\").val(\"dirty\");}" : "")),
+            open: function () { $('#@qid').autocomplete('widget').width($("#@qid").width()); },
+            appendTo: "#@(qid)_autoComplete",
+            response: function (event, ui) {
+                if ('@(Html.Raw(HttpUtility.JavaScriptStringEncode(noResultsMessage)))'.length > 0 && ui.content.length === 0) {
+                    $('#@(qid)_Message').text('@(Html.Raw(HttpUtility.JavaScriptStringEncode(noResultsMessage)))'.replace(/\[userenteredfilter\]/ig, $("#@qid").val()));
+                    $('#@(qid)_Message').attr('style', 'display:inline;');
+                    $('#@(qid)').attr('aria-describedby', '@(qid)_Message');
+                } else {
+                    $('#@(qid)_Message').empty();
+                    $('#@(qid)_Message').attr('style', 'display:none;');
+                    $('#@(qid)').removeAttr('aria-describedby');
+                }
+            },
+            change: function () {
+                $('#@(qid)_Message').empty();
+                $('#@(qid)_Message').attr('style', 'display:none;');
+                $('#@(qid)').removeAttr('aria-describedby');
+            }
+        })
+    });
+
+    @if (!string.IsNullOrEmpty(autoCompleteChange))
+    {
+        @Html.Raw("$('#" + qid + "').on('autocompletechange', function (event, ui) {" + autoCompleteChange + "});")
+    }
+    @if (Model.Question.IsMandatory)
+    {
+        @Html.Raw("$('#" + qid + "').on('blur', function (event, ui) {" + mandCheck + "});")
+    }
+</script>
+<div>
+    @if (Model.ShowUpload)
+    {
+        if (Model.Question.IsEditable)
+        {
+            <a href="#void" onclick="@Html.Raw(Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "','dataUpload'" + ");" : "")wiz.openUploadPage('@Url.Content("~/")', '@Model.Question.WizardFragment.InstanceId.ToString()', '@Model.Question.QuestionGuid.ToString()', 'data', '@Model.RepeatPath', '@Model.Question.WizardFragment.WizardSession.ProjectLog.ToString()', null);return false;">@Intelledox.Produce.Resources.Strings.SelectDataFile</a>
+        }
+        else
+        {
+            @Intelledox.Produce.Resources.Strings.NoDataFileSelected
+        }
+    }
+    @if (Model.ShowClear && Model.Question.IsEditable)
+    {
+        <a href="#void" onclick="@Html.Raw(Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "','dataClear'" + ");" : "")wiz.clearContent('@Model.Question.WizardFragment.InstanceId.ToString()', '@Model.Question.QuestionGuid.ToString()', '@Model.RepeatPath');return false;">@Intelledox.Produce.Resources.Strings.ClearFile</a><br />
+    }
+    @if (!Model.ShowUpload)
+    {
+        if (Model.Question.WizardFragment.WizardSession.Troubleshooting.HasTroubleshooting)
+        {
+            foreach (KeyValuePair<double, string> query in Model.Question.QueryData)
+            {
+                <div class="question-label datasource-debug">@(Html.Raw(String.Format(Intelledox.Produce.Resources.Strings.TimeToFetchData, query.Value, query.Key).Replace(Environment.NewLine, "<br>")))</div>
+            }
+        }
+        <input type="text" id="@qid" name="@qid" value="@Model.DisplayText" placeholder="@Model.Question.WatermarkFormatted" class="form-control" autocomplete="off" disabled="@(!Model.Question.IsEditable)"
+               @Html.Raw(Model.Question.DatasourceQuestionModel.TextBoxWidth > 0 ? "style=\"width:" + Model.Question.DatasourceQuestionModel.TextBoxWidth + "px\"" : "")
+               @Html.Raw(Model.Question.HasValidationErrors() ? "aria-invalid=\"true\" aria-describedby=\"error_" + qid + "\"" : "") @Html.Raw(Model.Question.IsMandatory ? "required" : "")
+               @if (Model.LogInteractions) { <text> data-analyticsid="@Model.AnalyticsID" </text> } />
+        <div id="@(qid)_autoComplete" class="autocomplete" />
+    }
+    <input type="hidden" id="@(qid)_Original" value="@Model.Question.SelectedIndex" name="@(qid)_Original" />
+    <div id="@(qid)_Message" value="@Model.Question.SelectedIndex" style="display:none;" name="@(qid)_Message" class="autocomplete-message" />
+</div>
+@Html.DisplayValidation(Model.Question.LastValidationMessage, qid)

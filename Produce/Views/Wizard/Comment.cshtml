@@ -1,0 +1,54 @@
+﻿@using Intelledox.Produce
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.CommentViewModel>
+@{
+    var commentId = Model.Model.Id.ToString().Replace("-", "_");
+}
+
+<div class="commentContainer" id="comment_@commentId">
+
+    @if (Model.Model.UserId == Model.Wizard.WizardSession.UserGuid)
+    {
+        <div class="commentCommands dropdown" id="commentCommands_@commentId">
+            <a href="#void" class="dropdown-toggle" id="dropdownMenu@commentId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu_@commentId">
+                <li><button type="button" class="btn-link" onclick="commentEdit(this, '@commentId')" id="commentEdit_@commentId">@Intelledox.Produce.Resources.Strings.Edit</button></li>
+                <li><button type="button" class="btn-link" onclick="commentDelete('@commentId')" id="commentDelete_@commentId">@Intelledox.Produce.Resources.Strings.Delete</button></li>
+            </ul>
+        </div>
+    }
+    <div class="commentDetail">
+        <span class="commentName">@Model.Model.CommenterName: </span>
+        <span class="commentText">@Model.Model.CommentText</span>
+    </div>
+    <div class="commentTime">
+
+        @Html.FormatLocalDate(Model.Model.TimeStamp, "G") @Model.GenerateTimeSince()
+        @if (Model.UseArchive)
+        {
+            <a href="#void" onclick="parent.wiz.commentKeep(this, '@commentId', window, '@Model.QuestionGuid', '@Html.Raw(HttpUtility.JavaScriptStringEncode(Model.QueryString))'); return false;" data-path="@Url.Content("~/")" id="commentPinned_@commentId" data-alt-id="commentPin_@commentId" style="@(Model.Model.Keep ? "" : "display:none")"><span title="@Intelledox.Produce.Resources.Strings.CommentPinned"><img src="~/Images/commentpinned.svg" class="lock"></span></a>
+            <a href="#void" onclick="parent.wiz.commentKeep(this, '@commentId', window, '@Model.QuestionGuid', '@Html.Raw(HttpUtility.JavaScriptStringEncode(Model.QueryString))'); return false;" data-path="@Url.Content("~/")" id="commentPin_@commentId" data-alt-id="commentPinned_@commentId" style="@(Model.Model.Keep ? "display:none" : "")"><span title="@Intelledox.Produce.Resources.Strings.CommentPin"><img src="~/Images/commentpin.svg" class="lock"></span></a>
+        }
+    </div>
+</div>
+@if (Model.Model.UserId == Model.Wizard.WizardSession.UserGuid)
+{
+    <div class="editCommentArea" id="editCommentArea_@commentId" style="display: none">
+        <div class="input-group">
+            <textarea rows="1"
+                        id="txtEditComment_@commentId"
+                        name="txtEditComment_@commentId"
+                        onchange="checkTextValue(this, 'btnUpdateComment_@commentId');"
+                        onkeyup="checkTextValue(this, 'btnUpdateComment_@commentId');"
+                        class="form-control custom-control"
+                        style="resize: none;">@Model.Model.CommentText</textarea>
+            <div class="input-group-btn">
+                <div>
+                    <button type="button" onclick="commentUpdate('@commentId')" id="btnUpdateComment_@commentId" class="btn btn-default btn-submit">Update</button>
+                    <button type="button" onclick="commentCancel('@commentId')" id="btnCancelCommentt_@commentId" class="btn btn-default btn-cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

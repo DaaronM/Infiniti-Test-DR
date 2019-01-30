@@ -1,0 +1,24 @@
+﻿<div class="flyout-title">
+    {{ 'ContentItems' | translate }}
+</div>
+<div class="flyout-subsection">
+    <div class="input-group">
+        <input class="form-control" ng-model="model.flyoutPanel.searchValue" placeholder="{{'Search'|translate}}" />
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="model.flyoutPanel.searchContentItems()">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+        </span>
+    </div>
+</div>
+
+<div class="flyout-container">
+    <ul class="li-contentitem">
+        <li toolbox-draggable ng-repeat="content in model.flyoutPanel.filteredContentItems" 
+            id="toolbox_contentitem.{{content.contentItem.contentItemGuid}}"
+            ng-class="content.imageKey">
+            <span ng-bind="content.contentItem.name"></span>
+        </li>
+    </ul>
+    <span class="noresults" ng-show="!model.flyoutPanel.filteredContentItems.length" ng-bind="'NoMatchesFound'|translate"></span>
+</div>

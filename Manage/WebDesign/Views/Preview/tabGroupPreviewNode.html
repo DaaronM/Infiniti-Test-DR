@@ -1,0 +1,30 @@
+﻿<div ng-switch on="node.DisplayType" class="{{node.CssStyle}}">
+    <div ng-switch-when="0"
+         editor-droppable="node" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)">
+        <div class="nav nav-tabs" ng-click="onNodeSelected({ node: node}); $event.stopPropagation()">
+            <li ng-repeat="tab in node.TabPages" ng-class="{active:node.ActiveTab === tab}"><a href="#void" ng-click="onNodeSelected({ node: tab}); node.ActiveTab = tab; $event.stopPropagation(); $event.preventDefault();">{{tab.Title}}</a></li>
+        </div>
+
+        <div class="tab-content" ng-if="node.ActiveTab">
+            <div class="tab-pane active">
+                <preview-node node="node.ActiveTab"
+                              on-node-selected="topSelectedFunc(node)" top-selected-func="topSelectedFunc"
+                              on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)" top-editor-drop-func="topEditorDropFunc"></preview-node>
+            </div>
+        </div>
+    </div>
+
+    <div ng-switch-when="1" ng-repeat="tab in node.TabPages"
+         editor-droppable="node" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)">
+        <div class="accordion accordionExpanded" ng-click="onNodeSelected({ node: tab}); $event.stopPropagation();">
+            <span class="AccordionContractButton">&nbsp;</span>
+            <a href="#void" onclick="event.preventDefault()">{{ tab.Title }}</a>
+        </div>
+
+        <div class="ExpandedAccordion">
+            <preview-node node="tab"
+                          on-node-selected="topSelectedFunc(node)" top-selected-func="topSelectedFunc"
+                          on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)" top-editor-drop-func="topEditorDropFunc"></preview-node>
+        </div>
+    </div>
+</div>

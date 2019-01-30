@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Intelledox.Extension.CustomQuestion</name>
+    </assembly>
+    <members>
+        <member name="T:Intelledox.Extension.CustomQuestion.CustomQuestionExtension">
+            <summary>
+            Custom question extension to add additional supported question types
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.TRIGGER_REFRESH">
+            <summary>
+            JavaScript function call that will cause a postback from the form to the server
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.ExtensionIdentity">
+            <summary>
+            Returns the unique identity for this custom question.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.GlobalSettingIdentity">
+            <summary>
+            Returns the identity that is registered in Manage for global configuration settings. This identity
+            may be shared between different extensions for shared settings.
+            </summary>
+        </member>
+        <member name="M:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.GetAvailableInputs">
+            <summary>
+            Returns all of the available inputs for this question.
+            </summary>
+            <returns>Available <see cref="T:Intelledox.Extension.CustomQuestion.AvailableInput"/></returns>
+        </member>
+        <member name="M:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.GetAvailableOutputs">
+            <summary>
+            Returns all of the available outputs for this question.
+            </summary>
+            <returns>Available <see cref="T:Intelledox.Extension.CustomQuestion.AvailableOutput"/> </returns>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.Icon16x16Png">
+            <summary>
+            Small png icon used to represent this question type in the TreeView of Design
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.Icon48x48Png">
+            <summary>
+            Large png icon used to represent this question type in the toolbox of Design
+            </summary>
+        </member>
+        <member name="M:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.WriteHtml(System.String,Intelledox.QAWizard.CustomQuestionProperties,System.IO.TextWriter)">
+            <summary>
+            Writes the HTML UI of the current state of the question. Non-HTML must be appropriately encoded.
+            </summary>
+            <param name="controlPrefix">Questions appear on a page with many others. The controlPrefix is a unique value that can added to the name of controls
+            to isolate and group them</param>
+            <param name="props">Wizard properties and settings</param>
+            <param name="writer">TextWriter to write the question's HTML to</param>
+        </member>
+        <member name="M:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.UpdateAttributes(System.String,System.Collections.Specialized.NameValueCollection,Intelledox.QAWizard.CustomQuestionProperties)">
+            <summary>
+            Update any custom attributes to values that have been posted from the form.
+            </summary>
+            <param name="controlPrefix">Unique value to add before control names</param>
+            <param name="postedFormValues">HTML input values received from the form</param>
+            <param name="props">Wizard properties and settings</param>
+        </member>
+        <member name="M:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.InitialiseInputs(Intelledox.QAWizard.CustomQuestionProperties)">
+            <summary>
+            Set any initial attribute values from Inputs or fixed values. Called once when the question is first loaded into the form.
+            </summary>
+            <param name="props">Wizard properties and settings</param>
+        </member>
+        <member name="M:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.InputChanged(Intelledox.QAWizard.CustomQuestionInput,System.Object,Intelledox.QAWizard.CustomQuestionProperties)">
+            <summary>
+            Called when an Input value has changed to give the question a chance to update any attributes.
+            </summary>
+            <param name="input">Input whose value has changed</param>
+            <param name="oldValue">The previous value</param>
+            <param name="props">Wizard properties and settings</param>
+        </member>
+        <member name="M:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.IsValid(Intelledox.QAWizard.CustomQuestionProperties,System.String@)">
+            <summary>
+            Whether the question has valid entries or not.
+            </summary>
+            <param name="props">Wizard properties and settings</param>
+            <param name="validationMessage">Custom message to show in the form to the user explaining why this question is invalid</param>
+            <returns><c>true</c> if valid, otherwise <c>false</c></returns>
+        </member>
+        <member name="M:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.HasBeenAnswered(Intelledox.QAWizard.CustomQuestionProperties)">
+            <summary>
+            Mandatory question check. Compare question attributes to determine if the question has the required values.
+            </summary>
+            <param name="props">Wizard properties and settings</param>
+            <returns><c>true</c> if question is answered, otherwise <c>false</c></returns>
+        </member>
+        <member name="M:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.FillAnswerFileNode(System.Xml.Linq.XElement,Intelledox.QAWizard.CustomQuestionProperties)">
+            <summary>
+            Writing the question's state to the answer file. 
+            </summary>
+            <param name="answerFileNode">XML node that represents the current question. Append attributes or values to store state</param>
+            <param name="props">Wizard properties and settings</param>
+        </member>
+        <member name="M:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.ReadAnswerFileNode(System.Xml.Linq.XElement,Intelledox.QAWizard.CustomQuestionProperties)">
+            <summary>
+            Reads the question's previous state from a saved answer file
+            </summary>
+            <param name="answerFileNode">XML node the represents the current question. Previously modified from FilAnswerFileNode</param>
+            <param name="props">Wizard properties and settings</param>
+        </member>
+        <member name="M:Intelledox.Extension.CustomQuestion.CustomQuestionExtension.IsLicensed(System.Guid)">
+            <summary>
+            Custom licensing check maintained by the question
+            </summary>
+            <param name="businessUnitGuid">Business unit identifier</param>
+            <returns><c>true</c> if licensed, otherwise <c>false</c></returns>
+        </member>
+        <member name="T:Intelledox.Extension.CustomQuestion.ExtensionIdentity">
+            <summary>
+            Unique identity for a custom question.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.ExtensionIdentity.Id">
+            <summary>
+            Unique id for a custom question.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.ExtensionIdentity.Name">
+            <summary>
+            Display name for a custom question.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.ExtensionIdentity.ModuleId">
+            <summary>
+            Licensing module identifier
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.ExtensionIdentity.PreviewHtml">
+            <summary>
+            Static non-interactive HTML to display in Design preview panel
+            </summary>
+        </member>
+        <member name="T:Intelledox.Extension.CustomQuestion.AvailableInput">
+            <summary>
+            An available input for a custom question.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.AvailableInput.Id">
+            <summary>
+            Unique id for an input.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.AvailableInput.Name">
+            <summary>
+            Display name for an input.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.AvailableInput.Required">
+            <summary>
+            Whether it is considered an error if the designer doesn't include this input
+            in a project using this custom question.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.AvailableInput.InstanceLimit">
+            <summary>
+            Number of times the input can be added by the designer. Default is 1. Use 0
+            for unlimited.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.AvailableInput.IsKeyValue">
+            <summary>
+            Whether this input displays a name field in Design. Used for key value pairs.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.AvailableInput.ValueType">
+            <summary>
+            Data type for the value
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.AvailableInput.EnumValues">
+            <summary>
+            Predefined set of allowed values
+            </summary>
+        </member>
+        <member name="T:Intelledox.Extension.CustomQuestion.AvailableOutput">
+            <summary>
+            An available output for a custom question
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.AvailableOutput.Id">
+            <summary>
+            Unique id for an output
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.AvailableOutput.Name">
+            <summary>
+            Display name for an output
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.CustomQuestion.AvailableOutput.OutputType">
+            <summary>
+            Value type of the output
+            </summary>
+        </member>
+        <member name="T:Intelledox.Extension.CustomQuestion.ValueTypes">
+            <summary>
+            Data type for values
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.CustomQuestion.ValueTypes.Any">
+            <summary>
+            Text value
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.CustomQuestion.ValueTypes.Boolean">
+            <summary>
+            "true" or "false"
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.CustomQuestion.ValueTypes.Enum">
+            <summary>
+            Text value that is one of a predefined set
+            </summary>
+        </member>
+    </members>
+</doc>

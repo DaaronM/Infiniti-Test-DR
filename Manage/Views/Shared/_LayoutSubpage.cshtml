@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html dir="@(System.Threading.Thread.CurrentThread.CurrentUICulture.TextInfo.IsRightToLeft ? "rtl" : "ltr")" lang="@(System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName )">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8,IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intelledox Infiniti</title>
+    <link rel="shortcut icon" href="~/favicon.ico" />
+    <link href="~/Content/base.css?v=10" type="text/css" rel="stylesheet" />
+    <link href="~/Content/site.css?v=10.2" type="text/css" rel="stylesheet" />
+    @if (System.Threading.Thread.CurrentThread.CurrentUICulture.TextInfo.IsRightToLeft)
+    {
+        <link href="~/Content/siteRtl.css?v=10" type="text/css" rel="stylesheet" />
+    }
+    @RenderSection("AddToHead", required: false)
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

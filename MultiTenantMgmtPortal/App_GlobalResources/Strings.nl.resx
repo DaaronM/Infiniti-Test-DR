@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Activate" xml:space="preserve">
+    <value>Activeer</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Voeg toe</value>
+  </data>
+  <data name="AdditionalAnonymousProjects" xml:space="preserve">
+    <value>Extra anonieme projecten</value>
+  </data>
+  <data name="AdditionalInternalProjects" xml:space="preserve">
+    <value>Extra geauthenticeerde gebruiker projecten</value>
+  </data>
+  <data name="AdditionalUserLicense" xml:space="preserve">
+    <value>Extra gebruikers licentie key</value>
+  </data>
+  <data name="AdditionalUsers" xml:space="preserve">
+    <value>Extra gebruikers</value>
+  </data>
+  <data name="AnonymousProjectLicenses" xml:space="preserve">
+    <value>Anonieme project licenties</value>
+  </data>
+  <data name="AnonymousUsers" xml:space="preserve">
+    <value>Anonieme gebruikers</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Terug</value>
+  </data>
+  <data name="Basic" xml:space="preserve">
+    <value>Basis</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>wijzig</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Bevestig nieuw password</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Bevestig password</value>
+  </data>
+  <data name="Deactivate" xml:space="preserve">
+    <value>De-activeeer</value>
+  </data>
+  <data name="EditTenant" xml:space="preserve">
+    <value>Tenant e-mail</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>e-mail</value>
+  </data>
+  <data name="Enterprise" xml:space="preserve">
+    <value>Bedrijf</value>
+  </data>
+  <data name="Expired" xml:space="preserve">
+    <value>Verlopen</value>
+  </data>
+  <data name="ExpiresOn" xml:space="preserve">
+    <value>Verloopt op {0}</value>
+  </data>
+  <data name="Express" xml:space="preserve">
+    <value>Express</value>
+  </data>
+  <data name="FailedLogin" xml:space="preserve">
+    <value>Portal kan u niet aanmelden. Controleer bij uw beheerder of uw gebruikersnaam is geregistreerd in de portal en probeer het opnieuw.</value>
+  </data>
+  <data name="FailedLoginDuplicate" xml:space="preserve">
+    <value>Een dubbele login is gedetecteerd. Een login kan slechts door één persoon worden gebruikt.</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Voornaam</value>
+  </data>
+  <data name="HeaderText" xml:space="preserve">
+    <value>Multi-Tenant Management Portal</value>
+  </data>
+  <data name="InternalProjectLicenses" xml:space="preserve">
+    <value>Geverifieerde gebruikersprojectlicenties</value>
+  </data>
+  <data name="InvalidProductKey" xml:space="preserve">
+    <value>Licentie en/of Product licentie is verlopen</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Achternaam</value>
+  </data>
+  <data name="LicenseExpiredOn" xml:space="preserve">
+    <value>Licentie verliep op {0}</value>
+  </data>
+  <data name="LicenseHolder" xml:space="preserve">
+    <value>Licentie</value>
+  </data>
+  <data name="LicenseInvalid" xml:space="preserve">
+    <value>Licentie niet geldig</value>
+  </data>
+  <data name="LicenseKeyAlreadyUsed" xml:space="preserve">
+    <value>Deze product licentie key is al in gebruik</value>
+  </data>
+  <data name="LicenseType" xml:space="preserve">
+    <value>Licentie type</value>
+  </data>
+  <data name="Licensing" xml:space="preserve">
+    <value>Licentie</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Uiteglogd</value>
+  </data>
+  <data name="LicenseExpiry" xml:space="preserve">
+    <value>Verlopen: {0}</value>
+  </data>
+  <data name="MsgSaved" xml:space="preserve">
+    <value>De wijzigingen zijn opgeslagen</value>
+  </data>
+  <data name="MsgTenantInUse" xml:space="preserve">
+    <value>Tenant naam "{0}" is al in gebruik</value>
+  </data>
+  <data name="MsgUsernameInUse" xml:space="preserve">
+    <value>Gebruikersnaam "{0}" is al in gebruik</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nieuw password</value>
+  </data>
+  <data name="NewTenant" xml:space="preserve">
+    <value>Nieuwe tenant</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>(Geen)</value>
+  </data>
+  <data name="NoTenants" xml:space="preserve">
+    <value>Geen tenants</value>
+  </data>
+  <data name="NoValidLicense" xml:space="preserve">
+    <value>Geen geldige licentie</value>
+  </data>
+  <data name="NumberInUse" xml:space="preserve">
+    <value>{0} ({1} in gebruik)</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordNoMatch" xml:space="preserve">
+    <value>Password klopt niet</value>
+  </data>
+  <data name="ProductLicenseKey" xml:space="preserve">
+    <value>Product licentie key</value>
+  </data>
+  <data name="Provision" xml:space="preserve">
+    <value>Bepaling</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Verwijder</value>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>{0} is een verplicht veld</value>
+  </data>
+  <data name="RequiredPasswordChange" xml:space="preserve">
+    <value>Je moet he password wijzigen</value>
+  </data>
+  <data name="SaaS" xml:space="preserve">
+    <value>SaaS</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Sla op</value>
+  </data>
+  <data name="SharePoint" xml:space="preserve">
+    <value>SharePoint</value>
+  </data>
+  <data name="Standard" xml:space="preserve">
+    <value>Standaard</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Tenant" xml:space="preserve">
+    <value>Tenant</value>
+  </data>
+  <data name="Management" xml:space="preserve">
+    <value>Management</value>
+  </data>
+  <data name="TenantName" xml:space="preserve">
+    <value>Tenant naam</value>
+  </data>
+  <data name="TenantProvision" xml:space="preserve">
+    <value>Bepalingen Tenant</value>
+  </data>
+  <data name="TenantsManagement" xml:space="preserve">
+    <value>Manage Tenant</value>
+  </data>
+  <data name="TIBCO" xml:space="preserve">
+    <value>TIBCO</value>
+  </data>
+  <data name="TRIM" xml:space="preserve">
+    <value>TRIM</value>
+  </data>
+  <data name="Unlimited" xml:space="preserve">
+    <value>Ongelimiteerd</value>
+  </data>
+  <data name="UnlimitedAnonymousProjects" xml:space="preserve">
+    <value>Onbeperkte geauthenticeerde projecten</value>
+  </data>
+  <data name="UnlimitedInternalProjects" xml:space="preserve">
+    <value>Onbeperkte geauthenticeerde gebruikersprojecten</value>
+  </data>
+  <data name="UserLicenseKeyInvalid" xml:space="preserve">
+    <value>Licentiekey is niet toegevoegd. Het is mogelijk ongeldig of is al in gebruik.</value>
+  </data>
+  <data name="UserLicenses" xml:space="preserve">
+    <value>Gebruikers licentie</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Gebruikersnaam</value>
+  </data>
+  <data name="ValidEmailAddress" xml:space="preserve">
+    <value>Een geldig e-mail adres is noodzakelijk</value>
+  </data>
+  <data name="WinApp" xml:space="preserve">
+    <value>Windows App</value>
+  </data>
+  <data name="Workflow" xml:space="preserve">
+    <value>Workflow</value>
+  </data>
+  <data name="MobileAppUserLicense" xml:space="preserve">
+    <value>Mobiele App gebruikers licentie</value>
+  </data>
+  <data name="UnlimitedUsers" xml:space="preserve">
+    <value>Ongelimiteerde named users</value>
+  </data>
+  <data name="AnonymousProjectCount" xml:space="preserve">
+    <value>Aantal anonieme projecten</value>
+  </data>
+  <data name="ExpiryDate" xml:space="preserve">
+    <value>Verloop datum</value>
+  </data>
+  <data name="InternalProjectCount" xml:space="preserve">
+    <value>Aantal geauthenticeerde gebruikersprojecten</value>
+  </data>
+  <data name="TenantType" xml:space="preserve">
+    <value>Type tenant</value>
+  </data>
+  <data name="UserCount" xml:space="preserve">
+    <value>Aantal gebruikers</value>
+  </data>
+  <data name="DemoTenantType" xml:space="preserve">
+    <value>Demo site</value>
+  </data>
+  <data name="MonthlyTenantType" xml:space="preserve">
+    <value>Maandelijkse account</value>
+  </data>
+  <data name="PartnerTenantType" xml:space="preserve">
+    <value>Partner site</value>
+  </data>
+  <data name="YearlyTenantType" xml:space="preserve">
+    <value>Jaarlijkse account</value>
+  </data>
+  <data name="HideDeactivated" xml:space="preserve">
+    <value>Verberg gedeactiveerde</value>
+  </data>
+  <data name="ShowDeactivated" xml:space="preserve">
+    <value>Toon gedeactiveerde</value>
+  </data>
+  <data name="DisableUser" xml:space="preserve">
+    <value>Disable gebruiker</value>
+  </data>
+  <data name="NewTenantAdmin" xml:space="preserve">
+    <value>Nieuwe admin gebruiker</value>
+  </data>
+  <data name="ResetPwd" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="PasswordValidation_ComplexPassword" xml:space="preserve">
+    <value>Password voldoet niet aan de bedrijfsstandaard</value>
+  </data>
+  <data name="PasswordValidation_Generic" xml:space="preserve">
+    <value>Password niet geldig</value>
+  </data>
+  <data name="PasswordValidation_History" xml:space="preserve">
+    <value>Password kan niet dezelfde zijn als laatste {0} passwoorden</value>
+  </data>
+  <data name="PasswordValidation_MinimumLength" xml:space="preserve">
+    <value>Password moet minimaal {0} characters bevatten</value>
+  </data>
+  <data name="SampleProjectsInfo" xml:space="preserve">
+    <value>Selecteer template(s) om te importeren in de nieuwe tenancy</value>
+  </data>
+  <data name="ImportTemplates" xml:space="preserve">
+    <value>Importeer templates</value>
+  </data>
+  <data name="MsgMinimumTemplateSelection" xml:space="preserve">
+    <value>Selecteer een of meer sjablonen om in de nieuwe tenant te importeren</value>
+  </data>
+  <data name="MsgAnonymousProjectLicensesExceedsLimit" xml:space="preserve">
+    <value>Project kan niet worden gepubliceerd in de map met voorbeelden. Het aantal anonieme projectlicenties overschrijdt het maximum aantal beschikbare licenties.</value>
+  </data>
+  <data name="MsgInternalProjectLicensesExceedsLimit" xml:space="preserve">
+    <value>Project kan niet worden gepubliceerd in de map met voorbeelden. Het aantal geverifieerde User-projectlicenties overschrijdt het maximum aantal beschikbare licenties.</value>
+  </data>
+  <data name="MsgPublishFailedLicenseExpired" xml:space="preserve">
+    <value>Project kan niet worden gepubliceerd in de map met voorbeelden. Productlicentiesleutel is verlopen of is niet langer geldig.</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Importeer</value>
+  </data>
+  <data name="LicenseHolderAlreadyUsed" xml:space="preserve">
+    <value>Deze licentie is al in gebruik</value>
+  </data>
+  <data name="MsgImported" xml:space="preserve">
+    <value>Geselecteerde project(en) zijn succesvol geimpoteerd</value>
+  </data>
+  <data name="LicenseHolderAlreadyUsedForCreateTenant" xml:space="preserve">
+    <value>Deze tenantnaam is al gebruikt als licentiehouder.</value>
+  </data>
+  <data name="ExistingProjectsInfo" xml:space="preserve">
+    <value>Lijst met sjablonen die uit de standaardpachtigheid zijn geïmporteerd</value>
+  </data>
+  <data name="EmailTenants" xml:space="preserve">
+    <value>e-mail tenants</value>
+  </data>
+  <data name="AdminList" xml:space="preserve">
+    <value>Admin e-mail adressen (door punt-komma gescheiden)</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>(Allen)</value>
+  </data>
+  <data name="GetEmails" xml:space="preserve">
+    <value>Verkrijg e-mails</value>
+  </data>
+  <data name="AdminUserDetails" xml:space="preserve">
+    <value>Admin gebruikers</value>
+  </data>
+  <data name="MsgInvalidImage" xml:space="preserve">
+    <value>Het geüploade bestand is geen geldig of ondersteund afbeeldingstype</value>
+  </data>
+  <data name="TenantLogo" xml:space="preserve">
+    <value>Tenant Logo</value>
+  </data>
+  <data name="RemoveLogo" xml:space="preserve">
+    <value>Verwijder Logo</value>
+  </data>
+  <data name="MobileAppUserLicenses" xml:space="preserve">
+    <value>Mobiele App gebruikers licentie</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Versie</value>
+  </data>
+  <data name="SupportContract" xml:space="preserve">
+    <value>Infiniti Support &amp; Maintenance</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Telefoonnummer</value>
+  </data>
+  <data name="UserContactDetails" xml:space="preserve">
+    <value>Gebruikers contact details</value>
+  </data>
+  <data name="ExtendTrial" xml:space="preserve">
+    <value>Verleng Trial</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="PerformedBy" xml:space="preserve">
+    <value>Uitegevoerd door</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>Reden</value>
+  </data>
+  <data name="MsgCannotExtendTrial" xml:space="preserve">
+    <value>U kunt de proeflicenties niet verder verlengen. Neem contact op met uw systeembeheerder.</value>
+  </data>
+  <data name="MsgExtendTrialSuccess" xml:space="preserve">
+    <value>Proeflicenties zijn met succes verlengd met nog eens 30 dagen. U hebt nog {0} meer pogingen gedaan.</value>
+  </data>
+  <data name="MsgErrorInExtendTrial" xml:space="preserve">
+    <value>Er is een fout opgetreden bij het uitbreiden van proeflicenties.</value>
+  </data>
+  <data name="Contacts" xml:space="preserve">
+    <value>Contacten</value>
+  </data>
+  <data name="ContentLibrary" xml:space="preserve">
+    <value>Inhoudsbibliotheek</value>
+  </data>
+  <data name="ImportProjectToTenant" xml:space="preserve">
+    <value>Import project naar Tenant</value>
+  </data>
+  <data name="ProvisionTenant" xml:space="preserve">
+    <value>Bepalingen Tenant</value>
+  </data>
+  <data name="PushNotification" xml:space="preserve">
+    <value>Push notificatie</value>
+  </data>
+  <data name="MsgSettingsError" xml:space="preserve">
+    <value>Foutieve settings. Wijzigingen niet opgeslagen</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Algemeen</value>
+  </data>
+  <data name="Transactional" xml:space="preserve">
+    <value>Transactie</value>
+  </data>
+  <data name="Demo" xml:space="preserve">
+    <value>Demo</value>
+  </data>
+  <data name="TenancyKeyInvalid" xml:space="preserve">
+    <value>Tenancy-sleutel is ongeldig</value>
+  </data>
+  <data name="GenerateNewKey" xml:space="preserve">
+    <value>Genereer een nieuwe key</value>
+  </data>
+  <data name="LicenseHolderEmpty" xml:space="preserve">
+    <value>Licentie is leeg</value>
+  </data>
+  <data name="Modules" xml:space="preserve">
+    <value>Modules</value>
+  </data>
+  <data name="TenancyKey" xml:space="preserve">
+    <value>Tenancy-sleutel</value>
+  </data>
+  <data name="UploadNewLicenseFile" xml:space="preserve">
+    <value>Upload de niewe licentie file</value>
+  </data>
+  <data name="PasswordValidation_DisallowCommonPwd" xml:space="preserve">
+    <value>Algemeen password is verboden</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="KeyCopied" xml:space="preserve">
+    <value>Tenancy-sleutel gekopieerd naar klembord</value>
+  </data>
+  <data name="MsgLicenseFileInvalid" xml:space="preserve">
+    <value>Ongeldige licentie file</value>
+  </data>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>Kopier naar clipboard</value>
+  </data>
+  <data name="Analytics" xml:space="preserve">
+    <value>Analytics</value>
+  </data>
+  <data name="TemporaryUserSave" xml:space="preserve">
+    <value>Tijdelijke gebruiker opgeslaan</value>
+  </data>
+  <data name="FormSummaryQuestion" xml:space="preserve">
+    <value>Formulieren samenvatting vraag</value>
+  </data>
+  <data name="LicenseNewSiteOnly" xml:space="preserve">
+    <value>Deze licentie kan alleen gebruikt worden op een nieuwe site</value>
+  </data>
+  <data name="ImportedVersion" xml:space="preserve">
+    <value>Geimporteerde versie</value>
+  </data>
+  <data name="BrowserTabName" xml:space="preserve">
+    <value>Browser Tab naam</value>
+  </data>
+  <data name="BrowserTabNameToolTip" xml:space="preserve">
+    <value>De naam die wordt weergegeven voor de instantie Produce op het browsertabblad.</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Samenvatting</value>
+  </data>
+  <data name="PdfStitch" xml:space="preserve">
+    <value>PDF Stitch</value>
+  </data>
+  <data name="RunActionButton" xml:space="preserve">
+    <value>Voer actie knop uit</value>
+  </data>
+  <data name="CustomManageUrl" xml:space="preserve">
+    <value>Custom Manage Url</value>
+  </data>
+  <data name="CustomProduceUrl" xml:space="preserve">
+    <value>Custom Produce Url</value>
+  </data>
+</root>

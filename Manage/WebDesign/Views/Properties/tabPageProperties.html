@@ -1,0 +1,14 @@
+﻿<div class="prop-title">
+    {{ 'TabProperties' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="tabTitle" class="col-sm-4 control-label">{{ ::'Title' | translate }}</label>
+        <div class="col-sm-8">
+            <textarea id="tabTitle" class="form-control input-sm f2-rename" ng-model="model.propertiesPanelModel.Title" rows="3" spellcheck="true"></textarea>
+        </div>
+    </div>
+    <div>
+        <ng-include src="'Views/Properties/styleProperty.html?v=106882799234227327'"></ng-include>
+    </div>
+</form>

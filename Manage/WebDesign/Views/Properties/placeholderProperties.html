@@ -1,0 +1,65 @@
+﻿<div class="prop-title">
+    {{ 'PlaceholdersProperties'|translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="placeTemplate" class="col-sm-4 control-label">{{ ::'Template' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="placeTemplate" class="form-control input-sm" ng-model="model.propertiesPanelModel.template" readonly />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="placeName" class="col-sm-4 control-label">{{ ::'Name' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="placeName" class="form-control input-sm f2-rename" ng-model="model.propertiesPanelModel.name" ng-blur="model.propertiesPanelModel.validateName()" />
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.propertiesPanelModel.isReverseHideValueVisible">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.reverseHideValue" title="{{'ReverseHideTooltip'|translate}}" />{{ ::'ReverseHideValue' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.propertiesPanelModel.isGapPlaceholderVisible">
+        <label for="gapPlaceholder" class="col-sm-4 control-label">{{ ::'GapPlaceholder' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input id="gapPlaceholder" class="form-control input-sm" ng-model="model.propertiesPanelModel.gapPlaceholder" readonly />
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-sm" type="button" ng-click="model.propertiesPanelModel.autoGapPlaceholder()" title="{{'btnGapPlaceholderToolTip'|translate}}">
+                        <img src="Images/leftArrow.png" alt="" />
+                    </button>
+                    <button class="btn btn-default input-sm" type="button" ng-click="model.propertiesPanelModel.selectGapPlaceholder()">...</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.propertiesPanelModel.isBehaviourVisible">
+        <label for="placeBehaviour" class="col-sm-4 control-label">{{ ::'Behaviour' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="placeBehaviour" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableBehaviours"
+                    ng-model="model.propertiesPanelModel.behaviour"></select>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.propertiesPanelModel.isStyleVisible">
+        <label for="placeStyle" class="col-sm-4 control-label">{{ ::'Style' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="placeStyle" class="form-control input-sm"
+                    ng-options="option.title as option.title for option in model.propertiesPanelModel.availableStyles"
+                    ng-model="model.propertiesPanelModel.style"></select>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.propertiesPanelModel.isImageScaleVisible">
+        <label for="placeScale" class="col-sm-4 control-label">{{ ::'ImageScale' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input id="placeScale" class="form-control input-sm" ng-model="model.propertiesPanelModel.imageScale" />
+                <span class="input-group-addon">%</span>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,337 @@
+﻿<div class="row">
+    <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" ng-class="{'active': currentTab === 'general'}"><a href="#" ng-click="switch('general')">{{ ::'General' | translate }}</a></li>
+            <li role="presentation" ng-class="{'active': currentTab === 'metadata'}" ng-if="!general.isDashboardProject"><a href="#" ng-click="switch('metadata')">{{ ::'DocumentMetadata' | translate }}</a></li>
+            <li role="presentation" ng-class="{'active': currentTab === 'language'}"><a href="#" ng-click="switch('language')">{{ ::'LanguageTranslations' | translate }}</a></li>
+            <li role="presentation" ng-class="{'active': currentTab === 'properties'}"><a href="#" ng-click="switch('properties')">{{ ::'Properties' | translate }}</a></li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <div class="tab-content" ng-if="currentTab === 'general'">
+            <form class="form-horizontal">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="ok()">&times;</button>
+                    <h4 class="modal-title">{{ ::'SetProjectProperties' | translate }}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="projectName" class="col-sm-4 control-label">{{ ::'ProjectName' | translate }}</label>
+                        <div class="col-sm-8">
+                            <input id="projectName" class="form-control" ng-model="general.projectName" ng-blur="general.checkUniqueName()" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="isCompatibilityMode" class="col-sm-4 control-label">{{ ::'CompatibilityMode' | translate }}</label>
+                        <div class="col-sm-8">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="isCompatibilityMode" ng-model="general.isCompatibilityMode" />
+                                    <span ng-show="general.isCompatibilityMode">{{ ::'CompatibilityModeDescriptionOn' | translate }}</span>
+                                    <span ng-show="!general.isCompatibilityMode">{{ ::'CompatibilityModeDescriptionOff' | translate }}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="general.isContentProject">
+                        <div class="form-group">
+                            <label for="projectAnswerFile" class="col-sm-12 control-label" style="text-align:left">{{ ::'AnswerFileNameDescription' | translate }}</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectAnswerFile" class="col-sm-4 control-label">{{ ::'AnswerFileName' | translate }}</label>
+                            <div class="col-sm-8">
+                                <input id="projectAnswerFile" class="form-control" ng-model="general.answerFileName" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectInProgressFile" class="col-sm-4 control-label">{{ ::'InprogressFileName' | translate }}</label>
+                            <div class="col-sm-8">
+                                <input id="projectInProgressFile" class="form-control" ng-model="general.inprogressFileName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="general.isTemporarySaveAvailable">
+                        <div class="form-group">
+                            <label class="col-sm-12 control-label" style="text-align:left">{{ ::'TemporarySaveDescription' | translate }}</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectAccessCodeGeneration" class="col-sm-4 control-label">{{ ::'AccessCodeGeneration' | translate }}</label>
+                            <div class="col-sm-8">
+                                <select id="projectAccessCodeGeneration" class="form-control input-sm"
+                                        ng-options="option.value as option.description for option in general.accessCodeGenerationOptions"
+                                        ng-model="general.accessCodeGeneration"></select>
+                            </div>
+                        </div>
+                        <div ng-if="general.isTempSaveVisible">
+                            <div class="form-group" ng-if="general.isQuestionVisible">
+                                <label for="projectTemporaryQuestionReference" class="col-sm-4 control-label">{{ ::'Question' | translate }}</label>
+                                <div class="col-sm-8">
+                                    <select id="projectTemporaryQuestionReference" class="form-control input-sm"
+                                            ng-options="option.QuestionGuid as option.Text for option in general.availableQuestions"
+                                            ng-model="general.selectedQuestionGuid"></select>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="general.isAnswerVisible">
+                                <label for="projectTemporaryAnswerReference" class="col-sm-4 control-label">{{ ::'Answer' | translate }}</label>
+                                <div class="col-sm-8">
+                                    <select id="projectTemporaryAnswerReference" class="form-control input-sm"
+                                            ng-options="option.AnswerGuid as option.Name for option in general.availableAnswers"
+                                            ng-model="general.selectedAnswerGuid"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="projectAccessCodeHelpText" class="col-sm-4 control-label">{{ ::'AccessCodeHelpText' | translate }}</label>
+                                <div class="col-sm-8">
+                                    <input id="projectAccessCodeHelpText" class="form-control" ng-model="general.accessCodeHelpText" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="projectRecipientName" class="col-sm-4 control-label">{{ ::'RecipientName' | translate }}</label>
+                                <div class="col-sm-8">
+                                    <input id="projectRecipientName" class="form-control" ng-model="general.recipientName" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="projectAccessEmailTo" class="col-sm-4 control-label">{{ ::'RecipientEmail' | translate }}</label>
+                                <div class="col-sm-8">
+                                    <input id="projectAccessEmailTo" class="form-control" ng-model="general.emailTo" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="projectAccessEmailSubject" class="col-sm-4 control-label">{{ ::'EmailSubject' | translate }}</label>
+                                <div class="col-sm-8">
+                                    <input id="projectAccessEmailSubject" class="form-control" ng-model="general.emailSubject" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="projectAccessEmailBody" class="col-sm-4 control-label">{{ ::'EmailBody' | translate }}</label>
+                                <div class="col-sm-8">
+                                    <textarea id="projectAccessEmailBody" rows="3" class="form-control" ng-model="general.emailBody" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="projectResumeText" class="col-sm-4 control-label">{{ ::'ResumeButtonText' | translate }}</label>
+                                <div class="col-sm-8">
+                                    <input id="projectResumeText" class="form-control" ng-model="general.resumeText" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="projectReassignText" class="col-sm-4 control-label">{{ ::'ReassignButtonText' | translate }}</label>
+                                <div class="col-sm-8">
+                                    <input id="projectReassignText" class="form-control" ng-model="general.reassignText" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="general.showLiveRefresh">
+                        <div class="form-group">
+                            <label for="projectLiveRefresh" class="col-sm-12 control-label" style="text-align:left">{{ ::'LiveRefreshDescription' | translate }}</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectLiveRefresh" class="col-sm-4 control-label">{{ ::'LiveRefresh' | translate }}</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="checkbox" id="liveRefresh" ng-model="general.liveRefresh" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="general.liveRefresh">
+                            <label for="refreshPeriod" class="col-sm-4 control-label">{{ ::'RefreshPeriod' | translate }}</label>
+                            <div class="col-sm-8">
+                                <input id="refreshPeriod" class="form-control input-sm" ng-model="general.refreshPeriod" maxlength="5" pattern="\d*" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="ok()">{{ ::'OK' | translate }}</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-content" ng-if="currentTab === 'metadata'">
+            <form class="form-horizontal">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="ok()">&times;</button>
+                    <h4 class="modal-title">{{ ::'DocumentMetadata' | translate }}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <span style="text-align:left">{{ ::'DocumentMetadataHelp' | translate }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="metadataName" class="col-sm-3 control-label">{{ ::'Name' | translate }}</label>
+                        <div class="col-sm-7">
+                            <input id="metadataName" class="form-control" ng-model="metadata.name" />
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-primary" ng-click="metadata.add()" ng-disabled="!metadata.isAddEnabled">{{ ::'Add' | translate }}</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="metadataType" class="col-sm-3 control-label">{{ ::'Type' | translate }}</label>
+                        <div class="col-sm-7">
+                            <select id="metadataType" class="form-control input-sm"
+                                    ng-options="option.value as option.description for option in metadata.types"
+                                    ng-model="metadata.selectedType"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-primary" ng-click="metadata.update()" ng-disabled="!metadata.isUpdateEnabled">{{ ::'Update' | translate }}</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="metadataFixed" class="col-sm-3 control-label">{{ ::'FixedValue' | translate }}</label>
+                        <div class="col-sm-7">
+                            <input id="metadataFixed" class="form-control" ng-model="metadata.fixed" />
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-primary" ng-click="metadata.remove()" ng-disabled="!metadata.isRemoveEnabled">{{ ::'Remove' | translate }}</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="metadataQuestion" class="col-sm-3 control-label">{{ ::'Question' | translate }}</label>
+                        <div class="col-sm-7">
+                            <select id="metadataQuestion" class="form-control input-sm"
+                                    ng-options="option.QuestionGuid as option.Text for option in metadata.availableQuestions"
+                                    ng-model="metadata.selectedQuestionGuid"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="metadataAnswer" class="col-sm-3 control-label">{{ ::'Answer' | translate }}</label>
+                        <div class="col-sm-7">
+                            <select id="metadataAnswer" class="form-control input-sm"
+                                    ng-options="option.AnswerGuid as option.Name for option in metadata.availableAnswers"
+                                    ng-model="metadata.selectedAnswerGuid"></select>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-condensed selection-grid">
+                        <thead>
+                            <tr>
+                                <th>{{ 'ElementName' | translate }}</th>
+                                <th>{{ 'Type' | translate }}</th>
+                                <th>{{ 'Value' | translate }}</th>
+                                <th>{{ 'Question' | translate }}</th>
+                                <th>{{ 'Answer' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="attr in metadata.existingMetadata"
+                            ng-click="metadata.selectExistingMetadata(attr.tag)"
+                            ng-class="{'active': attr.selected}">
+                            <td>{{ attr.name }}</td>
+                            <td>{{ attr.elementType }}</td>
+                            <td>{{ attr.fixedValue }}</td>
+                            <td>{{ attr.questionName }}</td>
+                            <td>{{ attr.answerName }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="ok()">{{ ::'OK' | translate }}</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="tab-content" ng-if="currentTab === 'language'">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="ok()">&times;</button>
+                <h4 class="modal-title">{{ ::'LanguageTranslations' | translate }}</h4>
+            </div>
+            <div class="modal-body">
+                <script src="scripts/papaparse.js"></script>
+                <div class="preview-dialog-section-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-5">
+                                <label for="ExportLanguageFile" class="col-sm-3 control-label">{{ ::'Export' | translate }}</label>
+                                <button id="ExportLanguageFile" type="button" ng-click="language.exportLanguageTranslationsFile()" class="btn btn-primary">{{ ::'ExportLanguageTranslations' | translate }}</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-5">
+                                <label for="ImportLanguageFile" class="col-sm-3 control-label">{{ ::'Import' | translate }}</label>
+                                <input id="ImportLanguageFile" type="file" file-change="language.importLanguageTranslationsFile()" ng-model="language.uploadedLanguageTranslationsFile" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="preview-dialog-section-header">
+                    <span class="preview-dialog-section-title">{{ 'Summary' | translate }}</span>
+                </div>
+                <div class="preview-dialog-section-body" ng-if="language.hasLanguageTranslations()">
+                    <table class="table table-bordered table-condensed" style="width:50%;">
+                        <thead>
+                            <tr>
+                                <th>{{ 'Language' | translate }}</th>
+                                <th>{{ 'Translations' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="t in language.languageTranslationSummary">
+                            <td>{{ t.lang }}</td>
+                            <td>{{ t.count }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="preview-dialog-section-body" ng-if="!language.hasLanguageTranslations()">
+                    {{ 'NoLanguageTranslations' | translate }}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="ok()">{{ ::'OK' | translate }}</button>
+            </div>
+        </div>
+
+        <div class="tab-content" ng-if="currentTab === 'properties'">
+            <form class="form-horizontal">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="ok()">&times;</button>
+                    <h4 class="modal-title">{{ ::'Properties' | translate }}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="propName" class="col-sm-3 control-label">{{ ::'Name' | translate }}</label>
+                        <div class="col-sm-7">
+                            <input id="propName" class="form-control input-sm" ng-model="properties.selectedName" />
+                        </div>
+                        <div class="col-sm-2">
+                            <button ng-disabled="!properties.isAddEnabled" class="btn btn-primary" ng-click="properties.add()">{{ 'Add' | translate }}</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="propValue" class="col-sm-3 control-label">{{ ::'InitialValue' | translate }}</label>
+                        <div class="col-sm-7">
+                            <input id="propValue" class="form-control input-sm" ng-model="properties.selectedInitialValue" />
+                        </div>
+                        <div class="col-sm-2">
+                            <button ng-disabled="!properties.isUpdateEnabled" class="btn btn-primary" ng-click="properties.update()">{{ 'Update' | translate }}</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                        </div>
+                        <div class="col-sm-2">
+                            <button ng-disabled="!properties.isRemoveEnabled" class="btn btn-primary" ng-click="properties.remove()">{{ 'Remove' | translate }}</button>
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered table-condensed selection-grid">
+                        <thead>
+                            <tr>
+                                <th>{{ 'Name' | translate }}</th>
+                                <th>{{ 'InitialValue' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="prop in properties.Wizard.Properties"
+                            ng-click="properties.selectProjectProperty(prop)"
+                            ng-class="{'active': prop.selected}">
+                            <td>{{ prop.Name }}</td>
+                            <td>{{ prop.InitialValue }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="ok()">{{ ::'OK' | translate }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

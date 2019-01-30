@@ -1,0 +1,18 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.CustomQuestionViewModel>
+@{ 
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+    var qid = @IdHelper.IdFor(Model.Question);
+
+    var writer = new System.IO.StringWriter();
+    Model.Question.WriteHtml(qid, writer);
+}
+<div>
+    @Html.Raw(writer.ToString())
+</div>
+@Html.DisplayValidation(Model.Question.LastValidationMessage, qid)
+
+@{
+    writer.Dispose();
+}

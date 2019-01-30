@@ -1,0 +1,78 @@
+﻿<div class="prop-title">
+    {{ model.propertiesPanelModel.PropertiesTitle }}
+    <div class="pull-right">{{ ::'Id' | translate}}: {{model.propertiesPanelModel.ID}}</div>
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="questionText" class="col-sm-4 control-label">{{model.propertiesPanelModel.QuestionLabel}}</label>
+        <div class="col-sm-8">
+            <textarea id="questionText" class="form-control input-sm f2-rename" ng-if="model.propertiesPanelModel.isPlainQuestionText" ng-model="model.propertiesPanelModel.Text" rows="6" spellcheck="true"></textarea>
+            <textarea id="questionText" class="form-control input-sm f2-rename" ng-if="!model.propertiesPanelModel.isPlainQuestionText" ng-model="model.propertiesPanelModel.Text" rows="6" spellcheck="true"
+                      ui-tinymce="tinymceHtmlWithPickRef" pick-Ref-Editor="model.pickRefEditor(ed)" tree-view="model.treeView"></textarea>
+        </div>
+    </div>
+    <div class="form-group" ng-show="model.propertiesPanelModel.ShowTextPosition">
+        <label for="textPosition" class="col-sm-4 control-label">{{ ::'TextPosition' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="textPosition" class="form-control input-sm" ng-model="model.propertiesPanelModel.TextPosition">
+                <option value="0" ng-selected="model.propertiesPanelModel.TextPosition === '0'">{{::'Top' | translate}}</option>
+                <option value="1" ng-selected="model.propertiesPanelModel.TextPosition === '1'">{{::'Left' | translate}}</option>
+                <option value="2" ng-selected="model.propertiesPanelModel.TextPosition === '2'">{{::'NoneWithBrackets' | translate}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group" ng-show="model.propertiesPanelModel.ShowLeftOptions">
+        <label for="columnWidth" class="col-sm-4 control-label">{{ ::'Width' | translate }}</label>
+        <div class="col-sm-8">
+            <input type="text" id="leftQuestionWidth" class="form-control input-sm" ng-model="model.propertiesPanelModel.LeftQuestionWidth" style="width:50px;text-align:right;display:inline-block"
+                   ng-blur="model.propertiesPanelModel.validateQuestionWidth()" maxlength="5" pattern="\d*" />
+            <select class="form-control input-sm" ng-model="model.propertiesPanelModel.WidthType" ng-change="model.propertiesPanelModel.validateQuestionWidth()" style="width:auto;display:inline-block">
+                <option value="1" ng-selected="model.propertiesPanelModel.WidthType === '1'">{{::'Pixel' | translate}}</option>
+                <option value="7" ng-selected="model.propertiesPanelModel.WidthType === '7'">{{::'Percent' | translate}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="property-divider" />
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 3" src="'Views/Properties/groupLogicProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 7" src="'Views/Properties/userPromptProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 11 && model.propertiesPanelModel.isFileSelection" src="'Views/Properties/fileSelectionProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 11 && !model.propertiesPanelModel.isFileSelection" src="'Views/Properties/contentLibraryProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 14" src="'Views/Properties/dataSourceProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 15" src="'Views/Properties/labelProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 16" src="'Views/Properties/autoLogicProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 17" src="'Views/Properties/chartProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 18" src="'Views/Properties/barcodeProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 19" src="'Views/Properties/richTextProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 20" src="'Views/Properties/inkProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 21" src="'Views/Properties/validatorProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 22" src="'Views/Properties/customProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 23" src="'Views/Properties/geolocationProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 24" src="'Views/Properties/numericProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 25" src="'Views/Properties/buttonProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 26" src="'Views/Properties/summaryProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 27" src="'Views/Properties/runActionButtonProperties.html?v=106882799234227327'"></ng-include>
+    <div class="form-group" ng-show="model.propertiesPanelModel.ShowHelpText">
+        <label for="helpText" class="col-sm-4 control-label">{{ ::'HelpText' | translate }}</label>
+        <div class="col-sm-8">
+            <textarea id="helpText" class="form-control input-sm" ng-model="model.propertiesPanelModel.HelpText" rows="6" spellcheck="true"
+                      ui-tinymce="tinymceHtmlWithPickRef" pick-Ref-Editor="model.pickRefEditor(ed)" tree-view="model.treeView"></textarea>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.propertiesPanelModel.ShowAllowComments">
+        <label for="allowComments" class="col-sm-4 control-label">{{ ::'Comments' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input id="allowComments" type="checkbox" class="checkbox" ng-model="model.propertiesPanelModel.AllowComments" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-show="model.propertiesPanelModel.ShowStyles">
+        <label for="cssStyle" class="col-sm-4 control-label">{{ ::'Style' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="cssStyle" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableCssStyles"
+                    ng-model="model.propertiesPanelModel.CssStyle"></select>
+        </div>
+    </div>
+    <a ng-if="model.propertiesPanelModel.ShowFindDependencies" ng-click="model.propertiesPanelModel.findDependencies()" class="dependencies-link">{{'FindDependencies'|translate}}</a>
+</form>

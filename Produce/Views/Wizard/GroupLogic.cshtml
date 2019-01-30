@@ -1,0 +1,99 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.QuestionViewModel<Intelledox.QAWizard.GroupLogicQuestion>>
+
+@{
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+
+    var qid = IdHelper.IdFor(Model.Question);
+    var columns = 0;
+    var currentColumn = -1;
+    var isMultiChoice = (Model.Question.GroupLogicQuestionModel.DisplayType == Intelledox.Model.QuestionDisplayType.MultiChoice);
+    var controlType = isMultiChoice ? "radio" : "checkbox";
+    var classType = isMultiChoice ? "radio-inline" : "checkbox-inline";
+    var isDisabled = !Model.Question.IsEditable;
+    var onClick = "$('#" + qid + "_change').val('1');";
+
+    if (Model.Question.IsRealtimeParentQuestion)
+    {
+        onClick += "wiz.reload();";
+    }
+    else if (Model.Question.IsMandatory)
+    {
+        onClick += "validate.setPass('#" + qid + "');";
+    }
+
+    if (Model.Question.HasValidationErrors())
+    {
+        Model.Question.Validate();
+    }
+
+    switch (Model.Question.GroupLogicQuestionModel.DisplayDirection)
+    {
+        case Intelledox.Model.DisplayDirection.Column2:
+            columns = 2;
+            break;
+        case Intelledox.Model.DisplayDirection.Column3:
+            columns = 3;
+            break;
+        case Intelledox.Model.DisplayDirection.Column4:
+            columns = 4;
+            break;
+        case Intelledox.Model.DisplayDirection.Vertical:
+            classType = isMultiChoice ? "radio" : "checkbox";
+            break;
+    }
+
+
+    List<Intelledox.QAWizard.Answer> activeAnswers = Model.Question.ActiveAnswers();
+}
+<input type="hidden" id="@(qid)_change" name="@(qid)_change" value="0" />
+@if (columns > 0)
+{
+    <div class="mc-table">
+    @foreach (Intelledox.QAWizard.Answer a in activeAnswers)
+{
+    var aid = IdHelper.IdFor(a);
+
+    if (currentColumn == -1)
+    {
+        @:<div class="mc-row">
+    }
+    currentColumn++;
+        <div class="mc-cell@(columns)">
+            <div class="@classType">
+                <label>
+                    <input type="@controlType" id="@aid" name="@qid" disabled="@isDisabled" value="@a.ID" checked="@a.Selected" onclick="@Html.Raw(onClick)" aria-describedby="@(qid)Text" @Html.Raw(Model.Question.IsMandatory ? "required" : "") @if (Model.LogInteractions) { <text>data-analyticsid="@(a.AnalyticsID())"</text> }/>
+                    @Html.Raw(Intelledox.Common.HtmlParsing.Sanitize(((Intelledox.QAWizard.GroupLogicAnswer)a).DisplayTextFormatted))
+                </label>
+            </div>
+        </div>
+
+    if (currentColumn == columns - 1)
+    {
+        @:</div>
+        currentColumn = -1;
+    }
+}
+@if (currentColumn > -1)
+{
+    @:</div>
+}
+    </div>
+}
+else
+{
+    @:<div>
+        foreach (Intelledox.QAWizard.Answer a in activeAnswers)
+        {
+        var aid = IdHelper.IdFor(a);
+        <div class="@classType">
+            <label>
+                <input type="@controlType" id="@aid" name="@qid" disabled="@isDisabled" value="@a.ID" checked="@a.Selected" onclick="@Html.Raw(onClick)" aria-describedby="@(qid)Text" @Html.Raw(Model.Question.IsMandatory ? "required" : "") @if (Model.LogInteractions) { <text>data-analyticsid="@(a.AnalyticsID())"</text> }/>
+                @Html.Raw(Intelledox.Common.HtmlParsing.Sanitize(((Intelledox.QAWizard.GroupLogicAnswer)a).DisplayTextFormatted))
+            </label>
+        </div>
+        }
+    @:</div>
+}
+@Html.DisplayValidation(Model.Question.LastValidationMessage, IdHelper.IdFor(activeAnswers[0]))

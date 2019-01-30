@@ -1,0 +1,110 @@
+﻿<div class="form-group">
+    <label for="size" class="col-sm-4 control-label">{{ ::'Size' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="size" class="form-control input-sm"
+                ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.sizes"
+                ng-model="model.propertiesPanelModel.size"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.size !== 1">
+    <label for="title" class="col-sm-4 control-label">{{ ::'Title' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input id="title" class="form-control input-sm" ng-model="model.propertiesPanelModel.title" />
+            <span class="input-group-btn">
+                <button class="btn btn-default input-sm" type="button"  title="{{ ::'QuestionReference' | translate }}"
+                        ng-click="model.propertiesPanelModel.pickTitleRef('title')"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15" />
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="badge" class="col-sm-4 control-label">{{ ::'Badge' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input id="badge" class="form-control input-sm" ng-model="model.propertiesPanelModel.badge" />
+            <span class="input-group-btn">
+                <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                        ng-click="model.propertiesPanelModel.pickBadgeRef('badge')"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15" />
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="icon" class="col-sm-4 control-label">{{ ::'Icon' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="ink-background-container">
+            <img ng-src="{{model.propertiesPanelModel.icon}}" class="ink-background" />
+        </div>
+        <button ng-click="model.propertiesPanelModel.openImage();">&nbsp;...&nbsp;</button>
+        <button ng-click="model.propertiesPanelModel.clearImage();"><img src="Images/delete.png"></button>
+    </div>
+</div>
+<div class="form-group">
+    <label for="buttonType" class="col-sm-4 control-label">{{ ::'Type' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="buttonType" class="form-control input-sm"
+                ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.buttonTypes"
+                ng-model="model.propertiesPanelModel.buttonType"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.showUrl">
+    <label for="launchUrl" class="col-sm-4 control-label">{{ ::'Url' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="launchUrl" class="form-control input-sm" ng-model="model.propertiesPanelModel.launchUrl"/>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.showNewTab">
+    <label for="openInNewTab" class="col-sm-4 control-label">{{ ::'OpenInNewTab' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="openInNewTab" type="checkbox" ng-model="model.propertiesPanelModel.openInNewTab" />
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.showGoToPage">
+    <label for="goToPage" class="col-sm-4 control-label">{{ ::'GoToPage' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="goToPage" class="form-control input-sm"
+                ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.pages"
+                ng-model="model.propertiesPanelModel.goToPageGuid"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.showGoToProject">
+    <label for="goToFolder" class="col-sm-4 control-label">{{ ::'Folder' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="goToFolder" class="form-control input-sm"
+                ng-options="option.name as option.name | translate for option in model.propertiesPanelModel.folders"
+                ng-model="model.propertiesPanelModel.goToFolder"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.showProjects">
+    <label for="goToProject" class="col-sm-4 control-label">{{ ::'Project' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="goToProject" class="form-control input-sm"
+                ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.projects"
+                ng-model="model.propertiesPanelModel.goToProjectGroupGuid"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.buttonType === 0">
+    <label for="backToggleColour" class="col-sm-4 control-label">{{ ::'BackToggleColour' | translate }}</label>
+    <div class="col-sm-8">
+        <color-picker options="colorPickerOptions" event-api="colorPickerEventApi" id="backToggleColour" ng-model="model.propertiesPanelModel.backToggleColour" />
+    </div>
+</div>
+<div class="form-group">
+    <label for="backColour" class="col-sm-4 control-label">{{ ::'BackColour' | translate }}</label>
+    <div class="col-sm-8">
+        <color-picker options="colorPickerOptions" event-api="colorPickerEventApi" id="backColour" ng-model="model.propertiesPanelModel.backColour" />
+    </div>
+</div>
+<div class="form-group">
+    <label for="focusRingColour" class="col-sm-4 control-label">{{ ::'FocusRingColour' | translate }}</label>
+    <div class="col-sm-8">
+        <color-picker options="colorPickerOptions" event-api="colorPickerEventApi" id="focusRingColour" ng-model="model.propertiesPanelModel.focusRingColour" />
+    </div>
+</div>

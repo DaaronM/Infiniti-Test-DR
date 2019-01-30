@@ -1,0 +1,9 @@
+﻿@using Intelledox.Produce
+@inherits System.Web.Mvc.WebViewPage<Intelledox.QAWizard.SubFragmentNode>
+@foreach (Intelledox.QAWizard.ILayoutNode itemNode in Model.Children)
+{
+    if (itemNode.IsVisible)
+    {
+        Html.RenderNode(itemNode);
+    }
+}

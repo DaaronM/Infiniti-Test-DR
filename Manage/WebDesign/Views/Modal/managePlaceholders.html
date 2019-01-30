@@ -1,0 +1,35 @@
+﻿<form class="form-horizontal" ng-submit="ok()">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title">{{ ::'SelectPlaceholders' | translate }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="selectPlaceholder" class="col-sm-3 control-label">{{ ::'Placeholder' | translate }}</label>
+            <div class="col-sm-7">
+                <select id="selectPlaceholder" class="form-control input-sm"
+                        ng-options="option as option.displayString for option in availablePlaceholders"
+                        ng-model="selectedPlaceholder"></select>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-primary" ng-click="add()" ng-disabled="!isAddEnabled">{{ ::'Add' | translate }}</button>
+            </div>
+        </div>
+        <table class="table table-bordered table-condensed selection-grid">
+            <tr ng-repeat="attr in existingPlaceholders"
+                ng-click="selectExistingPlaceholder(attr.tag)"
+                ng-class="{'active': attr.selected}">
+                <td>{{ attr.name }}</td>
+            </tr>
+        </table>
+        <div class="form-group">
+            <div class="col-sm-2 col-sm-offset-10">
+                <button type="button" class="btn btn-primary" ng-click="remove()" ng-disabled="!isRemoveEnabled">{{ ::'Remove' | translate }}</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">{{ ::'OK' | translate }}</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">{{ ::'Cancel' | translate }}</button>
+    </div>
+</form>

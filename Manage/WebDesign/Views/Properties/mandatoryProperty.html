@@ -1,0 +1,9 @@
+﻿<div class="form-group" ng-if="model.propertiesPanelModel.canBeMandatory">
+    <label for="mandatory" class="col-sm-4 control-label">{{ ::'Mandatory' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input type="checkbox" id="mandatory" class="checkbox" ng-model="model.propertiesPanelModel.mandatory" ng-disabled="model.propertiesPanelModel.hasMandatoryConditions" />
+            <span ng-show="model.propertiesPanelModel.hasMandatoryConditions">&nbsp;{{ 'Conditional' | translate }}</span>
+        </div>
+    </div>
+</div>

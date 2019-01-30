@@ -1,0 +1,1 @@
+function confirmDelete(strMessage){if(confirm(strMessage)){return true}else{return false}}function confirmRemove(strMessage){if(confirm(strMessage)){return true}else{return false}}

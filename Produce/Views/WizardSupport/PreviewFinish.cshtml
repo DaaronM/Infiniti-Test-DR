@@ -1,0 +1,43 @@
+﻿@inherits System.Web.Mvc.WebViewPage<Intelledox.Model.DocumentCollection>
+@{
+    Layout = "~/Views/Shared/_WizardSubpage.cshtml";
+}
+<table class="NoBorder" width="100%" style="border-spacing:1px;" id="tblFiles" role="presentation">
+    <tr>
+        <td class="cell-title" style="padding:5px">@Intelledox.Produce.Resources.Strings.Documents</td>
+    </tr>
+    <tr>
+        <td class="cell-heading" style="padding:5px">
+            @if (Model.Count > 1)
+            {
+                @(string.Format(Intelledox.Produce.Resources.Strings.FilesToDownload, Model.Count))
+            }
+        </td>
+    </tr>
+    <tr>
+        <td class="cell-normal" style="padding:5px">
+            <br />
+            @if (Model.Count == 0)
+            {
+                @Intelledox.Produce.Resources.Strings.NoDocs
+            }
+            else
+            {
+                <ul>
+                    @foreach (Intelledox.Model.Document doc in Model)
+                    {
+                        <li>
+                            <a href="~/DocumentDownload.ashx/@Uri.EscapeDataString(Intelledox.Common.Functions.MakeValidFileName(doc.DisplayName))@doc.Extension?FileId=@Uri.EscapeDataString(doc.DocumentId.ToString())&Extension=@Uri.EscapeDataString(doc.Extension == null ? "" : doc.Extension)&JobId=@Uri.EscapeDataString(Request.QueryString["jobGuid"])" class="fileDownloadLink">
+                                @doc.DisplayName@(string.IsNullOrEmpty(doc.Extension) ? "" : " (" + doc.Extension.Substring(1) + ")")
+                            </a>
+                        </li>
+                    }
+                </ul>
+            }
+            <br />
+        </td>
+    </tr>
+    <tr>
+        <td class="cell-footer" style="padding:5px;text-align:center">&nbsp;</td>
+    </tr>
+</table>

@@ -1,0 +1,28 @@
+﻿<div class="prop-title">
+    {{ model.propertiesPanelModel.PropertiesTitle }}
+    <div class="pull-right">{{ ::'Id' | translate}}: {{model.propertiesPanelModel.ID}}</div>
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="answerName" class="col-sm-4 control-label">{{ ::'AnswerName' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="answerName" class="form-control input-sm f2-rename" ng-model="model.propertiesPanelModel.Name" ng-model-options="{ updateOn: 'blur' }" maxlength="1000"
+                   ng-focus="model.highlightText('answerName')" xng-focus="model.hasDefaultText('answerName')" />
+        </div>
+    </div>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 1" src="'Views/Properties/addressAnswerProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 3" src="'Views/Properties/groupLogicAnswerProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 7" src="'Views/Properties/userPromptAnswerProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 8" src="'Views/Properties/variableAnswerProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 11" src="'Views/Properties/imageProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 14" src="'Views/Properties/dataSourceAnswerProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 15" src="'Views/Properties/labelAnswerProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 17" src="'Views/Properties/imageProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 18" src="'Views/Properties/imageProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 20" src="'Views/Properties/imageProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 22" src="'Views/Properties/customAnswerProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 23" src="'Views/Properties/geolocationAnswerProperties.html?v=106882799234227327'"></ng-include>
+    <ng-include ng-if="model.propertiesPanelModel.QuestionTypeID === 24" src="'Views/Properties/documentFormatProperty.html?v=106882799234227327'"></ng-include>
+
+    <a ng-if="model.propertiesPanelModel.ShowFindDependencies" ng-click="model.propertiesPanelModel.findDependencies()" class="dependencies-link">{{'FindDependencies'|translate}}</a>
+</form>

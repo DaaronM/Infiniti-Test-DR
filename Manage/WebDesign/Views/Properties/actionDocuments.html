@@ -1,0 +1,79 @@
+﻿<div class="prop-title">
+    {{'ActionDocumentsTitle' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="radio">
+                <label>
+                    <input type="radio"
+                           ng-model="model.actionDocumentsPanelModel.actionDocumentsType"
+                           ng-value="0" />
+                    {{'None' | translate}}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="radio">
+                <label>
+                    <input type="radio"
+                           ng-model="model.actionDocumentsPanelModel.actionDocumentsType"
+                           ng-value="1" />
+                    {{'All' | translate}}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="radio">
+                <label>
+                    <input type="radio"
+                           ng-model="model.actionDocumentsPanelModel.actionDocumentsType"
+                           ng-value="2" />
+                    {{'Custom' | translate}}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div ng-show="model.actionDocumentsPanelModel.actionDocumentsType === 2">
+        <div class="form-group">
+            <label for="actionDocument" class="col-sm-4 control-label">{{ ::'Document' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="actionDocument" class="form-control input-sm"
+                        ng-options="option.value as option.name for option in model.actionDocumentsPanelModel.availableDocuments"
+                        ng-model="model.actionDocumentsPanelModel.selectedDocument"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="actionFormat" class="col-sm-4 control-label">{{ ::'Format' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="actionFormat" class="form-control input-sm"
+                        ng-options="option.value as option.name for option in model.actionDocumentsPanelModel.availableFormats"
+                        ng-model="model.actionDocumentsPanelModel.selectedFormat"
+                        ng-disabled="!model.actionDocumentsPanelModel.isFormatEnabled"></select>
+            </div>
+        </div>
+        <div class="form-group text-center">
+            <button ng-disabled="!model.actionDocumentsPanelModel.isAddEnabled" class="btn btn-default" ng-click="model.actionDocumentsPanelModel.add()">{{ 'Add' | translate }}</button>
+            <button ng-disabled="!model.actionDocumentsPanelModel.isRemoveEnabled" class="btn btn-default" ng-click="model.actionDocumentsPanelModel.remove()">{{ 'Remove' | translate }}</button>
+        </div>
+
+        <table class="table table-bordered table-condensed selection-grid">
+            <thead>
+                <tr>
+                    <th>{{ 'Document' | translate }}</th>
+                    <th>{{ 'Format' | translate }}</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="doc in model.actionDocumentsPanelModel.existingDocuments"
+                ng-click="model.actionDocumentsPanelModel.selectExistingDocument(doc.tag)"
+                ng-class="{'active': doc.selected}">
+                <td>{{ doc.document }}</td>
+                <td>{{ doc.format }}</td>
+            </tr>
+        </table>
+    </div>
+</form>

@@ -1,0 +1,109 @@
+﻿<div class="prop-title">
+    {{ 'SeriesProperties' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="seriesName" class="col-sm-4 control-label">{{ ::'Name' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="seriesName" class="form-control input-sm" ng-model="model.seriesPanelModel.name" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="seriesType" class="col-sm-4 control-label">{{ ::'Type' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="seriesType" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.seriesPanelModel.availableTypes"
+                    ng-model="model.seriesPanelModel.selectedType"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="seriesDataQuestion" class="col-sm-4 control-label">{{ ::'DataQuestion' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="seriesDataQuestion" class="form-control input-sm"
+                    ng-options="option.QuestionGuid as option.Text for option in model.seriesPanelModel.availableQuestions"
+                    ng-model="model.seriesPanelModel.selectedQuestionGuid"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="seriesCategoriesField" class="col-sm-4 control-label">{{ ::'CategoriesField' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="seriesCategoriesField" class="form-control input-sm"
+                    ng-options="option.AnswerGuid as option.Name for option in model.seriesPanelModel.availableAnswers"
+                    ng-model="model.seriesPanelModel.selectedCategoryField"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="seriesValueField" class="col-sm-4 control-label">{{ ::'ValueField' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="seriesValueField" class="form-control input-sm"
+                    ng-options="option.AnswerGuid as option.Name for option in model.seriesPanelModel.availableAnswers"
+                    ng-model="model.seriesPanelModel.selectedValueField"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="seriesPalette" class="col-sm-4 control-label">{{ ::'Palette' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="seriesPalette" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.seriesPanelModel.availablePalettes"
+                    ng-model="model.seriesPanelModel.selectedPalette"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="seriesDataPointLabel" class="col-sm-4 control-label">{{ ::'DataPointLabel' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="seriesDataPointLabel" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.seriesPanelModel.availableDataPointLabels"
+                    ng-model="model.seriesPanelModel.selectedDataPointLabel"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="seriesFillColour" class="col-sm-4 control-label">{{ ::'Colour' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="seriesFillColour" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.seriesPanelModel.availableColours"
+                    ng-model="model.seriesPanelModel.selectedFillColour"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="seriesBorderLineDashStyle" class="col-sm-4 control-label">{{ ::'LineStyle' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="seriesBorderLineDashStyle" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.seriesPanelModel.availableLineStyles"
+                    ng-model="model.seriesPanelModel.selectedBorderLineDashStyle"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="seriesBorderLineWidth" class="col-sm-4 control-label">{{ ::'LineWidth' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="seriesBorderLineWidth" class="form-control input-sm" ng-model="model.seriesPanelModel.borderLineWidth" maxlength="5" pattern="\d*" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="seriesBorderLineColour" class="col-sm-4 control-label">{{ ::'LineColour' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="seriesBorderLineColour" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.seriesPanelModel.availableColours"
+                    ng-model="model.seriesPanelModel.selectedBorderLineColour"></select>
+        </div>
+    </div>
+
+
+    <div class="form-group text-center">
+        <button ng-disabled="!model.seriesPanelModel.isAddEnabled" class="btn btn-default" ng-click="model.seriesPanelModel.add()">{{ 'Add' | translate }}</button>
+        <button ng-disabled="!model.seriesPanelModel.isUpdateEnabled" class="btn btn-default" ng-click="model.seriesPanelModel.update()">{{ 'Update' | translate }}</button>
+        <button ng-disabled="!model.seriesPanelModel.isRemoveEnabled" class="btn btn-default" ng-click="model.seriesPanelModel.remove()">{{ 'Remove' | translate }}</button>
+    </div>
+
+    <table class="table table-bordered table-condensed selection-grid">
+        <thead>
+            <tr>
+                <th>{{ 'Series' | translate }}</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="series in model.seriesPanelModel.existingSeries" 
+            ng-click="model.seriesPanelModel.selectExistingSeries(series.tag)"
+            ng-class="{'active': series.selected}">
+            <td>{{ series.name }}</td>
+        </tr>
+    </table>
+</form>

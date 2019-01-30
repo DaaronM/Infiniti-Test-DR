@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html dir="@(System.Threading.Thread.CurrentThread.CurrentUICulture.TextInfo.IsRightToLeft ? "rtl" : "ltr")" lang="@(System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName )">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8,IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@Html.Raw(Infiniti.MvcControllers.ApplicationSettings.ThemePageTitle)</title>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link href="~/Content/bootstrap.min.css?v=337" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-theme.min.css?v=337" rel="stylesheet" />
+    <link href="~/Content/base.css?v=10" type="text/css" rel="stylesheet" />
+    <link href="~/Content/site.css?v=10.2" type="text/css" rel="stylesheet" />
+    @if (System.Threading.Thread.CurrentThread.CurrentUICulture.TextInfo.IsRightToLeft)
+    {
+        <link href="~/Content/siteRtl.css?v=10" type="text/css" rel="stylesheet" />
+    }
+    @Html.Raw(Infiniti.MvcControllers.ApplicationSettings.ThemeCss(Url.Content("~/")))
+    <script src="~/scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="~/scripts/bootstrap.min.js?v=337"></script>
+    @RenderSection("AddToHead", required: false)
+</head>
+<body>
+    @RenderBody()
+    <div id="footer">
+    </div>
+</body>
+</html>

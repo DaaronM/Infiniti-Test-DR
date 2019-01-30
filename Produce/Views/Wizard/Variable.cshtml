@@ -1,0 +1,12 @@
+﻿@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.QuestionViewModel<Intelledox.QAWizard.VariableQuestion>>
+
+@{
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+}
+<div>
+    @foreach (Intelledox.QAWizard.Answer a in Model.Question.Answers)
+    {
+      <div id="@IdHelper.IdFor(a)" class="question-label variable-debug">@(a.AnswerModel.Name + ": " + a.OutputValue(false))</div>
+    }
+</div>

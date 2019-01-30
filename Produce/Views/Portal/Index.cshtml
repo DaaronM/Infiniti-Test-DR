@@ -1,0 +1,10 @@
+﻿@model List<Intelledox.Model.ProjectListItem>
+@{
+    Layout = "~/Views/Shared/_LayoutSubpage.cshtml";
+}
+<ul class="portal">
+@foreach (var project in Model)
+{
+    <li><a target="_blank" href="~/wizard/@project.ProjectGroupGuid/?Portal=1">@project.Name</a></li>
+}
+</ul>

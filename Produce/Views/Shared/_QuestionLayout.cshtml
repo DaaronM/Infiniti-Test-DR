@@ -1,0 +1,138 @@
+﻿@{
+    var question = Model.Question;
+    var questionModel = question.QuestionModel;
+    var qid = Intelledox.ViewModel.Core.IdHelper.IdFor(question);
+    var repeatPath = Model.RepeatPath;
+    string titleText = Model.HtmlTextFormatted;
+    var commentsIcon = "commentsIcon";
+    if (question.IsMandatoryShowing)
+    {
+        titleText += " " + Intelledox.Produce.Resources.Strings.Mandatory;
+    }
+    else if (question.IsOptionalShowing)
+    {
+        titleText += " " + Intelledox.Produce.Resources.Strings.OptionalQuestion;
+    }
+    if (questionModel.AllowComments && question.HasComments)
+    {
+        commentsIcon = "commentedIcon";
+    }
+
+    bool includeFor = question.IsEditable &&
+              (question is Intelledox.QAWizard.UserPromptQuestion ||
+                (question is Intelledox.QAWizard.GroupLogicQuestion &&
+                    questionModel.DisplayType == Intelledox.Model.QuestionDisplayType.Dropdown) ||
+                (question is Intelledox.QAWizard.DatasourceQuestion &&
+                    ((questionModel.DisplayType == Intelledox.Model.QuestionDisplayType.List &&
+                        questionModel.SelectionType == Intelledox.Model.SelectionType.Single) ||
+                    questionModel.DisplayType == Intelledox.Model.QuestionDisplayType.AutoComplete)) ||
+                question is Intelledox.QAWizard.NumericQuestion);
+    bool includeId = (question is Intelledox.QAWizard.GroupLogicQuestion ||
+        question is Intelledox.QAWizard.ButtonQuestion);
+    }
+<div class="question-group @(question.HasValidationErrors() ? "question-invalid" : "")">
+    @if (questionModel.TextPosition == Intelledox.QAWizard.Design.TextPosition.Top)
+    {
+        @:<div class="question-text @(Model.Question.OnlyVisibleForTroubleshooting ? "question-text-debug" : "")">
+    }
+    else if (questionModel.TextPosition == Intelledox.QAWizard.Design.TextPosition.Left)
+    {
+        if (questionModel.WidthType == Intelledox.QAWizard.Design.WidthType.Pixel && questionModel.LeftQuestionWidth == 150)
+        {
+            @:<table width="100%" role="presentation"><tr><td class="question-text-inline @(Model.Question.OnlyVisibleForTroubleshooting ? "question-text-debug" : "")">
+        }
+        else if (questionModel.WidthType == Intelledox.QAWizard.Design.WidthType.Pixel)
+        {
+            @:<table width="100%" role="presentation"><tr><td style="width: @(questionModel.LeftQuestionWidth)px;" class="question-text-inline @(Model.Question.OnlyVisibleForTroubleshooting ? "question-text-debug" : "")">
+        }
+        else if (questionModel.WidthType == Intelledox.QAWizard.Design.WidthType.Percentage)
+        {
+            @:<table width="100%" role="presentation"><tr><td style="width: @(questionModel.LeftQuestionWidth)%;" class="question-text-inline @(Model.Question.OnlyVisibleForTroubleshooting ? "question-text-debug" : "")">
+        }
+    }
+    else
+    {
+        @:<div class="question-body @questionModel.CssStyle">
+    }
+
+    @if (includeFor)
+    {
+        <label id="@(includeId ? qid + "Text" : null)" for="@qid" class="@(questionModel.TextPosition == Intelledox.QAWizard.Design.TextPosition.None ? "sr-only" : null)">@Html.Raw(titleText)</label>
+    }
+    else if (questionModel.TextPosition != Intelledox.QAWizard.Design.TextPosition.None || includeId)
+    {
+        <div id="@(includeId ? qid + "Text" : null)" class="qtdiv @(questionModel.TextPosition == Intelledox.QAWizard.Design.TextPosition.None ? "sr-only" : null)" role="heading">@Html.Raw(titleText)</div>
+    }
+    @if (questionModel.TextPosition != Intelledox.QAWizard.Design.TextPosition.None)
+    {
+        @* Help Button *@
+        if (questionModel.HelpText != "")
+        {
+            <a href="#void" data-questionguid="@question.QuestionGuid.ToString()" 
+               data-path="@Url.Content("~/")"
+               data-log="@question.WizardFragment.WizardSession.ProjectLog.ToString()" 
+               data-frag="@question.WizardFragment.InstanceId.ToString()" 
+               data-repeatpath="@(repeatPath)" class="helpIcon help-question" title="@Intelledox.Produce.Resources.Strings.ClickForHelp" id="@(qid)_help"
+               @if (Model.LogInteractions) { <text>data-analyticsid="@(Model.AnalyticsID)" data-analyticsevent="questionHelp"</text> }>
+                <span class="sr-only">@Intelledox.Produce.Resources.Strings.Help</span>
+               </a>
+        }
+
+                  @* Comments Button *@
+    if (questionModel.AllowComments)
+    {
+        <span class="comments-question">
+            <a href="#void" id="@(qid)_commentsPopup" 
+               name="@(qid)_commentsPopup" 
+               onclick="wiz.commentsPopup(this, '@qid', '@question.WizardFragment.WizardSession.UserGuid');"
+               data-questionguid="@question.QuestionGuid.ToString()" 
+               data-userguid="@question.WizardFragment.WizardSession.UserGuid" 
+               data-path="@Url.Content("~/")" 
+               data-log="@question.WizardFragment.WizardSession.ProjectLog.ToString()" 
+               data-frag="@question.WizardFragment.InstanceId.ToString()" 
+               data-repeatpath="@(repeatPath)" class="@(commentsIcon)" title="@Intelledox.Produce.Resources.Strings.Comments"
+               @if (Model.LogInteractions) { <text>data-analyticsid="@(Model.AnalyticsID)" data-analyticsevent="questionOpenComment"</text> }>
+                <span class="sr-only">@Intelledox.Produce.Resources.Strings.Comments</span>
+               </a>
+            <span class="commentCounter" id="@(qid)_commentsCounter" name="@(qid)_commentsCounter">@(question.GetCommentsToView(question.WizardFragment.WizardSession.UserGuid))</span>
+        </span>
+        }
+    }
+
+    @if (questionModel.TextPosition == Intelledox.QAWizard.Design.TextPosition.Top)
+    {
+        @:</div><div class="question-body @questionModel.CssStyle">
+    }
+    else if (questionModel.TextPosition == Intelledox.QAWizard.Design.TextPosition.Left)
+    {
+        @:</td><td><div class="question-body @questionModel.CssStyle">
+    }
+
+    @RenderBody()
+
+    @if (questionModel.TextPosition == Intelledox.QAWizard.Design.TextPosition.None)
+    {
+        if (questionModel.AllowComments)
+        {
+            <span class="comments-question">
+                <a href="#void" id="@(qid)_commentsPopup" name="@(qid)_commentsPopup" onclick="wiz.commentsPopup(this, '@qid', '@question.WizardFragment.WizardSession.UserGuid');" data-questionguid="@question.QuestionGuid.ToString()" data-userguid="@question.WizardFragment.WizardSession.UserGuid" data-path="@Url.Content("~/")" data-log="@question.WizardFragment.WizardSession.ProjectLog.ToString()" data-frag="@question.WizardFragment.InstanceId.ToString()" data-repeatpath="@(repeatPath)" class="@(commentsIcon)" title="@Intelledox.Produce.Resources.Strings.Comments"><span class="sr-only">@Intelledox.Produce.Resources.Strings.Comments</span></a>
+                <span class="commentCounter" id="@(qid)_commentsCounter" name="@(qid)_commentsCounter">@(question.GetCommentsToView(question.WizardFragment.WizardSession.UserGuid))</span>
+            </span>
+        }
+    }
+
+    </div>
+
+    @if (questionModel.TextPosition == Intelledox.QAWizard.Design.TextPosition.Left)
+    {
+        @:</td></tr></table>
+    }
+</div>
+ @if (questionModel.AllowComments)
+ {
+    <input type="hidden" id="@Html.Raw(qid + "_allcomments")" name="@Html.Raw(qid + "_allcomments")" value="" />
+ }
+ @if (question.WizardFragment.WizardSession.Troubleshooting.HasTroubleshooting && question is Intelledox.QAWizard.DatasourceQuestion && !String.IsNullOrEmpty(Model.HtmlErrorMessage))
+ {
+    <div class="datasource-debug">@Html.Raw(Intelledox.Common.HtmlParsing.Sanitize(Model.HtmlErrorMessage))</div>
+ }

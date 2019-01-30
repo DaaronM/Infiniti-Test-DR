@@ -1,0 +1,294 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.DataFieldQuestionViewModel>
+@{
+    if (Model.ShowQuestionTemplate)
+    {
+        Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+    }
+    else
+    {
+        Layout = null;
+    }
+    var qid = IdHelper.IdFor(Model.Question);
+    var selectedIndex = Model.SelectedIndex;
+
+    if (Model.Question.HasValidationErrors())
+    {
+        Model.Question.Validate();
+    }
+}
+
+<input type="hidden" id="@(qid)_hidSelectedIndex" name="@(qid)_hidSelectedIndex" value="@selectedIndex" />
+<div id="@(qid)_label-warning" class="label-warning" hidden>@Model.CacheWarningMessage</div>
+<div id="@(qid)_offline" hidden><span class="wrn">@Intelledox.Produce.Resources.Strings.Offline</span></div>
+@if (Model.Question.WizardFragment.WizardSession.Troubleshooting.HasTroubleshooting)
+{
+    if (Model.Question.QueryData.Count == 0)
+    {
+        <div class="question-label datasource-debug">@(Html.Raw(Intelledox.Produce.Resources.Strings.DataGridTroubleshootingWarning))</div>
+    }
+    else
+    {
+        foreach (KeyValuePair<double, string> query in Model.Question.QueryData)
+        {
+            <div class="question-label datasource-debug">@(Html.Raw(String.Format(Intelledox.Produce.Resources.Strings.TimeToFetchData, query.Value, query.Key).Replace(Environment.NewLine, "<br>")))</div>
+        }
+    }
+}
+<div id="@(qid)_gridResults" class="row datagrid-table">
+    <table id="grdData_@(qid)" class="table table-bordered display dt-responsive" width="100%" cellspacing="0" data-SelectionField="@(qid)_hidSelectedIndex">
+        <thead>
+            <tr role="row"></tr>
+        </thead>
+        <tr>
+            <td><div id="ixLoading@(qid)" class="wait-datagrid" title="@Intelledox.Produce.Resources.Strings.Loading" aria-label="@Intelledox.Produce.Resources.Strings.Loading"></div><br /></td>
+        </tr>
+    </table>
+</div>
+
+@Html.DisplayValidation(Model.Question.LastValidationMessage, qid)
+
+<script type="text/javascript">
+    function fetchData@(qid)() {
+        var queryUrl = '@Url.Content("~/")data/grid/?fragmentGuid=@(Model.Question.WizardFragment.InstanceId.ToString())' +
+                        '&QuestionGuid=@(Model.Question.QuestionGuid.ToString())' +
+                        '&RepeatPath=@(Model.RepeatPath)' +
+                        '&logGuid=@Model.Question.WizardFragment.WizardSession.ProjectLog.ToString()';
+
+        if (wiz.isNative) {
+            NativeFunc("doGetUrl", queryUrl + '&resetData=false', function (data) {
+                createGrid(JSON.parse(data));
+            });
+        } else {
+            $.ajaxSetup({
+                cache: false
+            });
+            $.get(queryUrl + '&resetData=false',
+                function response(data) {
+                    createGrid(data);
+                }
+            );
+        }
+
+        function createGrid(data) {
+            if (data.cacheWarning) {
+                $('#@(qid)_label-warning').show();
+            }
+
+            if (data.error != null || data.columns.length === 0) {
+                $('#@(qid)_gridResults').append(data.error);
+                $('#grdData_@(qid)').hide();
+                if (data.displayOffline) {
+                    $('#@(qid)_offline').show();
+                }
+                return;
+            }
+
+            wiz.addScript('dataTableJs', '@Url.Content("~/scripts/datatables.min.js")').then(function () {
+                return wiz.addScript('dataTableRowJs', '@Url.Content("~/scripts/dataTables.rowGroup.js")');
+            }).then(function () {
+
+            var logInteractions = @Model.LogInteractions.ToString().ToLowerInvariant();
+            var isMultiple = @Model.IsMultipleSelect.ToString().ToLowerInvariant();
+            var thead = $('#grdData_@(qid) thead tr');
+            var existingHeaders = thead.children('th').length > 0;
+            var groupingIndex = -1;
+
+            for (var colIndex = 0; colIndex < data.columns.length; colIndex++) {
+                if (data.columns[colIndex].name === '@Html.Raw(HttpUtility.JavaScriptStringEncode(@Model.Question.DatasourceQuestionModel.GroupingField))') {
+                    groupingIndex = colIndex;
+                }
+                if (!existingHeaders) {
+                    var header = '<th class="' + (data.columns[colIndex].nosort ? "no-sort" : "") + ' ' + (logInteractions ? '@(qid)_focussortclick' : '') + '" ' + (logInteractions ? 'data-analyticsid="' + "@(Model.AnalyticsID)" + "\" data-analyticsevent=\"dataGridSort " + data.columns[colIndex].displayname + "\"" : "") + '>' + data.columns[colIndex].displayname + '</th>';
+                    thead.append(header);
+                }
+            }
+
+            var t = $('#grdData_@(qid)').DataTable({
+                destroy: true,
+                data: data.data,
+                order: [],
+                columnDefs: (groupingIndex > -1 ? [{ targets: 'no-sort', orderable: false }, { 'visible': false, 'targets': groupingIndex }] : [{ targets: 'no-sort', orderable: false }]),
+                rowGroup: (groupingIndex > -1 ? {
+                    startRender: function (rows, group) {
+                        return $('<tr/>')
+                            .append(
+                                $('<th/>')
+                                    .attr('colspan', $(this.s.dt.columns().header()).filter(':visible').length)
+                                    .append(group)
+                            );
+                    },
+                    endRender: null,
+                    dataSrc: groupingIndex
+                } : undefined),
+                lengthChange: false,
+                autoWidth: false,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: '@Html.Raw(HttpUtility.JavaScriptStringEncode(Intelledox.Produce.Resources.Strings.Search))',
+                    zeroRecords: '@Html.Raw(HttpUtility.JavaScriptStringEncode(Intelledox.Produce.Resources.Strings.ZeroRecords))',
+                    infoEmpty: '@Html.Raw(HttpUtility.JavaScriptStringEncode(Intelledox.Produce.Resources.Strings.InfoEmpty))',
+                    infoFiltered: '@Html.Raw(HttpUtility.JavaScriptStringEncode(String.Format(Intelledox.Produce.Resources.Strings.InfoFiltered, "_MAX_")))',
+                },
+                @if (Model.Editable)
+                {
+                    @:select: { style: "@(Model.IsMultipleSelect ? "multi" : "single")", info: false },
+                }
+                else
+                {
+                    @:select: false,
+                }
+                searching: @Model.Question.DatasourceQuestionModel.SearchAll.ToString().ToLowerInvariant(),
+                pageLength: @Model.Question.DatasourceQuestionModel.ResultsPerPage,
+                stateSave: true,
+                stateDuration: -1, //Use session storage
+                stateSaveCallback: function (settings, data) {
+                    localStorage.setItem("#@(qid)_gridResults" + $('#hidLogGuid').val(), JSON.stringify(data));
+                },
+                stateLoadCallback: function () {
+                    try {
+                        return JSON.parse(localStorage.getItem("#@(qid)_gridResults" + $('#hidLogGuid').val()));
+                    } catch (e) { }
+                },
+                responsive: true,
+                "fnDrawCallback": function (oSettings) {
+                    if (oSettings._iDisplayLength > oSettings.fnRecordsDisplay()) {
+                        $(oSettings.nTableWrapper).find('#grdData_@(qid)_paginate').hide();
+                    } else {
+                        $(oSettings.nTableWrapper).find('#grdData_@(qid)_paginate').show();
+                    }
+                    if (logInteractions) {
+                        $('#grdData_@(qid)_paginate .paginate_button').each(function () {
+                            $(this).bind('click', function (e) {
+                                var focusNode = "@(Model.AnalyticsID)";
+                                var eventNode = "dataGridPage " + $(this).find('a').text();
+                                wiz.dataAnalyticsFocusAndBlur(focusNode, eventNode);
+                            });
+                        });
+                    }
+                },
+                "infoCallback": function (settings, start, end, max, total, pre) {
+                    var api = this.api();
+                    var pageInfo = api.page.info();
+                    if (pageInfo.pages <= 1) {
+                        return '';
+                    }
+                    var output = '@Html.Raw(HttpUtility.JavaScriptStringEncode(Intelledox.Produce.Resources.Strings.ShowPageOfPage))';
+                    return output.replace('{0}', (pageInfo.page + 1)).replace('{1}', pageInfo.pages);
+                },
+                "initComplete": function (settings, json) {
+                    if (logInteractions) {
+                        @if (Model.Question.DatasourceQuestionModel.SearchAll)
+                        {
+                            <text>
+                            $('#grdData_@(qid)_filter input').addClass("@(qid)_focussearch").attr('data-analyticsid', '@(Model.AnalyticsID)').attr('data-analyticsevent', 'dataGridSearch');
+                            $(".@(qid)_focussearch").focus(function () {
+                                var focusNode = $(this).data('analyticsid');
+                                var eventNode = $(this).data('analyticsevent');
+                                wiz.dataAnalyticsFocus(focusNode, eventNode);
+                            });
+                            $(".@(qid)_focussearch").blur(function () {
+                                wiz.dataAnalyticsBlur();
+                            });
+                            </text>
+                        }
+
+                        $(".@(qid)_focussortclick").click(function () {
+                            var focusNode = $(this).data('analyticsid');
+                            var eventNode = $(this).data('analyticsevent');
+                            wiz.dataAnalyticsFocusAndBlur(focusNode, eventNode);
+                        });
+                    }
+                }
+            });
+
+            @if (!string.IsNullOrEmpty(selectedIndex) && selectedIndex != Intelledox.Common.ConstantValues.NONEVALUE && selectedIndex != "-1")
+            {
+                <text>
+                t.rows([@selectedIndex], { order: 'index' }).select();
+                </text>
+            }
+
+            $.fn.dataTable.ext.classes.sPaging = "@(qid)";
+
+            //Responsive seems to only hide one column at a time. Recurse down until we fit.
+            t.on('responsive-resize', function (e, datatable, columns) {
+                $("#grdData_@(qid)").DataTable().responsive.recalc();
+            });
+
+            $("#grdData_@(qid)").DataTable().responsive.recalc();
+
+            t.on('select', function (e, dt, type, indexes) {
+                if (logInteractions) {
+                    wiz.dataAnalyticsFocusAndBlur('@(Model.AnalyticsID)', "dataGridSelect " + indexes);
+                }
+
+                @Html.Raw(Model.Question.IsMandatory ? "validate.setPass('#" + qid + "');" : "");
+
+                if ( type === 'row' ) {
+                    if (isMultiple) {
+                        selectionField = $('#' + $('#grdData_@(qid)').data('selectionfield'));
+
+                        if (selectionField.val() == 'None' || selectionField.val() === '') {
+                            // This is the first row to be selected - so remove the "None"
+                            selectionField.val(indexes);
+                        } else {
+                            selectionField.val(selectionField.val() + "," + indexes);
+                        }
+                    }
+                    else
+                    {
+                        selectionField = $('#' + $('#grdData_@(qid)').data('selectionfield'));
+                        selectionField.val(indexes);
+                    }
+                }
+            } );
+            t.on('deselect', function (e, dt, type, indexes) {
+                if (logInteractions) {
+                    wiz.dataAnalyticsFocusAndBlur('@(Model.AnalyticsID)', "dataGridDeselect " + indexes);
+                }
+
+                if ( type === 'row' ) {
+                    if (isMultiple) {
+                        selectionField = $('#' + $('#grdData_@(qid)').data('selectionfield'));
+                        var selectedIndices;
+                        if (selectionField.val() === '') {
+                            selectedIndices = [];
+                        } else {
+                            selectedIndices = selectionField.val().split(',');
+                        }
+
+                        if (indexes.length > 0) {
+                            wiz.removeAt(selectedIndices, wiz.indexOf(selectedIndices, indexes[0].toString()));
+                            selectionField.val(selectedIndices.join(','));
+                        }
+                    }
+                }
+            });
+
+            @if (Model.Question.DatasourceQuestionModel.LiveRefresh)
+            {
+                <text>
+                wiz.intervals.push(setInterval(function () {
+                    t.ajax.url(queryUrl + '&resetData=true');
+                    t.ajax.reload(function () {
+                        var indexValue = document.getElementById('@(qid)_hidSelectedIndex').value;
+
+                        document.getElementById('@(qid)_hidSelectedIndex').value = '';
+
+                        if (indexValue != '')
+                        {
+                            t.rows(indexValue.split(','), { order: 'index' }).select();
+                        }
+                    }, false);
+                }, @((Model.Question.DatasourceQuestionModel.RefreshPeriod * 1000).ToString())));
+                </text>
+            }
+            });
+        }
+
+    }
+
+    fetchData@(qid)();
+</script>

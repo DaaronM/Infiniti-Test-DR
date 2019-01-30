@@ -1,0 +1,91 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.GeolocationQuestionViewModel>
+@{
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+    var qid = @IdHelper.IdFor(Model.Question);
+    var isDisabled = !Model.Question.IsEditable;
+    var mapSrc = "";
+    var zoom = "";
+    var apiKey = "";
+}
+@if (Model.IsNativeApp)
+{
+    apiKey = Model.GetGoogleStaticMapsApiKey();
+    zoom = "17";
+
+
+    if (Model.IsOnline() && Model.LatitudeString != "0.0" && Model.LongitudeString != "0.0")
+    {
+        mapSrc = string.Format("https://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom={3}&scale=2&size=600x400&maptype=roadmap&markers=color:red|{0},{1}&key={2}", Model.LatitudeString, Model.LongitudeString, apiKey, zoom);
+    }
+}
+@if (mapSrc.Length == 0)
+{
+    <div class="form-group">
+        <label for="@(qid)_Latitude">@Intelledox.Produce.Resources.Strings.Latitude</label>
+        <div>
+            <input type="number" id="@(qid)_Latitude" name="@(qid)_Latitude" class="form-control" value="@Model.LatitudeString" disabled="@isDisabled" step="any" @Html.Raw(Model.Question.IsRealtimeParentQuestion ? "onblur=\"if ($('#" + qid + "_change').val() == '1') {wiz.delayPostback();}\" autocomplete=\"off\"" : "") @Html.Raw(Model.Question.IsMandatory ? "required" : "")
+                   @if (Model.LogInteractions) { <text> data-analyticsid="@(Model.AnalyticsID)" </text> } />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="@(qid)_Longitude">@Intelledox.Produce.Resources.Strings.Longitude</label>
+        <div>
+            <input type="number" id="@(qid)_Longitude" name="@(qid)_Longitude" class="form-control" value="@Model.LongitudeString" disabled="@isDisabled" step="any" @Html.Raw(Model.Question.IsRealtimeParentQuestion ? "onblur=\"if ($('#" + qid + "_change').val() == '1') {wiz.delayPostback();}\" autocomplete=\"off\"" : "") @Html.Raw(Model.Question.IsMandatory ? "required" : "")
+                   @if (Model.LogInteractions) { <text> data-analyticsid="@(Model.AnalyticsID)" </text> } />
+        </div>
+        @if (isDisabled)
+        {
+            @Html.DisplayValidation(Model.Question.LastValidationMessage, qid)
+        }
+    </div>
+}
+@if (Model.IsNativeApp)
+{
+    if (mapSrc.Length > 0)
+    {
+        <input type="hidden" id="@(qid)_Longitude" name="@(qid)_Longitude" value="@Model.LongitudeString" />
+        <input type="hidden" id="@(qid)_Latitude" name="@(qid)_Latitude" value="@Model.LatitudeString" />
+        <div class="form-group">
+            <img id="@(qid)_Map" name="@(qid)_Map" src="@mapSrc" class="static-map" />
+        </div>
+        <div><button type="button" class="btn btn-default btn-get" onclick="getGeolocation('@Model.Question.WizardFragment.WizardSession.UserGuid.ToString()', '@(qid)_Latitude', '@(qid)_Longitude', '@(qid)_Warn', @Model.HighAccuracy.ToString().ToLower(), 'true');@Html.Raw(Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "', 'geolocation'" + ");" : "")">@Intelledox.Produce.Resources.Strings.UpdateToCurrentLocation</button></div>
+
+        <script type="text/javascript">
+             $("#@(qid)_Latitude").on({
+                 change:
+                     function() {
+                         var lat = $(this).val();
+                         var lon = $('#@(qid)_Longitude').val();
+                         var src = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
+                             lat +
+                             ',' +
+                             lon +
+                             '&zoom=@(zoom)&scale=2&size=600x400&maptype=roadmap&markers=color:red|' +
+                             lat +
+                             ',' +
+                             lon +
+                             '&key=@(apiKey)';
+                         $('#@(qid)_Map').attr("src", src);
+                     }
+             });
+        </script>
+    }
+}
+<span style="display:none" class="wrn" id="@(qid)_Warn">@Intelledox.Produce.Resources.Strings.GeolocationNotSupported</span>
+@if (mapSrc.Length == 0 && !isDisabled)
+{
+    <div><button type="button" class="btn btn-default btn-get" onclick="getGeolocation('@Model.Question.WizardFragment.WizardSession.UserGuid.ToString()', '@(qid)_Latitude', '@(qid)_Longitude', '@(qid)_Warn', @Model.HighAccuracy.ToString().ToLower(), 'true');@Html.Raw(Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "', 'geolocation'" + ");" : "")">@Intelledox.Produce.Resources.Strings.UseCurrentLocation</button></div>
+}
+@if (Model.Question.IsParentQuestion && !isDisabled)
+{
+    <input type="hidden" id="@(qid)_change" name="@(qid)_change" value="0" />
+    <script type="text/javascript">
+        wiz.wireTextChanged('#@(qid)_Latitude,#@(qid)_Longitude', '#@(qid)_change', '');
+    </script>
+}
+@if (!isDisabled)
+{
+    @Html.DisplayValidation(Model.Question.LastValidationMessage, qid)
+}

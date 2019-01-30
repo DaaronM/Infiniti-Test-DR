@@ -1,0 +1,170 @@
+﻿@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.WorkflowViewModel>
+@if (!string.IsNullOrEmpty(Model.HelpText))
+{
+    <div>
+        @Html.Raw(Intelledox.Common.HtmlParsing.Sanitize(Model.HelpText))<br /><br />
+    </div>
+}
+@if (Model.ShowStepSelection)
+{
+    <div class="question-group">
+        <h3 class="question-text">@Intelledox.Produce.Resources.Strings.NextSteps</h3>
+        <div class="question-body">
+            @if (Model.HasNoPossibleNextState)
+            {
+                <span class="wrn">@Intelledox.Produce.Resources.Strings.NextStateInvalid</span>
+            }
+            else if (Model.HasSinglePossibleNextState)
+            {
+                <input type="hidden" name="nextStateId" value="@Model.NextStates[0].Id.ToString()" />
+                @Model.NextStates[0].StateNameFormatted
+            }
+            else
+            {
+                <select name="nextStateId" onchange="wiz.reload()" class="form-control">
+                    <option value=""></option>
+                    @foreach (var s in Model.NextStates)
+                    {
+                        <option value="@s.Id.ToString()" @(Model.NextStateTransition != null && Model.NextStateTransition.StateId == s.Id ? "selected=\"selected\"" : "")>@s.StateNameFormatted</option>
+                    }
+                </select>
+            }
+        </div>
+    </div>
+}
+@if (Model.ShowSendTo)
+{
+    <div class="question-group">
+        @if (!String.IsNullOrEmpty(Model.SendToHeading))
+        {
+            <h3 class="question-text">
+                @Model.SendToHeading @if (Model.SendToIsSearch)
+                {
+                    @Html.Raw(Intelledox.Produce.Resources.Strings.Mandatory)
+                }
+            </h3>
+        }
+        <div class="question-body">
+            @if (Model.SendToIsSearch)
+            {
+                if (Model.SendToIsSearchForUser)
+                {
+                    if (Model.IsNativeApp)
+                    {
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label for="username">@Intelledox.Produce.Resources.Strings.Username</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <input type="text" id="username" required class="form-control" onfocus="wiz.setDefaultButton('btnSearch');" onblur="wiz.setDefaultButton(undefined);" @Html.Raw(Model.LogInteractions ? "data-analyticsid=\"workflowusername\"" : "") />
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <input type="button" id="btnSearch" class="btn btn-default btn-srch" value="@Intelledox.Produce.Resources.Strings.Search" onclick="wiz.doUsernameSearch('@Url.Content("~/")', '@Model.SendToSearchRestrictGroup.ToString()', '@Intelledox.Produce.Resources.Strings.Selected', '@Intelledox.Produce.Resources.Strings.NoPersonFound', '@Intelledox.Produce.Resources.Strings.NoUserNameSupplied')" @Html.Raw(Model.LogInteractions ? "data-analyticsid=\"workflowUserNameSearch\"" : "") />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="workflowSearchResponse"></div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label for="lastName">@Intelledox.Produce.Resources.Strings.LastName</label>
+                                </div>
+                                <div class="col-sm-5">
+                                    <label for="firstName">@Intelledox.Produce.Resources.Strings.FirstName</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <input type="text" id="lastName" class="form-control" onfocus="wiz.setDefaultButton('btnSearch');" onblur="wiz.setDefaultButton(undefined);" @Html.Raw(Model.LogInteractions ? "data-analyticsid=\"workflowLastName\"" : "") />
+                                </div>
+                                <div class="col-sm-5">
+                                    <input type="text" id="firstName" class="form-control" onfocus="wiz.setDefaultButton('btnSearch');" onblur="wiz.setDefaultButton(undefined);" @Html.Raw(Model.LogInteractions ? "data-analyticsid=\"workflowFirstName\"" : "") />
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="button" id="btnSearch" class="btn btn-default btn-srch" value="@Intelledox.Produce.Resources.Strings.Search" onclick="wiz.doUserSearch('@Url.Content("~/")', '@Model.SendToSearchRestrictGroup.ToString()', '@Intelledox.Produce.Resources.Strings.SelectString', '@Intelledox.Produce.Resources.Strings.NoPersonFound')" @Html.Raw(Model.LogInteractions ? "data-analyticsid=\"workflowUserSearch\"" : "") />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <table class="table table-bordered table-striped table-condensed"
+                           id="grdResults">
+                        <tbody id="rowResults"></tbody>
+                    </table>
+                }
+                if (!Model.SendToIsSearchForUser)
+                {
+                    if (Model.IsNativeApp)
+                    {
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label for="group">@Intelledox.Produce.Resources.Strings.SearchForGroup</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <input type="text" id="group" class="form-control" onfocus="wiz.setDefaultButton('btnSearch');" onblur="wiz.setDefaultButton(undefined);" @Html.Raw(Model.LogInteractions ? "data-analyticsid=\"workflowgroupname\"" : "") />
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <input type="button" id="btnSearch" class="btn btn-default btn-srch" value="@Intelledox.Produce.Resources.Strings.Search" onclick="wiz.doGroupSearch('@Url.Content("~/")','@Intelledox.Produce.Resources.Strings.Selected', '@Intelledox.Produce.Resources.Strings.GroupNotFound', '@Intelledox.Produce.Resources.Strings.NoGroupNameSupplied')" @Html.Raw(Model.LogInteractions ? "data-analyticsid=\"workflowGroupSearch\"" : "") />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="workflowSearchResponse"></div>
+
+                        <input type="hidden" id="selectedGroup" name="selectedGroup" />
+                    }
+                    else
+                    {
+                        <select name="selectedGroup" class="form-control">
+                            <option value=""></option>
+                            @foreach (var s in Model.NextGroups)
+                            {
+                                <option value="@s.Id.ToString()">@s.Name</option>
+                            }
+                        </select>
+                    }
+                }
+                <input type="hidden" id="selectedUser" name="selectedUser" />
+            }
+            else if (Model.AssignedGroup != null)
+            {
+                <span>@Model.AssignedGroup.Name</span>
+                <input type="hidden" id="questionReferenceGroup" name="questionReferenceGroup" value="@Model.AssignedGroup.Id" />
+            }
+            else if (Model.AssignedUser != null)
+            {
+                <span>@Model.AssignedUser.Name</span>
+                <input type="hidden" id="questionReferenceUser" name="questionReferenceUser" value="@Model.AssignedUser.Id" />
+            }
+            else
+            {
+                <span>@Model.SendToDisplayText</span>
+            }
+
+        </div>
+    </div>
+}
+@if (Model.ShowComment)
+{
+    <div class="question-group">
+        <h3 class="question-text">
+            @Intelledox.Produce.Resources.Strings.Comment
+            @if (Model.CommentMandatory)
+            {
+                @Html.Raw(Intelledox.Produce.Resources.Strings.Mandatory)
+            }
+        </h3>
+        <div class="question-body">
+            <textarea name="comments" rows="10" class="form-control" @Html.Raw(Model.LogInteractions ? "data-analyticsid=\"workflowComment\"" : "")>@Model.Comments</textarea>
+        </div>
+    </div>
+}

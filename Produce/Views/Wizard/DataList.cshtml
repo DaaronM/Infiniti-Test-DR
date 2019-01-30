@@ -1,0 +1,153 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.DataListQuestionViewModel>
+@{
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+    var qid = IdHelper.IdFor(Model.Question);
+    var isDisabled = !Model.Question.IsEditable;
+}
+@if (Model.ShowUpload)
+{
+    if (Model.Question.IsEditable)
+    {
+        <a href="#void" onclick="@Html.Raw(Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "', 'dataUpload'" + ");" : "")wiz.openUploadPage('@Url.Content("~/")', '@Model.Question.WizardFragment.InstanceId.ToString()', '@Model.Question.QuestionGuid.ToString()', 'data', '@Model.RepeatPath', '@Model.Question.WizardFragment.WizardSession.ProjectLog.ToString()', null);return false;">@Intelledox.Produce.Resources.Strings.SelectDataFile</a>
+    }
+    else
+    {
+        <div>@Intelledox.Produce.Resources.Strings.NoDataFileSelected</div>
+    }
+}
+@if (Model.ShowClear && Model.Question.IsEditable)
+{
+    <a href="#void" onclick="@Html.Raw(Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "', 'dataClear'" + ");" : "")wiz.clearContent('@Model.Question.WizardFragment.InstanceId.ToString()', '@Model.Question.QuestionGuid.ToString()', '@Model.RepeatPath');return false;">@Intelledox.Produce.Resources.Strings.ClearFile</a><br />
+}
+@if (Model.Question.HasValidationErrors())
+{
+    Model.Question.Validate();
+}
+@if (Model.ShowUpload)
+{
+    @Html.DisplayValidation(Model.Question.LastValidationMessage)
+}
+else
+{
+    if (Model.Question.WizardFragment.WizardSession.Troubleshooting.HasTroubleshooting)
+    {
+        foreach (KeyValuePair<double, string> query in Model.Question.QueryData)
+        {
+            <div class="question-label datasource-debug">@(Html.Raw(String.Format(Intelledox.Produce.Resources.Strings.TimeToFetchData, query.Value, query.Key).Replace(Environment.NewLine, "<br>")))</div>
+        }
+    }
+    if (Model.Question.UsingExpiredData)
+    {
+        <div class="label-warning">@Model.CacheWarningMessage</div>
+    }
+    if (Model.DisplayOfflineLabel)
+    {
+        @Html.DisplayValidation(Intelledox.Produce.Resources.Strings.Offline, qid)
+    }
+    if (Model.IsSingleSelectDropdown)
+    {
+        var attribs = new Dictionary<string, object>();
+
+        var onChange = string.Empty;
+        if (Model.Question.IsRealtimeParentQuestion)
+        {
+            onChange = "wiz.reload();";
+        }
+        else if (Model.Question.IsMandatory)
+        {
+            var mandCheck = "validate.checkMandatory('" + qid + "', true);";
+            onChange = mandCheck;
+            attribs.Add("onblur", mandCheck);
+        }
+
+        if (!string.IsNullOrEmpty(onChange))
+        {
+            attribs.Add("onchange", onChange);
+        }
+
+        if (!Model.Question.IsEditable)
+        {
+            attribs.Add("disabled", "disabled");
+        }
+        if (Model.Question.HasValidationErrors())
+        {
+            attribs.Add("aria-invalid", "true");
+            attribs.Add("aria-describedby", "error_" + qid);
+        }
+        if (Model.Question.IsMandatory)
+        {
+            attribs.Add("required", "");
+        }
+        if (Model.LogInteractions)
+        {
+            attribs.Add("data-analyticsid", System.Net.WebUtility.HtmlEncode(Model.AnalyticsID));
+        }
+
+        <select id="@qid" name="@qid" class="form-control"
+                @foreach (var attrib in attribs) { @Html.Raw(attrib.Key + "=\"" + attrib.Value + "\" ") }>
+            @foreach (var item in Model.SelectData)
+            {
+                <option value="@item.Value" selected="@item.Selected">@item.Text</option>
+            }
+        </select>
+        <input type="hidden" id="@(qid)_Original" value="@Model.Question.SelectedIndex" name="@(qid)_Original" />
+        @Html.DisplayValidation(Model.Question.LastValidationMessage, qid)
+    }
+    else if (Model.IsMultipleSelectDropdown)
+    {
+        <input type="hidden" value="@String.Join(",", Model.Question.SelectedIndices)" name="@(qid)_OriginalList" />
+        <input type="hidden" value="@Model.SelectData.Count" name="@(qid)_OriginalCount" />
+
+        <!-- Split button -->
+        <div class="btn-group btn-group-multiselect" id="@(qid)_MultiSelect">
+            <button type="button" class="btn btn-default btn-multiselect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Model.DisplayText</button>
+            <button type="button" class="btn btn-default btn-multiselect dropdown-toggle dropdown-toggle-multiselect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                @for (int i = 0; i < Model.SelectData.Count; i++)
+                {
+                    <li>
+                        <label class="multiselect-label" onclick="event.stopPropagation();">
+                            <input type="checkbox" id="@(qid)_@(i)" name="@qid" disabled="@isDisabled" value="@Model.SelectData[i].Value" checked="@Model.SelectData[i].Selected" @if (Model.LogInteractions) { <text> data-analyticsid="@(Model.AnalyticsID)" </text> } />
+                            <span class="multiselect-text">@Model.SelectData[i].Text</span>
+                        </label>
+                    </li>
+                }
+            </ul>
+        </div>
+        @Html.DisplayValidation(Model.Question.LastValidationMessage, qid)
+    }
+    else
+    {
+        var onClick = string.Empty;
+        if (Model.Question.IsRealtimeParentQuestion)
+        {
+            onClick = "wiz.reload();";
+        }
+        else if (Model.Question.IsMandatory)
+        {
+            onClick = "validate.setPass('#" + qid + "');";
+        }
+
+        <div id="@(qid)_boxMultiple" class="multiDataListBox @Html.Raw(Model.Question.IsMandatory ? "multiDataListBoxRequired" : "")" @Html.Raw(Model.Question.IsRealtimeParentQuestion ? "onscroll=\"document.getElementById('" + qid + "_pos').value=this.scrollTop\"" : "")>
+            <input type="hidden" id="@(qid)_pos" name="@(qid)_pos" value="@Model.ScrollPosition" />
+            <input type="hidden" value="@String.Join(",", Model.Question.SelectedIndices)" name="@(qid)_OriginalList" />
+            <input type="hidden" value="@Model.SelectData.Count" name="@(qid)_OriginalCount" />
+            <script type="text/javascript">document.getElementById('@(qid)_boxMultiple').scrollTop = document.getElementById('@(qid)_pos').value;</script>
+            @for (int i = 0; i < Model.SelectData.Count; i++)
+            {
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="@(qid)_@(i)" name="@qid" disabled="@isDisabled" value="@Model.SelectData[i].Value" checked="@Model.SelectData[i].Selected" @Html.Raw(!String.IsNullOrEmpty(onClick) ? "onclick=\"" + onClick + "\"" : "") @Html.Raw(Model.Question.IsMandatory ? "required" : "") @if (Model.LogInteractions) { <text> data-analyticsid="@(Model.AnalyticsID)" </text> } />
+                        @Model.SelectData[i].Text
+                    </label>
+                </div>
+            }
+        </div>
+        @Html.DisplayValidation(Model.Question.LastValidationMessage, qid + "_boxMultiple")
+    }
+}

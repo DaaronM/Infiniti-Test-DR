@@ -1,0 +1,168 @@
+﻿@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.CommentsPopupWindowViewModel>
+@{
+    Layout = "~/Views/Shared/_WizardSubpage.cshtml";
+    var question = Model.Question;
+    var questionModel = Model.Question.QuestionModel;
+    var qid = Intelledox.ViewModel.Core.IdHelper.IdFor(question);
+}
+
+@section AddToHead
+{
+    @if (Infiniti.MvcControllers.ApplicationSettings.UseCdn)
+    {
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    }
+    else
+    {
+        <script src="~/scripts/bootstrap.min.js?v=337"></script>
+    }
+    <script src="~/scripts/autosize.js"></script>
+    <script src="~/scripts/popupPost.js"></script>
+}
+<form method="post" action="~/wizard/commentsPopupWindow/@Model.Question.QuestionGuid.ToString()@(Model.QueryString)" onsubmit="return popupPost(this);">
+    <div>
+        <script type="text/javascript">
+            function closeMe() {
+                $("#@(qid)_commentsCounter", parent.document).html("");
+                var popup = $("#@(qid)_commentsPopup", parent.document);
+                if ($("#commentsArea").children().length > 0) {
+                    popup.removeClass("commentsIcon").addClass("commentedIcon");
+
+                } else {
+                    popup.removeClass("commentedIcon").addClass("commentsIcon");
+                }
+
+                parent.wiz.commentViewUpdate('@questionModel.QuestionGuid', '@Url.Content("~/")', '@Html.Raw(HttpUtility.JavaScriptStringEncode(Model.QueryString))');
+
+                @if (Model.LogInteractions)
+                {
+                    @:parent.wiz.dataAnalyticsFocusAndBlur('@(Model.AnalyticsID)', 'commentClose');
+                }
+                if ($("#addComment").val().length > 0) {
+                    var r = confirm("@Html.Raw(Intelledox.Produce.Resources.Strings.UnfinishedComment)");
+                    if (r === true) {
+                        parent.wiz.closeLargeDraggableModal();
+                    }
+                }
+                else {
+                    parent.wiz.closeLargeDraggableModal();
+                }
+            }
+
+            function commentEdit(sender, commentId) {
+                var editCommentField = "txtEditComment_" + commentId;
+                $("#editCommentArea_" + commentId).show();
+                $("#commentAddArea").hide();
+                $("#comment_" + commentId).hide();
+                autosize($("#" + editCommentField));
+                autosize.update($("#" + editCommentField));
+                @if (Model.LogInteractions)
+                {
+                    @:parent.wiz.dataAnalyticsFocusAndBlur('@(Model.AnalyticsID)', 'commentEdit');
+                }
+            }
+
+            function commentCancel(commentId) {
+                $("#editCommentArea_" + commentId).hide();
+                $("#commentAddArea").show();
+                $("#comment_" + commentId).show();
+                @if (Model.LogInteractions)
+                {
+                    @:parent.wiz.dataAnalyticsFocusAndBlur('@(Model.AnalyticsID)', 'commentCancel');
+                }
+            }
+
+            function commentUpdate(commentId) {
+                $("#SelectedCommentId").val(commentId);
+                $("#command").val("SaveUpdate");
+                $("form").first().submit();
+                @if (Model.LogInteractions)
+                {
+                    @:parent.wiz.dataAnalyticsFocusAndBlur('@(Model.AnalyticsID)', 'commentUpdate');
+                }
+            }
+
+            function commentDelete(commentId) {
+                var d = confirm("@Html.Raw(Intelledox.Produce.Resources.Strings.DeleteCommentConfirm)");
+                if (d === true) {
+                    $("#SelectedCommentId").val(commentId);
+                    $("#command").val("DoDelete");
+                    $("form").first().submit();
+                    @if (Model.LogInteractions)
+                    {
+                        @:parent.wiz.dataAnalyticsFocusAndBlur('@(Model.AnalyticsID)', 'commentDelete');
+                    }
+                }
+            }
+
+            function checkTextValue(sender, buttonId) {
+                var button = $("#" + buttonId);
+                if (!button[0].hasAttribute("disabled")) {
+                    button.prop("disabled", true);
+                }
+                if ($(sender).val().trim() !== "") {
+                    button.prop("disabled", false);
+                }
+                else {
+                    $(sender).val("");
+                }
+            }
+        </script>
+        <div id="contentinner" class="base1" style="margin-bottom: 40px">
+            <div class="body">
+                <div class="question-group">
+                    <div id="CommentsContent" class="comments-content" style="height: 410px; padding: 10px; overflow-x: hidden; overflow-y: auto">
+
+                        <h3 class="question-text">
+
+                            @if (questionModel.TextPosition != Intelledox.QAWizard.Design.TextPosition.None)
+                            {
+                                <label>@string.Format(Intelledox.Produce.Resources.Strings.CommentsFor, Model.Question.TextHtmlStripped)</label>
+                            }
+                            else
+                            {
+                                <label>@Intelledox.Produce.Resources.Strings.Comments</label>
+                            }
+                        </h3>
+                        <div id="commentAddArea">
+                            <div class="input-group">
+                                <textarea type="text"
+                                          id="addComment"
+                                          name="addComment"
+                                          onchange="checkTextValue(this,'commentAdd');"
+                                          onkeyup="checkTextValue(this,'commentAdd');"
+                                          rows="1"
+                                          placeholder="@Intelledox.Produce.Resources.Strings.WriteComment"
+                                          class="form-control"
+                                          spellcheck="true"></textarea>
+                                <div class="input-group-btn">
+                                    <div>
+                                        <button disabled="disabled" type="submit" value="AddComment" id="commentAdd" @Html.Raw(Model.LogInteractions ? "onclick=\"parent.wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "', 'commentAddBtn'" + ")\"" : "" ) class="btn btn-default btn-submit">@Intelledox.Produce.Resources.Strings.Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="commentsArea">
+                            @if (Model.Question.HasComments)
+                            {
+                                foreach (var comment in Model.Question.Comments.Where(m => !m.Deleted).OrderByDescending(c => c.TimeStamp))
+                                {
+                                    Html.RenderPartial("Comment", new Intelledox.ViewModel.Core.CommentViewModel(comment, question.WizardFragment, question.WizardFragment.WizardSession.EnableCommentsPurge, question.QuestionGuid, Model.QueryString));
+                                }
+                            }
+                        </div>
+
+                    </div>
+                    <input type="hidden" id="SelectedCommentId" name="SelectedCommentId" value="" />
+                    <input type="hidden" id="command" name="command" value="AddComment" />
+                </div>
+            </div>
+            <script type="text/javascript">
+                autosize($('#addComment'));
+            </script>
+            <div class="popupFooter">
+                <input type="button" id="btnOK" class="btn btn-primary btn-close" onclick="closeMe()" value="@Intelledox.Produce.Resources.Strings.Close" />
+            </div>
+        </div>
+    </div>
+</form>

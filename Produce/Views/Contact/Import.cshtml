@@ -1,0 +1,27 @@
+﻿@using Intelledox.Produce
+@{
+    ViewBag.CurrentTab = MenuTab.Contact;
+    ViewBag.BackUrl = Url.Action("Index");
+}
+@Html.Partial("_SiteHeader")
+<div class="container ix-header-body">
+    <h2>
+        @Intelledox.Produce.Resources.Strings.Contacts
+    </h2>
+
+    @if (!String.IsNullOrEmpty(ViewBag.Message))
+    {
+        <p class="bg-error">@ViewBag.Message</p>
+    }
+
+    <form method="post" enctype="multipart/form-data" action="@Url.Action("Import")">
+        <div class="form-group">
+            <label for="contactFile">@Intelledox.Produce.Resources.Strings.AddressImportDesc</label>
+            <input type="file" id="contactFile" name="contactFile" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-submit">@Intelledox.Produce.Resources.Strings.Import</button>
+        </div>
+    </form>
+</div>

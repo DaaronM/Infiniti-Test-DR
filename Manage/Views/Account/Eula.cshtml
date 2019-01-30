@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+}
+@section AddToHead
+{
+    <script type="text/javascript">
+        function chkAcceptEula_OnClick() {
+            document.getElementById('btnAcceptEula').disabled = !document.getElementById('chkAcceptEula').checked;
+        }
+    </script>
+}
+<form id="form2" method="post">
+    <div id="tblEulaAcceptance" class="loginControl">
+        <div class="loginHead">
+            @Resources.Strings.EndUserLicenseAgreement
+        </div>
+        <div class="form-group" style="overflow-y:scroll; height: 500px; border: 1px solid; padding: 2px">
+            <span id="lblEula">@Html.Raw(ViewBag.EulaText)</span>
+        </div>
+        <div>
+            <span class="checkbox"><input id="chkAcceptEula" type="checkbox" name="chkAcceptEula" onclick="chkAcceptEula_OnClick();" /><label for="chkAcceptEula">@Resources.Strings.UnderstandAndAcceptEula</label></span>
+        </div>
+        <div>
+            <input type="submit" name="btnAcceptEula" value="@Resources.Strings.Accept" id="btnAcceptEula" disabled="disabled" class="button" />
+        </div>
+    </div>
+</form>
+

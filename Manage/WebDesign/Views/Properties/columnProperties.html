@@ -1,0 +1,42 @@
+﻿<div class="prop-title">
+    {{ 'ColumnProperties' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="columnTitle" class="col-sm-4 control-label">{{ ::'Title' | translate }}</label>
+        <div class="col-sm-8">
+            <textarea id="columnTitle" class="form-control input-sm f2-rename" ng-model="model.propertiesPanelModel.title" rows="3" spellcheck="true"
+                      ui-tinymce="tinymceHtmlWithPickRef" pick-Ref-Editor="model.pickRefEditor(ed)" tree-view="model.treeView"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="helpText" class="col-sm-4 control-label">{{ ::'HelpText' | translate }}</label>
+        <div class="col-sm-8">
+            <textarea id="helpText" class="form-control input-sm" ng-model="model.propertiesPanelModel.helpText" rows="6" spellcheck="true"
+                      ui-tinymce="tinymceHtml"></textarea>
+        </div>
+    </div>
+    <div class="form-group" ng-show="model.propertiesPanelModel.showWidth">
+        <label for="columnWidth" class="col-sm-4 control-label">{{ ::'Width' | translate }}</label>
+        <div class="col-sm-8">
+            <input type="text" id="columnWidth" class="form-control input-sm" ng-model="model.propertiesPanelModel.width" style="width:50px;text-align:right;display:inline-block"
+                   maxlength="5" pattern="\d*" />
+            <select class="form-control input-sm" ng-model="model.propertiesPanelModel.widthType" style="width:auto;display:inline-block">
+                <option value="7" ng-selected="model.propertiesPanelModel.widthType === '7'">{{::'Percent' | translate}}</option>
+                <option value="1" ng-selected="model.propertiesPanelModel.widthType === '1'">{{::'Pixel' | translate}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.propertiesPanelModel.isRepeated">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.groupBy" />{{ ::'GroupBy' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div>
+        <ng-include src="'Views/Properties/styleProperty.html?v=106882799234227327'"></ng-include>
+    </div>
+</form>

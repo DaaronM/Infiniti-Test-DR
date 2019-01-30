@@ -1,0 +1,10 @@
+﻿<div class="panel panel-default {{node.CssStyle}}" 
+     editor-droppable="node" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)">
+    <div class="panel-body">
+        <div ng-repeat="child in node.Children">
+            <preview-node node="child"
+                          on-node-selected="topSelectedFunc(node)" top-selected-func="topSelectedFunc"
+                          on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)" top-editor-drop-func="topEditorDropFunc"></preview-node>
+        </div>
+    </div>
+</div>

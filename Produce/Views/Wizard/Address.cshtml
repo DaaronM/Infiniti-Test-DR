@@ -1,0 +1,187 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.AddressQuestionViewModel>
+@{
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+    var qid = IdHelper.IdFor(Model.Question) + "_";
+    var isDisabled = !Model.Question.IsEditable;
+}
+<div>
+    @if (Model.ShowExistingAddress)
+    {
+        <div class="radio">
+            <label>
+                <input type="radio" id="@(qid)rdoNewAddress" name="@(qid)rdoAddressNew" value="True" disabled="@isDisabled" onclick="wiz.clearAddress('@qid')" checked="@(!Model.IsExistingAddress)" />
+                @Intelledox.Produce.Resources.Strings.NewAddress
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" id="@(qid)rdoExistingAddress" name="@(qid)rdoAddressNew" value="False" disabled="@isDisabled" onclick="wiz.getAddress('@Url.Content("~/")', '@(qid)lstAddressBook', '@qid')" checked="@Model.IsExistingAddress" />
+                @Intelledox.Produce.Resources.Strings.ExistingAddress
+            </label>
+            <select name="@(qid + "lstAddressBook")" id="@(qid + "lstAddressBook")" class="form-control" disabled="@isDisabled" @Html.Raw(!isDisabled ? "onchange=\"wiz.getAddress('" + Url.Content("~/") + "', '" + qid + "lstAddressBook', '" + qid + "')\"" : "")>
+                @foreach (var item in Model.AddressBook)
+                {
+                    <option value="@item.Value" selected="@item.Selected">@item.Text</option>
+                }
+            </select>
+        </div>
+        @Html.DisplayValidation(Model.Question.LastValidationMessage, qid + "chkAddressSave")
+        <br />
+        <label>
+            <input type="checkbox" id="@(qid)chkAddressSave" name="@(qid)chkAddressSave" disabled="@(Model.IsExistingAddress || isDisabled)" checked="@Model.Question.AddToAddressBook"
+                   @Html.Raw(Model.Question.HasValidationErrors() ? "aria-invalid=\"true\" aria-describedby=\"error_" + qid + "chkAddressSave\"" : "") />
+            @Intelledox.Produce.Resources.Strings.AddtoAddressBook
+        </label>
+    }
+    <p></p>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#@(qid)General" data-toggle="tab">@Intelledox.Produce.Resources.Strings.General</a></li>
+        <li><a href="#@(qid)Street" data-toggle="tab">@Intelledox.Produce.Resources.Strings.StreetAddress</a></li>
+        <li><a href="#@(qid)Postal" data-toggle="tab">@Intelledox.Produce.Resources.Strings.PostalAddress</a></li>
+        @if (Model.CustomFields.Count > 0)
+        {
+            <li><a href="#@(qid)Additional" data-toggle="tab">@Intelledox.Produce.Resources.Strings.Additional</a></li>
+        }
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active form-horizontal" id="@(qid)General">
+            <div class="form-group">
+                <label for="@(qid)Prefix" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.Prefix</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)Prefix" name="@(qid)Prefix" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.Prefix" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)FirstName" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.FirstName</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)FirstName" name="@(qid)FirstName" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.FirstName" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)LastName" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.LastName</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)LastName" name="@(qid)LastName" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.LastName" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)Title" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.JobTitle</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)Title" name="@(qid)Title" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.Title" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)Organisation" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.Organisation</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)Organisation" name="@(qid)Organisation" class="form-control" maxlength="100" value="@Model.Question.SelectedAddress.Organisation" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)PhoneNumber" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.PhoneNumber</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)PhoneNumber" name="@(qid)PhoneNumber" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.PhoneNumber" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)FaxNumber" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.FaxNumber</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)FaxNumber" name="@(qid)FaxNumber" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.FaxNumber" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)EmailAddress" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.Email</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)EmailAddress" name="@(qid)EmailAddress" class="form-control" maxlength="256" value="@Model.Question.SelectedAddress.EmailAddress" disabled="@isDisabled" />
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane form-horizontal" id="@(qid)Street">
+            <div class="form-group">
+                <label for="@(qid)StreetAddress1" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.AddressLine1</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)StreetAddress1" name="@(qid)StreetAddress1" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.StreetAddress.Address1" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)StreetAddress2" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.AddressLine2</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)StreetAddress2" name="@(qid)StreetAddress2" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.StreetAddress.Address2" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)StreetSuburb" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.SuburbTownCity</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)StreetSuburb" name="@(qid)StreetSuburb" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.StreetAddress.Suburb" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)StreetState" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.StateProvinceRegion</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)StreetState" name="@(qid)StreetState" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.StreetAddress.State" disabled="@isDisabled">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)StreetPostCode" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.PostalZipCode</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)StreetPostCode" name="@(qid)StreetPostCode" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.StreetAddress.Postcode" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)StreetCountry" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.Country</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)StreetCountry" name="@(qid)StreetCountry" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.StreetAddress.Country" disabled="@isDisabled" />
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane form-horizontal" id="@(qid)Postal">
+            <div class="form-group">
+                <label for="@(qid)PostalAddress1" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.AddressLine1</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)PostalAddress1" name="@(qid)PostalAddress1" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.PostalAddress.Address1" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)PostalAddress2" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.AddressLine2</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)PostalAddress2" name="@(qid)PostalAddress2" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.PostalAddress.Address2" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)PostalSuburb" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.SuburbTownCity</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)PostalSuburb" name="@(qid)PostalSuburb" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.PostalAddress.Suburb" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)PostalState" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.StateProvinceRegion</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)PostalState" name="@(qid)PostalState" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.PostalAddress.State" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)PostalPostCode" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.PostalZipCode</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)PostalPostCode" name="@(qid)PostalPostCode" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.PostalAddress.Postcode" disabled="@isDisabled" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="@(qid)PostalCountry" class="col-sm-2 control-label">@Intelledox.Produce.Resources.Strings.Country</label>
+                <div class="col-sm-10">
+                    <input type="text" id="@(qid)PostalCountry" name="@(qid)PostalCountry" class="form-control" maxlength="50" value="@Model.Question.SelectedAddress.PostalAddress.Country" disabled="@isDisabled" />
+                </div>
+            </div>
+        </div>
+        @if (Model.CustomFields.Count > 0)
+        {
+            <div class="tab-pane form-horizontal" id="@(qid)Additional">
+                @foreach (var item in Model.CustomFields)
+                {
+                    Html.RenderPartial("CustomField", item);
+                }
+            </div>
+        }
+    </div>
+</div>

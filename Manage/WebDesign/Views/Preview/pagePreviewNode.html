@@ -1,0 +1,18 @@
+﻿<div class="{{node.CssStyle}}" ng-click="onNodeSelected({ node: node}); $event.stopPropagation()" editor-droppable="node" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)">
+    <div>
+        <table class="NoPadding NoSpacing" width="100%" role="presentation">
+            <tr>
+                <td>
+                    <h2 class="page-title">{{node.Name}}</h2>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="PageBody">
+        <div ng-repeat="child in node.Children track by child.ObjectId">
+            <preview-node node="child"
+                          on-node-selected="topSelectedFunc(node)" top-selected-func="topSelectedFunc"
+                          on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)" top-editor-drop-func="topEditorDropFunc"></preview-node>
+        </div>
+    </div>
+</div>

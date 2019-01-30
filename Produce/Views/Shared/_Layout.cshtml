@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html dir="@(System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft ? "rtl" : "ltr")" lang="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName )">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8,IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@Html.Raw(Infiniti.MvcControllers.ApplicationSettings.ThemePageTitle)</title>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    @if (Infiniti.MvcControllers.ApplicationSettings.Bundle)
+    {
+        if (Infiniti.MvcControllers.ApplicationSettings.UseCdn)
+        {
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link href="~/Content/cdnbundle.css?v=106882799234227327" rel="stylesheet" type="text/css" />
+        }
+        else
+        {
+        <link href="~/Content/bundle.css?v=106882799234227327" rel="stylesheet" type="text/css" />
+        }
+    }
+    else
+    {
+    <link href="~/Content/bootstrap.min.css?v=337" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-theme.min.css?v=337" rel="stylesheet" />
+    <link href="~/Content/Site.css?v=10.2.6" type="text/css" rel="stylesheet" />
+    }
+    @if (System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft)
+    {
+        <link href="~/Content/SiteRtl.css?v=9.7.3" type="text/css" rel="stylesheet" />
+    }
+    @Html.Raw(Infiniti.MvcControllers.ApplicationSettings.ThemeCss(Url.Content("~/")))
+    @if (Infiniti.MvcControllers.ApplicationSettings.UseCdn)
+    {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    }
+    else
+    {
+    <script src="~/scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/scripts/bootstrap.min.js?v=337"></script>
+    }
+    @RenderSection("AddToHead", required: false)
+</head>
+<body>
+    @RenderBody()
+    <div id="footer">
+    </div>
+</body>
+</html>

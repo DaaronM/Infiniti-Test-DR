@@ -1,0 +1,63 @@
+﻿<form class="form-horizontal" ng-submit="findWhat != '' && ok()" >
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title" ng-if="showFind">{{ ::'FindAnItem' | translate }}</h4>
+        <h4 class="modal-title" ng-if="!showFind">{{ ::'mnuActionFindAndReplaceToolTip' | translate }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group text-center">
+            <div class="btn-group text-center" role="group" data-toggle="buttons">
+                <label class="btn btn-primary active" ng-click="showFind=true">
+                    <input type="radio" value="true" checked />
+                    {{ ::'FindString' | translate }}
+                </label>
+                <label class="btn btn-primary" ng-click="showFind=false">
+                    <input type="radio" value="false" />
+                    {{ ::'Replace' | translate }}
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="findWhat" class="col-sm-4 control-label">{{ ::'FindWhat' | translate }}</label>
+            <div class="col-sm-8">
+                <input id="findWhat" class="form-control" ng-model="model.findWhat" />
+            </div>
+        </div>
+
+        <div class="form-group" ng-if="showFind">
+            <label for="findItem" class="col-sm-4 control-label">{{ ::'Item' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="findItem" class="form-control"
+                        ng-options="option.value as option.name for option in availableTypes"
+                        ng-model="model.itemType">
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="showFind">
+            <label for="findOn" class="col-sm-4 control-label">{{ ::'SearchOn' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="findOn" class="form-control"
+                        ng-options="option.value as option.name for option in availableSearchOns"
+                        ng-model="model.searchOn">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group" ng-if="!showFind">
+            <label for="replaceWith" class="col-sm-4 control-label">{{ ::'ReplaceWith' | translate }}</label>
+            <div class="col-sm-8">
+                <input id="replaceWith" class="form-control" ng-model="model.replaceWith" />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-disabled="findWhat == ''">{{ ::'OK' | translate }}</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">{{ ::'Cancel' | translate }}</button>
+    </div>
+</form>
+<script>
+    setTimeout(function() {
+        document.getElementById('findWhat').focus();
+    }, 500);
+</script>

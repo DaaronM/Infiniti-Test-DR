@@ -1,0 +1,97 @@
+﻿@using Intelledox.Produce
+@model Intelledox.Produce.HomeViewModel
+
+<script type="text/javascript">
+    function setCookie(c_name, value, expiredays) {
+        try {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + expiredays);
+            document.cookie = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toUTCString());
+        }
+        catch (ex) {
+        }
+    }
+
+    function getCookie(c_name) {
+        try {
+            if (document.cookie.length > 0) {
+                c_start = document.cookie.indexOf(c_name + "=");
+                if (c_start != -1) {
+                    c_start = c_start + c_name.length + 1;
+                    c_end = document.cookie.indexOf(";", c_start);
+                    if (c_end == -1) c_end = document.cookie.length;
+                    return unescape(document.cookie.substring(c_start, c_end));
+                }
+            }
+        }
+        catch (ex) {
+        }
+        return "";
+    }
+</script>
+
+@Html.Partial("_TaskGridPartial", Model)
+@Html.Partial("_TaskGroupGridPartial", Model)
+
+<h2>
+    @Intelledox.Produce.Resources.Strings.BeginANewForm
+    <img id="TaskListButtonForForms" class="ContractButton" alt="@Intelledox.Produce.Resources.Strings.Open/@Intelledox.Produce.Resources.Strings.Close" />
+</h2>
+<div id="newForm">
+    @if (Model.ShowRecent)
+    {
+        <div id="RecentProjects">
+            <div class="table-responsive">
+                <table class="table table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <th>@Intelledox.Produce.Resources.Strings.Recent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in Model.RecentProjects)
+                        {
+                            <tr>
+                                <td>
+                                    @if (row.LogGuid != Guid.Empty)
+                                    {
+                                        <a href="~/wizard/@row.ProjectGroupGuid.ToString()/?logguid=@row.LogGuid.ToString()&resetrunid=true" title="@Intelledox.Produce.Resources.Strings.ReloadAnswers">
+                                            <img src="~/Images/IX_Rerun.svg" alt="@Intelledox.Produce.Resources.Strings.ReloadAnswers" height="16"/>
+                                        </a>
+                                    }
+                                    <a href="~/wizard/@row.ProjectGroupGuid/" class="form-link">@row.Name</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+    <div id="divAvailableTemplates">
+        @Html.Partial("_ProjectGridPartial", Model)
+    </div>
+</div>
+<script type="text/javascript">
+    if (getCookie('newFormState') == "0" && $('#TaskListButtonForForms').length > 0) {
+        $('#newForm').slideToggle(0);
+        $('#TaskListButtonForForms').prop("class", 'ExpandButton');
+    }
+
+    // SLIDE OUT Project List
+    $(document).ready(function () {
+        if ($('#TaskListButtonForForms').length > 0) {
+            $('#TaskListButtonForForms').click(function () {
+                if ($('#newForm').is(':hidden')) {
+                    setCookie('newFormState', "1", 1);
+                    $('#TaskListButtonForForms').prop("class", 'ContractButton');
+                } else {
+                    setCookie('newFormState', "0", 1);
+                    $('#TaskListButtonForForms').prop("class", 'ExpandButton');
+                }
+                $('#newForm').slideToggle(300);
+            });
+        }
+    });
+</script>

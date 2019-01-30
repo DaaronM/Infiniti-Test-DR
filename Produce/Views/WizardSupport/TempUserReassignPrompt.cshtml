@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/Shared/_WizardSubpage.cshtml";
+}
+
+<script type="text/javascript">
+    function doOk() {
+        if (document.getElementById('txtEmailToAssignTo').value.replace(/^\s+|\s+$/g, '') == '') {
+            alert('@Intelledox.Produce.Resources.Strings.EnterEmailInstruction');
+            document.getElementById('txtEmailToAssignTo').focus();
+            return false;
+        } else {
+            parent.wiz.reassignDialog(document.getElementById('txtEmailToAssignTo').value, document.getElementById('txtRecipientName').value, document.getElementById('txtDescription').value);
+            return true;
+        }
+    }
+
+    function doCancel() {
+        parent.wiz.closeModal();
+    }
+
+    $(document).ready(function () {
+        $("#txtEmailToAssignTo").focus();
+    });
+</script>
+<form method="post" id="aspnetForm" onsubmit="return doOk();">
+    <div class="container">
+        <div id="ReassignEmail" class="form-group">
+            <label for="txtEmailToAssignTo">@Intelledox.Produce.Resources.Strings.RecipientEmail</label>
+            <input id="txtEmailToAssignTo" name="txtEmailToAssignTo" class="form-control" autofocus="autofocus" />
+            <br />
+            <label for="txtRecipientName">@Intelledox.Produce.Resources.Strings.RecipientName</label>
+            <input id="txtRecipientName" name="txtRecipientName" class="form-control" />
+            <br />
+            <label for="txtDescription">@Intelledox.Produce.Resources.Strings.Comment</label>
+            <input id="txtDescription" name="txtDescription" class="form-control" />
+        </div>
+        <div class="pull-right">
+            <input type="button" id="OK" onclick="doOk()" value="@Intelledox.Produce.Resources.Strings.OK" class="btn btn-primary btn-submit" />
+            <input type="button" id="Cancel" onclick="doCancel()" value="@Intelledox.Produce.Resources.Strings.Cancel" class="btn btn-default btn-cancel" />
+        </div>
+    </div>
+</form>

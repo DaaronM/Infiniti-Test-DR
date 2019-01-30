@@ -1,0 +1,57 @@
+﻿<div class="form-group">
+    <label for="defaultValue" class="col-sm-4 control-label">{{ ::'Value' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input id="defaultValue" class="form-control input-sm" ng-model="model.propertiesPanelModel.DefaultValue" />
+            <span class="input-group-btn">
+                <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                        ng-click="model.propertiesPanelModel.pickDefaultValueRef('defaultValue')"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15"/>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="barcodeType" class="col-sm-4 control-label">{{ ::'BarcodeType' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="barcodeType" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableBarcodeTypes"
+                ng-model="model.propertiesPanelModel.barcodeType"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isDisplayTypeVisible">
+    <label for="displayType" class="col-sm-4 control-label">{{ ::'DisplayType' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="displayType" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableDisplayTypes"
+                ng-model="model.propertiesPanelModel.displayType"></select>
+    </div>
+</div>
+<div class="form-group">
+    <label for="codeLocation" class="col-sm-4 control-label">{{ ::'CodeLocation' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="codeLocation" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableLocations"
+                ng-model="model.propertiesPanelModel.location"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isRowsColumnsVisible">
+    <label for="rows" class="col-sm-4 control-label">{{ ::'Rows' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="rows" class="form-control input-sm" ng-model="model.propertiesPanelModel.rows" maxlength="5" pattern="\d*" />
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isRowsColumnsVisible">
+    <label for="columns" class="col-sm-4 control-label">{{ ::'Columns' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="columns" class="form-control input-sm" ng-model="model.propertiesPanelModel.columns" maxlength="5" pattern="\d*" />
+    </div>
+</div>
+<div class="form-group">
+    <label for="rotation" class="col-sm-4 control-label">{{ ::'RotationDegrees' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="rotation" class="form-control input-sm" ng-model="model.propertiesPanelModel.rotation" maxlength="5" pattern="\d*" />
+    </div>
+</div>

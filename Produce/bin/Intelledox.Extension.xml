@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Intelledox.Extension</name>
+    </assembly>
+    <members>
+        <member name="T:Intelledox.Extension.ExtensionBase">
+            <summary>
+            General extension base class
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.ExtensionBase.GlobalSettingIdentity">
+            <summary>
+            Returns the identity that is registered in Manage for global configuration settings. This identity
+            may be shared between different extensions for shared settings.
+            </summary>
+        </member>
+        <member name="M:Intelledox.Extension.ExtensionBase.GetAvailableGlobalSettings">
+            <summary>
+            Returns the list of available global settings for this extension
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Intelledox.Extension.GlobalSettingIdentity">
+            <summary>
+            Identity that is registered in Manage for global configuration settings. This identity
+            may be shared between different extensions for shared settings.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.GlobalSettingIdentity.Id">
+            <summary>
+            Unique id for a setting identity
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.GlobalSettingIdentity.Name">
+            <summary>
+            Display name for a setting identity
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.GlobalSettingIdentity.ModuleId">
+            <summary>
+            Licensing module identifier
+            </summary>
+        </member>
+        <member name="T:Intelledox.Extension.GlobalSetting">
+            <summary>
+            Global configuration setting
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.GlobalSetting.Id">
+            <summary>
+            Unique id for a global setting
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.GlobalSetting.Name">
+            <summary>
+            Display name for a global setting
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.GlobalSetting.ObfuscateDisplay">
+            <summary>
+            Display this setting in Manage as a password field to protect the entered value from being seen
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.GlobalSetting.Encrypt">
+            <summary>
+            Values are stored encrypted in the database
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.GlobalSetting.SortOrder">
+            <summary>
+            Display order of the setting within the Manage edit page
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.GlobalSetting.DefaultValue">
+            <summary>
+            When a custom value has not been entered in Manage this value is used as the default.
+            Leave null for no default.
+            </summary>
+        </member>
+    </members>
+</doc>

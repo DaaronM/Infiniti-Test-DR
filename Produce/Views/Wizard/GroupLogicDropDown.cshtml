@@ -1,0 +1,59 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.QuestionViewModel<Intelledox.QAWizard.GroupLogicQuestion>>
+@{
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+    var qid = IdHelper.IdFor(Model.Question);
+    var activeAnswers = Model.Question.ActiveAnswers();
+    var watermark = Model.Question.WatermarkFormatted;
+    var isDefaultSelected = false;
+    var onChange = "$('#" + qid + "_change').val('1');";
+    var mandCheck = "validate.checkMandatory('" + qid + "', false);";
+
+    if (Model.Question.IsRealtimeParentQuestion)
+    {
+        onChange += (Model.Question.IsRealtimeParentQuestion ? "wiz.reload();" : "");
+    }
+    else if (Model.Question.IsMandatory)
+    {
+        onChange += mandCheck;
+    }
+
+    if (Model.Question.HasValidationErrors())
+    {
+        Model.Question.Validate();
+    }
+
+    if (!string.IsNullOrEmpty(watermark))
+    {
+        onChange += "$(this).removeClass('select-watermark').addClass($(this).children(':selected').attr('class'));";
+        isDefaultSelected = true;
+
+        foreach (var a in activeAnswers)
+        {
+            if (a.Selected)
+            {
+                isDefaultSelected = false;
+                break;
+            }
+        }
+    }
+}
+<input type="hidden" id="@(qid)_change" name="@(qid)_change" value="0" />
+
+<select id="@IdHelper.IdFor(Model.Question)"
+        class="form-control@(Model.LogInteractions ? " analyticslogdd" : "")@(string.IsNullOrEmpty(watermark) ? "" : " watermarked")@(isDefaultSelected ? " select-watermark" : "")"
+        name="@IdHelper.IdFor(Model.Question)"
+        onchange="@onChange"
+        @(!Model.Question.IsEditable ? "disabled=disabled" : "")
+        @(Model.Question.HasValidationErrors() ? "aria-invalid=true aria-describedby=error_" + qid : "")
+        @(Html.Raw(Model.Question.IsMandatory ? "required onBlur=\"" + mandCheck + "\"" : ""))
+        @(Model.LogInteractions ? "data-analyticsid=" + qid : "")>
+    <option @(Model.LogInteractions ? "data-analyticsid=" + qid + "_noselection" : "") value="" selected="@isDefaultSelected" class="select-watermark">@watermark</option>
+    @foreach (var a in activeAnswers)
+    {
+        <text>
+            <option value="@a.ID.ToString()" selected="@a.Selected" @if (Model.LogInteractions) { <text> data-analyticsid="@a.AnalyticsID()" </text> }>@(((Intelledox.QAWizard.GroupLogicAnswer)a).DisplayTextFormatted)</option></text>
+    }
+</select>
+@Html.DisplayValidation(Model.Question.LastValidationMessage, qid)

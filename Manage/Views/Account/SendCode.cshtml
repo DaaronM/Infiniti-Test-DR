@@ -1,0 +1,40 @@
+﻿@model Infiniti.MvcControllers.LoginViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+}
+<form id="form2" method="post" autocomplete="off">
+    @Html.AntiForgeryToken()
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div id="divLoginMessage">@ViewBag.Message</div>
+    }
+    <div id="tblSendCode" class="loginControl">
+        <div class="loginHead">
+            @Resources.Strings.TwoFactorCode
+        </div>
+        <div class="loginBody">
+            <table role="presentation">
+                <tr>
+                    <td class="loginLabel">
+                        <label for="code" class="normaltext">@Resources.Strings.Code</label>
+                    </td>
+                    <td class="loginFields">
+                        <input name="code" maxlength="50" id="code" class="field" autofocus="autofocus" autocomplete="off" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="loginLabel"></td>
+                    <td class="loginFields">
+                        <label>
+                            <input type="checkbox" name="RememberBrowser" value="true" /> @Resources.Strings.RememberThisBrowser
+                        </label>
+                    </td>
+                </tr>
+            </table>
+            <hr />
+            <div class="loginButtonCell">
+                <input type="submit" value="@Resources.Strings.Login" class="button" />
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,55 @@
+﻿@using Intelledox.Produce
+@model Intelledox.Produce.AnswerFileEditViewModel
+@{
+    ViewBag.CurrentTab = MenuTab.AnswerFiles;
+}
+
+@Html.Partial("_SiteHeader")
+<div class="container ix-header-body">
+    <h1 class="page-header">
+        @Intelledox.Produce.Resources.Strings.AnswerFiles
+    </h1>
+
+    <div class="row-fluid">
+        <form method="post">
+            @Html.AntiForgeryToken()
+            @{
+                if (Model.AnswerFiles.Count > 0)
+                {
+                    var grid = new WebGrid(source: Model.AnswerFiles, canPage: true, rowsPerPage: 20);
+
+                    @grid.Table(
+                        tableStyle: "table table-striped table-condensed",
+                        htmlAttributes: new { id = "grdAnswerFiles" },
+                        fillEmptyRows: false,
+                        columns: grid.Columns(
+                            grid.Column(format: @<text><input name="deleteId" type="checkbox" value="@item.AnswerFileGuid.ToString()" aria-label="@Intelledox.Produce.Resources.Strings.SelectRow" /></text>),
+                            grid.Column("RunDateUtc", Intelledox.Produce.Resources.Strings.DateCreated, format:(item) => @Infiniti.MvcControllers.UserSettings.FormatLocalDate(item.RunDateUtc, "g")),
+                            grid.Column("Description", header: Intelledox.Produce.Resources.Strings.Description,
+                                format: @<text>
+                                <a class="ImageSize" href="~/wizard/@item.ProjectGroupGuid/?Gen=true&amp;AnswerFileID=@item.AnswerFileID">
+                                    <img src="~/Images/IX_SavedAnswer.svg" style="margin:0px 0px 0px 0px;vertical-align:middle;border:0;" alt="@Intelledox.Produce.Resources.Strings.GenDocFromFile" title="@Intelledox.Produce.Resources.Strings.GenDocFromFile" />
+                                </a>
+                                <a href="~/wizard/@item.ProjectGroupGuid/?AnswerFileID=@item.AnswerFileID">
+                                    @item.Description
+                                </a>
+                                </text>),
+                            grid.Column("ProjectGroupName", Intelledox.Produce.Resources.Strings.Form)
+                        )
+                    )
+                    @grid.PagerList(mode: WebGridPagerModes.Numeric | WebGridPagerModes.FirstLast,
+                        firstText: Intelledox.Produce.Resources.Strings.First,
+                        lastText: Intelledox.Produce.Resources.Strings.Last,
+                        paginationStyle: "pagination pull-right")
+                    <div>
+                        <input type="submit" class="btn btn-default btn-del" value="@Intelledox.Produce.Resources.Strings.DeleteSelected" onclick="return confirm('@Intelledox.Produce.Resources.Strings.ConfirmDelete');" />
+                    </div>
+                }
+                else
+                {
+                    @Intelledox.Produce.Resources.Strings.NoAnswerFiles
+                }
+            }
+        </form>
+    </div>
+</div>

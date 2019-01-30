@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Intelledox.Model</name>
+    </assembly>
+    <members>
+        <member name="T:Intelledox.Model.ProjectAi">
+            <summary>
+             Accent insensitive class used for queries
+            </summary>
+        </member>
+        <member name="T:Intelledox.Model.UserAi">
+            <summary>
+             Accent insensitive class used for queries
+            </summary>
+        </member>
+        <member name="T:Intelledox.Model.UserGroupSubscriptionAi">
+            <summary>
+             Accent insensitive class used for queries
+            </summary>
+        </member>
+        <member name="T:Intelledox.Model.Document">
+            <summary>
+            Generated document information
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.Document.DocumentId">
+            <summary>
+            Unique id for the document
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.Document.Extension">
+            <summary>
+            File name extension
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.Document.DisplayName">
+            <summary>
+            File name without the extension
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.Document.DiskDetails">
+            <summary>
+            Temporary file location during generation
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.Document.ProjectDocumentGuid">
+            <summary>
+            Id of the template in the project
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.Document.DateCreatedUtc">
+            <summary>
+            DateTime the file was created
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.Document.JobId">
+            <summary>
+            Job identifier that this document was created from
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.Document.ProjectName">
+            <summary>
+            Project name that resulting in this document being created.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.Document.UserGuid">
+            <summary>
+            Id of the creator
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.Document.ActionOnly">
+            <summary>
+            <c>true</c> if this document was created purely for sending to an action, 
+            otherwise <c>false</c>. Action documents are not available for download.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.Document.RepeatIndices">
+            <summary>
+            The repeat path to the content library question or fragment that this
+            document was created from.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.Document.Downloadable">
+            <summary>
+            <c>true</c> if this document can be downloaded from either workflow step/transition page or finish page, 
+            otherwise <c>false</c>.
+            </summary>
+        </member>
+        <member name="T:Intelledox.Model.DocumentCollection">
+            <summary>
+            List of documents
+            </summary>
+        </member>
+        <member name="T:Intelledox.Model.GeneratedFile">
+            <summary>
+            Generated file resulting from a form submission
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.GeneratedFile.DisplayName">
+            <summary>
+            Generated file name without the extension
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.GeneratedFile.FileName">
+            <summary>
+            File name on disk
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.GeneratedFile.DocumentId">
+            <summary>
+            Id of the template in the project
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.GeneratedFile.ActionOnly">
+            <summary>
+            <c>true</c> if this document was created purely for sending to an action, 
+            otherwise <c>false</c>. Action documents are not available for download.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.GeneratedFile.RepeatIndices">
+            <summary>
+            The repeat path to the content library question or fragment that this
+            document was created from.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.GeneratedFile.Attachment">
+            <summary>
+            Treat this document as a separate file and dont merge into parent documents
+            </summary>
+        </member>
+        <member name="P:Intelledox.Model.GeneratedFile.Downloadable">
+            <summary>
+            <c>true</c> if this document can be donwloaded from either workflow step/transition page or finish page, 
+            otherwise <c>false</c>.
+            </summary>
+        </member>
+        <member name="T:Intelledox.Model.ComparisonType">
+            <summary>
+            Comparison operation types
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.ComparisonType.None">
+            <summary>
+            Nothing supported.
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.ComparisonType.Equals">
+            <summary>
+            Values are directly equal.
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.ComparisonType.BeginsWith">
+            <summary>
+            Value begins with a given filter
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.ComparisonType.EndsWith">
+            <summary>
+            Value ends with a given filter
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.ComparisonType.Contains">
+            <summary>
+            Value contains the given filter within it's value
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.ComparisonType.GreaterThan">
+            <summary>
+            Value is greater than a given filter
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.ComparisonType.GreaterThanOrEquals">
+            <summary>
+            Value is greater than or equal to a given filter
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.ComparisonType.LessThan">
+            <summary>
+            Value is less than a given filter
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.ComparisonType.LessThanOrEquals">
+            <summary>
+            Value is less than or equal to a given filter
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.ComparisonType.NotEqualTo">
+            <summary>
+            Values are not equal
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.ComparisonType.NotContain">
+            <summary>
+            Value does not contain a given filter within it's value
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.ComparisonType.ContainedIn">
+            <summary>
+            Value is wholly contained within the filter
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.ComparisonType.NotContainedIn">
+            <summary>
+             Value is not wholly contained within the filter
+            </summary>
+        </member>
+        <member name="T:Intelledox.Model.EventLevel">
+            <summary>
+            Severity of log messages or other operations.
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.EventLevel.Information">
+            <summary>
+            Info purposes only. Not an error.
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.EventLevel.Warning">
+            <summary>
+            Failure occurred but not severe enough to fail a process
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.EventLevel.Errored">
+            <summary>
+            A required operation failed
+            </summary>
+        </member>
+        <member name="T:Intelledox.Model.CustomQuestionOutputType">
+            <summary>
+            Value type of an output from a custom question
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.CustomQuestionOutputType.Text">
+            <summary>
+            Treat as plain text
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.CustomQuestionOutputType.Image">
+            <summary>
+            Treat as a binary image
+            </summary>
+        </member>
+        <member name="F:Intelledox.Model.CustomQuestionOutputType.Html">
+            <summary>
+            Convert text value into HTML
+            </summary>
+        </member>
+    </members>
+</doc>

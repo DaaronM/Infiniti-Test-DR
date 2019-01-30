@@ -1,0 +1,18 @@
+﻿<form class="form-horizontal" id="openImageForm" ng-submit="backgroundImage != '' && ok()">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title">{{ ::'OpenImage' | translate }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="selectImage" class="col-sm-4 control-label">{{ ::'BackgroundImage' | translate }}</label>
+            <div class="col-sm-8">
+                <input id="selectImage" type="file" class="form-control" ng-model="backgroundImage" />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-disabled="backgroundImage == ''">{{ ::'OK' | translate }}</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">{{ ::'Cancel' | translate }}</button>
+    </div>
+</form>

@@ -1,0 +1,50 @@
+﻿@model Infiniti.MvcControllers.LoginViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+}
+@section AddToHead
+{
+    <script>
+        if (window.sessionStorage) {
+            sessionStorage.removeItem("authorizationToken");
+        }
+    </script>
+}
+<!-- Version @Intelledox.Manage.General.GetVersion -->
+<form id="form2" method="post" autocomplete="off">
+    @Html.AntiForgeryToken()
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div id="divLoginMessage">@ViewBag.Message</div>
+    }
+    <div class="loginControl" id="tblLoginAdmin">
+        <div class="loginHead">
+            @Resources.Strings.Login
+        </div>
+        <div class="loginBody">
+            <table role="presentation">
+                <tr>
+                    <td class="loginLabel">
+                        <label for="txtUsername" class="normaltext">@ViewBag.UsernameTitle</label>
+                    </td>
+                    <td class="loginFields">
+                        <input name="UserName" type="text" id="txtUsername" class="field" style="width:180px" tabindex="1" autofocus="autofocus" autocomplete="off" value="@Model.UserName" />
+                        @Html.ValidationMessage("UserName")
+                    </td>
+                </tr>
+                <tr>
+                    <td class="loginLabel">
+                        <label for="txtPassword">@Resources.Strings.Password</label>
+                    </td>
+                    <td class="loginFields">
+                        <input name="Password" type="password" id="txtPassword" class="field" style="width:180px" autocomplete="off" tabindex="2" />
+                    </td>
+                </tr>
+            </table>
+            <hr />
+            <div class="loginButtonCell">
+                <input type="submit" value="@Resources.Strings.Login" id="btnSignIn" class="button" tabindex="3" />
+            </div>
+        </div>
+    </div>
+</form>

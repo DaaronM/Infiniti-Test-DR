@@ -1,0 +1,156 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.SectionRepeatingLayoutViewModel>
+@{
+    var path = Url.Content("~/");
+    var sid = IdHelper.IdFor(Model.Section);
+    var objectId = Model.Section.SectionGuid.ToString();
+    var repeatPath = Model.RepeatPath;
+    bool maximumReached = Model.IsMaximumRepeatsReached;
+    var fragmentGuid = Model.Section.WizardFragment.InstanceId.ToString();
+}
+<div class="ls lsrepeat @(Model.Section.SectionModel.CssStyle) @(Model.IsNested ? "lsrepeatnested" : "")">
+    @if (!String.IsNullOrEmpty(Model.Section.SectionModel.Title))
+    {
+        <h3 class="lsh">@Html.Raw(Intelledox.Common.HtmlParsing.Sanitize(Model.Section.TitleFormatted))</h3>
+    }
+    @if (!String.IsNullOrEmpty(Model.Section.SectionModel.Description))
+    {
+        <div class="lsd">@Html.Raw(Intelledox.Common.HtmlParsing.Sanitize(Model.Section.DescriptionFormatted))</div>
+    }
+    <table class="NoPadding NoSpacing NoBorder" width="100%" role="presentation">
+        <thead>
+            <tr>
+                @if (Model.CanModifyRepeat)
+                {
+                    <td class="lccell lccellselect"></td>
+                }
+                else
+                {
+                    <td class="lccell lccellselect lccellselect-readonly"></td>
+                }
+                @* Add column titles *@
+                @foreach (Intelledox.QAWizard.ColumnHeading col in Model.Section.ColumnHeadings)
+                {
+                    if (col.IsVisible)
+                    {
+                        Intelledox.QAWizard.Design.Column colModel = col.ColumnModel;
+
+                        if (colModel.Width == 0 && string.IsNullOrEmpty(colModel.Title))
+                        {
+                            <td class="lccell"></td>
+                        }
+                        else
+                        {
+                            <td style="@(colModel.Width > 0 ? "width: " + colModel.Width.ToString() + (colModel.WidthType == Intelledox.QAWizard.Design.WidthType.Pixel ? "px" : "%"): "")">
+                                @if (!string.IsNullOrEmpty(colModel.Title))
+                                {
+                                    <h3 class="lch">
+                                        @Html.Raw(Intelledox.Common.HtmlParsing.Sanitize(col.TitleFormatted))
+
+                                        @if (!string.IsNullOrEmpty(colModel.HelpText))
+                                        {
+                                            <a href="#void" data-path="@path" data-objectid="@col.ColumnModel.ColumnGuid.ToString()" data-log="@Model.Section.WizardFragment.WizardSession.ProjectLog.ToString()" class="helpIcon help-object" title="@Intelledox.Produce.Resources.Strings.ClickForHelp"><span class="sr-only">@Intelledox.Produce.Resources.Strings.Help</span></a>
+                                        }
+                                    </h3>
+                                }
+                            </td>
+                        }
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody class="@(Model.IsSortable ? "sortableRow" : "")" data-fragmentguid="@(fragmentGuid)" data-objectid="@(objectId)" data-repeatpath="@(repeatPath)">
+            @* Column children *@
+            @for (int repeatedIndex = 0; repeatedIndex < Model.Section.Rows.Count; repeatedIndex++)
+            {
+                <tr data-index="@repeatedIndex" class="lsrepeat-row">
+                    @if (Model.CanModifyRepeat)
+                    {
+                        <td class="@(Model.IsSortable ? "touchable" : "") lccell lccellselect">
+                            <div class="lc lcselect">
+                                @if (Model.IsSortable)
+                                {
+                                    <span class="MoveIcon MoveIconSection" @if (Model.LogInteractions) { <text> onmousedown="wiz.dataAnalyticsFocus('@(objectId) @(Model.Section.SectionModel.Title)', 'sectionMoveRow @(repeatedIndex)')" onmouseup="wiz.dataAnalyticsBlur()" </text> }><span class="sr-only">@Intelledox.Produce.Resources.Strings.MoveRow</span></span>
+                                }
+                                <label class="sr-only" for="@(sid)selectRow">@Intelledox.Produce.Resources.Strings.SelectRow</label>
+                                <input type="checkbox" name="@(sid)_chkSelect" value="@repeatedIndex" class="row-select" id="@(sid)selectRow" @if (Model.LogInteractions) { <text> data-analyticsid="@(objectId) @(Model.Section.SectionModel.Title)" data-analyticsevent="sectionChkRow @(repeatedIndex)" </text> } />
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="lccell lccellselect lccellselect-readonly"></td>
+                    }
+                    @for (var colIndex = 0; colIndex < Model.Section.Rows[repeatedIndex].Children.Count; colIndex++)
+                    {
+                        if (Model.Section.ColumnHeadings[colIndex].IsVisible)
+                        {
+                            <td class="lccell @Model.Section.ColumnHeadings[colIndex].ColumnModel.CssStyle">
+                                <div class="lc">
+                                    @foreach (Intelledox.QAWizard.ILayoutNode itemNode in ((Intelledox.QAWizard.Column)Model.Section.Rows[repeatedIndex].Children[colIndex]).Children)
+                                    {
+                                        if (itemNode.IsVisible)
+                                        {
+                                            Html.RenderNode(itemNode);
+                                        }
+                                    }
+                                </div>
+                            </td>
+                        }
+                    }
+                </tr>
+                <tr class="lsrepeat-spacer" data-index="@repeatedIndex"><td colspan="@(Model.Section.Rows[repeatedIndex].Children.Count + 1)"></td></tr>
+            }
+        </tbody>
+    </table>
+    <div class="lscommand">
+        <div>
+            @if (Model.CanModifyRepeat)
+            {
+                if (Model.IsNamedRepeat)
+                {
+                    <div class="lsnamed">
+                        @if (!maximumReached)
+                        {
+                            <input id="@(sid)_add" value="@(Model.RepeatAdd)" type="submit" class="btn" data-command="@Url.Action("addSectionRow", "wizard")" data-fragmentguid="@(fragmentGuid)" data-objectid="@(objectId)" data-repeatpath="@(repeatPath)" title="@(Model.RepeatAdd)" accesskey="A" @if (Model.LogInteractions) { <text> data-analyticsid="@(objectId) @(Model.RepeatAdd)" data-analyticsevent="sectionAdd" </text> } />
+                        }
+                        <input type="submit" value="@(Model.RepeatRemove)" class="btn" data-command="@Url.Action("deleteSectionRow", "wizard")" data-fragmentguid="@(fragmentGuid)" data-objectid="@(objectId)" data-repeatpath="@(repeatPath)" title="@(Model.RepeatRemove)" @if (Model.LogInteractions) { <text> data-analyticsid="@(objectId) @(Model.RepeatRemove)" data-analyticsevent="sectionDelete" </text> } />
+                        @if (!maximumReached && Model.ShowFillDownButton)
+                        {
+                            <input id="@(sid)_filldown" value="@(Model.RepeatFillDown)" type="submit" class="btn" data-command="@Url.Action("fillDown", "wizard")" data-fragmentguid="@(fragmentGuid)" data-objectid="@(objectId)" data-repeatpath="@(repeatPath)" title="@(Model.RepeatFillDown)" accesskey="F" @if (Model.LogInteractions) { <text> data-analyticsid="@(objectId) @(Model.RepeatFillDown)" data-analyticsevent="sectionDuplicate" </text> } />
+                        }
+                    </div>
+                }
+                else
+                {
+                    if (!maximumReached)
+                    {
+                        <input id="@(sid)_add" type="submit" class="add" data-command="@Url.Action("addSectionRow", "wizard")" data-fragmentguid="@(fragmentGuid)" data-objectid="@(objectId)" data-repeatpath="@(repeatPath)" title="@Intelledox.Produce.Resources.Strings.AddRow" accesskey="A" value="" @if (Model.LogInteractions) { <text> data-analyticsid="@(objectId) @(Model.Section.SectionModel.Title)" data-analyticsevent="sectionAdd" </text> } />
+                    }
+                    <input type="submit" class="delete" data-command="@Url.Action("deleteSectionRow", "wizard")" data-fragmentguid="@(fragmentGuid)" data-objectid="@(objectId)" data-repeatpath="@(repeatPath)" title="@Intelledox.Produce.Resources.Strings.DeleteRow" value="" @if (Model.LogInteractions) { <text> data-analyticsid="@(objectId) @(Model.Section.SectionModel.Title)" data-analyticsevent="sectionDelete" </text> } />
+                    if (!maximumReached && Model.ShowFillDownButton)
+                    {
+                        <input id="@(sid)_filldown" type="submit" class="fillDown" data-command="@Url.Action("fillDown", "wizard")" data-fragmentguid="@(fragmentGuid)" data-objectid="@(objectId)" data-repeatpath="@(repeatPath)" title="@Intelledox.Produce.Resources.Strings.FillDown" accesskey="F" value="" @if (Model.LogInteractions) { <text> data-analyticsid="@(objectId) @(Model.Section.SectionModel.Title)" data-analyticsevent="sectionDuplicate" </text> } />
+                    }
+                }
+            }
+            @if (Model.DisplayImportOptions)
+            {
+                <input id="@(sid)_export" type="submit" class="export" data-command="@Url.Action("exportSection", "wizard")" data-fragmentguid="@(fragmentGuid)" data-objectid="@(objectId)" data-repeatpath="@(repeatPath)" title="@Intelledox.Produce.Resources.Strings.Export" value="" @if (Model.LogInteractions) { <text> data-analyticsid="@(objectId) @(Model.Section.SectionModel.Title)" data-analyticsevent="sectionExport" </text> } />
+                if (!maximumReached && Model.CanModifyRepeat)
+                {
+                    <input id="@(sid)_import" type="button" class="import" title="@Intelledox.Produce.Resources.Strings.Import" onclick="return wiz.openImportDialog('@Url.Content("~/")', '@(fragmentGuid)', '@(objectId)', '@(repeatPath)', '@Model.Section.WizardFragment.WizardSession.ProjectLog.ToString()',@Model.MainPageWidth())" value="" @if (Model.LogInteractions) { <text> data-analyticsid="@(objectId) @(Model.Section.SectionModel.Title)" data-analyticsevent="sectionImport" </text> } />
+                }
+            }
+        </div>
+        @Html.DisplayValidation(Model.Section.LastValidationMessage, sid)
+    </div>
+    @if (Model.IsExporting())
+    {
+        <script type="text/javascript">
+                wiz.clearDirtyState();
+                document.location = '@Url.Content("~/")WizardSupport/ExportItems?fragmentGuid=@(fragmentGuid)&objectid=@(objectId)&repeatpath=@(Model.RepeatPath)&logGuid=@Model.Section.WizardFragment.WizardSession.ProjectLog.ToString()';
+        </script>
+    }
+</div>

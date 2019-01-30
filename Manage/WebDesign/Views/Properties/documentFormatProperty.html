@@ -1,0 +1,36 @@
+﻿<div class="form-group">
+    <label for="formatString" class="col-sm-4 control-label">{{ ::'DocumentFormat' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input id="formatString" class="form-control input-sm" ng-model="model.propertiesPanelModel.FormatString" />
+            <div class="input-group-btn">
+                <button class="btn btn-default dropdown-toggle input-sm" type="button" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li><a href="#" onclick="$('#formatString').val('PERCENT'); $('#formatString').trigger('change'); return false;">{{ ::'Percent' | translate }} (PERCENT)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('C'); $('#formatString').trigger('change'); return false;">{{ ::'Currency' | translate }} (C)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('G'); $('#formatString').trigger('change'); return false;">{{ ::'GeneralNumber' | translate }} (G)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('+'); $('#formatString').trigger('change'); return false;">{{ ::'Uppercase' | translate }} (+)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('-'); $('#formatString').trigger('change'); return false;">{{ ::'Lowercase' | translate }} (-)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('+-'); $('#formatString').trigger('change'); return false;">{{ ::'UppercaseFirstLetter' | translate }} (+-)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('+-+-'); $('#formatString').trigger('change'); return false;">{{ ::'Propercase' | translate }} (+-+-)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('ONE'); $('#formatString').trigger('change'); return false;">{{ ::'NumberToText' | translate }} (ONE)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('+ONE'); $('#formatString').trigger('change'); return false;">{{ ::'NumberToTextUpper' | translate }} (+ONE)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('-ONE'); $('#formatString').trigger('change'); return false;">{{ ::'NumberToTextLower' | translate }} (-ONE)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('CUR'); $('#formatString').trigger('change'); return false;">{{ ::'CurrencyToText' | translate }} (CUR)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('CUR USD'); $('#formatString').trigger('change'); return false;">{{ ::'CurrencyToText' | translate }} (CUR USD)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('CUR ZERO USD'); $('#formatString').trigger('change'); return false;">{{ ::'CurrencyToChequeText' | translate }} (CUR ZERO USD)</a></li>
+                     <li><a href="#" onclick="$('#formatString').val('LPAD \'0\'1'); $('#formatString').trigger('change'); return false;">{{ ::'LeftPad' | translate }} (LPAD '0'1)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('RPAD \'0\'1'); $('#formatString').trigger('change'); return false;">{{ ::'RightPad' | translate }} (RPAD '0'1)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('SHORT DATE'); $('#formatString').trigger('change'); return false;">{{ ::'ShortDate' | translate }} (SHORT DATE)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('LONG DATE'); $('#formatString').trigger('change'); return false;">{{ ::'LongDate' | translate }} (LONG DATE)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('LEFT 1'); $('#formatString').trigger('change'); return false;">{{ ::'LeftCharacters' | translate }} (LEFT 1)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('RIGHT 1'); $('#formatString').trigger('change'); return false;">{{ ::'RightCharacters' | translate }} (RIGHT 1)</a></li>
+                    <li><a href="#" onclick="$('#formatString').val('TRIM'); $('#formatString').trigger('change'); return false;">{{ ::'TrimSpaces' | translate }} (TRIM)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

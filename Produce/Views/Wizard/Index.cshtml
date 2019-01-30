@@ -1,0 +1,377 @@
+﻿@using Infiniti.MvcControllers
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.ProjectViewModel>
+@{
+    var demoMessage = "";
+
+    if (Model.LicenseType == Intelledox.Model.LicenseType.Demo)
+    {
+        demoMessage = Intelledox.Produce.Resources.Strings.DemoFormMessage;
+    }
+    else if (Model.LicenseType == Intelledox.Model.LicenseType.Test)
+    {
+        demoMessage = Intelledox.Produce.Resources.Strings.TestFormMessage;
+    }
+}
+<!DOCTYPE HTML>
+<html dir="@(Model.IsRightToLeft ? "rtl" : "ltr")" lang="@(Model.TwoLetterISOLanguageName)">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8,IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>@Model.ThemePageTitle</title>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    @if (Model.Bundle)
+    {
+        if (Model.UseCdn)
+        {
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+            <link href="~/Content/cdnbundle.css?v=106882799234227327" rel="stylesheet" type="text/css" />
+        }
+        else
+        {
+            <link href="~/Content/bundle.css?v=106882799234227327" rel="stylesheet" type="text/css" />
+        }
+    }
+    else
+    {
+        <link href="~/Content/bootstrap.min.css?v=337" rel="stylesheet" type="text/css" />
+        <link href="~/Content/bootstrap-theme.min.css?v=337" rel="stylesheet" />
+        <link href="~/Content/datatables.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/Content/Site.css?v=10.2.6" type="text/css" rel="stylesheet" />
+        <link href="~/Content/toastr.css?v=9.7.3" rel="stylesheet" />
+    }
+    @if (Model.IsRightToLeft)
+    {
+        <link href="~/Content/bootstrap-rtl.min.css" type="text/css" rel="stylesheet" />
+        <link href="~/Content/SiteRtl.css?v=9.7.3" type="text/css" rel="stylesheet" />
+    }
+    @Html.Raw(Model.HtmlThemeCss)
+    @{
+        var defaultLogo = "<img src=\"" + Url.Content("~/Images/produce.svg") + "\" alt=\"Infiniti Logo\" height=\"56\" width=\"165\" />";
+        var syncLogo = "<img id=\"syncLogo\" src=\"" + Url.Content("~/Images/IX_Syncing.gif") + "\" alt=\"Sync Logo\" height=\"26\" width=\"26\" />";
+        var skin = Intelledox.Controller.SkinController.GetTenantSkin(Model.BusinessUnitGuid);
+        if (skin.HasSkinCssSettings)
+        {
+            var skinPublishedDate = Intelledox.Common.DateHelper.UtcDateTimeToJsString(skin.Published);
+            <link href="~/Styles/Skin?v=@skinPublishedDate" rel="stylesheet" id="siteSkin" />
+            if (skin.Logo != null && skin.Logo.Length > 0)
+            {
+                defaultLogo = string.Empty;
+            }
+        }
+    }
+    @if (Model.Skin.HasSkinCssSettings)
+    {
+        var projectSkinPublishedDate = Intelledox.Common.DateHelper.UtcDateTimeToJsString(Model.Skin.Published);
+        <link href="~/Styles/ProjectSkin?id=@Model.Skin.ProjectGroupGuid&v=@projectSkinPublishedDate" rel="stylesheet" id="projectSkin" />
+        if (Model.Skin.Logo != null && Model.Skin.Logo.Length > 0)
+        {
+            defaultLogo = string.Empty;
+        }
+
+    }
+    @if (Model.UseCdn)
+    {
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    }
+    else
+    {
+        <script src="~/scripts/jquery-3.1.1.min.js"></script>
+    }
+    <script src="~/scripts/jquery-ui-1.12.1.custom.min.js"></script>
+    <script src="~/scripts/location.js?v=10.0.31"></script>
+    <!--[if lte IE 9]>
+    <script src="@Url.Content("~/scripts/jquery.placeholder.min.js?v=2")"></script>
+    <![endif]-->
+</head>
+<body class="@(Model.ProjectType == Intelledox.Model.ProjectType.Content ? "projectType-form" : "projectType-dashboard")">
+<a id="top"></a>
+    <form id="actionForm" method="post">
+        @Html.AntiForgeryToken()
+    </form>
+    @if (!String.IsNullOrEmpty(demoMessage))
+    {
+        <div style="position:relative; color:white; z-index:9999; background-color:red">
+            <p style="font-size:16px; font-weight:bold; font-family:'Times New Roman', Times, serif; margin-bottom:0; padding: 4px">@demoMessage</p>
+        </div>
+    }
+    <span id="wizHeader">@Html.Raw(Model.HtmlThemeWizardHeader)</span>
+    @if (!(Model.IsPortal || Model.IsPortalSave))
+    {
+        <header class="navbar navbar-inverse navbar-fixed-top ix-nav">
+            <div class="container-fluid">
+                <div id="navbar-header">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".ix-pagenav" id="ix-pagenavbtn">
+                        <span class="sr-only">Toggle form navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @{
+                    var homeUrl = "#";
+                    if (Model.ShowHome)
+                    {
+                        homeUrl = Url.Content("~/Home/GoToHome");
+                    }
+                    }
+
+                    <a class="navbar-brand analyticslog" href="@homeUrl" id="lnkHomeHead" data-analyticsid="goToHome">
+                        <div id="ixInfinitiLogo">@Html.Raw(defaultLogo)<span class="sr-only">Infiniti</span></div>
+                    </a>
+                </div>
+                <nav>
+                    <ul class="nav navbar-nav navbar-home">
+                    @if (!Model.IsWizardMode && Model.ShowHome)
+                    {
+                        <li>
+                            <a href="~/Home/GoToHome" id="lnkHome" title="@Intelledox.Produce.Resources.Strings.Home" class="analyticslog" data-analyticsid="goToHome">@Intelledox.Produce.Resources.Strings.Home</a>
+                        </li>
+                    }
+                    </ul>
+                    <p class="navbar-text form-title hidden-xs">@Model.Name</p>
+                    <ul class="nav navbar-nav navbar-right">
+                    @if (Model.ShowSignOut)
+                    {
+                    <li id="LogoutMenu">
+                        <a id="lnkSignOut" class="signout-link analyticslog" href="~/Account/LogOff" data-analyticsid="logoff">@Intelledox.Produce.Resources.Strings.LogOut</a>
+                    </li>
+                        }
+                    </ul>                    
+                    @if (Model.IsNative)
+                    {
+                    <div class="nav-native-sync" >
+                        <a href="#void" onclick="wiz.backgroundSync()" class="syncCount" id="ixConnection">@Html.Raw(syncLogo)<span id="pendingSyncCount">2</span></a>
+                    </div>
+                    }
+                </nav>
+            </div>
+        </header>
+    }
+    else
+    {
+        <header class="navbar navbar-inverse navbar-fixed-top ix-nav ix-nav-portal">
+            <div class="container-fluid">
+                <div id="navbar-header">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".ix-pagenav" id="ix-pagenavbtn">
+                        <span class="sr-only">Toggle form navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+            </div>
+        </header>
+    }
+    <input type="hidden" id="baseUrl" value="~/" />
+    <input type="hidden" id="exitMessage" value="@Intelledox.Produce.Resources.Strings.ExitMessage" />
+    <input type="hidden" id="savePopupTitle" value="@Intelledox.Produce.Resources.Strings.Save" />
+    <input type="hidden" id="reassignPopupTitle" value="@Intelledox.Produce.Resources.Strings.Reassign" />
+    <input type="hidden" id="uploadPopupTitle" value="@Intelledox.Produce.Resources.Strings.Upload" />
+    <input type="hidden" id="importPopupTitle" value="@Intelledox.Produce.Resources.Strings.Import" />
+    <input type="hidden" id="validateNumber" value="@Intelledox.Produce.Resources.Strings.NumericType" />
+    <input type="hidden" id="validateDate" value="@Intelledox.Produce.Resources.Strings.InvalidDate" />
+    <input type="hidden" id="validateRequired" value="@Intelledox.Produce.Resources.Strings.RequiredField" />
+    <input type="hidden" id="validateMonths" value="[@string.Join(",", System.Globalization.DateTimeFormatInfo.CurrentInfo.AbbreviatedMonthNames.Union(System.Globalization.DateTimeFormatInfo.CurrentInfo.MonthNames).Where(m => !string.IsNullOrEmpty(m)).Select(m => "\"" + m.ToLower() + "\""))]" />
+    <input type="hidden" name="Latitude" id="Latitude" />
+    <input type="hidden" name="Longitude" id="Longitude" />
+    <input type="hidden" name="Warn" id="Warn" />
+
+    <div class="container-fluid ix-header-body wizardContent">
+        <table width="100%" class="NoPadding NoSpacing" role="presentation">
+            <tr>
+                <td id="Sections">
+                    <div class="collapse navbar-collapse ix-pagenav" role="navigation">
+                        @Html.Raw(Model.HtmlThemeWizardHeaderLogo)
+                        <div id="OptionPanel">
+                            <div id="plhCustomUI"></div>
+                            <div id="pagesList"></div>
+                        </div>
+                        <div id="ProjectAnswerFiles">
+                        </div>
+                        @if (Model.IsNative && Model.IsHomePage)
+                        {
+                            <div id="NativeButtons">
+                                <h5 class="sidebarTop titleNativeButtons">
+                                    @Intelledox.Produce.Resources.Strings.Actions
+                                </h5>
+                                <div class="sidebarContent">
+                                    <div class="sidebarItem" style="overflow:hidden;">
+                                        <div class="bullet ImageSize">
+                                            <img src="~/Images/IX_Recent.svg" alt="@Intelledox.Produce.Resources.Strings.Synchronise" />
+                                        </div>
+                                        <div class="indent">
+                                            <a title="@Intelledox.Produce.Resources.Strings.Synchronise" href="~/wizard/synchronise">
+                                                @Intelledox.Produce.Resources.Strings.Synchronise
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="sidebarItem" style="overflow:hidden;">
+                                        <div class="bullet ImageSize">
+                                            <img src="~/Images/IX_Recent.svg" alt="@Intelledox.Produce.Resources.Strings.LogOut" />
+                                        </div>
+                                        <div class="indent">
+                                            <a title="@Intelledox.Produce.Resources.Strings.LogOut" href="~/wizard/logout">
+                                                @Intelledox.Produce.Resources.Strings.LogOut
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (Model.HtmlHelpText != "")
+                        {
+                            <div id="ProjectHelp">
+                                <h5 class="sidebarTop titleProjectHelp">
+                                    @Intelledox.Produce.Resources.Strings.TemplateHelp
+                                </h5>
+                                <div class="sidebarContent">
+                                    <p>@Html.Raw(Model.HtmlHelpText)</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </td>
+                <td id="Questions" style="vertical-align: top"></td>
+            </tr>
+        </table>
+        <div class="modal" id="waitShort-modal"></div>
+        <div class="modal" id="wait-modal" title="@Intelledox.Produce.Resources.Strings.Loading">
+            <div class="modal-dialog wait-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div style="text-align:center" aria-live="assertive">
+                            <div id="wait-spinner" title="@Intelledox.Produce.Resources.Strings.Loading" aria-label="@Intelledox.Produce.Resources.Strings.Loading"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="previewWin" style="display: none; position: absolute; z-index: 1000"></div>
+        <span id="wizFooter">@Html.Raw(Model.HtmlThemeWizardFooter)</span>
+    </div>
+    @if (Model.UseCdn)
+    {
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    }
+    else
+    {
+        <script src="~/scripts/bootstrap.min.js?v=337"></script>
+    }
+    <script>
+        $('#wait-modal')
+            .modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+    </script>
+    <script src="~/scripts/jquery.history.js?v=1.8b2"></script>
+    <script src="~/scripts/wizard.js?v=10.2.11"></script>
+    <script src="~/scripts/validate.js?v=11.0"></script>
+    <script src="~/scripts/toastr.js?v=9.7.3"></script>
+    <script src="~/scripts/jquery.ui.touch-punch.min.js"></script>
+    <script>
+        wiz.initWizard(@Model.IsNative.ToString().ToLowerInvariant());
+
+        $('body').click(wiz.bodyClick);
+
+        function getWizardUrl(url, callback) {
+            if (wiz.isNative) {
+                NativeFunc("doGetUrl", url, callback);
+            } else {
+                $.ajaxSetup({
+                    cache: false
+                });
+
+                $.get(url, callback);
+            }
+        }
+        function postWizardUrl(formDataCallBack, resultCallBack) {
+            if (wiz.isNative) {
+                resultCallBack(NativeFunc("doPostUrl", formDataCallBack(), resultCallBack));
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+    @{
+        var js = "getGeolocation('" + Model.UserGuid.ToString() + "', 'Latitude', 'Longitude', 'Warn', true);";
+    }
+    <script>
+        function updateLocation() {
+            @if (Model.LocationCollectionEnabled) {
+                @Html.Raw(js)
+            }
+            return true;
+        }
+    </script>
+
+    @{
+        var function = "null";
+        if (Model.UpdateLog && Model.LocationCollectionEnabled)
+        {
+            function = "function () { " +
+                        "updateLog('" + HttpUtility.JavaScriptStringEncode(ApplicationSettings.ProduceUrl + (ApplicationSettings.ProduceUrl.EndsWith("/") ? "" : "/")) + "','"
+                        + Model.UserGuid + "','"
+                        + Model.TimeStamp + "','"
+                        + Model.BusinessUnitGuid + "',"
+                        + "$(\"#Latitude\").val()," + "$(\"#Longitude\").val()" + ");}";
+        }
+    }
+    @if (!String.IsNullOrEmpty(Model.HtmlHomeMessage))
+    {
+        <script>
+        $(document).ready(function() {
+            toastr.options = {
+                "timeOut":
+                "3000",
+                "extendedTimeOut":
+                "1000"
+            };
+            toastr.success("@Html.Raw(HttpUtility.JavaScriptStringEncode(Model.HtmlHomeMessage))");
+        });
+        </script>
+    }
+    else if (!String.IsNullOrEmpty(Model.HtmlHomeError))
+    {
+        <script>
+        $(document).ready(function() {
+            toastr.options = {
+                "timeOut":
+                "10000",
+                "extendedTimeOut":
+                "2000"
+            };
+            toastr.error("@Html.Raw(HttpUtility.JavaScriptStringEncode(Model.HtmlHomeError))");
+        });
+        </script>
+    }
+
+    <script>
+    getWizardUrl('@Url.Content("~/")wizard/QA/@Model.ProjectGroupGuid.ToString()?@Html.Raw(Model.QueryString)',
+        function(data) {
+            $("#Questions").html(data);
+            if (document.getElementById('lnkHome') != null &&
+                document.getElementById('hidLogGuid') != null) {
+                document.getElementById('lnkHome').href = "@Url.Content("~/Home/GoToHome?LogGuid=")" +
+                    document.getElementById('hidLogGuid').value;
+                document.getElementById('lnkHomeHead').href = "@Url.Content("~/Home/GoToHome?LogGuid=")" +
+                    document.getElementById('hidLogGuid').value;
+            }
+        });
+    </script>
+
+@if (Model.LocationCollectionEnabled)
+{
+    <script>
+    getGeolocation('@Model.UserGuid.ToString()',
+        'Latitude',
+        'Longitude',
+        'Warn',
+        true,
+        @Html.Raw(function));
+        </script>
+    }
+</body>
+</html>

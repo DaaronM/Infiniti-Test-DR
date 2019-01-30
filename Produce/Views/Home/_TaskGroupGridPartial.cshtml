@@ -1,0 +1,87 @@
+﻿@using Intelledox.Produce
+@model Intelledox.Produce.HomeViewModel
+
+
+@if (Model.TaskListResultsForGroup.Count > 0)
+{
+    <h2 class="titleProgress">
+        @Intelledox.Produce.Resources.Strings.FormsAssignedToMyGroup
+        <img id="TaskListButtonForGroup" class="ContractButton" alt="@Intelledox.Produce.Resources.Strings.Open/@Intelledox.Produce.Resources.Strings.Close" />
+    </h2>
+
+    var grid = new WebGrid(source: Model.TaskListResultsForGroup, canPage: true, rowsPerPage: 20, fieldNamePrefix: "taskGroup");
+    <div class="table-responsive" id="listProgressForGroup">
+        @{
+            var gridColumns = new List<WebGridColumn>();
+            gridColumns.Add(grid.Column("ProjectName", Intelledox.Produce.Resources.Strings.Form, @<text>
+            @if (@item.IsLockedBySomeoneElse)
+            {
+                <img src="~/images/IX_Lock.svg" height="16" alt="@Intelledox.Produce.Resources.Strings.Locked" /><span class="locked">@item.ProjectName</span>
+            }
+            else
+            {
+                <a href="~/wizard/@item.ProjectGroupGuid.ToString()/?WorkflowId=@item.TaskListStateId.ToString()">@item.ProjectName - @item.StateName</a>
+            }</text>));
+            gridColumns.Add(grid.Column(null, null,@<text> @if (@item.AllowCancellation)
+            {
+                <div class="dropdown pull-right">
+                    <button class="btn btn-default btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">@Intelledox.Produce.Resources.Strings.ToggleActionDropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="presentation"><a role="menuitem" href="~/Home/AbortForm/@item.TaskListStateId.ToString()" onclick="if (confirm('@Intelledox.Produce.Resources.Strings.ConfirmDelete')) { document.getElementById('actionForm').setAttribute('action', this.getAttribute('href')); document.getElementById('actionForm').submit(); } return false;">@Intelledox.Produce.Resources.Strings.Cancel</a></li>
+                    </ul>
+                </div>
+            }</text>));
+            gridColumns.Add(grid.Column("AssignedBy", @Intelledox.Produce.Resources.Strings.AssignedBy, @<text>@Intelledox.Common.Functions.FormatDisplayName(@item.AssignedByName, @item.AssignedBy, false)</text>));
+            gridColumns.Add(grid.Column("DateCreatedUtc", @Intelledox.Produce.Resources.Strings.DateAssigned, @<text>@Infiniti.MvcControllers.UserSettings.FormatLocalDate(@item.DateCreatedUtc, "g")</text>, "width:15%"));
+            if (Model.ShowDueDateColumnForGroup)
+            {
+                gridColumns.Add(grid.Column("DateDueUtc", @Intelledox.Produce.Resources.Strings.DateDue, @<text>
+
+            @if (@item.DateDueUtc != null)
+            {
+                @Infiniti.MvcControllers.UserSettings.FormatLocalDate(@item.DateDueUtc, "g", true)
+            }</text>));
+            }
+            gridColumns.Add(grid.Column("Comment", @Intelledox.Produce.Resources.Strings.Comment, @<text>@item.Comment</text>));
+        }
+
+        @grid.Table(
+                displayHeader: true,
+                tableStyle: "table table-striped table-condensed",
+                htmlAttributes: new { id = "grdTaskGroup" },
+                fillEmptyRows: false,
+                columns: grid.Columns(gridColumns.ToArray())
+                )
+        <div class="paginationList">
+            @grid.PagerList(mode: WebGridPagerModes.Numeric | WebGridPagerModes.FirstLast,
+            firstText: Intelledox.Produce.Resources.Strings.First,
+            lastText: Intelledox.Produce.Resources.Strings.Last,
+            paginationStyle: "pagination")
+        </div>
+    </div>
+    <script type="text/javascript">
+        if (getCookie('wfGrpState') == "0" && $('#TaskListButtonForGroup').length > 0) {
+            $('#listProgressForGroup').slideToggle(0);
+            $('#TaskListButtonForGroup').prop("class", 'ExpandButton');
+        }
+
+        // SLIDE OUT Task List
+        $(document).ready(function () {
+            if ($('#TaskListButtonForGroup').length > 0) {
+                $('#TaskListButtonForGroup').click(function () {
+                    if ($('#listProgressForGroup').is(':hidden')) {
+                        setCookie('wfGrpState', "1", 1);
+                        $('#TaskListButtonForGroup').prop("class", 'ContractButton');
+                    } else {
+                        setCookie('wfGrpState', "0", 1);
+                        $('#TaskListButtonForGroup').prop("class", 'ExpandButton');
+                    }
+                    $('#listProgressForGroup').slideToggle(300);
+                });
+            }
+        });
+    </script>
+            }

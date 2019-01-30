@@ -1,0 +1,82 @@
+﻿@using Intelledox.Produce
+@model Intelledox.Model.AddressBookItemCollection
+@{
+    ViewBag.CurrentTab = MenuTab.Contact;
+}
+
+@Html.Partial("_SiteHeader")
+<div class="container ix-header-body">
+    <h1 class="page-header">
+        @Intelledox.Produce.Resources.Strings.Contacts
+    </h1>
+
+    <div class="table-responsive">
+        <form method="post">
+            <table class="table table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" title="Select/Deselect all addresses" onclick="selectAll(this);" /></th>
+                        <th>@Intelledox.Produce.Resources.Strings.FullName</th>
+                        <th>@Intelledox.Produce.Resources.Strings.JobTitle</th>
+                        <th>@Intelledox.Produce.Resources.Strings.Organisation</th>
+                        <th>@Intelledox.Produce.Resources.Strings.PhoneNumber</th>
+                        <th>@Intelledox.Produce.Resources.Strings.FaxNumber</th>
+                        <th>@Intelledox.Produce.Resources.Strings.Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in Model)
+                    {
+                        <tr>
+                            <td><input type="checkbox" name="contactId" value="@row.AddressId" aria-label="@Intelledox.Produce.Resources.Strings.SelectRow" /></td>
+                            <td>
+                                <a href="@Url.Action("Edit", new { Id = row.AddressId })">
+                                    @if (String.IsNullOrWhiteSpace(row.FullName))
+                                    {
+                                        @:(Blank)
+                                }
+                                    else
+                                    {
+                                        @row.FullName
+                                    }
+                                </a>
+                            </td>
+                            <td>@row.Title</td>
+                            <td>@row.Organisation</td>
+                            <td>@row.PhoneNumber</td>
+                            <td>@row.FaxNumber</td>
+                            <td>@row.EmailAddress</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div>
+                <input class="btn btn-primary btn-edit" type="button" value="@Intelledox.Produce.Resources.Strings.NewAddress" onclick="document.location='@Url.Action("Edit")'" />
+                <input class="btn btn-default btn-del" name="Delete" type="submit" value="@Intelledox.Produce.Resources.Strings.DeleteSelected" onclick="return confirm('@Intelledox.Produce.Resources.Strings.ConfirmDelete');" />
+                <input class="btn btn-default btn-export" type="button" value="@Intelledox.Produce.Resources.Strings.ExportSelected" onclick="saveNames()" />
+                <input class="btn btn-default btm-import" type="button" value="@Intelledox.Produce.Resources.Strings.Import" onclick="document.location='@Url.Action("Import")'" />
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        function saveNames() {
+            var selectedIds = '';
+
+            $('[name="contactId"]:checked').each(function () {
+                selectedIds += $(this).val() + ",";
+            });
+
+            document.location = '@Url.Action("ContactsCSV")?id=' + selectedIds;
+        }
+
+        function selectAll(parent) {
+            var value = parent.checked;
+
+            $('[name="contactId"]').each(function () {
+                this.checked = value;
+            });
+        }
+    </script>
+</div>

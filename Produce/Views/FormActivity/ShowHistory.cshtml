@@ -1,0 +1,39 @@
+﻿@using Intelledox.Produce
+@model Intelledox.Produce.TaskHistoryViewModel
+@{
+    ViewBag.CurrentTab = MenuTab.FormActivity;
+}
+@Html.Partial("_SiteHeader")
+<div class="container ix-header-body">
+    <h1 class="page-header">
+        @Intelledox.Produce.Resources.Strings.History - @Model.ProjectName
+    </h1>
+    <div class="row-fluid">
+        <form method="post">
+            @{
+                var grid = new WebGrid(source: Model.TaskListStates);
+
+                @grid.Table(
+                        tableStyle: "table table-striped table-condensed",
+                        htmlAttributes: new { id = "grdHistory" },
+                        fillEmptyRows: false,
+                        columns: grid.Columns(
+                                 grid.Column("StateName", Intelledox.Produce.Resources.Strings.State),
+                                 grid.Column("CreatedDateUTC", Intelledox.Produce.Resources.Strings.DateCreated, @<text>@Infiniti.MvcControllers.UserSettings.FormatLocalDate(item.CreatedDateUTC, "g")</text>),
+                                 grid.Column("AssignedToDisplayName", Intelledox.Produce.Resources.Strings.AssignedTo),
+                                 grid.Column("CompletedDateUTC", Intelledox.Produce.Resources.Strings.DateCompleted,@<text>
+                                @if (item.IsComplete == true)
+                                {
+                                    @Infiniti.MvcControllers.UserSettings.FormatLocalDate(item.CompletedDateUTC, "g")
+                                }
+                                else
+                                {
+                                    @Intelledox.Produce.Resources.Strings.None
+                                }
+                                </text>)                                                                                                                                                                                                                
+                )                                                                                                                                                                    )
+            }
+
+        </form>
+    </div>
+</div>

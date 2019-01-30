@@ -1,0 +1,71 @@
+﻿<div class="form-group">
+    <label for="visibility" class="col-sm-4 control-label">{{ ::'Visible' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input type="checkbox" id="visibility" ng-model="model.propertiesPanelModel.visible" />
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.visible">
+    <label for="contentType" class="col-sm-4 control-label">{{ ::'ContentType' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="contentType" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableContentTypes"
+                ng-model="model.propertiesPanelModel.contentType"></select>
+    </div>
+</div>
+<ng-include src="'Views/Properties/mandatoryProperty.html?v=106882799234227327'" ng-if="model.propertiesPanelModel.isMandatoryVisible" />
+<div class="form-group" ng-if="model.propertiesPanelModel.visible">
+    <label for="contentItem" class="col-sm-4 control-label">{{ ::'ContentItem' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input id="contentItem" class="form-control input-sm" ng-model="model.propertiesPanelModel.selectedContentItem" readonly />
+            <span class="input-group-btn">
+                <button class="btn btn-default input-sm" type="button" ng-click="model.propertiesPanelModel.selectContentItem()">...</button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="!model.propertiesPanelModel.visible">
+    <label for="contentAutoAnswer" class="col-sm-4 control-label">{{ ::'AutoAnswerTab' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input type="checkbox" id="contentAutoAnswer" ng-model="model.propertiesPanelModel.isAutoAnswerVisible" />
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isAutoAnswerVisible">
+    <label for="contentQuestion" class="col-sm-4 control-label">{{ ::'Question' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="contentQuestion" class="form-control input-sm"
+                ng-options="option.QuestionGuid as option.Text for option in model.propertiesPanelModel.availableQuestions"
+                ng-model="model.propertiesPanelModel.selectedQuestionGuid"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isAutoAnswerVisible && !model.propertiesPanelModel.isParentFieldVisible">
+    <label for="contentAnswer" class="col-sm-4 control-label">{{ ::'Answer' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <select id="contentAnswer" class="form-control input-sm"
+                    ng-disabled="!model.propertiesPanelModel.isAnswerEnabled"
+                    ng-options="option.AnswerGuid as option.Name for option in model.propertiesPanelModel.availableAnswers"
+                    ng-model="model.propertiesPanelModel.selectedAnswerGuid"></select>
+            <span class="input-group-btn">
+                <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                        ng-click="model.propertiesPanelModel.pickRef()"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15" />
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isAutoAnswerVisible && model.propertiesPanelModel.isParentFieldVisible">
+    <label for="contentParentField" class="col-sm-4 control-label">{{ ::'DataField' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="contentParentField" class="form-control input-sm"
+                ng-disabled="!model.propertiesPanelModel.isAnswerEnabled"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.availableParentFields"
+                ng-model="model.propertiesPanelModel.selectedParentField"></select>
+    </div>
+</div>

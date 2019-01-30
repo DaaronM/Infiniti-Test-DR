@@ -1,0 +1,88 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.DataSearchQuestionViewModel>
+@{
+    var qid = IdHelper.IdFor(Model.Question);
+    var isDisabled = !Model.Question.IsEditable;
+    var binaryType = Type.GetType("byte[]");
+    var dataTableType = Type.GetType("System.Data.DataTable");
+    Layout = null;
+}
+@if (Model.Question.WizardFragment.WizardSession.Troubleshooting.HasTroubleshooting)
+{
+    foreach (KeyValuePair<double, string> query in Model.Question.QueryData)
+    {
+        <div class="question-label datasource-debug">@(Html.Raw(String.Format(Intelledox.Produce.Resources.Strings.TimeToFetchData, query.Value, query.Key).Replace(Environment.NewLine, "<br>")))</div>
+    }
+}
+@if (Model.Question.UsingExpiredData)
+{
+    <div class="label-warning">@Model.CacheWarningMessage</div>
+}
+@if (String.IsNullOrEmpty(Model.HtmlErrorMessage))
+{
+    <table id="grdDataResults_@(qid)" class="dataResults table @(Model.Question.OnlyVisibleForTroubleshooting ? "datasource-debug" : "table-condensed")" data-SelectionField="@Model.SelectionField">
+        <tr class="cell-heading">
+            <th class="@(Model.Question.OnlyVisibleForTroubleshooting ? "datasource-debug" : "")">
+                @if (Model.IsMultipleSelect && !isDisabled)
+                {
+                    <input type="checkbox" checked="@Model.IsAllSelected" onclick="@Html.Raw(Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "', 'checkall'" + ");" : "")wiz.dataCheckAll(event)" />
+                }
+                else
+                {
+                    @:&nbsp;
+        }
+            </th>
+            @foreach (var col in Model.Results.Columns)
+            {
+                if (col.DataType != binaryType && col.DataType != dataTableType)
+                {
+                    <th class="@(Model.Question.OnlyVisibleForTroubleshooting ? "datasource-debug" : "")">@col.DisplayName</th>
+                }
+            }
+        </tr>
+        @for (int y = 0; y < Model.Results.Count; y++)
+        {
+            var row = Model.Results[y];
+            bool isSelected = (Model.SelectedIndices.Count == 0 || (Model.SelectedIndices.Count > 0 && Model.SelectedIndices.Contains(y.ToString())));
+
+            <tr class="@Html.Raw(!Model.IsMultipleSelect && isSelected ? "active" : "") @(Model.Question.OnlyVisibleForTroubleshooting ? "datasource-debug" : "")">
+                <td class="@(Model.Question.OnlyVisibleForTroubleshooting ? "datasource-debug" : "")">
+
+                    @if (Model.IsMultipleSelect)
+                    {
+                        <input type="checkbox" checked="@isSelected" disabled="@isDisabled" onclick="@Html.Raw(Model.LogInteractions ? (Model.Question.DatasourceQuestionModel.DisplayType == Intelledox.Model.QuestionDisplayType.Popup) ? "parent.wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "');" : "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "');" : "")wiz.dataCheckItem(event, '@y');@Html.Raw(Model.Question.IsMandatory ? "validate.setPass('#" + qid + "');" : "");"/>
+                    }
+                    else
+                    {
+                        if (!isDisabled)
+                        {
+                            <a href="#void" onclick="@Html.Raw(Model.LogInteractions ? (Model.Question.DatasourceQuestionModel.DisplayType == Intelledox.Model.QuestionDisplayType.Popup) ? "parent.wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "');" : "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "');" : "")wiz.dataSelectItem(event, '@y');@Html.Raw(Model.Question.IsMandatory ? "validate.setPass('#" + qid + "');" : "");return false;">@Intelledox.Produce.Resources.Strings.SelectString</a>
+                        }
+                    }
+
+                </td>
+                @for (int x = 0; x < Model.Results.Columns.Count; x++)
+                {
+                    if (Model.Results.Columns[x].DataType != binaryType && Model.Results.Columns[x].DataType != dataTableType)
+                    {
+                        <td class="@(Model.Question.OnlyVisibleForTroubleshooting ? "datasource-debug" : "")">@row[x].ToString()</td>
+                    }
+                }
+            </tr>
+        }
+    </table>
+}
+else
+{
+    @Html.Raw(Model.HtmlErrorMessage);
+}
+
+@if (Model.IsResettingSelection)
+{
+    <script type="text/javascript">document.getElementById('@Model.SelectionField').value = '@Model.ResetSelectionValue';</script>
+}
+@if (Model.IsScrollToView)
+{
+    <script type="text/javascript">wiz.dataScrollToView('grdDataResults_@(qid)', '@(qid)_results');</script>
+}

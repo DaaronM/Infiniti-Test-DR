@@ -1,0 +1,112 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.DataFieldQuestionViewModel>
+@{
+    if (Model.ShowQuestionTemplate)
+    {
+        Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+    }
+    else
+    {
+        Layout = null;
+    }
+    var qid = IdHelper.IdFor(Model.Question);
+}
+@if (Model.ShowUpload)
+{
+    @:<div>
+        if (Model.Question.IsEditable)
+    {
+        <a href="#void" onclick="@Html.Raw(Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "','dataUpload'" + ");" : "")wiz.openUploadPage('@Url.Content("~/")', '@Model.Question.WizardFragment.InstanceId.ToString()', '@Model.Question.QuestionGuid.ToString()', 'data', '@Model.RepeatPath', '@Model.Question.WizardFragment.WizardSession.ProjectLog.ToString()', null);return false;">@Intelledox.Produce.Resources.Strings.SelectDataFile</a>
+    }
+    else
+    {
+        @Intelledox.Produce.Resources.Strings.NoDataFileSelected
+    }
+    @:</div>
+}
+@if (Model.ShowClear && Model.Question.IsEditable)
+{
+    <a href="#void" onclick="@Html.Raw(Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "','dataClear'" + ");" : "")wiz.clearContent('@Model.Question.WizardFragment.InstanceId.ToString()', '@Model.Question.QuestionGuid.ToString()', '@Model.RepeatPath');return false;">@Intelledox.Produce.Resources.Strings.ClearFile</a><br />
+}
+@if (Model.ShowUpload)
+{
+    @Html.DisplayValidation(Model.Question.LastValidationMessage)
+}
+else
+{
+    if (Model.DisplayOfflineLabel)
+    {
+        @Html.DisplayValidation(Intelledox.Produce.Resources.Strings.Offline, qid);
+    }
+    <table class="NoPadding NoSpacing NoBorder" width="100%" role="presentation">
+        @if (Model.Filters != null && Model.Filters.Count > 0)
+        {
+            <tr>
+                <td class="filter">
+                    <table role="presentation">
+                        @foreach (var filter in Model.Filters)
+                        {
+                            var keyFieldName = qid + "_KeyField_" + filter.Id;
+
+                            <tr>
+                                <td class="filterTitle"><label for="@keyFieldName">@filter.Title</label></td>
+                                <td>
+                                    <input class="form-control" id="@keyFieldName" name="@keyFieldName" value="@filter.Value"
+                                           onfocus="wiz.setDefaultButton('@(qid)_btnFetchData');" onblur="wiz.setDefaultButton(undefined);"
+                                           @Html.Raw(Model.IsInPopupWindow() ? "onkeypress=\"if( event.keyCode == 13 ) { fetchData" + qid + "(); return false;}\"" : "")
+                                           @Html.Raw(!Model.Question.IsEditable ? "disabled=\"disabled\"" : "" )
+                                           @Html.Raw(Model.Question.IsMandatory ? "required" : "")
+                                           @if (Model.LogInteractions) { <text>data-analyticsid="@Model.AnalyticsID"</text> }>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td class="cell-search" style="text-align:center">
+                @if (Model.Filters != null && Model.Filters.Count > 0 && Model.Question.IsEditable)
+                {
+                    <div><input type="button" class="btn btn-default btn-get" value="@Intelledox.Produce.Resources.Strings.FetchData" id="@(qid)_btnFetchData" onclick="fetchData@(qid)()" @Html.Raw(Model.Question.HasValidationErrors() ? "aria-invalid=\"true\" aria-describedby=\"error_" + qid + "_iFetchData\"" : "") @if (Model.LogInteractions) { <text>data-analyticsid="@(Model.AnalyticsID)" data-analyticsevent="fetchData"</text> }/></div>
+                }
+                @Html.DisplayValidation(Model.Question.LastValidationMessage, qid + "_iFetchData")
+                <input type="hidden" id="@(qid)_hidSelectedIndex" name="@(qid)_hidSelectedIndex" value="@Model.SelectedIndex" />
+            </td>
+        </tr>
+        <tr id="@(qid)_trFetchData" @Html.Raw(Model.Filters != null && Model.Filters.Count > 0 ? "style=\"display:none\"" : "")>
+            <td>
+                <div class="dataFrameContainer">
+                    <div id="@(qid)_results" class="dataFrame multiDataListBoxRequired"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        function fetchData@(qid)() {
+            var queryUrl = '@Url.Content("~/")data/search/?fragmentGuid=@(Model.Question.WizardFragment.InstanceId.ToString())' +
+                            '&QuestionGuid=@(Model.Question.QuestionGuid.ToString())' +
+                            '&RepeatPath=@(Model.RepeatPath)' +
+                            '&Data=@(qid)_hidSelectedIndex' +
+                            '&SelectedIndex=' + document.getElementById('@(qid)_hidSelectedIndex').value +
+                            '&logGuid=@Model.Question.WizardFragment.WizardSession.ProjectLog.ToString()';
+            @if (Model.Filters != null)
+            {
+                foreach (var filter in Model.Filters)
+                {
+                    // apply display filter fields
+                @:queryUrl += '&KeyField_@(filter.Id)=' + encodeURIComponent(document.getElementById('@(qid)_KeyField_@(filter.Id)').value);
+                }
+            }
+
+            wiz.fetchData('@(qid)', queryUrl);
+
+            document.getElementById('@(qid)_trFetchData').style.display='';
+        }
+        @if ((Model.Filters != null && Model.Filters.Count == 0) || !Model.Question.IsEditable)
+        {
+            @:fetchData@(qid)();
+        }
+    </script>
+}

@@ -1,0 +1,54 @@
+﻿<ng-include src="'Views/Properties/mandatoryProperty.html?v=106882799234227327'"></ng-include>
+<div class="form-group">
+    <label for="defaultValue" class="col-sm-4 control-label">{{ ::'DefaultValue' | translate }}</label>
+    <div class="col-sm-8">
+        <textarea id="defaultValue" class="form-control input-sm" ng-model="model.propertiesPanelModel.DefaultValue" rows="6" spellcheck="true"
+                    ui-tinymce="tinymceHtmlWithPickRef" pick-Ref-Editor="model.pickRefEditor(ed)" tree-view="model.treeView"></textarea>
+    </div>
+</div>
+<div class="form-group">
+    <label for="textRows" class="col-sm-4 control-label">{{ ::'TextRows' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="textRows" class="form-control input-sm" ng-model="model.propertiesPanelModel.TextRows" maxlength="5" pattern="\d*" />
+    </div>
+</div>
+<fieldset class="col-sm-offset-4">
+    <legend>{{ ::'DisplayOptions' | translate }}</legend>
+    <div class="form-group">
+        <div class="checkbox col-sm-8">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.HasBullets" />{{ ::'BulletsAndNumbers' | translate }}
+            </label>
+        </div>
+        <div class="checkbox col-sm-8">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.HasCopyAndPaste" />{{ ::'CopyAndPaste' | translate }}
+            </label>
+        </div>
+        <div class="checkbox col-sm-8">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.HasHyperlink" />{{ ::'Hyperlink' | translate }}
+            </label>
+        </div>
+        <div class="checkbox col-sm-8">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.HasSpellCheck" />{{ ::'SpellCheck' | translate }}
+            </label>
+        </div>
+        <div class="checkbox col-sm-8" ng-if="model.propertiesPanelModel.ShowStyles">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.HasStyles" />{{ ::'Styles' | translate }}
+            </label>
+        </div>
+        <div class="checkbox col-sm-8">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.HasTables" />{{ ::'Tables' | translate }}
+            </label>
+        </div>
+        <div class="checkbox col-sm-8">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.HasProtectedFields" />{{ ::'ProtectedFields' | translate }}
+            </label>
+        </div>
+    </div>
+</fieldset>

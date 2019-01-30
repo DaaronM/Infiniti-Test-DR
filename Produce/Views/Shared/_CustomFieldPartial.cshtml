@@ -1,0 +1,40 @@
+﻿@using Intelledox.Produce
+@model Infiniti.MvcControllers.ContactCustomFieldViewModel
+<div class="form-group">
+    <input type="hidden" name="CustomFields.Index" value="@Model.Index" />
+    <input type="hidden" name="CustomFields[@Model.Index].CustomFieldId" value="@Model.Id" />
+    <input type="hidden" name="CustomFields[@Model.Index].ValidationType" value="@Model.ValidationType" />
+    <input type="hidden" name="CustomFields[@Model.Index].AddressCustomFieldId" value="@Model.AddressCustomFieldId" />
+    <label for="CustomFields[@Model.Index].Value" class="col-sm-2 control-label">@Model.Title</label>
+    <div class="col-sm-10">
+        @if (Model.ValidationType == 0)
+        {
+            
+         <input type="text" id="CustomFields[@Model.Index].Value" name="CustomFields[@Model.Index].Value" class="form-control" value="@Model.Value" />
+        
+        }
+        else if (Model.ValidationType == 1)
+        {
+            <div class="input-group" style="width:200px">
+                <input type="text" id="CustomFields[@Model.Index].Value" name="CustomFields[@Model.Index].Value" class="form-control" value="@Model.Value" style="width:auto">
+                <label for="CustomFields[@Model.Index].Value" class="input-group-addon btn-calendar" onclick="$('#CustomFields\\[@Model.Index\\]\\.Value').datepicker('show');">
+                    <img height="16" title="@Intelledox.Produce.Resources.Strings.SelectDate" alt="@Intelledox.Produce.Resources.Strings.SelectDate" class="datepicker-trigger" src="~/Images/IX_Calendar.svg" />
+                </label>
+            </div>
+            <script type="text/javascript">
+                $('#CustomFields\\[@Model.Index\\]\\.Value').datepicker({
+                    showOn: 'none', changeMonth: true, changeYear: true, nextText: '>', prevText: '<', dayNames: [@Html.JQueryDate().DayNames], dayNamesMin: [@Html.JQueryDate().DayNamesMin],
+                    monthNamesShort: [@Html.JQueryDate().MonthNames], dateFormat: '@Html.JQueryDate().DatePattern',
+                    yearRange: 'c-100:c+100'
+                });
+            </script>
+        }
+        else
+        {
+            <img src="~/WizardSupport/GetImage?Thumb=1&DataGuid=@Model.Value" alt=" " />
+            <input type="file" id="CustomFields[@Model.Index].BinaryValue" name="CustomFields[@Model.Index].BinaryValue" />
+            @Html.ValidationMessage("CustomFields[" + Model.Index + "].BinaryValue")
+            <input type="hidden" name="CustomFields[@Model.Index].Value" value="@Model.Value" />
+        }
+    </div>
+</div>

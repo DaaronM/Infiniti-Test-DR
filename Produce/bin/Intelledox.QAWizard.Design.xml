@@ -1,0 +1,261 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Intelledox.QAWizard.Design</name>
+    </assembly>
+    <members>
+        <member name="P:Intelledox.QAWizard.Design.Condition.ParentItemGuid">
+            <summary>
+            QuestionGuid or ActionGuid or AvailableInput
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Condition.ParentAttributeGuid">
+            <summary>
+            AnswerGuid or ActionOutputGuid
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Filter.ParentItemGuid">
+            <summary>
+            QuestionGuid or AvailableInput
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Filter.ParentAttributeGuid">
+            <summary>
+            AnswerGuid
+            </summary>
+        </member>
+        <member name="T:Intelledox.QAWizard.Design.Resources.Strings">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.AccessCode">
+            <summary>
+              Looks up a localized string similar to Access Code.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.AssigneeFullName">
+            <summary>
+              Looks up a localized string similar to AssigneeFullName.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.Comments">
+            <summary>
+              Looks up a localized string similar to Comments.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.CurrentlySubmittingDefault">
+            <summary>
+              Looks up a localized string similar to Submitting Form.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.DefaultDownloadPageTitle">
+            <summary>
+              Looks up a localized string similar to Documents.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.DefaultFinishTitle">
+            <summary>
+              Looks up a localized string similar to Finish.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.DefaultGeneratingText">
+            <summary>
+              Looks up a localized string similar to Creating your Documents.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.DefaultInvalidProjectText">
+            <summary>
+              Looks up a localized string similar to [ErrorPage] page contains invalid answers. Please correct them before continuing..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.DefaultOnlineRedirectMessage">
+            <summary>
+              Looks up a localized string similar to Your answers have been submitted.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.DefaultWorkflowTransitionEmail">
+             <summary>
+               Looks up a localized string similar to &lt;p&gt;[ProjectLink]&lt;/p&gt;
+            &lt;p&gt;Comments&lt;br&gt;
+            [Comments]&lt;/p&gt;.
+             </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.DefaultWorkflowTransitionEmailSubject">
+            <summary>
+              Looks up a localized string similar to [ProjectName] - [StateName].
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.FileNameWithoutBlanks">
+            <summary>
+              Looks up a localized string similar to Filename.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.FinishState">
+            <summary>
+              Looks up a localized string similar to (Finish).
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.FirstNameAndLastNameRequired">
+            <summary>
+              Looks up a localized string similar to First and last names are required when adding to contacts.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.FormDefaultDownloadPageTitle">
+            <summary>
+              Looks up a localized string similar to Finish.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.FormDefaultGenerateButtonText">
+            <summary>
+              Looks up a localized string similar to Submit.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.FormDefaultGeneratingText">
+            <summary>
+              Looks up a localized string similar to Submitting Form.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.FormQueueMessage">
+            <summary>
+              Looks up a localized string similar to Form has been queued and will be submitted when a connection is available.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.None">
+            <summary>
+              Looks up a localized string similar to (None).
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.NoNextState">
+            <summary>
+              Looks up a localized string similar to There is no next step for this task..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.NotContain">
+            <summary>
+              Looks up a localized string similar to not contain.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.NotEqual">
+            <summary>
+              Looks up a localized string similar to not equal.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.NumericType">
+            <summary>
+              Looks up a localized string similar to A valid number is required.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.PleaseEnterAComment">
+            <summary>
+              Looks up a localized string similar to Please enter a comment..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.PleaseSelectNextState">
+            <summary>
+              Looks up a localized string similar to Please select the next step for this task..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.PleaseSelectNextUser">
+            <summary>
+              Looks up a localized string similar to Please select the person to send this task to..
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.Printer">
+            <summary>
+              Looks up a localized string similar to Printer.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.ProjectLink">
+            <summary>
+              Looks up a localized string similar to ProjectLink.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.ProjectName">
+            <summary>
+              Looks up a localized string similar to ProjectName.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.PublishedProjectNotFound">
+            <summary>
+              Looks up a localized string similar to Published Project(s) not found.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.RowCount">
+            <summary>
+              Looks up a localized string similar to RowCount.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.RowId">
+            <summary>
+              Looks up a localized string similar to RowId.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.RowNumber">
+            <summary>
+              Looks up a localized string similar to RowNumber.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.StartState">
+            <summary>
+              Looks up a localized string similar to (Start).
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.StateName">
+            <summary>
+              Looks up a localized string similar to StateName.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.WorkflowId">
+            <summary>
+              Looks up a localized string similar to WorkflowId.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Resources.Strings.WorkflowStepCompleteDefault">
+            <summary>
+              Looks up a localized string similar to Form submitted - step complete.
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Rule.ParentItemGuid">
+            <summary>
+            QuestionGuid or AvailableInput or ProjectProperty
+            </summary>
+        </member>
+        <member name="P:Intelledox.QAWizard.Design.Rule.ParentAttributeGuid">
+            <summary>
+            AnswerGuid
+            </summary>
+        </member>
+        <member name="T:Intelledox.QAWizard.Design.ActionResultType">
+            <summary>
+            Status of an action after executing
+            </summary>
+        </member>
+        <member name="F:Intelledox.QAWizard.Design.ActionResultType.Success">
+            <summary>
+            All mandatory processes succeeded
+            </summary>
+        </member>
+        <member name="F:Intelledox.QAWizard.Design.ActionResultType.Fail">
+            <summary>
+            A mandatory process failed and the action was unable to complete
+            </summary>
+        </member>
+        <member name="F:Intelledox.QAWizard.Design.ActionResultType.NotRun">
+            <summary>
+            The action did not need to run during this generation
+            </summary>
+        </member>
+    </members>
+</doc>

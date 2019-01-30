@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html ng-app="Startup" ng-strict-di>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8,IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Infiniti Design</title>
+    <link rel="icon" type="image/x-icon" href="Content/design.ico" />
+    <link href="../Content/bootstrap.min.css?v=337" rel="stylesheet" type="text/css" />
+    <link href="../Content/bootstrap-theme.min.css?v=337" rel="stylesheet" />
+    <link href="Content/Site.css?v=106882799234227327" rel="stylesheet" />
+    <script src="../Scripts/jquery-3.1.1.js"></script>
+    <script src="../Scripts/bootstrap.min.js?v=337"></script>
+    <script src="../Scripts/angular.min.js?v=140"></script>
+    <script src="../Scripts/angular-translate.min.js"></script>
+    <script src="../Scripts/angular-translate-loader-static-files.min.js"></script>
+    <script src="../Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="scripts/app.js?v=106882799234227327"></script>
+</head>
+<body ng-controller="startupCtrl">
+    <div id="pageWrapper">
+        <div class="startup-container">
+            <div class="startup-container-inner">
+                <div class="brand-bar">
+                    <a href="#" id="brandLogo"></a>
+                </div>
+                <div ng-if="!model.isOpenExisting" class="startup-grid">
+                    <div>
+                        <div class="startup-header" ng-bind="'Tasks'|translate"></div>
+                        <div class="startup-header" ng-bind="'RecentProjects'|translate"></div>
+                    </div>
+                    <div>
+                        <div class="startup-col startup-tasks">
+                            <div class="startup-btn">
+                                <a href="editor.html?v=106882799234227327" ng-show="model.isLoggedIn">
+                                    <img src="Images/NewProject64.png" alt="" />
+                                    {{ 'CreateNewProject' | translate }}
+                                </a>
+                            </div>
+                            <div class="startup-btn">
+                                <a href="#" ng-click="showOpenExisting()" ng-show="model.isLoggedIn">
+                                    <img src="Images/OpenExisting64.png" alt="" /><br />
+                                    {{ 'OpenExisting' | translate }}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="startup-col">
+                            <ol>
+                                <li ng-repeat="recent in model.recentProjects">
+                                    <a href="editor.html?v=106882799234227327#/?id={{ recent.projectGuid }}">{{ recent.name }}</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="model.isOpenExisting" class="startup-grid">
+                    <div style="overflow-y: auto; height: 400px">
+                        <table style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th ng-bind="'PROJECT'|translate"></th>
+                                    <th ng-bind="'TYPE'|translate"></th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td colspan="2" class="startup-search"><input id="projectSearch" ng-model="model.projectSearch" /></td>
+                            </tr>
+                            <tr ng-repeat="project in model.filteredExistingProjects">
+                                <td>
+                                    <a href="editor.html?v=106882799234227327#/?id={{ project.projectGuid }}">{{ project.name }}</a>
+                                </td>
+                                <td ng-switch on="project.projectTypeId">
+                                    <span ng-switch-when="1">{{ 'Form' | translate }}</span>
+                                    <span ng-switch-when="2">{{ 'Layout' | translate }}</span>
+                                    <span ng-switch-when="3">{{ 'Form' | translate }}</span>
+                                    <span ng-switch-when="4">{{ 'FragmentPage' | translate }}</span>
+                                    <span ng-switch-when="5">{{ 'FragmentPortion' | translate }}</span>
+                                    <span ng-switch-when="6">{{ 'Dashboard' | translate }}</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button ng-click="showCreateNew()" class="btn btn-default btn-primary">{{ 'Back' | translate }}</button>
+                    <script>
+                        setTimeout(function () {
+                            if (document.getElementById('projectSearch')) {
+                                document.getElementById('projectSearch').focus();
+                            }
+                        }, 500);
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

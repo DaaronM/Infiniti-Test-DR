@@ -1,0 +1,42 @@
+﻿<form class="form-horizontal" ng-submit="model.isValid && ok()">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title" ng-bind="'NewIntelledoxProject' | translate"></h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="newProjectName" class="col-sm-4 control-label" ng-bind="'NewProjectName' | translate"></label>
+            <div class="col-sm-8">
+                <input id="newProjectName" class="form-control" ng-model="model.name" maxlength="100" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="projectType" class="col-sm-4 control-label" ng-bind="'ProjectType' | translate"></label>
+            <div class="col-sm-8">
+                <select id="projectType" class="form-control"
+                        ng-model="model.projectType">
+                    <option value="1">{{ 'Form' | translate }}</option>
+                    <option value="6">{{ 'Dashboard' | translate }}</option>
+                    <option value="4">{{ 'FragmentPage' | translate }}</option>
+                    <option value="5">{{ 'FragmentPortion' | translate }}</option>
+                    <option value="2">{{ 'Layout' | translate }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.projectType === '2'">
+            <label for="newLayoutTemplate" class="col-sm-4 control-label" ng-bind="'Template' | translate"></label>
+            <div class="col-sm-8">
+                <input id="newLayoutTemplate" type="file" file-change="fileSelected()" ng-model="model.newTemplate" />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-disabled="!model.isValid" ng-bind="'OK' | translate"></button>
+        <button type="button" class="btn btn-default" ng-click="cancel()" ng-bind="'Cancel' | translate"></button>
+    </div>
+</form>
+<script>
+    setTimeout(function() {
+        document.getElementById('newProjectName').focus();
+    }, 500);
+</script>

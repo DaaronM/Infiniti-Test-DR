@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutSubpage.cshtml";
+}
+<div id="layout" class="base1">
+    <div id="header">
+        <div id="headerWrap">
+            <span id="logoHead">
+                <img id="logoImg" alt="Infiniti Logo" src="~/Images/manage.svg" height="56">
+            </span>
+            <span id="NavButtons">
+            </span>
+        </div>
+    </div>
+    <div id="body">
+        <div id="bodywrap">
+            <div id="bodytable">
+                <div id="bodytablewrap">
+                    <div id="content">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section AddToHead
+{
+    @RenderSection("AddToHead", required: false)
+}

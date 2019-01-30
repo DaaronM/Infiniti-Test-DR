@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Intelledox.Extension.Identity</name>
+    </assembly>
+    <members>
+        <member name="T:Intelledox.Extension.IdentityExtension.FormsIdentityExtension">
+            <summary>
+            Forms authentication base class
+            </summary>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.FormsIdentityExtension.ValidateUserAsync(System.String,System.String)">
+            <summary>
+            Authenticate a user based on supplied username and password
+            </summary>
+            <param name="username">User entered username</param>
+            <param name="password">User entered password</param>
+            <returns>True if successful, false otherwise</returns>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.FormsIdentityExtension.ValidateAndGetUserAsync(System.String,System.String)">
+            <summary>
+            Authenticate a user based on supplied username and password
+            </summary>
+            <param name="username">User entered username</param>
+            <param name="password">User entered password</param>
+            <returns>UserGuid if login successful, Guid.Empty otherwise</returns>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.FormsIdentityExtension.FormatUserName(System.String)">
+            <summary>
+            Formats a supplied username to be the same as what would be stored in the Infiniti user table
+            </summary>
+            <param name="username">Supplier username</param>
+            <returns>Formatted username</returns>
+        </member>
+        <member name="T:Intelledox.Extension.IdentityExtension.IdentityExtension">
+            <summary>
+            Identity extension that can be used to add custom logic for identifying users.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.IdentityExtension.IdentityExtension.ExtensionIdentity">
+            <summary>
+            Returns the unique identity for this identity extension.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.IdentityExtension.IdentityExtension.GlobalSettingIdentity">
+            <summary>
+            Returns the identity that is registered in Manage for global configuration settings. This identity
+            may be shared between different extensions for shared settings.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.IdentityExtension.IdentityExtension.EnablePasswordReset">
+            <summary>
+            Whether this extension supports having the users password changed. Mainly used for Forms auth.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.IdentityExtension.IdentityExtension.IsActive">
+            <summary>
+            Whether this extension takes part in the request pipeline
+            </summary>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.IdentityExtension.GetRequestUrl">
+            <summary>
+            Current request url
+            </summary>
+            <returns>Uri of endpoint</returns>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.IdentityExtension.GetQueryStringValue(System.String)">
+            <summary>
+            Query string value on the current request
+            </summary>
+            <param name="name">Name of parameter</param>
+            <returns>Query string value</returns>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.IdentityExtension.GetHeaderValue(System.String)">
+            <summary>
+            Header value on the current request
+            </summary>
+            <param name="name">Name of header</param>
+            <returns>Header value</returns>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.IdentityExtension.GetFormValue(System.String)">
+            <summary>
+            Form value on the current request
+            </summary>
+            <param name="name">Name of form item</param>
+            <returns>Form value</returns>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.IdentityExtension.GetCookieValue(System.String)">
+            <summary>
+            Cookie value on the current request
+            </summary>
+            <param name="name">Name of cookie</param>
+            <returns>Cookie value</returns>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.IdentityExtension.SetResponseCookieValue(System.String,System.String)">
+            <summary>
+            Add a cookie to the outgoing response
+            </summary>
+            <param name="name">Cookie name</param>
+            <param name="value">Cookie value</param>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.IdentityExtension.UrlEncode(System.String)">
+            <summary>
+            Url encodes a given value
+            </summary>
+            <param name="value">Unencoded string</param>
+            <returns>Encoded value</returns>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.IdentityExtension.ProcessRequestAsync">
+            <summary>
+            Request on the way into the application
+            </summary>
+            <returns>RequestDetails with override information</returns>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.IdentityExtension.ProcessUnauthenticatedResponseAsync">
+            <summary>
+            Authenticated response on the way out of the application
+            </summary>
+            <returns>ResponseDetails with override information</returns>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.IdentityExtension.RequestedBusinessUnit">
+            <summary>
+            Determines what business unit the current request is associated with
+            </summary>
+            <returns>BusinessUnitGuid</returns>
+        </member>
+        <member name="M:Intelledox.Extension.IdentityExtension.IdentityExtension.DetermineBusinessUnit">
+            <summary>
+            Determines what business unit the current request is associated with or falls back to the default
+            </summary>
+            <returns>BusinessUnitGuid</returns>
+        </member>
+        <member name="T:Intelledox.Extension.IdentityExtension.RequestDetails">
+            <summary>
+            Class to override request handling
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.IdentityExtension.RequestDetails.RequestAction">
+            <summary>
+            Action to be performed on the current request
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.IdentityExtension.RequestDetails.RedirectUrl">
+            <summary>
+            Url to redirect to if the action is RequestAction.Redirect
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.IdentityExtension.RequestDetails.LoginIdentity">
+            <summary>
+            Identity object if the request can be authenticated
+            </summary>
+        </member>
+        <member name="T:Intelledox.Extension.IdentityExtension.ResponseDetails">
+            <summary>
+            Class to override response handling
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.IdentityExtension.ResponseDetails.ResponseAction">
+            <summary>
+            Action to be performed on the current response
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.IdentityExtension.ResponseDetails.RedirectUrl">
+            <summary>
+            Url to redirect to if the action is ResponseAction.Redirect
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.IdentityExtension.ResponseDetails.LoginIdentity">
+            <summary>
+            Identity object if the response can be authenticated
+            </summary>
+        </member>
+        <member name="T:Intelledox.Extension.IdentityExtension.RequestAction">
+            <summary>
+            Request handling
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.IdentityExtension.RequestAction.Continue">
+            <summary>
+            Take no alterative action based on this extension
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.IdentityExtension.RequestAction.Handled">
+            <summary>
+            Request has been handled, immediately return response to the user
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.IdentityExtension.RequestAction.Redirect">
+            <summary>
+            Immediately redirect response
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.IdentityExtension.RequestAction.Unauthorized">
+            <summary>
+            Immediately return response to user with a 401 status code
+            </summary>
+        </member>
+        <member name="T:Intelledox.Extension.IdentityExtension.ResponseAction">
+            <summary>
+            Response handling
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.IdentityExtension.ResponseAction.Continue">
+            <summary>
+            Take no alterative action based on this extension
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.IdentityExtension.ResponseAction.Redirect">
+            <summary>
+            Immediately redirect response
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.IdentityExtension.ResponseAction.Unauthorized">
+            <summary>
+            Immediately return response to user with a 401 status code
+            </summary>
+        </member>
+        <member name="T:Intelledox.Extension.IdentityExtension.ExtensionIdentity">
+            <summary>
+            Unique identity for an identity extension.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.IdentityExtension.ExtensionIdentity.Id">
+            <summary>
+            Unique id for an identity.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.IdentityExtension.ExtensionIdentity.Name">
+            <summary>
+            Display name for an identity.
+            </summary>
+        </member>
+    </members>
+</doc>

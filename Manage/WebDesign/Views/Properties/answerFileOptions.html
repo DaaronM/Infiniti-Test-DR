@@ -1,0 +1,62 @@
+﻿<div class="prop-title">
+    {{ 'AnswerFileProperties' | translate }}
+</div>
+<form class="form-horizontal">
+    <div ng-if="!model.answerFileOptionsPanelModel.isQuestion">
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-11">
+                <div class="radio">
+                    <label>
+                        <input type="radio" ng-model="model.answerFileOptionsPanelModel.saveBy" ng-value="-1" />{{ ::'None' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-11">
+                <div class="radio">
+                    <label>
+                        <input type="radio" ng-model="model.answerFileOptionsPanelModel.saveBy" ng-value="0" />{{ ::'SaveByBuiltInAnswerId' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-11">
+                <div class="radio">
+                    <label>
+                        <input type="radio" ng-model="model.answerFileOptionsPanelModel.saveBy" ng-value="1" />{{ ::'SaveByUniqueLabel' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input class="form-control input-sm"
+                       ng-model="model.answerFileOptionsPanelModel.labelName"
+                       ng-blur="model.answerFileOptionsPanelModel.labelNameValidate()"
+                       ng-disabled="!model.answerFileOptionsPanelModel.saveByLabel" />
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="model.answerFileOptionsPanelModel.isQuestion">
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-11">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="model.answerFileOptionsPanelModel.saveByLabel" />{{ ::'SaveByUniqueLabel' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input class="form-control input-sm"
+                       ng-model="model.answerFileOptionsPanelModel.labelName"
+                       ng-blur="model.answerFileOptionsPanelModel.labelNameValidate()"
+                       ng-disabled="!model.answerFileOptionsPanelModel.saveByLabel" />
+            </div>
+        </div>
+    </div>
+</form>

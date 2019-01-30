@@ -1,0 +1,3100 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+ManagementPortal
+</name>
+</assembly>
+<members>
+<member name="T:ManagementPortal.My.MyWebExtension">
+ <summary>
+ Module used to define the properties that are available in the My Namespace for Web projects.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:ManagementPortal.My.MyWebExtension.Computer">
+ <summary>
+ Returns information about the host computer.
+ </summary>
+</member>
+<member name="P:ManagementPortal.My.MyWebExtension.User">
+ <summary>
+ Returns information for the current Web user.
+ </summary>
+</member>
+<member name="P:ManagementPortal.My.MyWebExtension.Request">
+ <summary>
+ Returns Request object.
+ </summary>
+</member>
+<member name="P:ManagementPortal.My.MyWebExtension.Response">
+ <summary>
+ Returns Response object.
+ </summary>
+</member>
+<member name="P:ManagementPortal.My.MyWebExtension.Log">
+ <summary>
+ Returns the Asp log object.
+ </summary>
+</member>
+<member name="T:ManagementPortal.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:ManagementPortal.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:ManagementPortal.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:ManagementPortal.Resources.Strings">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Activate">
+<summary>
+  Looks up a localized string similar to Activate.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Add">
+<summary>
+  Looks up a localized string similar to Add.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.AdditionalAnonymousProjects">
+<summary>
+  Looks up a localized string similar to Additional Anonymous Projects.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.AdditionalInternalProjects">
+<summary>
+  Looks up a localized string similar to Additional Authenticated User Projects.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.AdditionalUserLicense">
+<summary>
+  Looks up a localized string similar to Additional User License Keys.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.AdditionalUsers">
+<summary>
+  Looks up a localized string similar to Additional Users.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.AdminList">
+<summary>
+  Looks up a localized string similar to Admin email addresses (semicolon-separated).
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.AdminUserDetails">
+<summary>
+  Looks up a localized string similar to Admin Users.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.All">
+<summary>
+  Looks up a localized string similar to (All).
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Analytics">
+<summary>
+  Looks up a localized string similar to Analytics.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.AnonymousProjectCount">
+<summary>
+  Looks up a localized string similar to No. of Anonymous Projects.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.AnonymousProjectLicenses">
+<summary>
+  Looks up a localized string similar to Anonymous Project Licenses.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.AnonymousUsers">
+<summary>
+  Looks up a localized string similar to Anonymous Users.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Back">
+<summary>
+  Looks up a localized string similar to Back.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Basic">
+<summary>
+  Looks up a localized string similar to Basic.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.BrowserTabName">
+<summary>
+  Looks up a localized string similar to Browser Tab Name.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.BrowserTabNameToolTip">
+<summary>
+  Looks up a localized string similar to The name that appears for the Produce instance in the browser tab..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Cancel">
+<summary>
+  Looks up a localized string similar to Cancel.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Change">
+<summary>
+  Looks up a localized string similar to Change.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ConfirmNewPassword">
+<summary>
+  Looks up a localized string similar to Confirm New Password.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ConfirmPassword">
+<summary>
+  Looks up a localized string similar to Confirm Password.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Contacts">
+<summary>
+  Looks up a localized string similar to Contacts.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ContentLibrary">
+<summary>
+  Looks up a localized string similar to Content Library.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.CopyToClipboard">
+<summary>
+  Looks up a localized string similar to Copy To Clipboard.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Country">
+<summary>
+  Looks up a localized string similar to Country.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.CustomManageUrl">
+<summary>
+  Looks up a localized string similar to Custom Manage Url.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.CustomProduceUrl">
+<summary>
+  Looks up a localized string similar to Custom Produce Url.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Deactivate">
+<summary>
+  Looks up a localized string similar to Deactivate.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Demo">
+<summary>
+  Looks up a localized string similar to Demo.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.DemoTenantType">
+<summary>
+  Looks up a localized string similar to Demo Site.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.DisableUser">
+<summary>
+  Looks up a localized string similar to Disable User.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.EditTenant">
+<summary>
+  Looks up a localized string similar to Edit Tenant.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Email">
+<summary>
+  Looks up a localized string similar to Email.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.EmailTenants">
+<summary>
+  Looks up a localized string similar to Email Tenants.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Enterprise">
+<summary>
+  Looks up a localized string similar to Enterprise.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ExistingProjectsInfo">
+<summary>
+  Looks up a localized string similar to List of template(s) imported from the default tenancy.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Expired">
+<summary>
+  Looks up a localized string similar to Expired.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ExpiresOn">
+<summary>
+  Looks up a localized string similar to expires on {0}.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ExpiryDate">
+<summary>
+  Looks up a localized string similar to Expiry Date.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Express">
+<summary>
+  Looks up a localized string similar to Express.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ExtendTrial">
+<summary>
+  Looks up a localized string similar to Extend Trial.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.FailedLogin">
+<summary>
+  Looks up a localized string similar to Portal was unable to log you on. Please check with your administrator that your username is registered in the Portal and try again..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.FailedLoginDuplicate">
+<summary>
+  Looks up a localized string similar to A duplicate login has been detected. A login can only be used by one person..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.FirstName">
+<summary>
+  Looks up a localized string similar to First Name.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.FormSummaryQuestion">
+<summary>
+  Looks up a localized string similar to Form Summary Question.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.General">
+<summary>
+  Looks up a localized string similar to General.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.GenerateNewKey">
+<summary>
+  Looks up a localized string similar to Generate New Key.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.GetEmails">
+<summary>
+  Looks up a localized string similar to Get Emails.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.HeaderText">
+<summary>
+  Looks up a localized string similar to Multi-Tenant Management Portal.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.HideDeactivated">
+<summary>
+  Looks up a localized string similar to Hide Deactivated.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Import">
+<summary>
+  Looks up a localized string similar to Import.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ImportedVersion">
+<summary>
+  Looks up a localized string similar to Imported Version.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ImportProjectToTenant">
+<summary>
+  Looks up a localized string similar to Import Project To Tenant.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ImportTemplates">
+<summary>
+  Looks up a localized string similar to Import Templates.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.InternalProjectCount">
+<summary>
+  Looks up a localized string similar to No. of Authenticated User Projects.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.InternalProjectLicenses">
+<summary>
+  Looks up a localized string similar to Authenticated User Project Licenses.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.InvalidProductKey">
+<summary>
+  Looks up a localized string similar to Licence Holder and/or Product Licence Key is invalid.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Key">
+<summary>
+  Looks up a localized string similar to Key.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.KeyCopied">
+<summary>
+  Looks up a localized string similar to Tenancy key copied to clipboard.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.LastName">
+<summary>
+  Looks up a localized string similar to Last Name.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.LicenseExpiredOn">
+<summary>
+  Looks up a localized string similar to License expired on {0}.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.LicenseExpiry">
+<summary>
+  Looks up a localized string similar to Expiry: {0}.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.LicenseHolder">
+<summary>
+  Looks up a localized string similar to License Holder.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.LicenseHolderAlreadyUsed">
+<summary>
+  Looks up a localized string similar to This License Holder has already been used..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.LicenseHolderAlreadyUsedForCreateTenant">
+<summary>
+  Looks up a localized string similar to This Tenant Name has already been used as a License Holder..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.LicenseHolderEmpty">
+<summary>
+  Looks up a localized string similar to License Holder Empty.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.LicenseInvalid">
+<summary>
+  Looks up a localized string similar to License invalid.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.LicenseKeyAlreadyUsed">
+<summary>
+  Looks up a localized string similar to This Product Licence Key has already been used..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.LicenseNewSiteOnly">
+<summary>
+  Looks up a localized string similar to This license can only be used on a new site.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.LicenseType">
+<summary>
+  Looks up a localized string similar to License Type.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Licensing">
+<summary>
+  Looks up a localized string similar to Licensing.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Login">
+<summary>
+  Looks up a localized string similar to Login.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Logout">
+<summary>
+  Looks up a localized string similar to Log Out.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Management">
+<summary>
+  Looks up a localized string similar to Management.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MobileAppUserLicense">
+<summary>
+  Looks up a localized string similar to Mobile App User License.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MobileAppUserLicenses">
+<summary>
+  Looks up a localized string similar to Mobile App User Licenses.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Modules">
+<summary>
+  Looks up a localized string similar to Modules.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MonthlyTenantType">
+<summary>
+  Looks up a localized string similar to Monthly Account.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgAnonymousProjectLicensesExceedsLimit">
+<summary>
+  Looks up a localized string similar to Project cannot be published to the samples folder. Anonymous project license count exceeds the maximum number of available licenses..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgCannotExtendTrial">
+<summary>
+  Looks up a localized string similar to You cannot extend the trial licences any further. Please contact your system administrator..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgErrorInExtendTrial">
+<summary>
+  Looks up a localized string similar to An error occurred while extending trial licences..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgExtendTrialSuccess">
+<summary>
+  Looks up a localized string similar to Trial Licences have been successfully extended for another 30 days. You have {0} more attempt left..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgImported">
+<summary>
+  Looks up a localized string similar to Selected project(s) have been successfully imported..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgInternalProjectLicensesExceedsLimit">
+<summary>
+  Looks up a localized string similar to Project cannot be published to the samples folder. Authenticated User project license count exceeds the maximum number of available licenses..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgInvalidImage">
+<summary>
+  Looks up a localized string similar to Uploaded file is not a valid or supported image type.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgLicenseFileInvalid">
+<summary>
+  Looks up a localized string similar to Invalid licence file.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgMinimumTemplateSelection">
+<summary>
+  Looks up a localized string similar to Please select one or more templates to import into the new tenancy.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgPublishFailedLicenseExpired">
+<summary>
+  Looks up a localized string similar to Project cannot be published to the samples folder. Product License Key has expired or is no longer valid..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgSaved">
+<summary>
+  Looks up a localized string similar to Your changes have been saved.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgSettingsError">
+<summary>
+  Looks up a localized string similar to Invalid settings. Changes have not been saved..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgTenantInUse">
+<summary>
+  Looks up a localized string similar to Tenant Name &quot;{0}&quot; is already in use..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.MsgUsernameInUse">
+<summary>
+  Looks up a localized string similar to Username &quot;{0}&quot; is already in use..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.NewPassword">
+<summary>
+  Looks up a localized string similar to New Password.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.NewTenant">
+<summary>
+  Looks up a localized string similar to New Tenant.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.NewTenantAdmin">
+<summary>
+  Looks up a localized string similar to New Admin User.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.None">
+<summary>
+  Looks up a localized string similar to (None).
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.NoTenants">
+<summary>
+  Looks up a localized string similar to No Tenants.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.NoValidLicense">
+<summary>
+  Looks up a localized string similar to No valid license.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.NumberInUse">
+<summary>
+  Looks up a localized string similar to {0} ({1} in use).
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.PartnerTenantType">
+<summary>
+  Looks up a localized string similar to Partner Site.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Password">
+<summary>
+  Looks up a localized string similar to Password.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.PasswordNoMatch">
+<summary>
+  Looks up a localized string similar to Passwords do not match.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.PasswordValidation_ComplexPassword">
+<summary>
+  Looks up a localized string similar to Password does not meet complexity requirements. Must contain an upper case, lower case, digit and special character. Must not contain the username..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.PasswordValidation_DisallowCommonPwd">
+<summary>
+  Looks up a localized string similar to Common password is denied..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.PasswordValidation_Generic">
+<summary>
+  Looks up a localized string similar to Password Validation Error.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.PasswordValidation_History">
+<summary>
+  Looks up a localized string similar to Password cannot match the last {0} passwords.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.PasswordValidation_MinimumLength">
+<summary>
+  Looks up a localized string similar to Password must be at least {0} characters long.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.PdfStitch">
+<summary>
+  Looks up a localized string similar to PDF Stitch.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.PerformedBy">
+<summary>
+  Looks up a localized string similar to Performed By.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.PhoneNumber">
+<summary>
+  Looks up a localized string similar to Phone Number.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ProductLicenseKey">
+<summary>
+  Looks up a localized string similar to Product License Key.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Provision">
+<summary>
+  Looks up a localized string similar to Provision.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ProvisionTenant">
+<summary>
+  Looks up a localized string similar to Provision Tenant.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.PushNotification">
+<summary>
+  Looks up a localized string similar to Push Notification.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Reason">
+<summary>
+  Looks up a localized string similar to Reason.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Remove">
+<summary>
+  Looks up a localized string similar to Remove.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.RemoveLogo">
+<summary>
+  Looks up a localized string similar to Remove Logo.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.RequiredField">
+<summary>
+  Looks up a localized string similar to {0} is a required field.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.RequiredPasswordChange">
+<summary>
+  Looks up a localized string similar to You Are Required To Change Your Password.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Reset">
+<summary>
+  Looks up a localized string similar to Reset.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ResetPwd">
+<summary>
+  Looks up a localized string similar to Reset Password.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.RunActionButton">
+<summary>
+  Looks up a localized string similar to Run Action Button.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.SaaS">
+<summary>
+  Looks up a localized string similar to SaaS.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.SampleProjectsInfo">
+<summary>
+  Looks up a localized string similar to Select template(s) to import into the new tenancy.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Save">
+<summary>
+  Looks up a localized string similar to Save.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.SharePoint">
+<summary>
+  Looks up a localized string similar to SharePoint.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ShowDeactivated">
+<summary>
+  Looks up a localized string similar to Show Deactivated.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Standard">
+<summary>
+  Looks up a localized string similar to Standard.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Submit">
+<summary>
+  Looks up a localized string similar to Submit.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Summary">
+<summary>
+  Looks up a localized string similar to Summary.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.SupportContract">
+<summary>
+  Looks up a localized string similar to Infiniti Support &amp; Maintenance.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.TemporaryUserSave">
+<summary>
+  Looks up a localized string similar to Temporary User Save.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.TenancyKey">
+<summary>
+  Looks up a localized string similar to Tenancy Key.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.TenancyKeyInvalid">
+<summary>
+  Looks up a localized string similar to Tenancy Key Invalid.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Tenant">
+<summary>
+  Looks up a localized string similar to Tenant.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.TenantLogo">
+<summary>
+  Looks up a localized string similar to Tenant Logo.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.TenantName">
+<summary>
+  Looks up a localized string similar to Tenant Name.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.TenantProvision">
+<summary>
+  Looks up a localized string similar to Provision Tenant.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.TenantsManagement">
+<summary>
+  Looks up a localized string similar to Manage Tenants.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.TenantType">
+<summary>
+  Looks up a localized string similar to Type of Tenant.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Test">
+<summary>
+  Looks up a localized string similar to Test.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.TIBCO">
+<summary>
+  Looks up a localized string similar to TIBCO.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Transactional">
+<summary>
+  Looks up a localized string similar to Transactional.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.TRIM">
+<summary>
+  Looks up a localized string similar to TRIM.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Unlimited">
+<summary>
+  Looks up a localized string similar to Unlimited.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.UnlimitedAnonymousProjects">
+<summary>
+  Looks up a localized string similar to Unlimited Anonymous Projects.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.UnlimitedInternalProjects">
+<summary>
+  Looks up a localized string similar to Unlimited Authenticated User Projects.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.UnlimitedUsers">
+<summary>
+  Looks up a localized string similar to Unlimited Named Users.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.UploadNewLicenseFile">
+<summary>
+  Looks up a localized string similar to Upload New License File.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.UserContactDetails">
+<summary>
+  Looks up a localized string similar to User Contact Details.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.UserCount">
+<summary>
+  Looks up a localized string similar to No. of Users.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.UserLicenseKeyInvalid">
+<summary>
+  Looks up a localized string similar to License Key was not added. It may have been invalid, or already in use..
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.UserLicenses">
+<summary>
+  Looks up a localized string similar to User Licenses.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Username">
+<summary>
+  Looks up a localized string similar to User Name.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.ValidEmailAddress">
+<summary>
+  Looks up a localized string similar to A valid email address is required.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Version">
+<summary>
+  Looks up a localized string similar to Version.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.WinApp">
+<summary>
+  Looks up a localized string similar to Windows App.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.Workflow">
+<summary>
+  Looks up a localized string similar to Workflow.
+</summary>
+</member>
+<member name="P:ManagementPortal.Resources.Strings.YearlyTenantType">
+<summary>
+  Looks up a localized string similar to Yearly Account.
+</summary>
+</member>
+<member name="F:ManagementPortal.ExtendTrial._btnSubmit">
+<summary>
+btnSubmit control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ExtendTrial._divSubmit">
+<summary>
+divSubmit control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ExtendTrial._btnCancel">
+<summary>
+btnCancel control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ExtendTrial._msg">
+<summary>
+msg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ExtendTrial._lblPerformedBy">
+<summary>
+lblPerformedBy control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ExtendTrial._txtPerformedBy">
+<summary>
+txtPerformedBy control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ExtendTrial._valPerformedBy">
+<summary>
+valPerformedBy control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ExtendTrial._lblReason">
+<summary>
+lblReason control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ExtendTrial._txtReason">
+<summary>
+txtReason control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ExtendTrial._valReason">
+<summary>
+valReason control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ImportTemplates._ScriptManager1">
+<summary>
+ScriptManager1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ImportTemplates._btnImport">
+<summary>
+btnImport control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ImportTemplates._btnBack">
+<summary>
+btnBack control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ImportTemplates._msg">
+<summary>
+msg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ImportTemplates._lblTenantName">
+<summary>
+lblTenantName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ImportTemplates._lblTenantNameText">
+<summary>
+lblTenantNameText control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ImportTemplates._lstSampleProjects">
+<summary>
+lstSampleProjects control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.ImportTemplates._grdExistingProjects">
+<summary>
+grdExistingProjects control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._btnSubmit">
+<summary>
+btnSubmit control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._btnBack">
+<summary>
+btnBack control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._msg">
+<summary>
+msg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._lblTenantName">
+<summary>
+lblTenantName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._lblTenantNameText">
+<summary>
+lblTenantNameText control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._lblUsername">
+<summary>
+lblUsername control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._txtUsername">
+<summary>
+txtUsername control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._rfvUsername">
+<summary>
+rfvUsername control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._lblPassword">
+<summary>
+lblPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._txtPassword">
+<summary>
+txtPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._rfvPassword">
+<summary>
+rfvPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._lblConfirmPassword">
+<summary>
+lblConfirmPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._txtConfirmPassword">
+<summary>
+txtConfirmPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._valConfirmPassword">
+<summary>
+valConfirmPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._lblFirstName">
+<summary>
+lblFirstName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._txtFirstName">
+<summary>
+txtFirstName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._rfvFirstName">
+<summary>
+rfvFirstName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._lblLastName">
+<summary>
+lblLastName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._txtLastName">
+<summary>
+txtLastName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._rfvLastName">
+<summary>
+rfvLastName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._lblEmail">
+<summary>
+lblEmail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._txtEmail">
+<summary>
+txtEmail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.NewUser._rfvEmail">
+<summary>
+rfvEmail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._btnSubmit">
+<summary>
+btnSubmit control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._msg">
+<summary>
+msg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._lblTenantName">
+<summary>
+lblTenantName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._txtTenantName">
+<summary>
+txtTenantName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._rfvTenantName">
+<summary>
+rfvTenantName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._lblTenantType">
+<summary>
+lblTenantType control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._lstTenantType">
+<summary>
+lstTenantType control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._Literal1">
+<summary>
+Literal1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._lblUsername">
+<summary>
+lblUsername control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._txtUsername">
+<summary>
+txtUsername control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._rfvUsername">
+<summary>
+rfvUsername control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._lblPassword">
+<summary>
+lblPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._txtPassword">
+<summary>
+txtPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._rfvPassword">
+<summary>
+rfvPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._lblConfirmPassword">
+<summary>
+lblConfirmPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._txtConfirmPassword">
+<summary>
+txtConfirmPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._valConfirmPassword">
+<summary>
+valConfirmPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._lblFirstName">
+<summary>
+lblFirstName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._txtFirstName">
+<summary>
+txtFirstName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._rfvFirstName">
+<summary>
+rfvFirstName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._lblLastName">
+<summary>
+lblLastName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._txtLastName">
+<summary>
+txtLastName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._rfvLastName">
+<summary>
+rfvLastName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._lblEmail">
+<summary>
+lblEmail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._txtEmail">
+<summary>
+txtEmail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal._Default._rfvEmail">
+<summary>
+rfvEmail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._btnSave">
+<summary>
+btnSave control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._btnExtendTrial">
+<summary>
+btnExtendTrial control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._extendTrialDiv">
+<summary>
+extendTrialDiv control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._btnImport">
+<summary>
+btnImport control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._importDiv">
+<summary>
+importDiv control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._btnBack">
+<summary>
+btnBack control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._msg">
+<summary>
+msg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblTenantName">
+<summary>
+lblTenantName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblTenantNameText">
+<summary>
+lblTenantNameText control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblLicenseHolder">
+<summary>
+lblLicenseHolder control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._txtLicenseHolder">
+<summary>
+txtLicenseHolder control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._valLicenseHolder">
+<summary>
+valLicenseHolder control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblTenancyKeyText">
+<summary>
+lblTenancyKeyText control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblTenancyKey">
+<summary>
+lblTenancyKey control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblTenancyKeyExpiry">
+<summary>
+lblTenancyKeyExpiry control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._btnGenTenancyKey">
+<summary>
+btnGenTenancyKey control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblLicenseTypeText">
+<summary>
+lblLicenseTypeText control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblLicenseType">
+<summary>
+lblLicenseType control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblUserCountText">
+<summary>
+lblUserCountText control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblUserCount">
+<summary>
+lblUserCount control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblMobileAppUserCountText">
+<summary>
+lblMobileAppUserCountText control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblMobileAppUserCount">
+<summary>
+lblMobileAppUserCount control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblAnonymousProjectCountText">
+<summary>
+lblAnonymousProjectCountText control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblAnonymousProjectCount">
+<summary>
+lblAnonymousProjectCount control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblInternalProjectCountText">
+<summary>
+lblInternalProjectCountText control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblInternalProjectCount">
+<summary>
+lblInternalProjectCount control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lstUserModuleLicenses">
+<summary>
+lstUserModuleLicenses control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._lblFile">
+<summary>
+lblFile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.LicenseManager._fileUpload">
+<summary>
+fileUpload control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.Logout._Head1">
+<summary>
+Head1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.Logout._Form1">
+<summary>
+Form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._Head1">
+<summary>
+Head1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._Javascript">
+<summary>
+Javascript control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._BaseStyleSheet">
+<summary>
+BaseStyleSheet control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._StyleSheet">
+<summary>
+StyleSheet control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._LogoutMenu">
+<summary>
+LogoutMenu control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._lnkSignOut">
+<summary>
+lnkSignOut control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._BreadCrumbs">
+<summary>
+BreadCrumbs control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._Content">
+<summary>
+Content control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._TenantDiv">
+<summary>
+TenantDiv control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._ProvisionMenu">
+<summary>
+ProvisionMenu control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._ProvisionLink">
+<summary>
+ProvisionLink control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._ManagementMenu">
+<summary>
+ManagementMenu control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._ManagementLink">
+<summary>
+ManagementLink control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SiteMaster._litVersionNumber">
+<summary>
+litVersionNumber control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SearchTenantUsers._btnBack">
+<summary>
+btnBack control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SearchTenantUsers._lblTenant">
+<summary>
+lblTenant control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SearchTenantUsers._lstTenants">
+<summary>
+lstTenants control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SearchTenantUsers._btnGetEmails">
+<summary>
+btnGetEmails control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SearchTenantUsers._litAdminList">
+<summary>
+litAdminList control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.SearchTenantUsers._txtAdminList">
+<summary>
+txtAdminList control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._btnSave">
+<summary>
+btnSave control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._btnLicensing">
+<summary>
+btnLicensing control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._btnImport">
+<summary>
+btnImport control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._btnDeactivate">
+<summary>
+btnDeactivate control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._btnAdmin">
+<summary>
+btnAdmin control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._btnBack">
+<summary>
+btnBack control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._msg">
+<summary>
+msg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._hidTabPage">
+<summary>
+hidTabPage control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._hidTab">
+<summary>
+hidTab control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._tabGeneral">
+<summary>
+tabGeneral control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._tabSkinSettings">
+<summary>
+tabSkinSettings control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._pageGeneral">
+<summary>
+pageGeneral control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblTenantName">
+<summary>
+lblTenantName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._txtTenantName">
+<summary>
+txtTenantName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._rfvTenantName">
+<summary>
+rfvTenantName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblBrowserTabName">
+<summary>
+lblBrowserTabName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblBrowserTabNameHelp">
+<summary>
+lblBrowserTabNameHelp control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._txtBrowserTabName">
+<summary>
+txtBrowserTabName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblCustomProduceUrl">
+<summary>
+lblCustomProduceUrl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._txtCustomProduceUrl">
+<summary>
+txtCustomProduceUrl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblCustomManageUrl">
+<summary>
+lblCustomManageUrl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._txtCustomManageUrl">
+<summary>
+txtCustomManageUrl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblTenantType">
+<summary>
+lblTenantType control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lstTenantType">
+<summary>
+lstTenantType control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._Literal1">
+<summary>
+Literal1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblUsername">
+<summary>
+lblUsername control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lstUsername">
+<summary>
+lstUsername control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._btnResetPwd">
+<summary>
+btnResetPwd control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._btnDisableUser">
+<summary>
+btnDisableUser control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._trPwd">
+<summary>
+trPwd control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblPassword">
+<summary>
+lblPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._txtPassword">
+<summary>
+txtPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._trConfirmPwd">
+<summary>
+trConfirmPwd control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblConfirmPassword">
+<summary>
+lblConfirmPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._txtConfirmPassword">
+<summary>
+txtConfirmPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._btnReset">
+<summary>
+btnReset control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._trUserContactDetails">
+<summary>
+trUserContactDetails control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._Literal2">
+<summary>
+Literal2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblFirstName">
+<summary>
+lblFirstName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._txtFirstName">
+<summary>
+txtFirstName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblLastName">
+<summary>
+lblLastName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._txtLastName">
+<summary>
+txtLastName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblPhone">
+<summary>
+lblPhone control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._txtPhone">
+<summary>
+txtPhone control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblEmail">
+<summary>
+lblEmail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._txtEmail">
+<summary>
+txtEmail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._lblCountry">
+<summary>
+lblCountry control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._txtCountry">
+<summary>
+txtCountry control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._pageSkinSettings">
+<summary>
+pageSkinSettings control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.TenantEdit._businessUnitSkinPlaceholder">
+<summary>
+businessUnitSkinPlaceholder control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.Tenants._ScriptManager1">
+<summary>
+ScriptManager1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.Tenants._btnNew">
+<summary>
+btnNew control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.Tenants._btnShowHideTenants">
+<summary>
+btnShowHideTenants control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.Tenants._btnEmailData">
+<summary>
+btnEmailData control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.Tenants._pnlTenants">
+<summary>
+pnlTenants control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.Tenants._grdTenants">
+<summary>
+grdTenants control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.Tenants._TenantDataSource">
+<summary>
+TenantDataSource control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._Head1">
+<summary>
+Head1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._form2">
+<summary>
+form2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._divLoginMessage">
+<summary>
+divLoginMessage control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._tblLoginAdmin">
+<summary>
+tblLoginAdmin control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._lblUsername">
+<summary>
+lblUsername control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._txtUsername">
+<summary>
+txtUsername control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._valUsername">
+<summary>
+valUsername control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._lblPassword">
+<summary>
+lblPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._txtPassword">
+<summary>
+txtPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._btnSignIn">
+<summary>
+btnSignIn control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._tblChangePassword">
+<summary>
+tblChangePassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._lblChangePassword1">
+<summary>
+lblChangePassword1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._txtChangePassword1">
+<summary>
+txtChangePassword1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._valPassword1">
+<summary>
+valPassword1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._lblChangePassword2">
+<summary>
+lblChangePassword2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._txtChangePassword2">
+<summary>
+txtChangePassword2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._valPassword2">
+<summary>
+valPassword2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._valCompare">
+<summary>
+valCompare control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ManagementPortal.WebLogin._btnChange">
+<summary>
+btnChange control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblLogos">
+<summary>
+lblLogos control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._resetUrlCtrl">
+<summary>
+resetUrlCtrl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblSkinLogo">
+<summary>
+lblSkinLogo control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblSkinLogoHelp">
+<summary>
+lblSkinLogoHelp control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._spanLogo">
+<summary>
+spanLogo control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._logoPreviewThumb">
+<summary>
+logoPreviewThumb control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._logoPreview">
+<summary>
+logoPreview control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._fileLogo">
+<summary>
+fileLogo control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblSkinLogoMobile">
+<summary>
+lblSkinLogoMobile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblSkinLogoMobileHelp">
+<summary>
+lblSkinLogoMobileHelp control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._span1">
+<summary>
+span1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._mobilePreview">
+<summary>
+mobilePreview control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._fileMobile">
+<summary>
+fileMobile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._btnRemove">
+<summary>
+btnRemove control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblHeader">
+<summary>
+lblHeader control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblColorScheme">
+<summary>
+lblColorScheme control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblHeaderBackgroundColor">
+<summary>
+lblHeaderBackgroundColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblHeaderBackgroundColorHelp">
+<summary>
+lblHeaderBackgroundColorHelp control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._headerBackgroundColor">
+<summary>
+headerBackgroundColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblPrimaryColor">
+<summary>
+lblPrimaryColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblPrimaryColorHelp">
+<summary>
+lblPrimaryColorHelp control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._primaryColor">
+<summary>
+primaryColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblHeaderFontColor">
+<summary>
+lblHeaderFontColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblHeaderFontColorHelp">
+<summary>
+lblHeaderFontColorHelp control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._headerFontColor">
+<summary>
+headerFontColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblSecondaryColor">
+<summary>
+lblSecondaryColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblSecondaryColorHelp">
+<summary>
+lblSecondaryColorHelp control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._secondaryColor">
+<summary>
+secondaryColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblHeaderLinkColor">
+<summary>
+lblHeaderLinkColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblHeaderLinkColorHelp">
+<summary>
+lblHeaderLinkColorHelp control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._headerLinkColor">
+<summary>
+headerLinkColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblTextLinkColor">
+<summary>
+lblTextLinkColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblTextLinkColorHelp">
+<summary>
+lblTextLinkColorHelp control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._textLinkColor">
+<summary>
+textLinkColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblHeaderFontHoverColor">
+<summary>
+lblHeaderFontHoverColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblHeaderFontHoverColorHelp">
+<summary>
+lblHeaderFontHoverColorHelp control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._headerFontHoverColor">
+<summary>
+headerFontHoverColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblRequiredFieldBackground">
+<summary>
+lblRequiredFieldBackground control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblRequiredFieldBackgroundHelp">
+<summary>
+lblRequiredFieldBackgroundHelp control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._RequiredFieldBackground">
+<summary>
+RequiredFieldBackground control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._pnlMobileColorScheme">
+<summary>
+pnlMobileColorScheme control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblMobileColorScheme">
+<summary>
+lblMobileColorScheme control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblAppBackgroundColor">
+<summary>
+lblAppBackgroundColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblAppBackgroundColorHelp">
+<summary>
+lblAppBackgroundColorHelp control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._appBackgroundColor">
+<summary>
+appBackgroundColor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._pnlProjectIconColors">
+<summary>
+pnlProjectIconColors control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblCircleColors">
+<summary>
+lblCircleColors control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblCircleColorsHelp">
+<summary>
+lblCircleColorsHelp control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._circleColor1">
+<summary>
+circleColor1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._circleColor2">
+<summary>
+circleColor2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._circleColor3">
+<summary>
+circleColor3 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._circleColor4">
+<summary>
+circleColor4 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Intelledox.Manage.SkinSettings._lblExampleLink">
+<summary>
+lblExampleLink control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+</members>
+</doc>

@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Intelledox.Extension.Datasource</name>
+    </assembly>
+    <members>
+        <member name="T:Intelledox.Extension.Datasource.AuthenticationMode">
+            <summary>
+            Data source authentication modes known by Infiniti
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.Datasource.AuthenticationMode.None">
+            <summary>
+            Authentication not required
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.Datasource.AuthenticationMode.UserNameAndPassword">
+            <summary>
+            User configured username and password settings
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.Datasource.AuthenticationMode.Windows">
+            <summary>
+            Application pool's Windows account 
+            </summary>
+        </member>
+        <member name="F:Intelledox.Extension.Datasource.AuthenticationMode.AccessToken">
+            <summary>
+            Access token provided by OpenID Connect or similar authentication
+            </summary>
+        </member>
+        <member name="T:Intelledox.Extension.Datasource.ObjectType">
+            <summary>
+            Data object type as defined by a data source extension
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Datasource.ObjectType.Id">
+            <summary>
+            Unique id for the type
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Datasource.ObjectType.Name">
+            <summary>
+            Display name for the type
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Datasource.ObjectType.Multiline">
+            <summary>
+            Whether the data object name is displayed in a multi-line text area
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Datasource.ObjectType.CanCache">
+            <summary>
+            Supports caching on the offline apps
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Datasource.ObjectType.SelectableSchemaFields">
+            <summary>
+            Whether the data object supports restricting the schema fields returned to a limited subset
+            </summary>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.ObjectType.#ctor(System.Guid,System.String,System.Boolean)">
+            <summary>
+            Creates an ObjectType
+            </summary>
+            <param name="id">Unique id for the type</param>
+            <param name="name">Display name for the type</param>
+            <param name="multiline">Whether the data object name is displayed in a multi-line text area</param>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.ObjectType.#ctor(System.Guid,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Creates an ObjectType
+            </summary>
+            <param name="id">Unique id for the type</param>
+            <param name="name">Display name for the type</param>
+            <param name="multiline">Whether the data object name is displayed in a multi-line text area</param>
+            <param name="canCache">Supports caching on the offline apps</param>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.ObjectType.#ctor(System.Guid,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Creates an ObjectType
+            </summary>
+            <param name="id">Unique id for the type</param>
+            <param name="name">Display name for the type</param>
+            <param name="multiline">Whether the data object name is displayed in a multi-line text area</param>
+            <param name="canCache">Supports caching on the offline apps</param>
+            <param name="selectableSchemaFields">Whether the data object supports restricting the schema fields returned to a limited subset</param>
+        </member>
+        <member name="T:Intelledox.Extension.Datasource.DatasourceConnector">
+            <summary>
+            Data source extension to add the ability to connect to external data
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Datasource.DatasourceConnector.ExtensionIdentity">
+            <summary>
+            Returns the unique identity for this data source. Used to identify individual data sources to be run.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Datasource.DatasourceConnector.GlobalSettingIdentity">
+            <summary>
+            Returns the identity that is registered in Manage for global configuration settings. This identity
+            may be shared between different extensions for shared settings.
+            </summary>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.GetSchemaAsync(System.String,Intelledox.Extension.Datasource.Query,Intelledox.Model.DataFilter,Intelledox.Extension.Datasource.Authentication,Intelledox.QAWizard.DatasourceProperties)">
+            <summary>
+            Returns the available fields that would be returned from a call to GetData.
+            </summary>
+            <param name="connectionString">Data source connection information</param>
+            <param name="query">Data object to be queried</param>
+            <param name="criteria">Filtering information</param>
+            <param name="auth">Authentication details</param>
+            <param name="properties">Wizard properties and settings</param>
+            <returns>A <see cref="T:System.Data.DataTable"/> with the available columns but no rows</returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.GetDataAsync(System.String,Intelledox.Extension.Datasource.Query,Intelledox.Model.DataFilter,Intelledox.Extension.Datasource.Authentication,Intelledox.QAWizard.DatasourceProperties)">
+            <summary>
+            Main querying call that Infiniti uses to get data into the wizard.
+            </summary>
+            <param name="connectionString">Data source connection information</param>
+            <param name="query">Data object to be queried</param>
+            <param name="criteria">Filtering information</param>
+            <param name="auth">Authentication details</param>
+            <param name="properties">Wizard properties and settings</param>
+            <returns>A <see cref="T:System.Data.DataTable"/> with the columns and rows from the data source. Hierarchical data is returned in a column of type <see cref="T:System.Data.DataTable"/>,
+            the value of the cell being a nested <see cref="T:System.Data.DataTable"/> object.</returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.GetDataReaderAsync(System.String,Intelledox.Extension.Datasource.Query,Intelledox.Model.DataFilter,Intelledox.Extension.Datasource.Authentication,Intelledox.QAWizard.DatasourceProperties)">
+            <summary>
+            Data querying call that is used for a data-driven repeating document to save resources.
+            </summary>
+            <param name="connectionString">Data source connection information</param>
+            <param name="query">Data object to be queried</param>
+            <param name="criteria">Filtering information</param>
+            <param name="auth">Authentication details</param>
+            <param name="properties">Wizard properties and settings</param>
+            <returns>A <see cref="T:System.Data.IDataReader"/> result equivalent to a call to GetData</returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.GetLinkList(System.Guid)">
+            <summary>
+            A list of available link types this dataobject supports.
+            </summary>
+            <returns>
+            /// <param name="dataObject">Data object to be queried</param>
+            </returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.GetAvailableFilterFieldsAsync(System.String,Intelledox.Extension.Datasource.Query,Intelledox.Extension.Datasource.Authentication,Intelledox.QAWizard.DatasourceProperties)">
+            <summary>
+            Available filters or parameters for a given data object
+            </summary>
+            <param name="connectionString">Data source connection information</param>
+            <param name="query">Data object to be queried</param>
+            <param name="auth">Authentication details</param>
+            <param name="properties">Wizard properties and settings</param>
+            <returns>A <see cref="T:System.Data.DataTable"/> object where there is a column for each available filter. Column name represents the filter name.</returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.ObjectTypes">
+            <summary>
+            A list of available data object types this extension supports.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.ObjectListAsync(System.String,System.String,System.Guid,Intelledox.Extension.Datasource.Authentication,Intelledox.QAWizard.DatasourceProperties)">
+            <summary>
+            Suggestion list of possible matching data objects based on user input
+            </summary>
+            <param name="connectionString">Data source connection information</param>
+            <param name="prefixText">The user entered text so far</param>
+            <param name="objectType">Selected data object type</param>
+            <param name="auth">Authentication details</param>
+            <param name="properties">Properties and settings</param>
+            <returns>An array of possible matches</returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.TestConnectionAsync(System.String,Intelledox.Extension.Datasource.Authentication,Intelledox.QAWizard.DatasourceProperties)">
+            <summary>
+            Tests whether a connection can be made to the data source based on user entered configuration
+            </summary>
+            <param name="connectionString">Data source connection information</param>
+            <param name="auth">Authentication details</param>
+            <param name="properties">Properties and settings</param>
+            <returns><c>true</c> if the connection information has been setup correctly, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.LogEvent(System.String,Intelledox.Model.EventLevel)">
+            <summary>
+            Logs a failure or message to the Infiniti database
+            </summary>
+            <param name="message">Custom message to log</param>
+            <param name="level">A <see cref="T:Intelledox.Model.EventLevel"/> representing the severity of the log</param>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.SupportedFilterComparisons(System.Guid)">
+            <summary>
+            List of available comparisions that can be used against filters in this data object
+            </summary>
+            <param name="objectType">Selected data object type</param>
+            <returns>A list of <see cref="T:Intelledox.Model.ComparisonType"/> enums that are supported</returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.SupportedHierarchicalFilterComparisons(System.Guid)">
+            <summary>
+            List of available comparisions that can be used against filters on nested data
+            </summary>
+            <param name="objectType">Selected data object type</param>
+            <returns>A list of <see cref="T:Intelledox.Model.ComparisonType"/> enums that are supported</returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.SupportedAuthenticationModes">
+            <summary>
+            List of supported authentication that this extension knows how to use
+            </summary>
+            <returns>List of <see cref="T:Intelledox.Extension.Datasource.AuthenticationMode"/></returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.IsLicensed(System.Guid)">
+            <summary>
+            Custom licensing check maintained by the data source
+            </summary>
+            <param name="businessUnitGuid">Business unit identifier</param>
+            <returns><c>true</c> if licensed, otherwise <c>false</c></returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.HasChildTableFields">
+            <summary>
+            Used for Infiniti data sources
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.AllowConnectionAttributes">
+            <summary>
+            Controls whether attributes can be configured the data source
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.AllowSchema">
+            <summary>
+            Controls whether a schema can be provided for the data source
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Intelledox.Extension.Datasource.DatasourceConnector.AllowDefaultData">
+            <summary>
+            Controls whether default data can be provided for the data source
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Intelledox.Extension.Datasource.ExtensionIdentity">
+            <summary>
+            Unique identity for a data source.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Datasource.ExtensionIdentity.Id">
+            <summary>
+            Unique id for a data source
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Datasource.ExtensionIdentity.Name">
+            <summary>
+            Unique display name for a data source. Name is used for finding referenced data sources.
+            </summary>
+        </member>
+        <member name="P:Intelledox.Extension.Datasource.ExtensionIdentity.ModuleId">
+            <summary>
+            Licensing module identifier
+            </summary>
+        </member>
+    </members>
+</doc>

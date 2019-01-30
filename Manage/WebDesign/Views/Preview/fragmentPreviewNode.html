@@ -1,0 +1,9 @@
+﻿<div ng-click="onNodeSelected({ node: node}); $event.stopPropagation()" editor-droppable="node" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)">
+    <i ng-if="node.Preview == null">&lt;{{node.Name}}&gt;</i>
+    <div ng-if="node.Preview != null" class="fragment-preview-parent">
+        <div class="fragment-preview" middle-click-open></div>
+        <div ng-repeat="child in node.Preview.Children">
+            <preview-node node="child"></preview-node>
+        </div>
+    </div>
+</div>

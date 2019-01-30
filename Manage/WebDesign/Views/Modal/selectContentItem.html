@@ -1,0 +1,44 @@
+﻿<form class="form-horizontal" ng-submit="contentItem != null && ok()">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title">{{ ::'SelectContentItem' | translate }}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="selectName" class="col-sm-3 control-label">{{ ::'Name' | translate }}</label>
+            <div class="col-sm-7">
+                <input id="selectName" class="form-control" ng-model="name" maxlength="100" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="selectCategory" class="col-sm-3 control-label">{{ ::'Category' | translate }}</label>
+            <div class="col-sm-7">
+                <select id="selectCategory" class="form-control input-sm"
+                        ng-options="option.categoryId as option.name for option in categories"
+                        ng-model="selectedCategory"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="selectFolder" class="col-sm-3 control-label">{{ ::'ContentFolder' | translate }}</label>
+            <div class="col-sm-7">
+                <select id="selectFolder" class="form-control input-sm"
+                        ng-options="option.folderGuid as option.name for option in folders"
+                        ng-model="selectedFolder"></select>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-primary" ng-click="search()">{{ ::'Search' | translate }}</button>
+            </div>
+        </div>
+        <table class="table table-bordered table-condensed selection-grid">
+            <tr ng-repeat="attr in existingContentItems"
+                ng-click="selectExistingContentItem(attr.tag)"
+                ng-class="{'active': attr.selected}">
+                <td>{{ attr.name }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-disabled="contentItem == null">{{ ::'OK' | translate }}</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">{{ ::'Cancel' | translate }}</button>
+    </div>
+</form>

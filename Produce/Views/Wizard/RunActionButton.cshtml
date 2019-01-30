@@ -1,0 +1,42 @@
+﻿@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.RunActionButtonQuestionViewModel>
+
+@{
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+
+    var qid = IdHelper.IdFor(Model.Question);
+    var clickEvent = string.Empty;
+    var cssClass = String.IsNullOrEmpty(Model.ClassName) ? "btn-primary" : Model.ClassName;
+    var isDisabled = !Model.Question.IsEditable;
+
+    clickEvent = (Model.LogInteractions ? "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(Model.AnalyticsID) + "', 'runActionButton'" + ");" : "") + "wiz.runActionButton('" + @Model.Question.WizardFragment.InstanceId.ToString() + "', '" + @Model.Question.QuestionGuid.ToString() + "', '" + @Model.RepeatPath + "', '" + qid + "'); return false;";
+
+}
+
+<div class="btn-group">
+    <button id="@qid" name="@qid" class="btn @cssClass" disabled="@isDisabled" onclick="@clickEvent">
+        @Html.Raw(Model.HtmlTextFormatted)
+    </button>
+</div>@* TODO: Copy from finish page instead *@
+@if (Model.Question.WizardFragment.WizardSession.Troubleshooting.HasTroubleshooting)
+{
+    <div>
+        @if (Model.Question.WizardFragment.WizardSession.Messages.Count != 0)
+        {
+            foreach (var message in Model.Question.WizardFragment.WizardSession.Messages)
+            {
+                if (message is Intelledox.Model.ActionFailedMessage)
+                {
+                    var afm = (Intelledox.Model.ActionFailedMessage)message;
+                    foreach (var action in Model.ActionSetQuestionModel.Actions)
+                    {
+                        if (action.Name.Equals(afm.ActionName, StringComparison.OrdinalIgnoreCase))
+                        {
+                            <div class="question-label variable-debug">@(message.Name + " " + message.Description)</div>
+                        }
+                    }
+                }
+            }
+        }
+    </div>
+}

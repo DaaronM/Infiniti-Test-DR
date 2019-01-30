@@ -1,0 +1,32 @@
+﻿<div class="prop-title">
+    {{ 'SectionProperties' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="sectionTitle" class="col-sm-4 control-label">{{ ::'Title' | translate }}</label>
+        <div class="col-sm-8">
+            <textarea id="sectionTitle" class="form-control input-sm f2-rename" ng-model="model.propertiesPanelModel.title" rows="3" spellcheck="true"
+                      ui-tinymce="tinymceHtmlWithPickRef" pick-Ref-Editor="model.pickRefEditor(ed)" tree-view="model.treeView"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sectionDescription" class="col-sm-4 control-label">{{ ::'Description' | translate }}</label>
+        <div class="col-sm-8">
+            <textarea id="sectionDescription" class="form-control input-sm" ng-model="model.propertiesPanelModel.description" rows="6" spellcheck="true"
+                      ui-tinymce="tinymceHtmlWithPickRef" pick-Ref-Editor="model.pickRefEditor(ed)" tree-view="model.treeView"></textarea>
+        </div>
+    </div>
+    <ng-include src="'Views/Properties/repeatProperty.html?v=106882799234227327'"></ng-include>
+    <div class="form-group" ng-if="model.propertiesPanelModel.repeatModel.isRepeated">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.displayImportOptions" />{{ ::'DisplayImportOptions' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div>
+        <ng-include src="'Views/Properties/styleProperty.html?v=106882799234227327'"></ng-include>
+    </div>
+</form>

@@ -1,0 +1,33 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.TabGroupLayoutViewModel>
+@{
+    var objectId = Model.TabGroup.TabGroupModel.TabGroupGuid.ToString();
+    var repeatPath = Model.RepeatPath;
+    var fragmentGuid = Model.TabGroup.WizardFragment.InstanceId.ToString();
+    var selectedIndex = Model.SelectedTabIndex; // Force initial selection
+}
+<div class="@(Model.TabGroup.TabGroupModel.CssStyle)">
+    <div class="nav nav-tabs" data-fragmentguid="@(fragmentGuid)" data-objectid="@(objectId)" data-repeatpath="@(repeatPath)">
+        @{ var index = -1; }
+        @foreach (Intelledox.QAWizard.TabPage tab in Model.TabGroup.TabPages)
+        {
+            index++;
+
+            if (tab.IsVisible)
+            {
+                @Html.Raw(String.Format("<li class=\"{0}\"><a href=\"#void\" id=\"{3}\" {4} onclick=\"wiz.tabClick($(this).parent(), '{1}');return false;\">{2}</a></li>",
+                Model.TabGroup.ActivePage == index ? "active" : "",
+                index.ToString(),
+                System.Net.WebUtility.HtmlEncode(String.IsNullOrWhiteSpace(tab.TabPageModel.Title) ? Intelledox.Produce.Resources.Strings.TabPage : tab.TabPageModel.Title),
+                IdHelper.IdFor(Model.TabGroup) + "_" + index.ToString(),
+                (Model.LogInteractions) ? "class=\"analyticslog\" data-analyticsid=\"" + System.Net.WebUtility.HtmlEncode(String.IsNullOrWhiteSpace(tab.TabPageModel.Title) ? Intelledox.Produce.Resources.Strings.TabPage : tab.TabPageModel.Title) + "\" data-analyticsevent=\"" + "tabSelect" + "\"" : ""));
+            }
+        }
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane active">
+            @{ Html.RenderNode(Model.TabGroup.TabPages[Model.TabGroup.ActivePage]); }
+        </div>
+    </div>
+</div>

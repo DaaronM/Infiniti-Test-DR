@@ -1,0 +1,43 @@
+﻿<div>
+    <div>
+        <table class="NoPadding NoSpacing" width="100%" role="presentation">
+            <tr>
+                <td>
+                    <h2 class="page-title">{{ model.wizard.FinishTitle }}</h2>
+                </td>
+                <td class="pageNav">
+                    <input class="btn btn-primary genbutton" type="button" value="{{ model.wizard.GenerateButtonText }}" ng-show="model.wizard.GenerateButtonLocation === 1 || model.wizard.GenerateButtonLocation == 2" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="PageBody">
+        <div class="question-group">
+            <h3 class="question-text"><label for="rdoYes">{{ 'SaveAnswers' | translate }}</label></h3>
+            <div class="question-body">
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" onclick="event.preventDefault();" />
+                        {{ 'Yes' | translate }}
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" checked onclick="event.preventDefault();" />
+                        {{ 'No' | translate }}
+                    </label>
+                </div>
+                <h5><label for="txtAnswerDescription">{{ 'IfYes' | translate }}</label></h5>
+                <input type="text" class="form-control" disabled />
+            </div>
+        </div>
+    </div>
+    <div class="cell-footer" style="text-align: center;">
+        <span style="color:red; display:inline;">{{ model.wizard.InvalidProjectText }}</span>
+        <br />
+        <br />
+        <input class="btn btn-primary genbutton" value="{{ model.wizard.GenerateButtonText }}" type="button" ng-show="model.wizard.GenerateButtonLocation === 0 || model.wizard.GenerateButtonLocation == 2" />
+        <div class="fr"></div>
+    </div>
+</div>
+                        

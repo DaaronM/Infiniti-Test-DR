@@ -1,0 +1,319 @@
+﻿<div class="prop-title">
+    {{ 'Escalation'|translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="escalationName" class="col-sm-4 control-label">{{ ::'EscalationName' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="escalationName" class="form-control input-sm" ng-model="model.propertiesPanelModel.name" ng-blur="model.propertiesPanelModel.validateName()" />
+        </div>
+    </div>
+    <fieldset>
+        <legend>{{ ::'Initiate' | translate }}</legend>
+        <div class="form-group">
+            <label for="initiateType" class="col-sm-4 control-label">{{ ::'Interval' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="initiateType" class="form-control input-sm"
+                        ng-options="option.value as option.name for option in model.propertiesPanelModel.initiateTypes"
+                        ng-model="model.propertiesPanelModel.selectedType">
+                </select>
+            </div>
+        </div>
+
+        <div ng-if="!model.propertiesPanelModel.showQuestionRef">
+            <div class="form-group">
+                <label for="initiateAfter" class="col-sm-4 control-label">{{ model.propertiesPanelModel.initiateAfterLabel }}</label>
+                <div class="col-sm-8">
+                    <input id="initiateAfter" class="form-control input-sm" ng-model="model.propertiesPanelModel.initiateAfter" />
+                </div>
+            </div>
+            <div ng-if="model.propertiesPanelModel.showWorkingDays" class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="model.propertiesPanelModel.workingDaysOnly" />{{ ::'WeekDaysOnly' | translate }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="model.propertiesPanelModel.showQuestionRef">
+            <div class="form-group">
+                <label for="initiateDateQuestion" class="col-sm-4 control-label">{{ ::'Question' | translate }}</label>
+                <div class="col-sm-8">
+                    <select id="initiateDateQuestion" class="form-control input-sm"
+                            ng-options="option.QuestionGuid as option.Text for option in model.propertiesPanelModel.availableQuestions"
+                            ng-model="model.propertiesPanelModel.selectedQuestionGuid"></select>
+                </div>
+            </div>
+            <div class="form-group" ng-if="model.propertiesPanelModel.isAnswerVisible">
+                <label for="initiateDateAnswer" class="col-sm-4 control-label">{{ ::'Answer' | translate }}</label>
+                <div class="col-sm-8">
+                    <select id="initiateDateAnswer" class="form-control input-sm"
+                            ng-options="option.AnswerGuid as option.Name for option in model.propertiesPanelModel.availableAnswers"
+                            ng-model="model.propertiesPanelModel.selectedAnswerGuid"></select>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <ng-include src="'Views/Properties/inputs.html?v=106882799234227327'"></ng-include>
+
+    <div class="form-group">
+        <label for="escalationRecur" class="col-sm-4 control-label">{{ ::'Recurring' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="checkbox">
+                <input type="checkbox" id="escalationRecur" ng-model="model.propertiesPanelModel.recurs" ng-disabled="!model.propertiesPanelModel.isRecursEnabled" />
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="model.propertiesPanelModel.recurs">
+        <fieldset>
+            <legend>{{ ::'RecurrencePattern' | translate }}</legend>
+            <div class="text-center">
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" ng-value="0" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.frequency" />{{ ::'Hourly' | translate }}
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" ng-value="1" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.frequency" />{{ ::'Daily' | translate }}
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" ng-value="2" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.frequency" />{{ ::'Weekly' | translate }}
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" ng-value="3" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.frequency" />{{ ::'Monthly' | translate }}
+                    </label>
+                </div>
+            </div>
+
+            <div ng-if="model.propertiesPanelModel.recurrencePanelViewModel.frequency === 0">
+                <div class="form-group">
+                    <label for="hourlyInterval" class="col-sm-4 control-label">{{ ::'Every' | translate }}</label>
+                    <div class="col-sm-4">
+                        <input id="hourlyInterval" class="form-control input-sm" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.hours" />
+                    </div>
+                    <label for="hourlyInterval" class="col-sm-4 control-label">{{ ::'Hours' | translate }}</label>
+                </div>
+            </div>
+
+            <div ng-if="model.propertiesPanelModel.recurrencePanelViewModel.frequency === 1">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.dailyWeekday" value="0" />{{ ::'Every' | translate }}
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input id="dailyInterval" class="form-control input-sm" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.dailySpecified" />
+                    </div>
+                    <label for="dailyInterval" class="col-sm-4 control-label">{{ ::'DayDays' | translate }}</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.dailyWeekday" value="1" />{{ ::'EveryWeekday' | translate }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="model.propertiesPanelModel.recurrencePanelViewModel.frequency === 2">
+                <div class="form-group">
+                    <label for="weeklyInterval" class="col-sm-4 control-label">{{ ::'RecurEvery' | translate }}</label>
+                    <div class="col-sm-4">
+                        <input id="weeklyInterval" class="form-control input-sm" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.weeklySpecified" />
+                    </div>
+                    <label for="weeklyInterval" class="col-sm-4 control-label">{{ ::'WeeksOn' | translate }}</label>
+                </div>
+                <table role="presentation" style="width: 100%">
+                    <tr>
+                        <td>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input type="checkbox" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.monday" />{{ ::'Monday' | translate }}
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input type="checkbox" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.tuesday" />{{ ::'Tuesday' | translate }}
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input type="checkbox" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.wednesday" />{{ ::'Wednesday' | translate }}
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input type="checkbox" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.thursday" />{{ ::'Thursday' | translate }}
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input type="checkbox" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.friday" />{{ ::'Friday' | translate }}
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input type="checkbox" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.saturday" />{{ ::'Saturday' | translate }}
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input type="checkbox" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.sunday" />{{ ::'Sunday' | translate }}
+                                </label>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div ng-if="model.propertiesPanelModel.recurrencePanelViewModel.frequency === 3">
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.monthlyWeekday" value="0" />{{ ::'Day' | translate }}
+                        </label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input id="monthInterval" class="form-control input-sm" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.monthlyDay" />
+                    </div>
+                    <label for="monthInterval" class="col-sm-2 control-label">{{ ::'OfEvery' | translate }}</label>
+                    <div class="col-sm-4">
+                        <input id="monthIntervalMonth" class="form-control input-sm" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.dayMonthRecurrence" />
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="monthIntervalMonth" class="control-label">{{ ::'Months' | translate }}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.monthlyWeekday" value="1" />{{ ::'The' | translate }}
+                        </label>
+                    </div>
+                    <div class="col-sm-5">
+                        <select class="form-control input-sm"
+                                ng-options="option.value as option.name for option in model.propertiesPanelModel.recurrencePanelViewModel.availableFirstSecond"
+                                ng-model="model.propertiesPanelModel.recurrencePanelViewModel.selectedSetPosition"></select>
+                    </div>
+                    <div class="col-sm-5">
+                        <select class="form-control input-sm"
+                                ng-options="option.value as option.name for option in model.propertiesPanelModel.recurrencePanelViewModel.availableDaysOfWeek"
+                                ng-model="model.propertiesPanelModel.recurrencePanelViewModel.selectedDayOfWeek"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="monthSpecifiedInterval" class="col-sm-4 col-sm-offset-2 control-label">{{ ::'OfEvery' | translate }}</label>
+                    <div class="col-sm-4">
+                        <input id="monthSpecifiedInterval" class="form-control input-sm" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.monthlySpecifiedRecurrence" />
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="monthSpecifiedInterval" class="control-label">{{ ::'Months' | translate }}</label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div ng-if="model.propertiesPanelModel.recurs">
+        <fieldset>
+            <legend>{{ ::'RangeOfRecurrence' | translate }}</legend>
+            <div class="text-center">
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" ng-value="0" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.rangeOfRecurrence" />{{ ::'Occurrences' | translate }}
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" ng-value="1" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.rangeOfRecurrence" />{{ ::'AfterDays' | translate }}
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" ng-value="2" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.rangeOfRecurrence" />{{ ::'EndOn' | translate }}
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" ng-value="3" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.rangeOfRecurrence" />{{ ::'NoEnd' | translate }}
+                    </label>
+                </div>
+            </div>
+
+            <div ng-if="model.propertiesPanelModel.recurrencePanelViewModel.rangeOfRecurrence === 0">
+                <div class="form-group">
+                    <label for="occurrencesInternal" class="col-sm-4 control-label">{{ ::'EndAfter' | translate }}</label>
+                    <div class="col-sm-4">
+                        <input id="occurrencesInternal" class="form-control input-sm" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.endOccurrences" />
+                    </div>
+                    <label for="occurrencesInternal" class="col-sm-4 control-label">{{ ::'Occurrences' | translate }}</label>
+                </div>
+            </div>
+
+            <div ng-if="model.propertiesPanelModel.recurrencePanelViewModel.rangeOfRecurrence === 1">
+                <div class="form-group">
+                    <label for="afterDaysInternal" class="col-sm-4 control-label">{{ ::'EndText' | translate }}</label>
+                    <div class="col-sm-4">
+                        <input id="afterDaysInternal" class="form-control input-sm" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.endAfterDays" />
+                    </div>
+                    <label for="afterDaysInternal" class="col-sm-6 control-label">{{ ::'DaysAfterTransition' | translate }}</label>
+                </div>
+                <div class="col-sm-offset-4 col-sm-8">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="model.propertiesPanelModel.recurrencePanelViewModel.workingDaysOnly" />{{ ::'WeekDaysOnly' | translate }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="model.propertiesPanelModel.recurrencePanelViewModel.rangeOfRecurrence === 2">
+                <div class="form-group">
+                    <label for="onDateQuestion" class="col-sm-4 control-label">{{ ::'Question' | translate }}</label>
+                    <div class="col-sm-8">
+                        <select id="onDateQuestion" class="form-control input-sm"
+                                ng-options="option.QuestionGuid as option.Text for option in model.propertiesPanelModel.recurrencePanelViewModel.availableQuestions"
+                                ng-model="model.propertiesPanelModel.recurrencePanelViewModel.recurDateQuestionReference"></select>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="model.propertiesPanelModel.recurrencePanelViewModel.isAnswerVisible">
+                    <label for="onDateAnswer" class="col-sm-4 control-label">{{ ::'Answer' | translate }}</label>
+                    <div class="col-sm-8">
+                        <select id="onDateAnswer" class="form-control input-sm"
+                                ng-options="option.AnswerGuid as option.Name for option in model.propertiesPanelModel.recurrencePanelViewModel.availableAnswers"
+                                ng-model="model.propertiesPanelModel.recurrencePanelViewModel.recurDateAnswerReference"></select>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</form>

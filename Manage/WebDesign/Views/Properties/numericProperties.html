@@ -1,0 +1,39 @@
+﻿<div class="form-group">
+    <label for="defaultValue" class="col-sm-4 control-label">{{ ::'DefaultValue' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input id="defaultValue" class="form-control input-sm" ng-model="model.propertiesPanelModel.DefaultValue" />
+            <span class="input-group-btn">
+                <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                        ng-click="model.propertiesPanelModel.pickDefaultValueRef('defaultValue')"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15"/>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="minimumValue" class="col-sm-4 control-label">{{ ::'Minimum' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="minimumValue" class="form-control input-sm" ng-model="model.propertiesPanelModel.minimum" maxlength="5"  pattern="\d*"/>
+    </div>
+</div>
+<div class="form-group">
+    <label for="maximumValue" class="col-sm-4 control-label">{{ ::'Maximum' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="maximumValue" class="form-control input-sm" ng-model="model.propertiesPanelModel.maximum" maxlength="5" pattern="\d*"/>
+    </div>
+</div>
+<div class="form-group">
+    <label for="increment" class="col-sm-4 control-label">{{ ::'Increment' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="increment" class="form-control input-sm" ng-model="model.propertiesPanelModel.increment" maxlength="5"/>
+    </div>
+</div>
+<div class="form-group">
+    <label for="width" class="col-sm-4 control-label">{{ ::'WidthPX' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="width" class="form-control input-sm" ng-model="model.propertiesPanelModel.width" maxlength="5" pattern="\d*"/>
+    </div>
+</div>

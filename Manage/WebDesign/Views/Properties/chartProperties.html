@@ -1,0 +1,282 @@
+﻿<!-- Chart properties -->
+<fieldset>
+    <legend>{{ ::'Chart' | translate }}</legend>
+    <div class="form-group">
+        <label for="chartTitle" class="col-sm-4 control-label">{{ ::'Title' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="chartTitle" class="form-control input-sm" ng-model="model.propertiesPanelModel.chartTitle" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="chartPalette" class="col-sm-4 control-label">{{ ::'Palette' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="chartPalette" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availablePalettes"
+                    ng-model="model.propertiesPanelModel.chartPalette"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="chartFillColour" class="col-sm-4 control-label">{{ ::'Colour' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="chartFillColour" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableColours"
+                    ng-model="model.propertiesPanelModel.chartFillColour"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="chartBorderLineDashStyle" class="col-sm-4 control-label">{{ ::'LineStyle' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="chartBorderLineDashStyle" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableLineStyles"
+                    ng-model="model.propertiesPanelModel.chartBorderLineDashStyle"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="chartBorderLineWidth" class="col-sm-4 control-label">{{ ::'LineWidth' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="chartBorderLineWidth" class="form-control input-sm" ng-model="model.propertiesPanelModel.chartBorderLineWidth" maxlength="5" pattern="\d*" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="chartBorderLineColour" class="col-sm-4 control-label">{{ ::'LineColour' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="chartBorderLineColour" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableColours"
+                    ng-model="model.propertiesPanelModel.chartBorderLineColour"></select>
+        </div>
+    </div>
+</fieldset>
+
+<!-- Legend properties -->
+<fieldset>
+    <legend>{{ ::'Legend' | translate }}</legend>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.isLegendVisible" />{{ ::'Visible' |translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="legendPosition" class="col-sm-4 control-label">{{ ::'Position' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="chartBorderLineColour" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availablePositions"
+                    ng-model="model.propertiesPanelModel.legendPosition"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="legendFillColour" class="col-sm-4 control-label">{{ ::'Colour' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="legendFillColour" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableColours"
+                    ng-model="model.propertiesPanelModel.legendFillColour"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="legendBorderLineDashStyle" class="col-sm-4 control-label">{{ ::'LineStyle' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="legendBorderLineDashStyle" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableLineStyles"
+                    ng-model="model.propertiesPanelModel.legendBorderLineDashStyle"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="legendBorderLineWidth" class="col-sm-4 control-label">{{ ::'LineWidth' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="legendBorderLineWidth" class="form-control input-sm" ng-model="model.propertiesPanelModel.legendBorderLineWidth" maxlength="5" pattern="\d*" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="legendBorderLineColour" class="col-sm-4 control-label">{{ ::'LineColour' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="legendBorderLineColour" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableColours"
+                    ng-model="model.propertiesPanelModel.legendBorderLineColour"></select>
+        </div>
+    </div>
+</fieldset>
+
+<!-- Chart area properties -->
+<fieldset>
+    <legend>{{ ::'ChartArea' | translate }}</legend>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.enable3DChartArea" />{{ ::'Enable3D' |translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="chartAreaFillColour" class="col-sm-4 control-label">{{ ::'Colour' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="chartAreaFillColour" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableColours"
+                    ng-model="model.propertiesPanelModel.chartAreaFillColour"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="chartAreaBorderLineDashStyle" class="col-sm-4 control-label">{{ ::'LineStyle' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="chartAreaBorderLineDashStyle" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableLineStyles"
+                    ng-model="model.propertiesPanelModel.chartAreaBorderLineDashStyle"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="chartAreaBorderLineWidth" class="col-sm-4 control-label">{{ ::'LineWidth' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="chartAreaBorderLineWidth" class="form-control input-sm" ng-model="model.propertiesPanelModel.chartAreaBorderLineWidth" maxlength="5" pattern="\d*" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="chartAreaBorderLineColour" class="col-sm-4 control-label">{{ ::'LineColour' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="chartAreaBorderLineColour" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableColours"
+                    ng-model="model.propertiesPanelModel.chartAreaBorderLineColour"></select>
+        </div>
+    </div>
+</fieldset>
+
+<!-- Value Axis -->
+<fieldset>
+    <legend>{{ ::'ValueAxis' | translate }}</legend>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.valueAxisHideTitle" />{{ ::'HideAxisTitle' |translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="valueAxisTitle" class="col-sm-4 control-label">{{ ::'Title' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="valueAxisTitle" class="form-control input-sm" ng-model="model.propertiesPanelModel.valueAxisTitle" ng-disabled="model.propertiesPanelModel.valueAxisHideTitle" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="valueAxisAlignment" class="col-sm-4 control-label">{{ ::'Alignment' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="chartAreaBorderLineDashStyle" class="form-control input-sm"
+                    ng-disabled="model.propertiesPanelModel.valueAxisHideTitle"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableAlignments"
+                    ng-model="model.propertiesPanelModel.valueAxisAlignment"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.valueAxisHideLabels" />{{ ::'HideAxisLabels' |translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.valueAxisHideFirstAndLast" />{{ ::'HideFirstAndLast' |translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="valueAxisBorderLineDashStyle" class="col-sm-4 control-label">{{ ::'LineStyle' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="valueAxisBorderLineDashStyle" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableLineStyles"
+                    ng-model="model.propertiesPanelModel.valueAxisBorderLineDashStyle"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="valueAxisBorderLineWidth" class="col-sm-4 control-label">{{ ::'LineWidth' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="valueAxisBorderLineWidth" class="form-control input-sm" ng-model="model.propertiesPanelModel.valueAxisBorderLineWidth" maxlength="5" pattern="\d*" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="valueAxisBorderLineColour" class="col-sm-4 control-label">{{ ::'LineColour' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="valueAxisBorderLineColour" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableColours"
+                    ng-model="model.propertiesPanelModel.valueAxisBorderLineColour"></select>
+        </div>
+    </div>
+</fieldset>
+
+<!-- Category Axis -->
+<fieldset>
+    <legend>{{ ::'CategoryAxis' | translate }}</legend>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.categoryAxisHideTitle" />{{ ::'HideAxisTitle' |translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="categoryAxisTitle" class="col-sm-4 control-label">{{ ::'Title' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="categoryAxisTitle" class="form-control input-sm" ng-model="model.propertiesPanelModel.categoryAxisTitle" ng-disabled="model.propertiesPanelModel.categoryAxisHideTitle" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="categoryAxisAlignment" class="col-sm-4 control-label">{{ ::'Alignment' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="chartAreaBorderLineDashStyle" class="form-control input-sm"
+                    ng-disabled="model.propertiesPanelModel.categoryAxisHideTitle"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableAlignments"
+                    ng-model="model.propertiesPanelModel.categoryAxisAlignment"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.categoryAxisHideLabels" />{{ ::'HideAxisLabels' |translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.categoryAxisHideFirstAndLast" />{{ ::'HideFirstAndLast' |translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="categoryAxisBorderLineDashStyle" class="col-sm-4 control-label">{{ ::'LineStyle' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="categoryAxisBorderLineDashStyle" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableLineStyles"
+                    ng-model="model.propertiesPanelModel.categoryAxisBorderLineDashStyle"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="categoryAxisBorderLineWidth" class="col-sm-4 control-label">{{ ::'LineWidth' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="categoryAxisBorderLineWidth" class="form-control input-sm" ng-model="model.propertiesPanelModel.categoryAxisBorderLineWidth" maxlength="5" pattern="\d*" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="categoryAxisBorderLineColour" class="col-sm-4 control-label">{{ ::'LineColour' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="categoryAxisBorderLineColour" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableColours"
+                    ng-model="model.propertiesPanelModel.categoryAxisBorderLineColour"></select>
+        </div>
+    </div>
+</fieldset>

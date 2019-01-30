@@ -1,0 +1,23 @@
+﻿
+<div class="flyout-title">
+    {{ 'Escalations' | translate }}
+</div>
+<div class="flyout-subsection">
+    <div class="input-group">
+        <input class="form-control" ng-model="model.flyoutPanel.searchValue" placeholder="{{'Search'|translate}}" />
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="model.flyoutPanel.searchEscalations()">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+        </span>
+    </div>
+</div>
+
+<div class="flyout-container">
+    <ul class="li-escalation">
+        <li toolbox-draggable ng-repeat="escalation in model.flyoutPanel.filteredEscalations" id="toolbox_escalation.{{escalation.routingTypeId}}">
+            <span ng-bind="escalation.description"></span>
+        </li>
+    </ul>
+    <span class="noresults" ng-show="!model.flyoutPanel.filteredEscalations.length" ng-bind="'NoMatchesFound'|translate"></span>
+</div>

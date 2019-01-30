@@ -1,0 +1,324 @@
+﻿<div class="prop-title">
+    {{ model.propertiesPanelModel.title }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="transName" class="col-sm-4 control-label">{{ ::'Name' | translate }}</label>
+        <div class="col-sm-8">
+            <input id="transName" class="form-control input-sm" ng-model="model.propertiesPanelModel.name" />
+        </div>
+    </div>
+    <fieldset ng-if="model.propertiesPanelModel.isCreationVisible">
+        <legend>{{ ::'Creation' | translate }}</legend>
+        <label class="col-sm-12">{{ 'SelectStateInstructions' | translate }}</label>
+        <div class="form-group">
+            <label for="transState" class="col-sm-4 control-label">{{ ::'State' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="transState" class="form-control input-sm"
+                        ng-options="option.value as option.name for option in model.propertiesPanelModel.availableStates"
+                        ng-model="model.propertiesPanelModel.selectedState"></select>
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="button" class="btn btn-primary" ng-click="model.propertiesPanelModel.create()">{{ ::'Create' | translate }}</button>
+        </div>
+    </fieldset>
+
+    <fieldset ng-if="model.propertiesPanelModel.isParallelExitVisible">
+        <legend>{{ ::'ParallelExit' | translate }}</legend>
+        <label class="col-sm-12">{{ model.propertiesPanelModel.priorityInstructionText }}</label>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="model.propertiesPanelModel.isPriorityExit" />{{ ::'PriorityParallelExit' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset ng-if="model.propertiesPanelModel.isSendtoVisible">
+        <legend>{{ ::'Assignments' | translate }}</legend>
+        <div class="form-group">
+            <label for="transSendTo" class="col-sm-4 control-label">{{ ::'SendTo' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="transSendTo" class="form-control input-sm"
+                        ng-options="option.value as option.name for option in model.propertiesPanelModel.availableSendTos"
+                        ng-model="model.propertiesPanelModel.selectedSendTo"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="transSendToType" class="col-sm-4 control-label">{{ ::'SendToType' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="transSendToType" class="form-control input-sm"
+                        ng-disabled="!model.propertiesPanelModel.isSendToTypeEnabled"
+                        ng-options="option.value as option.name for option in model.propertiesPanelModel.availableSendToTypes"
+                        ng-model="model.propertiesPanelModel.selectedSendToType"></select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isSpecifiedVisible">
+            <label for="transSpecified" class="col-sm-4 control-label">{{ ::'UserOrGroup' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="transSpecified" class="form-control input-sm"
+                        ng-options="option.id as option.name for option in model.propertiesPanelModel.availableSpecified"
+                        ng-model="model.propertiesPanelModel.selectedSpecified"></select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isRestrictByVisible">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="model.propertiesPanelModel.restrictBy" />{{ ::'RestrictBy' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isRestrictByListVisible">
+            <div class="col-sm-offset-4 col-sm-8">
+                <select id="transRestrictGroup" class="form-control input-sm"
+                        ng-options="option.id as option.name for option in model.propertiesPanelModel.availableRestrictGroups"
+                        ng-model="model.propertiesPanelModel.selectedRestrictGroup"></select>
+            </div>
+        </div>
+
+        <div ng-if="model.propertiesPanelModel.isQuestionVisible">
+            <div class="form-group">
+                <label for="transQuestion" class="col-sm-4 control-label" ng-if="!model.propertiesPanelModel.isTemporaryTransition">{{ ::'Question' | translate }}</label>
+                <label for="transQuestion" class="col-sm-4 control-label" ng-if="model.propertiesPanelModel.isTemporaryTransition">{{ ::'RecipientEmail' | translate }}</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <select id="transQuestion" class="form-control input-sm"
+                                ng-options="option.QuestionGuid as option.Text for option in model.propertiesPanelModel.availableQuestions"
+                                ng-model="model.propertiesPanelModel.selectedQuestion"></select>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                                    ng-click="model.propertiesPanelModel.pickRef()"
+                                    ng-class="{'active': model.propertiesPanelModel.treeView.isInPickMode }">
+                                <img src="Images/refPick.svg" alt="" height="15" />
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-if="model.propertiesPanelModel.isAnswerVisible">
+                <label for="transAnswer" class="col-sm-4 control-label">{{ ::'Answer' | translate }}</label>
+                <div class="col-sm-8">
+                    <select id="transAnswer" class="form-control input-sm"
+                            ng-options="option.AnswerGuid as option.Name for option in model.propertiesPanelModel.availableAnswers"
+                            ng-model="model.propertiesPanelModel.selectedAnswer"></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-if="model.propertiesPanelModel.isTemporaryTransition">
+            <label for="transRecipientNameQuestion" class="col-sm-4 control-label">{{ ::'RecipientName' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="transRecipientNameQuestion" class="form-control input-sm"
+                        ng-options="option.QuestionGuid as option.Text for option in model.propertiesPanelModel.availableQuestions"
+                        ng-model="model.propertiesPanelModel.temporaryRecipientNameQuestion"></select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isTemporaryTransitionAnswerVisible">
+            <label for="transRecipientNameAnswer" class="col-sm-4 control-label">{{ ::'Answer' | translate }}</label>
+            <div class="col-sm-8">
+                <select id="transRecipientNameAnswer" class="form-control input-sm"
+                        ng-options="option.AnswerGuid as option.Name for option in model.propertiesPanelModel.availableAnswers"
+                        ng-model="model.propertiesPanelModel.temporaryRecipientNameAnswer"></select>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="form-group" ng-if="model.propertiesPanelModel.isReassignVisible">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.allowReassign" />{{ ::'AllowReassign' | translate }}
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-offset-4 col-sm-8" ng-if="model.propertiesPanelModel.isTemporaryReassignHelpVisible">
+            <div class="">
+                <label>
+                    {{ ::'TemporaryWorkflowReassignHelp' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.propertiesPanelModel.isSendEmailVisible">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.sendEmail" />{{ ::'SendEmail' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+<div ng-if="model.propertiesPanelModel.isSendEmailVisible && model.propertiesPanelModel.sendEmail">
+    <div class="form-group">
+        <label for="transEmailSubject" class="col-sm-4 control-label">{{ ::'EmailSubject' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input id="transEmailSubject" class="form-control input-sm" ng-model="model.propertiesPanelModel.emailSubject" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                            ng-click="model.propertiesPanelModel.pickEmailSubjectRef('transEmailSubject')"
+                            ng-class="{'active': model.propertiesPanelModel.treeView.isInPickMode }">
+                        <img src="Images/refPick.svg" alt="" height="15" />
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="transEmailBody" class="col-sm-4 control-label">{{ ::'EmailBody' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <textarea id="transEmailBody" class="form-control input-sm" ng-model="model.propertiesPanelModel.emailBody" rows="6" spellcheck="true"></textarea>
+                <span class="input-group-btn" style="vertical-align:top">
+                    <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                            ng-click="model.propertiesPanelModel.pickEmailBodyRef('transEmailBody')"
+                            ng-class="{'active': model.treeView.isInPickMode }">
+                        <img src="Images/refPick.svg" alt="" height="15" />
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.isStartPageOptionVisible">
+    <label for="transStartPage" class="col-sm-4 control-label">{{ ::'StartPage' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="transStartPage" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.pages"
+                ng-model="model.propertiesPanelModel.startPageGuid"></select>
+    </div>
+</div>
+
+    <fieldset ng-if="model.propertiesPanelModel.isDisplayOptionsVisible">
+        <legend>{{ ::'DisplayOptions' | translate }}</legend>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isPageTitleVisible">
+            <label for="transPageTitle" class="col-sm-4 control-label">{{ ::'PageTitle' | translate }}</label>
+            <div class="col-sm-8">
+                <input id="transPageTitle" class="form-control input-sm" ng-model="model.propertiesPanelModel.pageTitle" ng-blur="model.propertiesPanelModel.validateName()" />
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isHelpTextVisible">
+            <label for="transHelpText" class="col-sm-4 control-label">{{ ::'HelpText' | translate }}</label>
+            <div class="col-sm-8">
+                <textarea id="transHelpText" class="form-control input-sm" ng-model="model.propertiesPanelModel.helpText" rows="6" spellcheck="true"></textarea>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isShowNextStepsVisible">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="model.propertiesPanelModel.showNextSteps" />{{ ::'ShowNextSteps' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isShowSendToVisible">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"
+                                ng-model="model.propertiesPanelModel.showSendTo" />{{ ::'ShowSendTo' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isShowCommentVisible">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="model.propertiesPanelModel.showComment" />{{ ::'ShowComment' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isCommentMandatoryVisible">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"
+                                ng-model="model.propertiesPanelModel.commentMandatory"
+                                ng-disabled="!model.propertiesPanelModel.showComment" />{{ ::'CommentMandatory' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isDefaultCommentVisible">
+            <label for="transDefaultComment" class="col-sm-4 control-label">{{ ::'DefaultComment' | translate }}</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <textarea id="transDefaultComment" class="form-control input-sm" ng-model="model.propertiesPanelModel.defaultComment" rows="6" spellcheck="true"></textarea>
+                    <span class="input-group-btn" style="vertical-align:top">
+                        <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                                ng-click="model.propertiesPanelModel.pickDefaultCommentRef('transDefaultComment')"
+                                ng-class="{'active': model.treeView.isInPickMode }">
+                            <img src="Images/refPick.svg" alt="" height="15" />
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isSubmitButtonTextVisible">
+            <label for="transSubmitButton" class="col-sm-4 control-label">{{ ::'SubmitButtonText' | translate }}</label>
+            <div class="col-sm-8">
+                <input id="transSubmitButton" class="form-control input-sm" ng-model="model.propertiesPanelModel.submitButtonText" />
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isSubmittingTextVisible">
+            <label for="transSubmittingText" class="col-sm-4 control-label">{{ ::'SubmittingText' | translate }}</label>
+            <div class="col-sm-8">
+                <input id="transSubmittingText" class="form-control input-sm" ng-model="model.propertiesPanelModel.submittingText" />
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isResponseSubmittedTextVisible">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="model.propertiesPanelModel.redirectToHome" />{{ ::'RedirectToHome' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-show="model.propertiesPanelModel.showRedirectOptions" ng-if="model.propertiesPanelModel.isResponseSubmittedTextVisible">
+            <div class="col-sm-offset-4 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="model.propertiesPanelModel.waitForProject" />{{ ::'WaitForProject' | translate }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-if="model.propertiesPanelModel.isResponseSubmittedTextVisible">
+            <label for="transResponsesSubmittedText" class="col-sm-4 control-label">{{ ::'ResponsesSubmittedMessage' | translate }}</label>
+            <div class="col-sm-8">
+                <input id="transResponsesSubmittedText" class="form-control input-sm" ng-blur="model.propertiesPanelModel.validateOnlineRedirectMessage('transResponsesSubmittedText')" ng-model="model.propertiesPanelModel.responsesSubmittedText"/>
+            </div>
+        </div>
+        <div class="form-group" ng-show="model.propertiesPanelModel.showRedirectOptions" ng-if="model.propertiesPanelModel.isResponseSubmittedTextVisible">
+            <label for="transOfflineRedirectSubmittedText" class="col-sm-4 control-label">{{::'OfflineRedirectMessage' | translate }}</label>
+            <div class="col-sm-8">
+                <textarea id="transOfflineRedirectSubmittedText" class="form-control input-sm" rows="3" xng-focus="model.propertiesPanelModel.redirectToHome" ng-model="model.propertiesPanelModel.offlineRedirectSubmittedText" ng-blur="model.propertiesPanelModel.validateOfflineRedirectMessage('transOfflineRedirectSubmittedText')" spellcheck="true"></textarea>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset ng-if="model.propertiesPanelModel.isDocumentsOptionsVisible">
+        <legend>{{ ::'Downloads' | translate }}</legend>
+        <div class="form-group">
+            <label for="transitionDocuments" class="col-sm-4 control-label">{{ ::'SelectedDocuments' | translate }}</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <input id="transitionDocuments" class="form-control input-sm" ng-model="model.propertiesPanelModel.documentsText" readonly />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default input-sm" type="button" ng-click="model.propertiesPanelModel.selectTransitionDocuments()">...</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

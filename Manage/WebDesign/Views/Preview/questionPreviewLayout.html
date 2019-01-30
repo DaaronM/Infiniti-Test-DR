@@ -1,0 +1,45 @@
+﻿<div class="question-group" ng-click="onNodeSelected({ node: node}); $event.stopPropagation()"
+     ng-if="!(node.QuestionTypeID === 16 || node.QuestionTypeID === 8 ||
+        node.QuestionTypeID === 17 || node.QuestionTypeID === 18 ||
+        (node.QuestionTypeID === 11 && !node.Visibility) ||
+        (node.QuestionTypeID === 15 && !node.Visibility) ||
+        (node.QuestionTypeID === 14 && !node.Visibility))"
+     ng-switch on="node.TextPosition"
+     editor-droppable="node" on-editor-drop="topEditorDropFunc(mode, dropped, targetNode)">
+    <div ng-switch-when="0">
+        <div class="question-text">
+            <label ng-bind-html="node.Text | infinitiHtml"></label>
+            <span class="helpIcon help-question" ng-show="node.HelpText"><span class="sr-only">Help</span></span>
+            <span class="commentedIcon comments-question" ng-show="node.AllowComments"><span class="sr-only">{{'Comments' | translate }}</span></span>
+            <span class="commentCounter" ng-show="node.AllowComments">(2)</span>
+        </div>
+        <div class="question-body {{node.CssStyle}}">
+            <question-preview-node node="node" on-node-selected="topSelectedFunc(node)"
+                                   top-editor-drop-func="topEditorDropFunc"></question-preview-node>
+        </div>
+    </div>
+
+    <table width="100%" role="presentation" ng-switch-when="1">
+        <tr>
+            <td class="question-text-inline" ng-style="node.LeftQuestionWidth > 0 && {'width': node.LeftQuestionWidth + (node.WidthType === 1 ? 'px' : '%')}">
+                <label ng-bind-html="node.Text | infinitiHtml"></label>
+                <span class="helpIcon help-question" ng-show="node.HelpText"><span class="sr-only">Help</span></span>
+                <span class="commentedIcon comments-question" ng-show="node.AllowComments"><span class="sr-only">{{'Comments' | translate }}</span></span>
+                <span class="commentCounter" ng-show="node.AllowComments">(3)</span>
+            </td>
+            <td>
+                <div class="question-body {{node.CssStyle}}">
+                    <question-preview-node node="node" on-node-selected="topSelectedFunc(node)"
+                                           top-editor-drop-func="topEditorDropFunc"></question-preview-node>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="question-body {{node.CssStyle}}" ng-switch-when="2">
+        <question-preview-node node="node" on-node-selected="topSelectedFunc(node)"
+                               top-editor-drop-func="topEditorDropFunc"></question-preview-node>
+        <span class="commentedIcon comments-question" ng-show="node.AllowComments"><span class="sr-only">{{'Comments' | translate }}</span></span>
+        <span class="commentCounter" ng-show="node.AllowComments">(4)</span>
+    </div>
+</div>

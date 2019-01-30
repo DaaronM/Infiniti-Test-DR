@@ -1,0 +1,22 @@
+﻿<div class="prop-title">
+    {{ 'FragmentDocumentTitle' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="model.propertiesPanelModel.isAttachment" ng-disabled="!model.propertiesPanelModel.isAttachmentEnabled" />{{ ::'Attachment' | translate }}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-if="model.propertiesPanelModel.isFormatVisible">
+        <label for="documentFormat" class="col-sm-4 control-label">{{ ::'Format' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="documentFormat" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.propertiesPanelModel.availableFormats"
+                    ng-model="model.propertiesPanelModel.selectedFormat"></select>
+        </div>
+    </div>
+</form>

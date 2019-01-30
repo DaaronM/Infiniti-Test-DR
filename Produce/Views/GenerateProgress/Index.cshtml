@@ -1,0 +1,82 @@
+﻿@using Infiniti.MvcControllers
+@{
+    Layout = null;
+}
+<!DOCTYPE HTML>
+<html dir="@(System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft ? "rtl" : "ltr")" lang="@(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName )">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>@Html.Raw(ApplicationSettings.ThemePageTitle)</title>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    @if (ApplicationSettings.Bundle)
+    {
+        if (ApplicationSettings.UseCdn)
+        {
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link href="~/Content/cdnbundle.css?v=106882799234227327" rel="stylesheet" type="text/css" />
+        }
+        else
+        {
+        <link href="~/Content/bundle.css?v=106882799234227327" rel="stylesheet" type="text/css" />
+        }
+    }
+    else
+    {
+    <link href="~/Content/bootstrap.min.css?v=337" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-theme.min.css?v=337" rel="stylesheet" />
+    <link href="~/Content/Site.css?v=10.2.6" type="text/css" rel="stylesheet" />
+    }
+    @Html.Raw(ApplicationSettings.ThemeCss(Url.Content("~/")))
+    @if (ApplicationSettings.UseCdn)
+    {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    }
+    else
+    {
+    <script src="~/scripts/jquery-3.1.1.min.js"></script>
+    }
+</head>
+<body>
+    <label id="GeneratingHeader">@Html.Raw(ApplicationSettings.ThemeWizardHeader)</label>
+    <input type="hidden" id="hidRequestId" value="@ViewBag.JobGuid" />
+    <div id="fileCreationContainer">
+        <div id="wait-preview" title="@Intelledox.Produce.Resources.Strings.CreatingDocument" aria-label="@Intelledox.Produce.Resources.Strings.CreatingDocument"></div>
+        <label class="fileCreationTitle">@ViewBag.CurrentlyCreating</label>
+        <label class="fileCreationSubTitle">@Intelledox.Produce.Resources.Strings.PleaseWait</label><span id="divProgress"></span>
+    </div>
+    <label id="GeneratingFooter">@Html.Raw(ApplicationSettings.ThemeWizardFooter)</label>
+
+    <script type="text/javascript">
+        function checkStatus() {
+            $.get("@Url.Content("~/")GenerateProgress/CheckStatus?JobGuid=" + document.getElementById('hidRequestId').value)
+                .done(function (data, textStatus, xhr) {
+                    var recheck = true;
+
+                    // only if "OK"
+                    if (xhr.status == 200) {
+
+                        if (data == '1') {
+                            // a "1" means it is done
+                            recheck = false;
+                            document.location.reload();
+                        } else {
+                            if (document.getElementById('divProgress').innerHTML.length > 10) {
+                                document.getElementById('divProgress').innerHTML = '';
+                            }
+                            document.getElementById('divProgress').innerHTML += '.';
+                        }
+                    }
+
+                    if (recheck) {
+                        setTimeout(checkStatus, 1000);
+                    }
+                });
+        }
+
+        setTimeout(checkStatus, 1000);
+    </script>
+</body>
+</html>

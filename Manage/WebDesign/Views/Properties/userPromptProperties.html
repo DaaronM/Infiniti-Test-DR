@@ -1,0 +1,97 @@
+﻿<ng-include src="'Views/Properties/mandatoryProperty.html?v=106882799234227327'"></ng-include>
+<div class="form-group">
+    <label for="defaultValue" class="col-sm-4 control-label">{{ ::'DefaultValue' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input id="defaultValue" class="form-control input-sm" ng-model="model.propertiesPanelModel.DefaultValue" />
+            <span class="input-group-btn">
+                <button class="btn btn-default input-sm" type="button"  title="{{ ::'QuestionReference' | translate }}"
+                        ng-click="model.propertiesPanelModel.pickDefaultValueRef('defaultValue')"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15" />
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="dataType" class="col-sm-4 control-label">{{ ::'DataType' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="dataType" class="form-control input-sm"
+                ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.DataTypes"
+                ng-model="model.propertiesPanelModel.DataType"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.ShowDisplayType">
+    <label for="displayType" class="col-sm-4 control-label">{{ ::'DisplayType' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="displayType" class="form-control input-sm"
+                ng-options="option.value as option.name | translate for option in model.propertiesPanelModel.DisplayTypes"
+                ng-model="model.propertiesPanelModel.DisplayType"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.ShowMaxLength">
+    <label for="maxLength" class="col-sm-4 control-label">{{ ::'MaxLength' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="maxLength" class="form-control input-sm" ng-model="model.propertiesPanelModel.MaxLength" maxlength="5" pattern="\d*" />
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.ShowWidth">
+    <label for="width" class="col-sm-4 control-label">{{ ::'WidthPX' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="width" class="form-control input-sm" ng-model="model.propertiesPanelModel.Width" maxlength="5" pattern="\d*" />
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.ShowTextRows">
+    <label for="textRows" class="col-sm-4 control-label">{{ ::'TextRows' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="textRows" class="form-control input-sm" ng-model="model.propertiesPanelModel.TextRows" maxlength="5" pattern="\d*" />
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.ShowDecimalPlaces">
+    <label for="decimalPlaces" class="col-sm-4 control-label">{{ ::'DecimalPlaces' | translate }}</label>
+    <div class="col-sm-8">
+        <input id="decimalPlaces" class="form-control input-sm" ng-model="model.propertiesPanelModel.DecimalPlaces" maxlength="5" pattern="\d*" />
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.ShowSymbol">
+    <label for="currencyCode" class="col-sm-4 control-label">{{ ::'Symbol' | translate }}</label>
+    <div class="col-sm-8">
+        <select id="currencyCode" class="form-control input-sm"
+                ng-options="option.value as option.name for option in model.propertiesPanelModel.CurrencySymbols"
+                ng-model="model.propertiesPanelModel.CurrencyCode"></select>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.ShowAlignment">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.IsRightAligned" />{{ ::'RightAlign' |translate }}
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.ShowWatermark">
+    <label for="watermark" class="col-sm-4 control-label">{{ ::'Watermark' | translate }}</label>
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input id="watermark" class="form-control input-sm" ng-model="model.propertiesPanelModel.Watermark" />
+            <span class="input-group-btn">
+                <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                        ng-click="model.propertiesPanelModel.pickWatermarkRef('watermark')"
+                        ng-class="{'active': model.treeView.isInPickMode }">
+                    <img src="Images/refPick.svg" alt="" height="15"/>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-if="model.propertiesPanelModel.ShowWeekdaysOnly">
+    <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="model.propertiesPanelModel.WeekdaysOnly" />{{ ::'WeekDaysOnly' |translate }}
+            </label>
+        </div>
+    </div>
+</div>

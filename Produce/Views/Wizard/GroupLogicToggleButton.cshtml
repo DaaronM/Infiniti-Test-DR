@@ -1,0 +1,53 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.QuestionViewModel<Intelledox.QAWizard.GroupLogicQuestion>>
+
+@{
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+
+    var qid = IdHelper.IdFor(Model.Question);
+    var isMultiChoice = (Model.Question.GroupLogicQuestionModel.DisplayType == Intelledox.Model.QuestionDisplayType.MultiChoiceToggleButton);
+    var controlType = isMultiChoice ? "radio" : "checkbox";
+    var isDisabled = !Model.Question.IsEditable;
+    var onChange = "$('#" + qid + "_change').val('1');";
+
+    if (Model.Question.IsRealtimeParentQuestion && !isDisabled)
+    {
+        onChange += "wiz.reload();";
+    }
+    else if (Model.Question.IsMandatory)
+    {
+        onChange += "validate.setPass('#" + qid + "');";
+    }
+
+    if (Model.Question.HasValidationErrors())
+    {
+        Model.Question.Validate();
+    }
+
+    List<Intelledox.QAWizard.Answer> activeAnswers = Model.Question.ActiveAnswers();
+}
+<input type="hidden" id="@(qid)_change" name="@(qid)_change" value="0" />
+<div class="btn-group btn-block" @Html.Raw(isDisabled ? "" : "data-toggle=\"buttons\"")>
+    @foreach (Intelledox.QAWizard.Answer a in activeAnswers)
+    {
+        var aid = IdHelper.IdFor(a);
+        var labelClass = a.Selected ? "btn btn-primary active" : "btn btn-primary";
+        labelClass = isDisabled ? labelClass + " disabled" : labelClass;
+        var answerChange = "";
+        if (Model.LogInteractions)
+        {
+            answerChange = "wiz.dataAnalyticsFocusAndBlur('" + HttpUtility.JavaScriptStringEncode(a.AnalyticsID()) + "');" + onChange;
+        }
+        else
+        {
+            answerChange = onChange;
+        }
+
+        <label class="@labelClass">
+            <input type="@controlType" id="@aid" name="@qid" autocomplete="off" disabled="@isDisabled" value="@a.ID" checked="@a.Selected" class="sr-only" onchange="@Html.Raw(answerChange)" aria-describedby="@(qid)Text" @Html.Raw(Model.Question.IsMandatory ? "required" : "")/>
+            @Html.Raw(Intelledox.Common.HtmlParsing.Sanitize(((Intelledox.QAWizard.GroupLogicAnswer)a).DisplayTextFormatted))
+        </label>
+    }
+</div>
+@Html.DisplayValidation(Model.Question.LastValidationMessage, IdHelper.IdFor(activeAnswers[0]))

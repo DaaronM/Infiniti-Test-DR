@@ -1,0 +1,70 @@
+﻿<div class="prop-title">
+    {{ 'Validation' | translate }}
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="validationType" class="col-sm-4 control-label">{{ ::'Type' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="validationType" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.validationsPanelModel.availableValidationTypes"
+                    ng-model="model.validationsPanelModel.selectedValidationType"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="comparisonType" class="col-sm-4 control-label">{{ ::'Comparison' | translate }}</label>
+        <div class="col-sm-8">
+            <select id="comparisonType" class="form-control input-sm"
+                    ng-options="option.value as option.name for option in model.validationsPanelModel.availableComparisons"
+                    ng-model="model.validationsPanelModel.selectedComparison"
+                    ng-disabled="!model.validationsPanelModel.isComparisonTypeEnabled"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="comparisonExpression" class="col-sm-4 control-label">{{ ::'Expression' | translate }}</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <textarea id="comparisonExpression" class="form-control input-sm" rows="8"
+                          ng-model="model.validationsPanelModel.expression"
+                          ng-disabled="!model.validationsPanelModel.isExpressionEnabled"></textarea>
+                <span class="input-group-btn" style="vertical-align:top" ng-if="model.validationsPanelModel.selectedValidationType === 0">
+                    <button class="btn btn-default input-sm" type="button" title="{{ ::'QuestionReference' | translate }}"
+                            ng-disabled="!model.validationsPanelModel.isExpressionEnabled"
+                            ng-click="model.validationsPanelModel.pickRef('comparisonExpression')"
+                            ng-class="{'active': model.treeView.isInPickMode }">
+                        <img src="Images/refPick.svg" alt="" height="15"/>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="comparisonMessage" class="col-sm-4 control-label">{{ ::'Message' | translate }}</label>
+        <div class="col-sm-8">
+            <textarea id="comparisonMessage" class="form-control input-sm" rows="6"
+                      ng-model="model.validationsPanelModel.message"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group text-center">
+        <button ng-disabled="!model.validationsPanelModel.isAddEnabled" class="btn btn-default" ng-click="model.validationsPanelModel.add()">{{ 'Add' | translate }}</button>
+        <button ng-disabled="!model.validationsPanelModel.isUpdateEnabled" class="btn btn-default" ng-click="model.validationsPanelModel.update()">{{ 'Update' | translate }}</button>
+        <button ng-disabled="!model.validationsPanelModel.isRemoveEnabled" class="btn btn-default" ng-click="model.validationsPanelModel.remove()">{{ 'Remove' | translate }}</button>
+    </div>
+
+    <table class="table table-bordered table-condensed selection-grid">
+        <thead>
+            <tr>
+                <th>{{ 'Type' | translate }}</th>
+                <th>{{ 'Comparison' | translate }}</th>
+                <th>{{ 'Expression' | translate }}</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="rule in model.validationsPanelModel.existingValidations" 
+            ng-click="model.validationsPanelModel.selectExistingValidation(rule.tag)"
+            ng-class="{'active': rule.selected}">
+            <td>{{ rule.name }}</td>
+            <td>{{ rule.comparison }}</td>
+            <td>{{ rule.expression }}</td>
+        </tr>
+    </table>
+</form>

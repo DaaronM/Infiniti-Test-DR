@@ -1,0 +1,177 @@
+﻿@using Intelledox.Produce
+@using Intelledox.ViewModel.Core
+@inherits System.Web.Mvc.WebViewPage<Intelledox.ViewModel.Core.InkQuestionViewModel>
+@{
+    Layout = "~/Views/Shared/_QuestionLayout.cshtml";
+    var qid = IdHelper.IdFor(Model.Question);
+    var thumbWidth = 0;
+    var thumbHeight = 0;
+    var zoomStyle = "";
+    if (Model.ZoomedIn)
+    {
+        zoomStyle = "width: 99%; margin:0 auto; text-align:center;";
+    }
+}
+<div id="@(qid)ink" class="canvas-blank-fill">
+    <div id="@(qid)scrollwrap" class="inkScrollWrapper" style="height: @(Model.DefaultHeight + 14)px;">
+        <div id="@(qid)wrap" class="inkWrapper">
+            @if (!String.IsNullOrEmpty(Model.Question.Background))
+            {
+                <canvas id="@(qid)cvbk"></canvas>
+            }
+            <canvas id="@(qid)cv" width="500" height="300" class="inkQuestion canvasTouchAction"><span class="wrn">@Intelledox.Produce.Resources.Strings.NonCanvasBrowser</span></canvas>
+            <input type="hidden" id="@qid" name="@qid" value="@Model.Question.Value" data-bk-width="500" data-bk-height="300" />
+        </div>
+    </div>
+</div>
+
+@if (Model.Question.IsEditable)
+{
+    <div style="@zoomStyle">
+        @if (Model.ShowUploadButton)
+        {
+            <input type="button" value="@Intelledox.Produce.Resources.Strings.Upload" class="btn btn-default btn-submit" onclick="wiz.openUploadPage('@Url.Content("~/")', '@Model.Question.WizardFragment.InstanceId.ToString()', '@Model.Question.QuestionGuid.ToString()', 'ink', '@Model.RepeatPath', '@Model.Question.WizardFragment.WizardSession.ProjectLog.ToString()','@qid');" @if (Model.LogInteractions) { <text>data-analyticsid="@(Model.AnalyticsID)" data-analyticsevent="inkUpload"</text> }/>
+        }
+        <input type="button" value="@Intelledox.Produce.Resources.Strings.Clear" class="btn btn-default btn-clear" onclick="wiz.clearInk('@qid')" @if (Model.LogInteractions) { <text>data-analyticsid="@(Model.AnalyticsID)" data-analyticsevent="inkClear"</text> } />
+
+        <input type="button" id="@(qid)btn" value="@Intelledox.Produce.Resources.Strings.Eraser" class="btn btn-default btn-erase" onclick="wiz.eraseInk('@qid');" @if (Model.LogInteractions) { <text>data-analyticsid="@(Model.AnalyticsID)" data-analyticsevent="inkEraser"</text> } />
+
+        @if (((Intelledox.QAWizard.Design.InkQuestion)Model.Question.QuestionModel).AllowZoom)
+        {
+            if (Model.ZoomedIn)
+            {
+                <input type="button" id="@(qid)zoomoutbtn" value="@Intelledox.Produce.Resources.Strings.ZoomOut" class="btn btn-default btn-zoomout" onclick="zoomOutAndClose();" @if (Model.LogInteractions) { <text>data-analyticsid="@(Model.AnalyticsID)" data-analyticsevent="inkZoomOut"</text> } />
+            }
+            else
+            {
+                if (!String.IsNullOrEmpty(Model.Question.Background))
+                {
+                    <input type="button" id="@(qid)zoominbtn" value="@Intelledox.Produce.Resources.Strings.ZoomIn" class="btn btn-default btn-zoomin" onclick="wiz.zoomIn(this, '@(qid)')" data-questionguid="@Model.Question.QuestionGuid.ToString()" data-userguid="@Model.Question.WizardFragment.WizardSession.UserGuid" data-path="@Url.Content("~/")" data-log="@Model.Question.WizardFragment.WizardSession.ProjectLog.ToString()" data-repeatpath="@(Model.RepeatPath)" data-frag="@Model.Question.WizardFragment.InstanceId.ToString()" @if (Model.LogInteractions) { <text>data-analyticsid="@(Model.AnalyticsID)" data-analyticsevent="inkZoomIn"</text> }/>
+                }
+                if (((Intelledox.QAWizard.Design.InkQuestion)Model.Question.QuestionModel).ThumbnailMaxWidth > 0)
+                {
+                    thumbWidth = ((Intelledox.QAWizard.Design.InkQuestion)Model.Question.QuestionModel).ThumbnailMaxWidth;
+                }
+                if (((Intelledox.QAWizard.Design.InkQuestion)Model.Question.QuestionModel).ThumbnailMaxHeight > 0)
+                {
+                    thumbHeight = ((Intelledox.QAWizard.Design.InkQuestion)Model.Question.QuestionModel).ThumbnailMaxHeight;
+                }
+            }
+        }
+
+        @if (((Intelledox.QAWizard.Design.InkQuestion)Model.Question.QuestionModel).AllowInkColourChoice)
+        {
+            <div class="inkColourWrapper">
+            <span id="@(qid)inklabel" class="question-label">@Intelledox.Produce.Resources.Strings.InkColour</span>
+                <select id="@(qid + "inkcolour")" name="@(qid + "inkcolour")" class="form-control" style="width:auto;display:inline" data-analyticsid="@(Model.AnalyticsID)" data-analyticsevent="inkColour">
+                    @foreach (var item in Model.Colours)
+                    {
+                        <option value="@item.Value" selected="@item.Selected">@item.Text</option>
+                    }
+                </select>
+            </div>
+        }
+
+    </div>
+}
+            @Html.DisplayValidation(Model.Question.LastValidationMessage)
+    <script type="text/javascript">
+                var signaturePad@(qid);
+
+            // zoomOutAndClose is only needed when the ink question is called within the ZoomedInkWindow view
+            @if (Model.ZoomedIn) {
+         @:function zoomOutAndClose() {
+
+             @:var backgroundBase64 = null,
+                   @:foregroundBase64 = null,
+                   @:thumbWidth = 0,
+                   @:thumbHeight = 0;
+            if (!String.IsNullOrEmpty(Model.Question.Background))
+            {
+                @:backgroundBase64 = '@Html.Raw(Model.Question.Background)';
+            }
+             @:var foregroundBase64 = $('#@qid').val();
+             @:parent.window.$('#@qid').val($('#@qid').val());
+            if (((Intelledox.QAWizard.Design.InkQuestion) Model.Question.QuestionModel).ThumbnailMaxWidth > 0)
+            {
+                @:thumbWidth = '@(((Intelledox.QAWizard.Design.InkQuestion) Model.Question.QuestionModel).ThumbnailMaxWidth)';
+            }
+            if (((Intelledox.QAWizard.Design.InkQuestion) Model.Question.QuestionModel).ThumbnailMaxHeight > 0)
+            {
+                @:thumbHeight = '@(((Intelledox.QAWizard.Design.InkQuestion) Model.Question.QuestionModel).ThumbnailMaxHeight)';
+            }
+
+            @:if (!!window.HTMLCanvasElement) { parent.wiz.loadInk('@(qid)', backgroundBase64, foregroundBase64, '@Model.InkHex', thumbWidth, thumbHeight, false, '@(Model.AnalyticsID)'); }
+
+            @:parent.wiz.setInkColor('@(qid)', '@Model.InkHex', signaturePad@(qid));
+            if (Model.Question.InkQuestionModel.AllowInkColourChoice)
+            {
+                @:$('#@(qid)inkcolour').change(function() {wiz.setInkColor('@(qid)', $('#@(qid)inkcolour').val(), signaturePad@(qid)); });
+            }
+
+             @:parent.wiz.closeFullscreenModal();
+          @:}
+    }
+
+    wiz.addScript('inkJs', '@Url.Content("~/scripts/signature_pad-1.5.3.js?v=9.6")').then(
+        function () {
+    (function() {
+
+        var cv = $('#@(qid)cv'),
+            backgroundBase64 = null,
+            foregroundBase64 = null;
+        @if (Model.ZoomedIn)
+        {
+            @:$('#@(qid)').val(window.parent.$('#@(qid)').val());
+            @:foregroundBase64 = $('#@qid').val();
+        }
+        @if (!String.IsNullOrEmpty(Model.Question.Background))
+        {
+            @:backgroundBase64 = '@Html.Raw(Model.Question.Background)';
+        }
+        var spaceWidth = $('#@(qid)ink').width();
+        if (spaceWidth <= 500 && backgroundBase64 === null) {
+            spaceWidth = spaceWidth - 7;
+            $('#@(qid)cv').width(spaceWidth);
+            var spaceHeight = spaceWidth * 3 / 5;
+            $('#@(qid)cv').height(spaceHeight);
+            $('#@(qid)cv').attr('width', spaceWidth);
+            $('#@(qid)cv').attr('height', spaceHeight);
+            $('#@(qid)').attr('data-bk-width', spaceWidth);
+            $('#@(qid)').attr('data-bk-height', spaceHeight);
+        }
+
+        @if (!String.IsNullOrEmpty(Model.Question.Value as string))
+        {
+            @:foregroundBase64 = $('#@qid').val();
+        }
+        if (!!window.HTMLCanvasElement) {
+            wiz.loadInk('@(qid)', backgroundBase64, foregroundBase64, '@Model.InkHex', @thumbWidth, @thumbHeight, @(Model.ZoomedIn ? "true" : "false"), '@Model.AnalyticsID');
+            @if (Model.Question.IsEditable)
+            {
+                var penMin = 0.5;
+                var penMax = 2.5;
+                if (((Intelledox.QAWizard.Design.InkQuestion) Model.Question.QuestionModel).AllowZoom)
+                {
+                    penMin = 0.2;
+                    penMax = 2.2;
+                    if (Model.ZoomedIn)
+                    {
+                        penMin = 0.2;
+                        penMax = 2.8;
+                    }
+                }
+                @:signaturePad@(qid) = new SignaturePad(cv[0], { minWidth: (@penMin), maxWidth: (@penMax), penColor: "@Model.InkHex" });
+            }
+        }
+
+        @if (Model.Question.InkQuestionModel.AllowInkColourChoice)
+        {
+            @:$('#@(qid)inkcolour').change(function () {
+                @:wiz.setInkColor('@(qid)', $('#@(qid)inkcolour').val(), signaturePad@(qid));
+            @:});
+        }
+
+        })();
+        });
+    </script>
